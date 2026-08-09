@@ -1,0 +1,94 @@
+
+
+"use client";
+
+import { ShieldCheck, Sparkles } from "lucide-react";
+
+import { Reveal } from "@/components/ui/reveal";
+import { Counter } from "@/components/ui/counter";
+import { STATS } from "@/lib/constants";
+
+const MARQUEE_ITEMS = [
+  "🎬 VERIFIED CASTING OPPORTUNITIES",
+  "⭐ LIFETIME PREMIUM MEMBERSHIP",
+  "📱 DAILY WHATSAPP UPDATES",
+  "🎥 BOLLYWOOD • OTT • TV • ADS",
+  "🔒 100% SECURE ONLINE PAYMENT",
+];
+
+export function ProofStrip() {
+  const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+
+  return (
+    <section className="relative overflow-hidden border-y border-[#D4AF37]/20 bg-[#0E0E0E]">
+      {/* Background Glow */}
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)]" />
+
+      {/* Top Marquee */}
+
+      <div className="relative overflow-hidden border-b border-[#D4AF37]/15 py-4">
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-4 whitespace-nowrap border-r border-[#D4AF37]/15 px-8"
+            >
+              <Sparkles size={14} className="text-[#D4AF37] opacity-70" />
+
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Stats */}
+
+      <Reveal>
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mb-14 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-5 py-2 text-sm text-[#D4AF37]">
+              <ShieldCheck size={16} />
+              Trusted Across India
+            </div>
+
+            <h2 className="mt-6 text-3xl font-bold text-white md:text-5xl">
+              Thousands of Artists
+              <span className="block text-[#D4AF37]">
+                Trust Delhi Casting Agency
+              </span>
+            </h2>
+
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/60">
+              Join one of India&apos;s growing communities of aspiring actors,
+              models and performers receiving verified casting opportunities.
+            </p>
+          </div>
+
+          {/* <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="group flex min-h-[180px] flex-col items-center justify-center rounded-[30px] border border-white/10 bg-gradient-to-br from-[#151515] to-[#101010] p-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-3 hover:border-[#D4AF37]/50 hover:shadow-[0_0_40px_rgba(212,175,55,0.18)]"
+              >
+                <Counter target={stat.target} label={stat.label} />
+              </div>
+            ))}
+          </div> */}
+          <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-6">
+            {STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group flex min-h-[170px] flex-col items-center justify-center rounded-[28px] border border-white/10 bg-gradient-to-br from-[#151515] to-[#101010] px-6 py-8 text-center shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/50 hover:shadow-[0_0_40px_rgba(212,175,55,0.18)]"
+              >
+                <Counter target={stat.target} label={stat.label} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}

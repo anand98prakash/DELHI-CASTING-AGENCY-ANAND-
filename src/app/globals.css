@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-black: #0a0a0a;
+  --color-charcoal: #141210;
+  --color-charcoal-2: #1c1916;
+  --color-gold: #d4af37;
+  --color-gold-soft: #e8cd7a;
+  --color-red: #c8102e;
+  --color-cream: #f6efe1;
+
+  --font-display: var(--font-cormorant), serif;
+  --font-sans: var(--font-inter), sans-serif;
+
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-pulse-line: pulse-line 2s ease-in-out infinite;
+  --animate-sway: sway 14s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+@keyframes sway {
+  0%, 100% { transform: translateX(-54%) rotate(-2deg); }
+  50% { transform: translateX(-46%) rotate(2deg); }
+}
+
+@keyframes gold-shine {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.gold-text {
+  background-size: 200% auto;
+  animation: gold-shine 2s linear infinite;
+}
+
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-black);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
