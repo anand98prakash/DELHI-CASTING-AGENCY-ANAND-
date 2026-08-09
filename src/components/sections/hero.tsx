@@ -60,7 +60,7 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.45 }}
-            className="mb-6 text-base sm:text-lg uppercase tracking-[0.35em] text-white/50 text-center"
+            className="mb-6 text-base sm:text-lg uppercase tracking-[0.35em] text-white/80 text-center"
           >
             WAY TO{" "}
             {/* <span
@@ -76,7 +76,10 @@ export function Hero() {
             >
               BOLLYWOOD
             </span> */}
-            <span className="block mt-2 text-4xl sm:text-5xl md:text-6xl font-[var(--font-fredoka)] font-bold tracking-widest bg-gradient-to-r from-yellow-300 via-[#D4AF37] to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+            {/* <span className="block mt-2 text-4xl sm:text-5xl md:text-6xl font-[var(--font-fredoka)] font-bold tracking-widest bg-gradient-to-r from-yellow-300 via-[#D4AF37] to-yellow-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+              BOLLYWOOD
+            </span> */}
+            <span className="block mt-2 text-4xl sm:text-5xl md:text-6xl font-[var(--font-fredoka)] font-bold tracking-wide text-[#f33918] drop-shadow-[0_0_12px_rgba(230,57,70,0.5)]">
               BOLLYWOOD
             </span>
           </motion.p>
