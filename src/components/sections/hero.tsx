@@ -54,7 +54,6 @@ export function Hero() {
               <span>Verified Casting Opportunities</span>
             </div>
           </div>
-
           {/* Brand */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -83,8 +82,7 @@ export function Hero() {
               BOLLYWOOD
             </span>
           </motion.p>
-
-          {/* Heading */}
+          {/* Heading */} 
           <motion.h1
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,7 +96,6 @@ export function Hero() {
             </span>
           </motion.h1>
           {/* Description */}
-
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -109,9 +106,7 @@ export function Hero() {
           >
             {SITE.tagline}
           </motion.p>
-
           {/* CTA */}
-
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}

@@ -1,132 +1,128 @@
-
-
 "use client";
-import Image from "next/image";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowRight, ChevronDown, Menu, X } from "lucide-react";
 
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
+import { NAV_GROUPS, type NavGroup } from "@/lib/site-navigation";
 
-const links = [
-  { name: "Benefits", href: "#benefits" },
-  { name: "Membership", href: "#pricing" },
-  { name: "FAQ", href: "#faq" },
-];
+function DesktopDropdown({ group }: { group: NavGroup }) {
+  if (!group.items) {
+    return (
+      <Link href={group.href} className="text-sm font-medium tracking-wide text-white/80 transition hover:text-gold">
+        {group.label}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="group relative">
+      <Link href={group.href} className="inline-flex items-center gap-1.5 text-sm font-medium tracking-wide text-white/80 transition hover:text-gold">
+        {group.label}<ChevronDown className="h-3.5 w-3.5 transition group-hover:rotate-180" />
+      </Link>
+      <div className="pointer-events-none absolute left-1/2 top-full w-72 -translate-x-1/2 translate-y-3 pt-4 opacity-0 transition duration-200 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="rounded-2xl border border-white/10 bg-[#0b0b0b]/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl">
+          {group.items.map((item) => (
+            <Link key={item.href} href={item.href} className="flex items-center justify-between rounded-xl px-4 py-3 text-sm text-white/70 transition hover:bg-white/[0.06] hover:text-gold">
+              {item.label}<ArrowRight className="h-3.5 w-3.5 opacity-0 transition group-hover:opacity-100" />
+            </Link>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileGroup, setMobileGroup] = useState<string | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-
-    window.addEventListener("scroll", onScroll, {
-      passive: true,
-    });
-
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  const closeMobile = () => {
+    setMobileOpen(false);
+    setMobileGroup(null);
+  };
 
   return (
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{
-          duration: 0.7,
-          ease: "easeOut",
-        }}
-        className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-          scrolled
-            ? "border-b border-white/10 bg-black/80 backdrop-blur-xl shadow-xl"
-            : "bg-transparent",
-        )}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className={cn("fixed inset-x-0 top-0 z-50 transition-all duration-500", scrolled ? "border-b border-white/10 bg-black/85 shadow-xl backdrop-blur-xl" : "bg-transparent")}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-10">
-          <Link href="/" aria-label="WAY TO BOLLYWOOD">
+          <Link href="/" aria-label="Delhi Casting Agency home" onClick={closeMobile}>
             <Logo />
           </Link>
 
-          {/* Desktop Menu */}
+          <nav className="hidden items-center gap-7 xl:flex" aria-label="Primary navigation">
+            {NAV_GROUPS.map((group) => <DesktopDropdown key={group.label} group={group} />)}
+          </nav>
 
-          <div className="hidden items-center gap-10 lg:flex">
-            {links.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="relative text-sm font-medium tracking-wide text-white/80 transition duration-300 hover:text-[#D4AF37]"
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
+          <Link href="/register/" className="group hidden items-center gap-2 rounded-full border border-gold bg-gold px-5 py-3 text-sm font-semibold text-black transition hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] lg:flex">
+            Register Now<ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+          </Link>
 
-          {/* Desktop CTA */}
-
-          <div className="hidden lg:block">
-            <button
-              onClick={() => {
-                window.dispatchEvent(new Event("open-registration"));
-              }}
-              className="group flex items-center gap-2 rounded-full border border-[#D4AF37] bg-[#D4AF37] px-6 py-3 text-sm font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_rgba(212,175,55,0.35)]"
-            >
-              Join Premium
-              <ArrowRight
-                size={17}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </button>
-          </div>
-
-          {/* Mobile Button */}
-
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="text-white lg:hidden"
-          >
-            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+          <button type="button" aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)} className="rounded-lg p-2 text-white transition hover:bg-white/10 xl:hidden">
+            {mobileOpen ? <X size={27} /> : <Menu size={27} />}
           </button>
         </div>
       </motion.header>
 
-      {/* Mobile Drawer */}
-
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <motion.aside
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{
-              duration: 0.45,
-            }}
-            className="fixed inset-0 z-40 bg-black"
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            className="fixed inset-0 z-40 overflow-y-auto bg-black px-6 pb-10 pt-28 xl:hidden"
           >
-            <div className="flex h-full flex-col items-center justify-center gap-10">
-              {links.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-3xl font-semibold text-white transition hover:text-[#D4AF37]"
-                >
-                  {item.name}
-                </a>
-              ))}
+            <div className="mx-auto max-w-lg">
+              <nav className="space-y-2" aria-label="Mobile navigation">
+                {NAV_GROUPS.map((group) => (
+                  <div key={group.label} className="border-b border-white/10">
+                    {group.items ? (
+                      <>
+                        <button type="button" onClick={() => setMobileGroup((current) => current === group.label ? null : group.label)} className="flex w-full items-center justify-between py-4 text-left text-lg font-medium text-white">
+                          {group.label}<ChevronDown className={cn("h-5 w-5 text-gold transition", mobileGroup === group.label && "rotate-180")} />
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {mobileGroup === group.label && (
+                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden pb-3">
+                              <Link href={group.href} onClick={closeMobile} className="block rounded-xl px-4 py-3 text-sm font-semibold text-gold">View All {group.label}</Link>
+                              {group.items.map((item) => <Link key={item.href} href={item.href} onClick={closeMobile} className="block rounded-xl px-4 py-3 text-sm text-white/60 transition hover:bg-white/[0.05] hover:text-white">{item.label}</Link>)}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <Link href={group.href} onClick={closeMobile} className="block py-4 text-lg font-medium text-white transition hover:text-gold">{group.label}</Link>
+                    )}
+                  </div>
+                ))}
+              </nav>
 
-              <a
-                href="#pricing"
-                onClick={() => setMobileOpen(false)}
-                className="mt-6 rounded-full bg-[#D4AF37] px-8 py-4 text-lg font-bold text-black"
-              >
-                Join Premium
-              </a>
+              <Link href="/register/" onClick={closeMobile} className="mt-8 flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-4 font-bold text-black">
+                Register Now<ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
-          </motion.div>
+          </motion.aside>
         )}
       </AnimatePresence>
     </>

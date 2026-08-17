@@ -33,5 +33,19 @@
     "eslint-config-next": "16.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Cinematic membership landing page built with Next.js 16, React 19, TypeScript and Tailwind CSS v4.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webthegrowbiz-ops/delhicastingagency.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/webthegrowbiz-ops/delhicastingagency/issues"
+  },
+  "homepage": "https://github.com/webthegrowbiz-ops/delhicastingagency#readme"
 }

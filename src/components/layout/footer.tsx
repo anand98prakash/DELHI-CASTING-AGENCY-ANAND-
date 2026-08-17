@@ -1,262 +1,52 @@
-// "use client";
-
-// import Link from "next/link";
-// import { motion } from "motion/react";
-// import {
-//   Mail,
-//   MessageCircle,
-//   ShieldCheck,
-//   ArrowUpRight,
-//   Phone,
-//   MapPin,
-// } from "lucide-react";
-
-// import { Logo } from "@/components/logo";
-// import { SITE } from "@/lib/constants";
-
-// // const FOOTER_LINKS = [
-// //   {
-// //     title: "Company",
-// //     links: [
-// //       { label: "About Delhi Casting Agency", href: "#" },
-// //       { label: "Contact Us", href: "#" },
-// //       { label: "Instagram", href: "#" },
-// //     ],
-// //   },
-// //   {
-// //     title: "Legal",
-// //     links: [
-// //       { label: "Privacy Policy", href: "#" },
-// //       { label: "Terms & Conditions", href: "#" },
-// //       { label: "Refund Policy", href: "#" },
-// //     ],
-// //   },
-// //   {
-// //     title: "Support",
-// //     links: [
-// //       { label: "WhatsApp Support", href: "#" },
-// //       { label: "Email Support", href: "#" },
-// //     ],
-// //   },
-// // ];
-
-// export function Footer() {
-//   return (
-//     <footer className="relative overflow-hidden border-t border-white/10 bg-[#090909]">
-//       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent" />
-
-//       <motion.div
-//         initial={{ opacity: 0, y: 60 }}
-//         whileInView={{ opacity: 1, y: 0 }}
-//         viewport={{ once: true }}
-//         transition={{ duration: 0.7 }}
-//         className="mx-auto max-w-7xl px-8 py-20"
-//       >
-
-// <div className="mt-10 grid lg:grid-cols-2 gap-14 items-start">
-
-//   {/* LEFT SIDE (TEXT) */}
-//   <div>
-//     <p className="max-w-xl text-lg leading-9 text-white/70">
-//       {SITE.agency} provides verified casting opportunities for Bollywood,
-//       OTT, TV Shows, Fashion Shows, Print Ads and Brand Campaigns across India.
-//     </p>
-//   </div>
-
-//   {/* RIGHT SIDE (FEATURES) */}
-//   <div className="flex flex-col gap-5">
-
-//     <div className="flex items-start gap-3 text-white/80">
-//       <ShieldCheck className="h-5 w-5 text-[#D4AF37] mt-1" />
-//       <span>Secure Lifetime Membership</span>
-//     </div>
-
-//     <div className="flex items-start gap-3 text-white/80">
-//       <MessageCircle className="h-5 w-5 text-[#D4AF37] mt-1" />
-//       <span>Daily WhatsApp Casting Updates</span>
-//     </div>
-
-//     <div className="flex items-start gap-3 text-white/80">
-//       <Mail className="h-5 w-5 text-[#D4AF37] mt-1" />
-//       <span>Professional Support Team</span>
-//     </div>
-
-//   </div>
-
-// </div>
-
-//         {/* Right */}
-//         {/*
-//           <div className="grid gap-10 sm:grid-cols-3">
-//             {FOOTER_LINKS.map((column) => (
-//               <div key={column.title}>
-//                 <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.18em] text-[#D4AF37]">
-//                   {column.title}
-//                 </h4>
-
-//                 <ul className="space-y-4">
-//                   {column.links.map((link) => (
-//                     <li key={link.label}>
-//                       <Link
-//                         href={link.href}
-//                         className="group inline-flex items-center gap-2 text-white/60 transition-all duration-300 hover:text-[#D4AF37]"
-//                       >
-//                         {link.label}
-
-//                         <ArrowUpRight className="h-4 w-4 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:opacity-100" />
-//                       </Link>
-//                     </li>
-//                   ))}
-//                 </ul>
-//               </div>
-//             ))}
-//           </div>
-//         </div> */}
-
-//         {/* Contact */}
-
-//         <div className="mt-16 grid gap-6 border-y border-white/10 py-10 md:grid-cols-3">
-//           <div className="flex items-center gap-3">
-//             <Phone className="h-5 w-5 text-[#D4AF37]" />
-//             <div>
-//               <p className="text-sm text-white/50">+91 7074545456</p>
-//             </div>
-//           </div>
-
-//           <div className="flex items-center gap-3">
-//             <Mail className="h-5 w-5 text-[#D4AF37]" />
-//             <div>
-//               <p className="text-sm text-white/50">klmn@gmail.com</p>
-//             </div>
-//           </div>
-
-//           <div className="flex items-center gap-3">
-//             <MapPin className="h-5 w-5 text-[#D4AF37]" />
-//             <div>
-//               <p className="text-sm text-white/50">Address</p>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Disclaimer */}
-
-//         <div className="mt-12 rounded-2xl border border-[#D4AF37]/20 bg-white/[0.03] p-6">
-//           <p className="text-center text-sm leading-7 text-white/55">
-//             <span className="font-semibold text-[#D4AF37]">
-//               Important Notice:
-//             </span>{" "}
-//             Membership provides access to verified casting opportunities and
-//             related services. Membership does not guarantee selection,
-//             employment, auditions, or roles. Final selection depends entirely on
-//             production requirements and audition performance.
-//           </p>
-//         </div>
-
-//         {/* Bottom */}
-
-//         <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
-//           <p className="text-sm text-white/40">
-//             © {new Date().getFullYear()} {SITE.agency}. All Rights Reserved.
-//           </p>
-
-//           <p className="text-sm text-white/40">
-//             Crafted with ❤️ for aspiring artists across India.
-//           </p>
-//         </div>
-//       </motion.div>
-//     </footer>
-//   );
-// }
-//================================================================
-
 "use client";
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Mail, MessageCircle, ShieldCheck, Phone, MapPin } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone, ShieldCheck } from "lucide-react";
 
 import { SITE } from "@/lib/constants";
+import { FOOTER_GROUPS } from "@/lib/site-navigation";
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white">
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7 }}
-        className="mx-auto max-w-7xl px-6 py-20"
-      >
-        {/* 🔥 TOP SECTION (FIXED GRID) */}
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
-          {/* ================= LEFT SIDE ================= */}
-          <div className="max-w-md">
-            <p className="text-white/80 text-lg leading-relaxed">
-              Delhi Casting Agency provides verified casting opportunities for
-              Bollywood, OTT, TV Shows, Fashion Shows, Print Ads and Brand
-              Campaigns across India.
-            </p>
+    <footer className="border-t border-white/10 bg-black text-white">
+      <div className="h-px bg-gradient-to-r from-transparent via-gold to-transparent" />
+      <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
+          <div>
+            <Link href="/" className="inline-block"><span className="sr-only">Delhi Casting Agency</span></Link>
+            <p className="mt-5 max-w-md text-base leading-8 text-white/65">Delhi Casting Agency is an online-first casting platform serving talent across India. Explore casting categories, talent segments, resources and registration information.</p>
+            <div className="mt-7 space-y-4 text-sm text-white/60">
+              <div className="flex items-start gap-3"><ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold" /><span>Membership and casting information presented with clear selection disclaimers.</span></div>
+              <div className="flex items-start gap-3"><MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-gold" /><span>Online-first support and community access information.</span></div>
+            </div>
           </div>
 
-          {/* ================= RIGHT SIDE ================= */}
-          <div className="flex flex-col gap-6 max-w-md  ">
-            <div className="flex items-start gap-3 text-white/80">
-              <ShieldCheck className="h-5 w-5 text-[#D4AF37] mt-1" />
-              <span>Secure Lifetime Membership</span>
-            </div>
-
-            <div className="flex items-start gap-3 text-white/80">
-              <MessageCircle className="h-5 w-5 text-[#D4AF37] mt-1" />
-              <span>Daily WhatsApp Casting Updates</span>
-            </div>
-
-            <div className="flex items-start gap-3 text-white/80">
-              <Mail className="h-5 w-5 text-[#D4AF37] mt-1" />
-              <span>Professional Support Team</span>
-            </div>
+          <div className="grid gap-9 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
+            {FOOTER_GROUPS.map((group) => (
+              <div key={group.title}>
+                <h3 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-gold">{group.title}</h3>
+                <ul className="space-y-2.5">
+                  {group.links.map((link) => <li key={link.href}><Link href={link.href} className="text-sm text-white/55 transition hover:text-gold">{link.label}</Link></li>)}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* ================= CONTACT ================= */}
-        <div className="mt-16 grid gap-6 border-y border-white/10 py-10 md:grid-cols-3">
-          <div className="flex items-center gap-3">
-            <Phone className="h-5 w-5 text-[#D4AF37]" />
-            <p className="text-sm text-white/50">+91 7074545456</p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Mail className="h-5 w-5 text-[#D4AF37]" />
-            <p className="text-sm text-white/50">klmn@gmail.com</p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <MapPin className="h-5 w-5 text-[#D4AF37]" />
-            <p className="text-sm text-white/50">Address</p>
-          </div>
+        <div className="mt-14 grid gap-5 border-y border-white/10 py-8 md:grid-cols-3">
+          <a href="tel:+917074545456" className="flex items-center gap-3 text-sm text-white/55 transition hover:text-gold"><Phone className="h-5 w-5 text-gold" />+91 7074545456</a>
+          <a href="mailto:klmn@gmail.com" className="flex items-center gap-3 text-sm text-white/55 transition hover:text-gold"><Mail className="h-5 w-5 text-gold" />klmn@gmail.com</a>
+          <div className="flex items-center gap-3 text-sm text-white/55"><MapPin className="h-5 w-5 text-gold" />Online across India</div>
         </div>
 
-        {/* ================= DISCLAIMER ================= */}
-        <div className="mt-12 rounded-2xl border border-[#D4AF37]/20 bg-white/[0.03] p-6">
-          <p className="text-center text-sm leading-7 text-white/55">
-            <span className="font-semibold text-[#D4AF37]">
-              Important Notice:
-            </span>{" "}
-            Membership provides access to verified casting opportunities and
-            related services. Membership does not guarantee selection,
-            employment, auditions, or roles. Final selection depends entirely on
-            production requirements and audition performance.
-          </p>
+        <div className="mt-10 rounded-2xl border border-gold/20 bg-white/[0.03] p-6">
+          <p className="text-center text-sm leading-7 text-white/55"><span className="font-semibold text-gold">Important Notice:</span> Membership does not guarantee selection, employment, auditions, or roles. Final selection depends on production requirements and audition performance.</p>
         </div>
 
-        {/* ================= BOTTOM ================= */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 md:flex-row">
-          <p className="text-sm text-white/40">
-            © {new Date().getFullYear()} {SITE.agency}. All Rights Reserved.
-          </p>
-
-          <p className="text-sm text-white/40">
-            Crafted with ❤️ for aspiring artists across India.
-          </p>
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-7 text-sm text-white/35 md:flex-row">
+          <p>© {new Date().getFullYear()} {SITE.agency}. All Rights Reserved.</p>
+          <p>Serving aspiring artists across India.</p>
         </div>
       </motion.div>
     </footer>
