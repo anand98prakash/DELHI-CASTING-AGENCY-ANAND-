@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
 interface CastingCardProps {
   title: string;
@@ -10,15 +11,62 @@ interface CastingCardProps {
   demo?: boolean;
 }
 
-export function CastingCard({ title, category, description, href, image, demo = true }: CastingCardProps) {
+export function CastingCard({
+  title,
+  category,
+  description,
+  href,
+  image,
+  demo = false,
+}: CastingCardProps) {
   return (
-    <Link href={href} className="group block overflow-hidden rounded-2xl border border-white/10 bg-charcoal transition duration-500 hover:-translate-y-1 hover:border-gold/40">
-      <div className="relative aspect-[16/10] overflow-hidden bg-charcoal-2">
-        {image && <div className="h-full w-full bg-cover bg-center transition duration-700 group-hover:scale-105" style={{ backgroundImage: `url(${image})` }} />}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-        {demo && <span className="absolute left-4 top-4 rounded-full border border-gold/30 bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">Sample Content</span>}
+    <div className="group relative flex h-full flex-col justify-between overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#C5A059] hover:shadow-xl sm:p-7">
+      <div className="flex flex-1 flex-col">
+        <div className="mb-2 flex items-center justify-between gap-2">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C5A059]">
+            {category}
+          </span>
+          {demo && (
+            <span className="rounded-full border border-[#C5A059]/40 bg-[#F5F2EA] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[#6B6A50]">
+              Sample Brief
+            </span>
+          )}
+        </div>
+
+        <h3 className="mb-3 font-serif text-xl font-bold tracking-tight text-[#171717] transition-colors group-hover:text-[#C5A059]">
+          {title}
+        </h3>
+
+        {image && (
+          <div className="relative mb-4 aspect-16/10 w-full shrink-0 overflow-hidden rounded-lg bg-[#F5F2EA]">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-transparent to-transparent" />
+          </div>
+        )}
+
+        <p className="flex-1 text-xs leading-relaxed text-[#171717]/75">
+          {description}
+        </p>
       </div>
-      <div className="p-6"><p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">{category}</p><div className="mt-2 flex items-start justify-between gap-4"><div><h3 className="font-display text-2xl text-white">{title}</h3><p className="mt-2 text-sm leading-6 text-white/55">{description}</p></div><ArrowUpRight className="h-5 w-5 shrink-0 text-gold" /></div></div>
-    </Link>
+
+      <div className="mt-6 flex shrink-0 items-center justify-between border-t border-[#E2DDD3] pt-4">
+        <Link
+          href={href}
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#171717] transition-colors group-hover:text-[#C5A059]"
+        >
+          <span>View Casting Call</span>
+          <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-[#171717]/40">
+          DCA Verified
+        </span>
+      </div>
+    </div>
   );
 }

@@ -131,7 +131,7 @@ export default function HowToAvoidCastingScamsPage() {
               Trust & Safety
             </p>
 
-            <h2 className="mt-4 font-display text-3xl leading-tight text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-white md:text-5xl">
               Protect yourself when exploring casting opportunities
             </h2>
 
@@ -158,7 +158,7 @@ export default function HowToAvoidCastingScamsPage() {
               Warning Signs
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Watch for these red flags
             </h2>
 
@@ -181,7 +181,7 @@ export default function HowToAvoidCastingScamsPage() {
                     <Icon className="h-6 w-6" />
                   </div>
 
-                  <h3 className="mt-6 font-display text-xl text-white">
+                  <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                     {item.title}
                   </h3>
 
@@ -203,7 +203,7 @@ export default function HowToAvoidCastingScamsPage() {
               Stay Safe
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               A safer way to evaluate an opportunity
             </h2>
 
@@ -222,7 +222,7 @@ export default function HowToAvoidCastingScamsPage() {
                   {step.number}
                 </div>
 
-                <h3 className="mt-6 font-display text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                   {step.title}
                 </h3>
 
@@ -247,7 +247,7 @@ export default function HowToAvoidCastingScamsPage() {
               Before Making a Payment
             </p>
 
-            <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Understand exactly what you are paying for
             </h2>
 
@@ -294,7 +294,7 @@ export default function HowToAvoidCastingScamsPage() {
                   Verification Checklist
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Ask these questions before proceeding
                 </h2>
               </div>
@@ -326,7 +326,7 @@ export default function HowToAvoidCastingScamsPage() {
               <ShieldCheck className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               When in doubt, verify before acting
             </h2>
 

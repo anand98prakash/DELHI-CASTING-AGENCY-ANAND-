@@ -87,7 +87,7 @@ export default function DisclaimerPage() {
                   Important Notice
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Casting opportunities are not guaranteed
                 </h2>
 
@@ -111,7 +111,7 @@ export default function DisclaimerPage() {
               What You Should Know
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Important information before using the platform
             </h2>
 
@@ -133,7 +133,7 @@ export default function DisclaimerPage() {
                     <Icon className="h-6 w-6" />
                   </div>
 
-                  <h3 className="mt-6 font-display text-xl text-white">
+                  <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                     {point.title}
                   </h3>
 
@@ -159,7 +159,7 @@ export default function DisclaimerPage() {
               Membership
             </p>
 
-            <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Membership does not guarantee work
             </h2>
 
@@ -208,7 +208,7 @@ export default function DisclaimerPage() {
               Casting Opportunities
             </p>
 
-            <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Each casting call has its own requirements
             </h2>
 
@@ -238,7 +238,7 @@ export default function DisclaimerPage() {
               Your Responsibility
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Make informed decisions
             </h2>
 
@@ -274,7 +274,7 @@ export default function DisclaimerPage() {
               Safety
             </p>
 
-            <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Be careful with unrealistic promises
             </h2>
 
@@ -303,7 +303,7 @@ export default function DisclaimerPage() {
               <Info className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Information is provided for general purposes
             </h2>
 
@@ -329,7 +329,7 @@ export default function DisclaimerPage() {
               href="/privacy-policy/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Privacy Policy
               </h3>
 
@@ -343,7 +343,7 @@ export default function DisclaimerPage() {
               href="/terms-and-conditions/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Terms & Conditions
               </h3>
 
@@ -357,7 +357,7 @@ export default function DisclaimerPage() {
               href="/refund-and-cancellation-policy/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Refund & Cancellation
               </h3>
 

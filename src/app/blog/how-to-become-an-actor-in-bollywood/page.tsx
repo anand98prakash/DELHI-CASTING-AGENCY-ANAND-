@@ -100,7 +100,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
               Bollywood Acting Guide
             </p>
 
-            <h2 className="mt-4 font-display text-3xl leading-tight text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-white md:text-5xl">
               Start building your path as an actor
             </h2>
 
@@ -127,7 +127,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
               Step by Step
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               A practical path for aspiring actors
             </h2>
 
@@ -146,7 +146,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                   {step.number}
                 </div>
 
-                <h3 className="mt-6 font-display text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                   {step.title}
                 </h3>
 
@@ -168,7 +168,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                 <Sparkles className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-display text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
                 Skills worth developing
               </h2>
 
@@ -198,7 +198,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                 <BookOpen className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-display text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
                 Keep learning and practising
               </h2>
 
@@ -231,7 +231,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                   Actor Profile
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Prepare your professional profile
                 </h2>
 
@@ -267,7 +267,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
               <Mic2 className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Be selective about casting opportunities
             </h2>
 
@@ -301,7 +301,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                 Related Guide
               </p>
 
-              <h3 className="mt-3 font-display text-xl text-white">
+              <h3 className="mt-3 font-bold tracking-tight text-xl text-white">
                 Acting Audition Tips
               </h3>
 
@@ -319,7 +319,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                 Safety Guide
               </p>
 
-              <h3 className="mt-3 font-display text-xl text-white">
+              <h3 className="mt-3 font-bold tracking-tight text-xl text-white">
                 How to Avoid Casting Scams
               </h3>
 

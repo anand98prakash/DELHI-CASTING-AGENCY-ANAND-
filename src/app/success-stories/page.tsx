@@ -84,7 +84,7 @@ export default function SuccessStoriesPage() {
                 <Quote className="h-6 w-6" />
               </div>
 
-              <blockquote className="mt-7 font-display text-2xl leading-9 text-white">
+              <blockquote className="mt-7 font-bold tracking-tight text-2xl leading-9 text-white">
                 “Real experiences matter more than promises.”
               </blockquote>
 
@@ -116,7 +116,7 @@ export default function SuccessStoriesPage() {
                   {item.icon}
                 </div>
 
-                <h3 className="mt-5 font-display text-xl text-white">
+                <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
                   {item.title}
                 </h3>
 
@@ -141,7 +141,7 @@ export default function SuccessStoriesPage() {
               Verified Content
             </p>
 
-            <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl text-white md:text-4xl">
+            <h2 className="mx-auto mt-4 max-w-3xl font-bold tracking-tight text-3xl text-white md:text-4xl">
               Genuine stories will be added as verified experiences become
               available.
             </h2>

@@ -4,8 +4,6 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock3,
-  FileText,
-  HelpCircle,
   Mail,
   ShieldCheck,
   XCircle,
@@ -106,7 +104,7 @@ export default function RefundAndCancellationPolicyPage() {
                   Important
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Please review the actual refund terms before payment
                 </h2>
 
@@ -131,7 +129,7 @@ export default function RefundAndCancellationPolicyPage() {
                 01
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Scope of This Policy
               </h2>
 
@@ -153,7 +151,7 @@ export default function RefundAndCancellationPolicyPage() {
                 02
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Refund & Cancellation Conditions
               </h2>
 
@@ -175,7 +173,7 @@ export default function RefundAndCancellationPolicyPage() {
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="mt-5 font-display text-xl text-white">
+                      <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
                         {point.title}
                       </h3>
 
@@ -194,7 +192,7 @@ export default function RefundAndCancellationPolicyPage() {
                 03
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Casting Selection Is Not Guaranteed
               </h2>
 
@@ -226,7 +224,7 @@ export default function RefundAndCancellationPolicyPage() {
                 04
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 How to Request a Refund or Cancellation
               </h2>
 
@@ -241,7 +239,7 @@ export default function RefundAndCancellationPolicyPage() {
                     </div>
 
                     <div>
-                      <h3 className="font-display text-lg text-white">
+                      <h3 className="font-bold tracking-tight text-lg text-white">
                         {step.title}
                       </h3>
 
@@ -260,7 +258,7 @@ export default function RefundAndCancellationPolicyPage() {
                 05
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Information to Include in a Request
               </h2>
 
@@ -293,7 +291,7 @@ export default function RefundAndCancellationPolicyPage() {
                 06
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Refund Processing
               </h2>
 
@@ -325,7 +323,7 @@ export default function RefundAndCancellationPolicyPage() {
                 07
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Exceptions & Special Conditions
               </h2>
 
@@ -347,7 +345,7 @@ export default function RefundAndCancellationPolicyPage() {
                 08
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Contact for Refund Requests
               </h2>
 
@@ -377,7 +375,7 @@ export default function RefundAndCancellationPolicyPage() {
                 09
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Policy Information
               </h2>
 
@@ -405,7 +403,7 @@ export default function RefundAndCancellationPolicyPage() {
               href="/privacy-policy/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Privacy Policy
               </h3>
 
@@ -419,7 +417,7 @@ export default function RefundAndCancellationPolicyPage() {
               href="/terms-and-conditions/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Terms & Conditions
               </h3>
 
@@ -433,7 +431,7 @@ export default function RefundAndCancellationPolicyPage() {
               href="/disclaimer/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">Disclaimer</h3>
+              <h3 className="font-bold tracking-tight text-lg text-white">Disclaimer</h3>
 
               <div className="mt-4 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
                 View Disclaimer

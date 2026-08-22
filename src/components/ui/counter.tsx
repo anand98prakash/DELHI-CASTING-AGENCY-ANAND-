@@ -28,11 +28,11 @@ export function Counter({ target, label }: { target: number; label: string }) {
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-display font-extrabold text-[28px] md:text-[38px] text-gold">
+      <div className="text-[28px] md:text-[38px] font-extrabold tracking-tight text-gold">
         {value.toLocaleString()}
         {value === target ? "+" : ""}
       </div>
-      <div className="mt-1 font-sans text-[11.5px] font-medium tracking-wide text-cream/50 uppercase">
+      <div className="mt-1 text-[11.5px] font-medium tracking-wide text-cream/50 uppercase">
         {label}
       </div>
     </div>

@@ -102,7 +102,7 @@ export default function CommunityAccessPage() {
               Registration Complete
             </p>
 
-            <h1 className="mx-auto mt-4 max-w-3xl font-display text-3xl text-white md:text-5xl">
+            <h1 className="mx-auto mt-4 max-w-3xl font-bold tracking-tight text-3xl text-white md:text-5xl">
               Your next step is community access.
             </h1>
 
@@ -150,7 +150,7 @@ export default function CommunityAccessPage() {
                 </div>
 
                 <div>
-                  <h2 className="font-display text-2xl text-white">
+                  <h2 className="font-bold tracking-tight text-2xl text-white">
                     Join the Artist Community
                   </h2>
 

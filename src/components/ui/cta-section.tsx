@@ -55,19 +55,19 @@ export function CTASection({
               {eyebrow}
             </p>
 
-            <h2 className="font-display text-4xl leading-tight text-white md:text-5xl">
+            <h2 className="text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
               {title}
             </h2>
 
             {description && (
-              <p className="mt-4 text-white/60 md:text-lg">{description}</p>
+              <p className="mt-4 text-base font-normal leading-7 text-white/60 md:text-lg">{description}</p>
             )}
           </div>
 
           {/* CTA */}
           <Link
             href={finalHref}
-            className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-bold text-black transition hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(212,175,55,0.25)]"
+            className="group inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-semibold tracking-wider text-black transition hover:scale-[1.03] hover:shadow-[0_0_30px_rgba(212,175,55,0.25)]"
           >
             {finalLabel}
 

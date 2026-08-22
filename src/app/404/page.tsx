@@ -21,11 +21,11 @@ export default function Custom404Page() {
               <Clapperboard className="h-9 w-9" />
             </div>
 
-            <p className="mt-8 font-display text-7xl font-semibold text-[#D4AF37] md:text-8xl">
+            <p className="mt-8 font-bold tracking-tight text-7xl font-semibold text-[#D4AF37] md:text-8xl">
               404
             </p>
 
-            <h2 className="mt-6 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-6 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Looks like this scene is missing.
             </h2>
 
@@ -64,7 +64,7 @@ export default function Custom404Page() {
                   Continue Exploring
                 </p>
 
-                <h3 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h3 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Find your next opportunity
                 </h3>
 

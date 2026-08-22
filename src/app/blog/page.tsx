@@ -93,11 +93,11 @@ export default function BlogPage() {
               Blog Hub
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
               Practical resources for your entertainment career
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
+            <p className="mt-5 text-base font-normal leading-8 text-white/60">
               Explore guides and resources covering acting, modeling, auditions,
               casting safety and other useful topics for talent.
             </p>
@@ -113,7 +113,7 @@ export default function BlogPage() {
               Featured Resources
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
               Explore our latest guides
             </h2>
           </div>
@@ -137,11 +137,11 @@ export default function BlogPage() {
                     <ArrowRight className="h-5 w-5 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
                   </div>
 
-                  <h3 className="mt-7 font-display text-2xl text-white">
+                  <h3 className="mt-7 text-2xl font-bold tracking-tight text-white">
                     {article.title}
                   </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/55">
+                  <p className="mt-3 text-sm font-normal leading-7 text-white/55">
                     {article.description}
                   </p>
 
@@ -164,7 +164,7 @@ export default function BlogPage() {
               Browse by Topic
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-white md:text-4xl">
               Explore resource categories
             </h2>
           </div>
@@ -178,14 +178,14 @@ export default function BlogPage() {
                 className="group block h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-display text-xl text-white">
+                  <h3 className="text-xl font-bold tracking-tight text-white">
                     {category.title}
                   </h3>
 
                   <ArrowRight className="h-5 w-5 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
                 </div>
 
-                <p className="mt-4 text-sm leading-7 text-white/55">
+                <p className="mt-4 text-sm font-normal leading-7 text-white/55">
                   {category.description}
                 </p>
               </Link>
@@ -208,11 +208,11 @@ export default function BlogPage() {
                   Safety & Awareness
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-white md:text-3xl">
                   Learn how to recognise casting scams
                 </h2>
 
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+                <p className="mt-4 max-w-3xl text-sm font-normal leading-7 text-white/55 md:text-base">
                   Our resources include guidance designed to help talent make
                   informed decisions and recognise potentially suspicious
                   casting approaches.
@@ -235,7 +235,7 @@ export default function BlogPage() {
       <section className="mx-auto max-w-7xl px-6 pb-12 lg:px-8 lg:pb-20">
         <Reveal>
           <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-            <h2 className="font-display text-2xl text-white md:text-3xl">
+            <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
               Make the most of our resources
             </h2>
 

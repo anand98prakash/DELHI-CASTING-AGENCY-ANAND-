@@ -120,7 +120,7 @@ export default function FAQPage() {
               Common Questions
             </p>
 
-            <h2 className="mx-auto mt-4 max-w-3xl font-display text-3xl text-white md:text-4xl">
+            <h2 className="mx-auto mt-4 max-w-3xl font-bold tracking-tight text-3xl text-white md:text-4xl">
               Clear answers before you get started.
             </h2>
 
@@ -207,7 +207,7 @@ export default function FAQPage() {
               </div>
 
               <div>
-                <h2 className="font-display text-2xl text-white">
+                <h2 className="font-bold tracking-tight text-2xl text-white">
                   Keep your expectations realistic.
                 </h2>
 

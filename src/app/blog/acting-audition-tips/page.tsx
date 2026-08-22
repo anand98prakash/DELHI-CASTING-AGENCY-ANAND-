@@ -113,7 +113,7 @@ export default function ActingAuditionTipsPage() {
               Audition Preparation
             </p>
 
-            <h2 className="mt-4 font-display text-3xl leading-tight text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-white md:text-5xl">
               Prepare with confidence before your next audition
             </h2>
 
@@ -141,7 +141,7 @@ export default function ActingAuditionTipsPage() {
               Step by Step
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               How to prepare for an acting audition
             </h2>
 
@@ -160,7 +160,7 @@ export default function ActingAuditionTipsPage() {
                   {step.number}
                 </div>
 
-                <h3 className="mt-6 font-display text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                   {step.title}
                 </h3>
 
@@ -182,7 +182,7 @@ export default function ActingAuditionTipsPage() {
                 <Sparkles className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-display text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
                 Focus on the scene
               </h2>
 
@@ -205,7 +205,7 @@ export default function ActingAuditionTipsPage() {
                 <UserCheck className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-display text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
                 Present yourself professionally
               </h2>
 
@@ -235,7 +235,7 @@ export default function ActingAuditionTipsPage() {
               Self-Tape Tips
             </p>
 
-            <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Make your self-tape easy to watch
             </h2>
 
@@ -269,7 +269,7 @@ export default function ActingAuditionTipsPage() {
               <BookOpen className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Final audition checklist
             </h2>
 
@@ -304,7 +304,7 @@ export default function ActingAuditionTipsPage() {
               <Mic2 className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Remember: every audition is an opportunity to learn
             </h2>
 
@@ -338,7 +338,7 @@ export default function ActingAuditionTipsPage() {
                 Related Guide
               </p>
 
-              <h3 className="mt-3 font-display text-xl text-white">
+              <h3 className="mt-3 font-bold tracking-tight text-xl text-white">
                 How to Become an Actor in Bollywood
               </h3>
 
@@ -356,7 +356,7 @@ export default function ActingAuditionTipsPage() {
                 Safety Guide
               </p>
 
-              <h3 className="mt-3 font-display text-xl text-white">
+              <h3 className="mt-3 font-bold tracking-tight text-xl text-white">
                 How to Avoid Casting Scams
               </h3>
 

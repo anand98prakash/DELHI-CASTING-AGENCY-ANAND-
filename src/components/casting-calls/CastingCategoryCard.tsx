@@ -1,0 +1,91 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Sparkles } from "lucide-react";
+import type { CastingCategoryMeta } from "@/data/casting-calls";
+
+interface CastingCategoryCardProps {
+  category: CastingCategoryMeta;
+}
+
+export function CastingCategoryCard({ category }: CastingCategoryCardProps) {
+  // Max 3 visible subcategory links (Requirement 9)
+  const visibleSegments = category.segments.slice(0, 3);
+
+  return (
+    <div className="group relative flex flex-col justify-between h-full overflow-hidden rounded-3xl border border-white/10 bg-[#181818] p-6 sm:p-7 transition-all duration-500 hover:border-[#d4af37]/60 hover:shadow-2xl hover:shadow-[#d4af37]/10">
+      <div className="flex flex-col flex-1">
+        {/* 1. Top Eyebrow & Category Count */}
+        <div className="flex items-center justify-between gap-2 mb-2">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/80 flex items-center gap-1.5">
+            <Sparkles className="w-3 h-3 text-white/70" />
+            {category.countLabel}
+          </span>
+        </div>
+
+        {/* 2. Category Title (DCA GOLD) */}
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#d4af37] group-hover:text-amber-200 transition-colors leading-tight mb-1">
+          {category.title}
+        </h2>
+
+        {/* 3. Subtitle / Headline */}
+        {category.headline && (
+          <p className="text-xs sm:text-sm font-medium text-white/50 mb-3">
+            {category.headline}
+          </p>
+        )}
+
+        {/* 4. Large Visual Image */}
+        <Link
+          href={category.route}
+          className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-[#121212] my-3 border border-white/5 shrink-0 block focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+        >
+          <Image
+            src={category.image}
+            alt={category.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-70 group-hover:opacity-50 transition-opacity" />
+        </Link>
+
+        {/* 5. Category Description */}
+        <p className="text-sm leading-relaxed text-white/70 flex-1 mt-1">
+          {category.description}
+        </p>
+
+        {/* 6. Max 3 Visible Subcategory Links */}
+        {visibleSegments.length > 0 && (
+          <div className="mt-4 space-y-1.5">
+            {visibleSegments.map((segment, idx) => (
+              <Link
+                key={idx}
+                href={segment.href}
+                className="group/link flex items-center justify-between rounded-xl border border-white/5 bg-black/30 px-3 py-2 text-xs text-white/75 transition hover:border-[#d4af37]/30 hover:bg-[#d4af37]/5 hover:text-white"
+              >
+                <span>{segment.title}</span>
+                <ArrowRight className="h-3 w-3 text-white/30 transition-transform group-hover/link:translate-x-1 group-hover/link:text-[#d4af37]" />
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* 7. Explore CTA link & DCA Verified Badge */}
+      <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between shrink-0">
+        <Link
+          href={category.route}
+          className="inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-[#d4af37] transition-colors"
+        >
+          <span>{category.ctaText}</span>
+          <ArrowRight className="w-4 h-4 text-[#d4af37] group-hover:translate-x-1.5 transition-transform duration-300" />
+        </Link>
+
+        <span className="text-xs text-white/40 font-medium">
+          DCA Verified
+        </span>
+      </div>
+    </div>
+  );
+}

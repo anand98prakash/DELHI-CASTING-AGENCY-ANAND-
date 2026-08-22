@@ -87,7 +87,7 @@ export default function TermsAndConditionsPage() {
                   Please Read
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Terms for using this website
                 </h2>
 
@@ -112,7 +112,7 @@ export default function TermsAndConditionsPage() {
                 01
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Acceptance of Terms
               </h2>
 
@@ -134,7 +134,7 @@ export default function TermsAndConditionsPage() {
                 02
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Website Services
               </h2>
 
@@ -157,7 +157,7 @@ export default function TermsAndConditionsPage() {
                 03
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 User Responsibilities
               </h2>
 
@@ -180,7 +180,7 @@ export default function TermsAndConditionsPage() {
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="mt-5 font-display text-xl text-white">
+                      <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
                         {item.title}
                       </h3>
 
@@ -199,7 +199,7 @@ export default function TermsAndConditionsPage() {
                 04
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 User Content
               </h2>
 
@@ -222,7 +222,7 @@ export default function TermsAndConditionsPage() {
                 05
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Casting Opportunities
               </h2>
 
@@ -245,7 +245,7 @@ export default function TermsAndConditionsPage() {
                 06
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Payments & Membership
               </h2>
 
@@ -280,7 +280,7 @@ export default function TermsAndConditionsPage() {
                 07
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Prohibited Use
               </h2>
 
@@ -313,7 +313,7 @@ export default function TermsAndConditionsPage() {
                 08
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Intellectual Property
               </h2>
 
@@ -336,7 +336,7 @@ export default function TermsAndConditionsPage() {
                 09
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Third-Party Services & Links
               </h2>
 
@@ -354,7 +354,7 @@ export default function TermsAndConditionsPage() {
                 10
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Disclaimer
               </h2>
 
@@ -380,7 +380,7 @@ export default function TermsAndConditionsPage() {
                 11
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Changes to These Terms
               </h2>
 
@@ -408,7 +408,7 @@ export default function TermsAndConditionsPage() {
                 12
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Contact
               </h2>
 
@@ -441,7 +441,7 @@ export default function TermsAndConditionsPage() {
               href="/privacy-policy/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Privacy Policy
               </h3>
 
@@ -455,7 +455,7 @@ export default function TermsAndConditionsPage() {
               href="/refund-and-cancellation-policy/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Refund & Cancellation
               </h3>
 
@@ -469,7 +469,7 @@ export default function TermsAndConditionsPage() {
               href="/disclaimer/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">Disclaimer</h3>
+              <h3 className="font-bold tracking-tight text-lg text-white">Disclaimer</h3>
 
               <div className="mt-4 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
                 View Disclaimer

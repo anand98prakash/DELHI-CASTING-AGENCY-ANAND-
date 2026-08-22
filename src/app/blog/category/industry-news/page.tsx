@@ -104,7 +104,7 @@ export default function IndustryNewsPage() {
               Industry Resources
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-5xl">
               Useful insights for your entertainment career
             </h2>
 
@@ -130,7 +130,7 @@ export default function IndustryNewsPage() {
               Featured Resources
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Explore our industry resources
             </h2>
 
@@ -159,7 +159,7 @@ export default function IndustryNewsPage() {
                     <ArrowRight className="h-5 w-5 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
                   </div>
 
-                  <h3 className="mt-7 font-display text-xl text-white">
+                  <h3 className="mt-7 font-bold tracking-tight text-xl text-white">
                     {article.title}
                   </h3>
 
@@ -186,7 +186,7 @@ export default function IndustryNewsPage() {
               Topics
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               What you can learn here
             </h2>
           </div>
@@ -200,7 +200,7 @@ export default function IndustryNewsPage() {
                   <Sparkles className="h-5 w-5" />
                 </div>
 
-                <h3 className="mt-6 font-display text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                   {topic.title}
                 </h3>
 
@@ -227,7 +227,7 @@ export default function IndustryNewsPage() {
                   Career Reminders
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Keep these principles in mind
                 </h2>
 
@@ -264,7 +264,7 @@ export default function IndustryNewsPage() {
               Trust & Safety
             </p>
 
-            <h2 className="mt-4 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-4 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Learn how to recognise casting scams
             </h2>
 

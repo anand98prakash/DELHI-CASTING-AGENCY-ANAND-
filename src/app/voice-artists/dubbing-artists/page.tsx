@@ -1,343 +1,117 @@
+import React from "react";
 import Link from "next/link";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Globe2,
-  Headphones,
-  Languages,
-  Mic2,
-} from "lucide-react";
+import { Users, Sparkles } from "lucide-react";
 
-import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
+import { getVoiceArtistsByCategory, getVoiceCategoryBySlug, VOICE_ARTIST_CATEGORIES } from "@/data/voice-artists";
+import { VoiceArtistGrid } from "@/components/voice-artists/VoiceArtistGrid";
 
-const profilePoints = [
-  "Languages and dialects you can perform",
-  "Clear and recent voice samples",
-  "Dubbing or voiceover experience where applicable",
-  "Voice styles and performance strengths",
-  "Accurate professional and contact information",
-];
-
-const voiceAreas = [
-  {
-    title: "Language Voiceover",
-    description:
-      "Voice talent for productions requiring clear and expressive language-based voiceover.",
-    icon: Languages,
-  },
-  {
-    title: "Dubbing",
-    description:
-      "Voice talent for dubbing content across different languages and production formats.",
-    icon: Headphones,
-  },
-  {
-    title: "Character Voices",
-    description:
-      "Performers with suitable vocal range and expression for character-based voice work.",
-    icon: Mic2,
-  },
-  {
-    title: "Multilingual Talent",
-    description:
-      "Voice artists who can work across multiple languages or regional language requirements.",
-    icon: Globe2,
-  },
-];
-
-const preparationSteps = [
-  {
-    title: "List Your Languages",
-    description:
-      "Clearly mention the languages and dialects you can speak and perform professionally.",
-  },
-  {
-    title: "Prepare Voice Samples",
-    description:
-      "Keep clear and relevant audio samples ready to demonstrate your voice and delivery.",
-  },
-  {
-    title: "Mention Your Voice Skills",
-    description:
-      "Describe your vocal range, styles and performance strengths accurately.",
-  },
-  {
-    title: "Add Relevant Experience",
-    description:
-      "Include previous dubbing, voiceover, narration or related audio work where applicable.",
-  },
-];
+export const metadata = {
+  title: "Dubbing Artists Roster | Delhi Casting Agency (DCA)",
+  description:
+    "Explore certified dubbing actors specializing in lip-sync dubbing for Hollywood blockbusters, South Indian cinema, and multilingual OTT series.",
+};
 
 export default function DubbingArtistsPage() {
+  const category = getVoiceCategoryBySlug("dubbing-artists")!;
+  const artists = getVoiceArtistsByCategory("dubbing-artists");
+  const otherCategories = VOICE_ARTIST_CATEGORIES.filter((c) => c.slug !== "dubbing-artists");
+
   return (
-    <main>
-      <PageHero
-        eyebrow="Dubbing Artists"
-        title="Dubbing & Language Voiceover Casting"
-        description="Explore dubbing and language voiceover opportunities for voice artists across different production formats."
-      />
-
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
-        <Breadcrumb
-          items={[
-            {
-              label: "Home",
-              href: "/",
-            },
-            {
-              label: "Talents",
-              href: "/talents/",
-            },
-            {
-              label: "Voice Artists",
-              href: "/voice-artists/",
-            },
-            {
-              label: "Dubbing Artists",
-            },
-          ]}
-        />
-      </div>
-
-      {/* Introduction */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <main className="bg-[#0d0d0d] min-h-screen text-white">
+      {/* Streamlined Category Hero */}
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#0a0a0a] px-4 sm:px-6 lg:px-8 pb-8 pt-24 sm:pt-28">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_38%),linear-gradient(180deg,rgba(10,10,10,0.72),#0a0a0a)]" />
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-4">
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Talents", href: "/talents/" },
+                { label: "Voice Artists", href: "/voice-artists/" },
+                { label: "Dubbing Artists" },
+              ]}
+            />
+          </div>
           <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#d4af37] mb-2">
+              Talent Roster
+            </p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+              Dubbing Artists
+            </h1>
+            <p className="mt-2.5 max-w-3xl text-sm sm:text-base text-white/70 leading-relaxed">
+              {category.heroDescription}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Featured Voice Artists Grid Section */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <Reveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-white/10">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                Dubbing / Language Voiceover
-              </p>
-
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-                Showcase your language and dubbing voice profile
+              <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1.5">
+                <Users className="w-3.5 h-3.5" />
+                Featured Voice Artists
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                Dubbing Artist Profiles
               </h2>
+            </div>
+            <span className="text-xs sm:text-sm text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/30 px-3.5 py-1.5 rounded-full self-start md:self-auto font-medium">
+              Showing Verified Artists
+            </span>
+          </div>
+        </Reveal>
 
-              <p className="mt-5 text-base leading-8 text-white/60">
-                This category is focused on dubbing and language voiceover
-                talent for productions that require expressive and suitable
-                voices across different languages.
-              </p>
+        {/* Voice Artist Cards Grid */}
+        <Reveal delay={0.1}>
+          <VoiceArtistGrid artists={artists} />
+        </Reveal>
+      </section>
 
-              <p className="mt-4 text-base leading-8 text-white/60">
-                Present your languages, voice skills, samples and relevant
-                experience accurately so your profile reflects your current
-                abilities.
-              </p>
-
+      {/* Other Categories Switcher */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 border-t border-white/10">
+        <Reveal>
+          <div className="mb-6">
+            <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              Explore More Categories
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              Other Voice Divisions
+            </h3>
+          </div>
+          <div className="grid grid-cols-2 gap-3.5 max-w-lg">
+            {otherCategories.map((cat) => (
               <Link
-                href="/register/"
-                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E2C04A] hover:shadow-lg hover:shadow-[#D4AF37]/20"
+                key={cat.slug}
+                href={cat.route}
+                className="p-4 rounded-xl bg-[#181818] border border-white/10 hover:border-[#d4af37]/60 hover:bg-white/[0.05] transition-all group block text-center"
               >
-                Register as a Voice Artist
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <span className="text-sm font-semibold text-white group-hover:text-[#d4af37] transition-colors block">
+                  {cat.title}
+                </span>
+                <span className="text-[11px] text-white/50 block mt-1">
+                  {cat.countLabel}
+                </span>
               </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
-
-              <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                  <Languages className="h-6 w-6" />
-                </div>
-
-                <h3 className="mt-6 font-display text-2xl text-white">
-                  Build a language-ready voice profile
-                </h3>
-
-                <p className="mt-3 text-sm leading-7 text-white/55">
-                  Highlight your languages, voice qualities, samples and
-                  relevant dubbing or voiceover experience.
-                </p>
-
-                <div className="mt-6 space-y-3">
-                  {profilePoints.slice(0, 3).map((point) => (
-                    <div
-                      key={point}
-                      className="flex items-start gap-3 text-sm text-white/65"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
-                      <span>{point}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Voice Areas */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Voice Work
-            </p>
-
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-              Dubbing and language voiceover areas
-            </h2>
-
-            <p className="mt-5 text-base leading-8 text-white/60">
-              Present your voice skills according to the languages, styles and
-              types of voice work you can perform.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {voiceAreas.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <Reveal key={item.title} delay={index * 0.06}>
-                <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#D4AF37]/30">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                    <Icon className="h-5 w-5" />
-                  </div>
-
-                  <h3 className="mt-5 font-display text-xl text-white">
-                    {item.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-7 text-white/55">
-                    {item.description}
-                  </p>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Profile Preparation */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Profile Preparation
-            </p>
-
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-              Prepare your dubbing artist profile
-            </h2>
-
-            <p className="mt-5 text-base leading-8 text-white/60">
-              A strong dubbing profile should clearly communicate your
-              languages, vocal ability, samples and relevant experience.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {preparationSteps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 0.06}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-sm font-semibold text-[#D4AF37]">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <h3 className="font-display text-xl text-white">
-                    {step.title}
-                  </h3>
-                </div>
-
-                <p className="mt-4 text-sm leading-7 text-white/55">
-                  {step.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Profile Checklist */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                <Headphones className="h-6 w-6" />
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  Profile Checklist
-                </p>
-
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
-                  Information to keep ready
-                </h2>
-
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
-                  Prepare the information that best represents your dubbing and
-                  language voiceover profile.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              {profilePoints.map((point) => (
-                <div
-                  key={point}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
-                >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
-
-                  <span className="text-sm leading-7 text-white/65">
-                    {point}
-                  </span>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
         </Reveal>
       </section>
 
-      {/* Related Category */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <Link
-            href="/voice-artists/radio-voice-artists/"
-            className="group block rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30"
-          >
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  Explore More
-                </p>
-
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
-                  Radio Voice Artists
-                </h2>
-
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-white/55">
-                  Explore radio and audio advertising voice talent.
-                </p>
-              </div>
-
-              <div className="inline-flex shrink-0 items-center text-sm font-semibold text-[#D4AF37]">
-                View Category
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </div>
-            </div>
-          </Link>
-        </Reveal>
-      </section>
-
+      {/* Category CTA */}
       <CTASection
-        eyebrow="Start Your Journey"
-        title="Ready to showcase your voice?"
-        description="Register your talent profile and explore relevant dubbing and language voiceover opportunities."
-        buttonLabel="Register Now"
-        buttonHref="/register/"
+        eyebrow="Film &amp; OTT Dubbing"
+        title="Need Lead Dubbing Artists for Feature Films or Series?"
+        description="Delhi Casting Agency manages voice direction, translation supervision, and studio recording."
+        buttonLabel="Contact Voice Desk"
+        buttonHref="/contact/"
       />
     </main>
   );

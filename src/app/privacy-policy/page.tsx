@@ -86,7 +86,7 @@ export default function PrivacyPolicyPage() {
                   Please Read
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Your privacy matters
                 </h2>
 
@@ -112,7 +112,7 @@ export default function PrivacyPolicyPage() {
                 01
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Who We Are
               </h2>
 
@@ -145,7 +145,7 @@ export default function PrivacyPolicyPage() {
                 02
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Information We May Collect
               </h2>
 
@@ -168,7 +168,7 @@ export default function PrivacyPolicyPage() {
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="mt-5 font-display text-xl text-white">
+                      <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
                         {point.title}
                       </h3>
 
@@ -186,7 +186,7 @@ export default function PrivacyPolicyPage() {
                 03
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 How Information May Be Used
               </h2>
 
@@ -209,7 +209,7 @@ export default function PrivacyPolicyPage() {
                 04
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Sharing of Information
               </h2>
 
@@ -232,7 +232,7 @@ export default function PrivacyPolicyPage() {
                 05
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Data Security
               </h2>
 
@@ -254,7 +254,7 @@ export default function PrivacyPolicyPage() {
                 06
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Data Retention
               </h2>
 
@@ -279,7 +279,7 @@ export default function PrivacyPolicyPage() {
                 07
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Your Privacy Requests
               </h2>
 
@@ -310,7 +310,7 @@ export default function PrivacyPolicyPage() {
                 08
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Contact Us About Privacy
               </h2>
 
@@ -338,7 +338,7 @@ export default function PrivacyPolicyPage() {
                 09
               </p>
 
-              <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                 Policy Updates
               </h2>
 
@@ -373,7 +373,7 @@ export default function PrivacyPolicyPage() {
               href="/terms-and-conditions/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Terms & Conditions
               </h3>
 
@@ -387,7 +387,7 @@ export default function PrivacyPolicyPage() {
               href="/refund-and-cancellation-policy/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-white">
                 Refund & Cancellation
               </h3>
 
@@ -401,7 +401,7 @@ export default function PrivacyPolicyPage() {
               href="/disclaimer/"
               className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
             >
-              <h3 className="font-display text-lg text-white">Disclaimer</h3>
+              <h3 className="font-bold tracking-tight text-lg text-white">Disclaimer</h3>
 
               <div className="mt-4 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
                 View Disclaimer

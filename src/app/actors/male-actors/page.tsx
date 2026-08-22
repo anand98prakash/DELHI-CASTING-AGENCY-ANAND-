@@ -68,7 +68,7 @@ export default function MaleActorsPage() {
                 Male Actor Category
               </p>
 
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+              <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
                 Present your acting profile professionally
               </h2>
 
@@ -103,7 +103,7 @@ export default function MaleActorsPage() {
                   <UserRound className="h-6 w-6" />
                 </div>
 
-                <h3 className="mt-6 font-display text-2xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-2xl text-white">
                   Build a complete profile
                 </h3>
 
@@ -137,7 +137,7 @@ export default function MaleActorsPage() {
               Profile Preparation
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               What to include in your profile
             </h2>
 
@@ -171,7 +171,7 @@ export default function MaleActorsPage() {
               Explore More
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Explore other actor categories
             </h2>
           </div>
@@ -185,7 +185,7 @@ export default function MaleActorsPage() {
                 className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:bg-white/[0.05]"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-display text-xl text-white">
+                  <h3 className="font-bold tracking-tight text-xl text-white">
                     {item.title}
                   </h3>
 
@@ -209,7 +209,7 @@ export default function MaleActorsPage() {
               Important
             </p>
 
-            <h2 className="mt-4 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-4 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Casting opportunities do not guarantee selection.
             </h2>
 

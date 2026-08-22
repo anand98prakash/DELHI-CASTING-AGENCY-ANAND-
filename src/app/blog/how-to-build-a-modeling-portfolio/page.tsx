@@ -108,7 +108,7 @@ export default function HowToBuildAModelingPortfolioPage() {
               Modeling Portfolio Guide
             </p>
 
-            <h2 className="mt-4 font-display text-3xl leading-tight text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-white md:text-5xl">
               Create a portfolio that represents you accurately
             </h2>
 
@@ -135,7 +135,7 @@ export default function HowToBuildAModelingPortfolioPage() {
               Step by Step
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               How to build your modeling portfolio
             </h2>
 
@@ -154,7 +154,7 @@ export default function HowToBuildAModelingPortfolioPage() {
                   {step.number}
                 </div>
 
-                <h3 className="mt-6 font-display text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                   {step.title}
                 </h3>
 
@@ -176,7 +176,7 @@ export default function HowToBuildAModelingPortfolioPage() {
                 <ImageIcon className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-display text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
                 Keep photographs current
               </h2>
 
@@ -200,7 +200,7 @@ export default function HowToBuildAModelingPortfolioPage() {
                 <Sparkles className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-display text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
                 Show relevant versatility
               </h2>
 
@@ -232,7 +232,7 @@ export default function HowToBuildAModelingPortfolioPage() {
                   Portfolio Checklist
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Before you submit your profile
                 </h2>
 
@@ -269,7 +269,7 @@ export default function HowToBuildAModelingPortfolioPage() {
               Common Mistakes
             </p>
 
-            <h2 className="mt-4 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-4 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Things to avoid
             </h2>
 
@@ -296,7 +296,7 @@ export default function HowToBuildAModelingPortfolioPage() {
               <Camera className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Explore model opportunities
             </h2>
 

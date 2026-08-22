@@ -199,7 +199,7 @@ export default function StepTwoProfilePage() {
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-semibold text-white">
+                  <h2 className="text-2xl font-bold tracking-tight text-white">
                     Artist Information
                   </h2>
 

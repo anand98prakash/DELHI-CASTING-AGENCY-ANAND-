@@ -1,94 +1,8 @@
-// "use client";
-
-// import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-// import { Plus } from "lucide-react";
-// import { Reveal } from "@/components/ui/reveal";
-
-// const FAQS = [
-//   {
-//     q: "Is this membership refundable?",
-//     a: "No. The membership fee is non-refundable once payment is completed.",
-//   },
-//   {
-//     q: "Does membership guarantee work?",
-//     a: "No. Membership provides access to verified casting opportunities only. Final selection always depends on the requirements of each project and your performance in auditions.",
-//   },
-//   {
-//     q: "How long is membership valid?",
-//     a: "Lifetime. It's a one-time payment with no renewal required.",
-//   },
-//   {
-//     q: "Will I receive daily updates?",
-//     a: "Yes — verified casting calls are shared daily through our official WhatsApp community.",
-//   },
-// ];
-
-// export function FAQ() {
-//   const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-//   return (
-//     <section
-//       id="faq"
-//       className="py-[100px] px-6 bg-charcoal border-y border-gold/[0.18]"
-//     >
-//       <div className="max-w-[760px] mx-auto">
-//         <Reveal className="text-center max-w-[560px] mx-auto mb-14">
-//           <span className="font-sans text-[12.5px] font-semibold tracking-[0.32em] text-gold uppercase">
-//             Questions
-//           </span>
-//           <h2 className="mt-3 font-display font-bold text-[28px] md:text-[42px] text-white">
-//             Frequently Asked Questions
-//           </h2>
-//         </Reveal>
-
-//         <Reveal>
-//           {FAQS.map((item, i) => {
-//             const isOpen = openIndex === i;
-//             return (
-//               <div key={item.q} className="border-b border-gold/[0.18]">
-//                 <button
-//                   onClick={() => setOpenIndex(isOpen ? null : i)}
-//                   className="w-full text-left bg-transparent py-[22px] px-1 flex justify-between items-center gap-5 font-sans font-semibold text-[15px] text-white"
-//                 >
-//                   {item.q}
-//                   <Plus
-//                     className={`w-[18px] h-[18px] text-gold shrink-0 transition-transform duration-300 ${
-//                       isOpen ? "rotate-45" : ""
-//                     }`}
-//                   />
-//                 </button>
-//                 <AnimatePresence initial={false}>
-//                   {isOpen && (
-//                     <motion.div
-//                       initial={{ height: 0, opacity: 0 }}
-//                       animate={{ height: "auto", opacity: 1 }}
-//                       exit={{ height: 0, opacity: 0 }}
-//                       transition={{ duration: 0.3 }}
-//                       className="overflow-hidden"
-//                     >
-//                       <p className="px-1 pb-[22px] text-[14px] leading-relaxed text-cream/55 max-w-[600px]">
-//                         {item.a}
-//                       </p>
-//                     </motion.div>
-//                   )}
-//                 </AnimatePresence>
-//               </div>
-//             );
-//           })}
-//         </Reveal>
-//       </div>
-//     </section>
-//   );
-// }
-//================================================================
-
 "use client";
 
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, Sparkles } from "lucide-react";
-
 import { Reveal } from "@/components/ui/reveal";
 
 const FAQS = [
@@ -122,25 +36,23 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative overflow-hidden bg-[#090909] py-28">
-      {/* Background Glow */}
-
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.08),transparent_65%)]" />
-
+    <section id="faq" className="relative overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] py-20 sm:py-28">
       <div className="relative mx-auto max-w-5xl px-6">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-5 py-2 text-sm text-[#D4AF37]">
-              <Sparkles size={15} />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/40 bg-[#EFECE4] px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#6B6A50]">
+              <Sparkles size={14} className="text-[#C5A059]" />
               Need Help?
             </div>
 
-            <h2 className="mt-6 text-4xl font-bold leading-tight text-white md:text-6xl">
-              Frequently Asked
-              <span className="block text-[#D4AF37]">Questions</span>
+            <h2 className="mt-5 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl md:text-5xl lg:text-6xl">
+              Frequently Asked <br />
+              <span className="italic font-normal text-[#C5A059]">
+                Questions
+              </span>
             </h2>
 
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/60">
+            <p className="mx-auto mt-4 max-w-2xl text-base font-normal leading-relaxed text-[#171717]/70">
               Find answers to the most common questions about our premium
               membership, verified casting opportunities and registration
               process.
@@ -149,86 +61,45 @@ export function FAQ() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-20 space-y-5">
+          <div className="mt-14 space-y-4">
             {FAQS.map((item, index) => {
               const isOpen = openIndex === index;
 
               return (
-                <motion.div
+                <div
                   key={item.q}
-                  layout
-                  whileHover={{ y: -2 }}
-                  transition={{ duration: 0.25 }}
-                  className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl transition-all duration-300 hover:border-[#D4AF37]/30"
+                  className="overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] transition duration-300 hover:border-[#C5A059]"
                 >
                   <button
+                    type="button"
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-${index}`}
-                    className="flex w-full items-center justify-between gap-6 px-7 py-6 text-left"
+                    className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left font-serif text-lg font-bold text-[#171717]"
                   >
-                    <span className="text-lg font-semibold text-white">
-                      {item.q}
-                    </span>
-
-                    <motion.div
-                      animate={{
-                        rotate: isOpen ? 180 : 0,
-                      }}
-                      whileHover={{
-                        scale: 1.2,
-                        rotate: isOpen ? 180 : 90,
-                      }}
-                      whileTap={{
-                        scale: 0.9,
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 450,
-                        damping: 18,
-                      }}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 shadow-[0_0_0_rgba(212,175,55,0)] transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/20 hover:shadow-[0_0_20px_rgba(212,175,55,0.35)]"
-                    >
-                      {isOpen ? (
-                        <Minus size={18} className="text-[#D4AF37]" />
-                      ) : (
-                        <Plus size={18} className="text-[#D4AF37]" />
-                      )}
-                    </motion.div>
+                    <span>{item.q}</span>
+                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#E2DDD3] bg-[#F5F2EA] text-[#C5A059]">
+                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                    </div>
                   </button>
 
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
                         id={`faq-${index}`}
-                        initial={{
-                          height: 0,
-                          opacity: 0,
-                        }}
-                        animate={{
-                          height: "auto",
-                          opacity: 1,
-                        }}
-                        exit={{
-                          height: 0,
-                          opacity: 0,
-                        }}
-                        transition={{
-                          duration: 0.3,
-                        }}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-7 pb-7">
-                          <div className="h-px w-full bg-gradient-to-r from-[#D4AF37]/20 via-[#D4AF37]/10 to-transparent" />
-
-                          <p className="mt-5 leading-8 text-white/60">
-                            {item.a}
-                          </p>
+                        <div className="border-t border-[#E2DDD3] px-6 py-5 text-xs font-normal leading-relaxed text-[#171717]/75 sm:text-sm">
+                          {item.a}
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </div>
               );
             })}
           </div>

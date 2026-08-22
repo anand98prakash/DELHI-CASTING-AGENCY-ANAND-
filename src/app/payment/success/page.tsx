@@ -97,7 +97,7 @@ export default function PaymentSuccessPage() {
               Payment Successful
             </p>
 
-            <h1 className="mx-auto mt-4 max-w-2xl font-display text-3xl text-white md:text-5xl">
+            <h1 className="mx-auto mt-4 max-w-2xl font-bold tracking-tight text-3xl text-white md:text-5xl">
               Your registration journey is complete.
             </h1>
 

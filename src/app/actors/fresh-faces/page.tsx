@@ -1,257 +1,183 @@
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Sparkles, UserPlus } from "lucide-react";
+import { ArrowRight, Users, Sparkles, CheckCircle2, UserPlus } from "lucide-react";
 
-import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
+import { getActorsByCategory, getCategoryBySlug, ACTOR_CATEGORIES } from "@/data/actors";
+import { ActorGrid } from "@/components/actors/ActorGrid";
+
+export const metadata = {
+  title: "Fresh Faces Actor Roster | Delhi Casting Agency (DCA)",
+  description:
+    "Discover emerging actors and new talent ready for debut auditions, TV commercials, OTT shows and feature films with Delhi Casting Agency.",
+};
 
 const profilePoints = [
-  "Recent and clear photographs",
-  "Accurate personal and profile information",
-  "Acting skills, interests and abilities",
-  "Languages and performance skills",
-  "Portfolio or social links where relevant",
-];
-
-const preparationSteps = [
-  {
-    title: "Create Your Profile",
-    description:
-      "Provide your basic information and create a clear representation of your talent.",
-  },
-  {
-    title: "Add Your Photos",
-    description:
-      "Use recent, clear and appropriate photographs that represent your current appearance.",
-  },
-  {
-    title: "Show Your Skills",
-    description:
-      "Mention relevant acting skills, languages, training and other performance abilities.",
-  },
-  {
-    title: "Explore Opportunities",
-    description:
-      "Review casting opportunities and check their individual requirements before applying.",
-  },
+  "Recent, well-lit digital headshots & natural portraits",
+  "Accurate age, height, and location specs",
+  "Language proficiencies and accent capabilities",
+  "Special talents: singing, dance, sports or martial arts",
+  "Audition monologue or self-tape introduction link",
 ];
 
 export default function FreshFacesPage() {
+  const category = getCategoryBySlug("fresh-faces")!;
+  const actors = getActorsByCategory("fresh-faces");
+  const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "fresh-faces");
+
   return (
-    <main>
-      <PageHero
-        eyebrow="Fresh Faces"
-        title="Fresh Face Actor Casting & Registration"
-        description="A dedicated category for aspiring actors who are beginning their professional journey."
-      />
-
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
-        <Breadcrumb
-          items={[
-            {
-              label: "Home",
-              href: "/",
-            },
-            {
-              label: "Talents",
-              href: "/talents/",
-            },
-            {
-              label: "Actors",
-              href: "/actors/",
-            },
-            {
-              label: "Fresh Faces",
-            },
-          ]}
-        />
-      </div>
-
-      {/* Introduction */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <main className="bg-[#0d0d0d] min-h-screen text-white">
+      {/* Streamlined Category Hero */}
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#0a0a0a] px-4 sm:px-6 lg:px-8 pb-8 pt-24 sm:pt-28">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_38%),linear-gradient(180deg,rgba(10,10,10,0.72),#0a0a0a)]" />
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-4">
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Talents", href: "/talents/" },
+                { label: "Actors", href: "/actors/" },
+                { label: "Fresh Faces" },
+              ]}
+            />
+          </div>
           <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#d4af37] mb-2">
+              Talent Roster
+            </p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+              Fresh Faces
+            </h1>
+            <p className="mt-2.5 max-w-3xl text-sm sm:text-base text-white/70 leading-relaxed">
+              {category.heroDescription}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Featured Profiles Section */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <Reveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-white/10">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                For Aspiring Actors
-              </p>
-
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-                Start your acting journey with a professional profile
+              <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1.5">
+                <Users className="w-3.5 h-3.5" />
+                Emerging Talent
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                Fresh Face Actor Profiles
               </h2>
+            </div>
+            <span className="text-xs sm:text-sm text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/30 px-3.5 py-1.5 rounded-full self-start md:self-auto font-medium">
+              Showing Verified Artists
+            </span>
+          </div>
+        </Reveal>
 
-              <p className="mt-5 text-base leading-8 text-white/60">
-                The Fresh Faces category is intended for aspiring actors and
-                talent who are beginning their professional journey and may not
-                yet have extensive industry experience.
-              </p>
+        {/* Actor Cards Grid */}
+        <Reveal delay={0.1}>
+          <ActorGrid actors={actors} />
+        </Reveal>
+      </section>
 
-              <p className="mt-4 text-base leading-8 text-white/60">
-                Previous professional work is not the only way to present your
-                potential. Your profile can communicate your skills, interests,
-                training and other relevant abilities.
-              </p>
-
-              <Link
-                href="/register/"
-                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E2C04A] hover:shadow-lg hover:shadow-[#D4AF37]/20"
-              >
-                Register Now
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+      {/* Guidance for Aspiring Newcomers */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div className="grid gap-8 lg:grid-cols-2 items-stretch">
+          <Reveal>
+            <div className="h-full bg-[#181818] border border-white/10 rounded-3xl p-8 flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d4af37]">
+                  For Aspiring Talents
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-4">
+                  Start Your Acting Journey With DCA
+                </h3>
+                <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-4">
+                  The Fresh Faces division is dedicated to discovering new actors, college theatre artists, and passionate performers looking for their first professional screen opportunity.
+                </p>
+                <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+                  Our talent managers help you build an audition-ready comp card, organize professional test shoots, and present your profile to prominent casting directors.
+                </p>
+              </div>
+              <div className="pt-6">
+                <Link
+                  href="/register/"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d4af37] px-6 py-3.5 text-sm font-bold text-black hover:bg-[#e5c158] transition-all"
+                >
+                  Register as a Fresh Face
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </Reveal>
 
-          <Reveal delay={0.12}>
-            <div className="relative overflow-hidden rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-8">
-              <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
-
-              <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                  <UserPlus className="h-6 w-6" />
+          <Reveal delay={0.1}>
+            <div className="h-full bg-[#181818] border border-[#d4af37]/20 rounded-3xl p-8 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2.5 rounded-xl bg-[#d4af37]/10 text-[#d4af37]">
+                    <UserPlus className="w-5 h-5" />
+                  </div>
+                  <h4 className="text-xl font-bold text-white">
+                    Fresh Face Profile Checklist
+                  </h4>
                 </div>
-
-                <h3 className="mt-6 font-display text-2xl text-white">
-                  No extensive experience required
-                </h3>
-
-                <p className="mt-3 text-sm leading-7 text-white/55">
-                  Fresh talent can create a profile and present their skills and
-                  potential professionally.
-                </p>
-
-                <div className="mt-6 space-y-3">
-                  {profilePoints.slice(0, 3).map((point) => (
-                    <div
-                      key={point}
-                      className="flex items-start gap-3 text-sm text-white/65"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
-                      <span>{point}</span>
+                <div className="space-y-3 mt-4">
+                  {profilePoints.map((pt, i) => (
+                    <div key={i} className="flex items-start gap-3 text-sm text-white/80">
+                      <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
+                      <span>{pt}</span>
                     </div>
                   ))}
                 </div>
               </div>
+              <div className="mt-6 p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-white/50">
+                Tip: Keep headshots natural with minimal makeup to allow directors to envision diverse characters.
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* How to Prepare */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
+      {/* Other Categories Switcher */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 border-t border-white/10">
         <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Getting Started
-            </p>
-
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-              Prepare your profile
-            </h2>
-
-            <p className="mt-5 text-base leading-8 text-white/60">
-              A professional profile helps you communicate your talent clearly
-              when exploring relevant opportunities.
-            </p>
+          <div className="mb-6">
+            <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              Explore More Categories
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              Other Talent Divisions
+            </h3>
           </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {preparationSteps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 0.05}>
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#D4AF37]/30">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-sm font-semibold text-[#D4AF37]">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <h3 className="font-display text-xl text-white">
-                    {step.title}
-                  </h3>
-                </div>
-
-                <p className="mt-4 text-sm leading-7 text-white/55">
-                  {step.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Profile Checklist */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
-            <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                Profile Checklist
-              </p>
-
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-                Information worth keeping ready
-              </h2>
-
-              <p className="mt-4 text-sm leading-7 text-white/55 md:text-base">
-                Prepare accurate information before creating or updating your
-                artist profile.
-              </p>
-            </div>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              {profilePoints.map((point) => (
-                <div
-                  key={point}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
-                >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
-
-                  <span className="text-sm leading-7 text-white/65">
-                    {point}
-                  </span>
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+            {otherCategories.map((cat) => (
+              <Link
+                key={cat.slug}
+                href={cat.route}
+                className="p-4 rounded-xl bg-[#181818] border border-white/10 hover:border-[#d4af37]/60 hover:bg-white/[0.05] transition-all group block text-center"
+              >
+                <span className="text-sm font-semibold text-white group-hover:text-[#d4af37] transition-colors block">
+                  {cat.title}
+                </span>
+                <span className="text-[11px] text-white/50 block mt-1">
+                  {cat.countLabel}
+                </span>
+              </Link>
+            ))}
           </div>
         </Reveal>
       </section>
 
-      {/* Important Notice */}
-      <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
-        <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-9">
-            <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                <Sparkles className="h-5 w-5" />
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  Important
-                </p>
-
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
-                  Fresh face does not mean guaranteed selection.
-                </h2>
-
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55">
-                  Individual casting opportunities can have their own
-                  requirements and selection processes. Creating a profile or
-                  registering does not guarantee auditions, roles, employment or
-                  selection.
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
+      {/* Category CTA */}
       <CTASection
-        eyebrow="Start Your Journey"
-        title="Ready to showcase your potential?"
-        description="Create your artist profile and present your skills, interests and portfolio professionally."
-        buttonLabel="Register Now"
+        eyebrow="Fresh Faces Casting"
+        title="Ready to Cast or Audition New Talent?"
+        description="Delhi Casting Agency connects promising new talent with ongoing film, web series, and commercial casting calls."
+        buttonLabel="Register as Talent"
         buttonHref="/register/"
       />
     </main>

@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/ui/reveal";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import Image from "next/image";
 
 interface PageHeroProps {
   eyebrow?: string;
@@ -11,18 +12,47 @@ interface PageHeroProps {
 
 export function PageHero({ eyebrow, title, description, breadcrumbs = [], image }: PageHeroProps) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-white/10 bg-charcoal px-6 pb-16 pt-32 md:pb-20 md:pt-40">
-      {image ? (
-        <div className="absolute inset-0 -z-20 bg-cover bg-center opacity-20" style={{ backgroundImage: `url(${image})` }} />
-      ) : null}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_38%),linear-gradient(180deg,rgba(10,10,10,0.72),#0a0a0a)]" />
+    <section className="relative isolate overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
       <div className="mx-auto max-w-7xl">
-        {breadcrumbs.length > 0 && <div className="mb-7"><Breadcrumb items={breadcrumbs} /></div>}
-        <Reveal>
-          {eyebrow && <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-gold">{eyebrow}</p>}
-          <h1 className="max-w-4xl font-display text-5xl leading-[0.95] text-white md:text-7xl">{title}</h1>
-          {description && <p className="mt-6 max-w-2xl text-base leading-8 text-white/65 md:text-lg">{description}</p>}
-        </Reveal>
+        {breadcrumbs.length > 0 && (
+          <div className="mb-6">
+            <Breadcrumb items={breadcrumbs} />
+          </div>
+        )}
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div className={image ? "lg:col-span-7" : "lg:col-span-12"}>
+            <Reveal>
+              {eyebrow && (
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+                  {eyebrow}
+                </p>
+              )}
+              <h1 className="font-serif text-3xl font-extrabold leading-[1.1] tracking-tight text-[#171717] sm:text-4xl md:text-5xl lg:text-6xl">
+                {title}
+              </h1>
+              {description && (
+                <p className="mt-5 max-w-2xl text-base font-normal leading-relaxed text-[#171717]/70 md:text-lg">
+                  {description}
+                </p>
+              )}
+            </Reveal>
+          </div>
+
+          {image && (
+            <div className="lg:col-span-5">
+              <div className="relative aspect-4/3 w-full overflow-hidden rounded-xl border border-[#E2DDD3] shadow-md md:aspect-3/2 lg:aspect-4/5">
+                <Image
+                  src={image}
+                  alt={title}
+                  fill
+                  priority
+                  className="object-cover transition duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/30 via-transparent to-transparent" />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

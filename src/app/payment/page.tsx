@@ -126,7 +126,7 @@ export default function PaymentPage() {
                 Registration Summary
               </p>
 
-              <h2 className="mt-4 font-display text-2xl text-white">
+              <h2 className="mt-4 font-bold tracking-tight text-2xl text-white">
                 Artist Membership
               </h2>
 
@@ -158,7 +158,7 @@ export default function PaymentPage() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-white/50">Membership Fee</span>
 
-                <span className="font-display text-xl text-[#D4AF37]">
+                <span className="font-bold tracking-tight text-xl text-[#D4AF37]">
                   As applicable
                 </span>
               </div>
@@ -197,7 +197,7 @@ export default function PaymentPage() {
                     Secure Checkout
                   </p>
 
-                  <h2 className="mt-3 font-display text-3xl text-white">
+                  <h2 className="mt-3 font-bold tracking-tight text-3xl text-white">
                     Payment
                   </h2>
 

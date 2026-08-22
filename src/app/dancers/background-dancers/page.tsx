@@ -1,316 +1,117 @@
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Film, Music2, Users } from "lucide-react";
+import { Users, Sparkles } from "lucide-react";
 
-import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
+import { getDancersByCategory, getDancerCategoryBySlug, DANCER_CATEGORIES } from "@/data/dancers";
+import { DancerGrid } from "@/components/dancers/DancerGrid";
 
-const profilePoints = [
-  "Recent and clear photographs",
-  "Relevant dance styles and performance skills",
-  "Previous group or background dance experience",
-  "Film, video or stage performance experience where applicable",
-  "Accurate profile and contact information",
-];
-
-const castingTypes = [
-  {
-    title: "Film Productions",
-    description:
-      "Background and group dancers for film sequences and dance-focused scenes.",
-  },
-  {
-    title: "Music Videos",
-    description:
-      "Dancers for group performances and choreography-based music video productions.",
-  },
-  {
-    title: "Video Productions",
-    description:
-      "Background dancers for digital and other video productions requiring group performers.",
-  },
-];
-
-const profileSteps = [
-  {
-    title: "Create Your Profile",
-    description:
-      "Provide accurate information about your dance experience, skills and performance background.",
-  },
-  {
-    title: "Add Recent Photos",
-    description:
-      "Use clear and recent photographs that represent your current appearance.",
-  },
-  {
-    title: "Mention Dance Skills",
-    description:
-      "List the dance styles and performance skills that are relevant to your profile.",
-  },
-  {
-    title: "Keep Information Updated",
-    description:
-      "Update your profile whenever your experience, skills or professional information changes.",
-  },
-];
+export const metadata = {
+  title: "Background Dancers & Troupes | Delhi Casting Agency (DCA)",
+  description:
+    "Explore synchronized background dance troupes and ensemble artists for major Bollywood film songs, award shows, and stage events.",
+};
 
 export default function BackgroundDancersPage() {
+  const category = getDancerCategoryBySlug("background-dancers")!;
+  const dancers = getDancersByCategory("background-dancers");
+  const otherCategories = DANCER_CATEGORIES.filter((c) => c.slug !== "background-dancers");
+
   return (
-    <main>
-      <PageHero
-        eyebrow="Background Dancers"
-        title="Background Dancer Casting"
-        description="Explore background and group dancer opportunities for films and video productions."
-      />
-
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
-        <Breadcrumb
-          items={[
-            {
-              label: "Home",
-              href: "/",
-            },
-            {
-              label: "Talents",
-              href: "/talents/",
-            },
-            {
-              label: "Dancers",
-              href: "/dancers/",
-            },
-            {
-              label: "Background Dancers",
-            },
-          ]}
-        />
-      </div>
-
-      {/* Introduction */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+    <main className="bg-[#0d0d0d] min-h-screen text-white">
+      {/* Streamlined Category Hero */}
+      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#0a0a0a] px-4 sm:px-6 lg:px-8 pb-8 pt-24 sm:pt-28">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_38%),linear-gradient(180deg,rgba(10,10,10,0.72),#0a0a0a)]" />
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-4">
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Talents", href: "/talents/" },
+                { label: "Dancers", href: "/dancers/" },
+                { label: "Background Dancers" },
+              ]}
+            />
+          </div>
           <Reveal>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#d4af37] mb-2">
+              Talent Roster
+            </p>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+              Background Dancers
+            </h1>
+            <p className="mt-2.5 max-w-3xl text-sm sm:text-base text-white/70 leading-relaxed">
+              {category.heroDescription}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Featured Dancers Grid Section */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <Reveal>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-white/10">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                Background / Group Dancers
-              </p>
-
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-                Showcase your background dance profile
+              <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1.5">
+                <Users className="w-3.5 h-3.5" />
+                Featured Dancers
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                Background Dancer Profiles
               </h2>
+            </div>
+            <span className="text-xs sm:text-sm text-[#d4af37] bg-[#d4af37]/10 border border-[#d4af37]/30 px-3.5 py-1.5 rounded-full self-start md:self-auto font-medium">
+              Showing Verified Dancers
+            </span>
+          </div>
+        </Reveal>
 
-              <p className="mt-5 text-base leading-8 text-white/60">
-                This category is focused on background and group dancers
-                interested in opportunities for films and video productions.
-              </p>
+        {/* Dancer Cards Grid */}
+        <Reveal delay={0.1}>
+          <DancerGrid dancers={dancers} />
+        </Reveal>
+      </section>
 
-              <p className="mt-4 text-base leading-8 text-white/60">
-                Present your dance skills, relevant experience and current
-                profile information clearly.
-              </p>
-
+      {/* Other Categories Switcher */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 border-t border-white/10">
+        <Reveal>
+          <div className="mb-6">
+            <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1">
+              <Sparkles className="w-3.5 h-3.5" />
+              Explore More Categories
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-white">
+              Other Dance Divisions
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            {otherCategories.map((cat) => (
               <Link
-                href="/register/"
-                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E2C04A] hover:shadow-lg hover:shadow-[#D4AF37]/20"
+                key={cat.slug}
+                href={cat.route}
+                className="p-4 rounded-xl bg-[#181818] border border-white/10 hover:border-[#d4af37]/60 hover:bg-white/[0.05] transition-all group block text-center"
               >
-                Register as a Dancer
-                <ArrowRight className="ml-2 h-4 w-4" />
+                <span className="text-sm font-semibold text-white group-hover:text-[#d4af37] transition-colors block">
+                  {cat.title}
+                </span>
+                <span className="text-[11px] text-white/50 block mt-1">
+                  {cat.countLabel}
+                </span>
               </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
-
-              <div className="relative">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                  <Users className="h-6 w-6" />
-                </div>
-
-                <h3 className="mt-6 font-display text-2xl text-white">
-                  Group performance profile
-                </h3>
-
-                <p className="mt-3 text-sm leading-7 text-white/55">
-                  Keep your dance experience and performance information
-                  accurate for relevant background and group casting.
-                </p>
-
-                <div className="mt-6 space-y-3">
-                  {profilePoints.slice(0, 3).map((point) => (
-                    <div
-                      key={point}
-                      className="flex items-start gap-3 text-sm text-white/65"
-                    >
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
-                      <span>{point}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* Casting Types */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Casting Focus
-            </p>
-
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-              Background and group dance opportunities
-            </h2>
-
-            <p className="mt-5 text-base leading-8 text-white/60">
-              This page is specifically focused on background and group dancers
-              for film and video work.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {castingTypes.map((item, index) => (
-            <Reveal key={item.title} delay={index * 0.06}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#D4AF37]/30">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                  <Film className="h-5 w-5" />
-                </div>
-
-                <h3 className="mt-5 font-display text-xl text-white">
-                  {item.title}
-                </h3>
-
-                <p className="mt-3 text-sm leading-7 text-white/55">
-                  {item.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Profile Preparation */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Profile Preparation
-            </p>
-
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-              Prepare your dancer profile
-            </h2>
-
-            <p className="mt-5 text-base leading-8 text-white/60">
-              Keep your information clear, current and relevant to background
-              and group dance casting.
-            </p>
-          </div>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {profileSteps.map((step, index) => (
-            <Reveal key={step.title} delay={index * 0.06}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-sm font-semibold text-[#D4AF37]">
-                    {String(index + 1).padStart(2, "0")}
-                  </div>
-
-                  <h3 className="font-display text-xl text-white">
-                    {step.title}
-                  </h3>
-                </div>
-
-                <p className="mt-4 text-sm leading-7 text-white/55">
-                  {step.description}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* Checklist */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                <Music2 className="h-6 w-6" />
-              </div>
-
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  Profile Checklist
-                </p>
-
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
-                  Information to keep ready
-                </h2>
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-4 md:grid-cols-2">
-              {profilePoints.map((point) => (
-                <div
-                  key={point}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
-                >
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
-
-                  <span className="text-sm leading-7 text-white/65">
-                    {point}
-                  </span>
-                </div>
-              ))}
-            </div>
+            ))}
           </div>
         </Reveal>
       </section>
 
-      {/* Related Category */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
-        <Reveal>
-          <Link
-            href="/dancers/lead-dancers/"
-            className="group block rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30"
-          >
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  Explore More
-                </p>
-
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
-                  Lead Dancers
-                </h2>
-
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-white/55">
-                  Explore the lead and featured dancer category.
-                </p>
-              </div>
-
-              <div className="inline-flex shrink-0 items-center text-sm font-semibold text-[#D4AF37]">
-                View Category
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </div>
-            </div>
-          </Link>
-        </Reveal>
-      </section>
-
+      {/* Category CTA */}
       <CTASection
-        eyebrow="Start Your Journey"
-        title="Ready to showcase your dance profile?"
-        description="Register your talent profile and explore relevant background and group dancer opportunities."
-        buttonLabel="Register Now"
-        buttonHref="/register/"
+        eyebrow="Ensemble Dance Troupes"
+        title="Need Large Dance Troupes for Film Shoots or Live Events?"
+        description="Delhi Casting Agency coordinates full synchronized dance ensembles with costume and formation expertise."
+        buttonLabel="Contact Dance Desk"
+        buttonHref="/contact/"
       />
     </main>
   );

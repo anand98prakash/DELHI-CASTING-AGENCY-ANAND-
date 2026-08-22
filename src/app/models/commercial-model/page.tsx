@@ -103,7 +103,7 @@ export default function CommercialModelsPage() {
                 Commercial Model Category
               </p>
 
-              <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+              <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
                 Present your commercial modeling profile
               </h2>
 
@@ -138,7 +138,7 @@ export default function CommercialModelsPage() {
                   <ShoppingBag className="h-6 w-6" />
                 </div>
 
-                <h3 className="mt-6 font-display text-2xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-2xl text-white">
                   Build a commercial-ready profile
                 </h3>
 
@@ -172,7 +172,7 @@ export default function CommercialModelsPage() {
               Commercial Opportunities
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Types of commercial requirements
             </h2>
 
@@ -192,7 +192,7 @@ export default function CommercialModelsPage() {
                   <BriefcaseBusiness className="h-5 w-5" />
                 </div>
 
-                <h3 className="mt-5 font-display text-xl text-white">
+                <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
                   {item.title}
                 </h3>
 
@@ -219,7 +219,7 @@ export default function CommercialModelsPage() {
                   Profile Preparation
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Keep your commercial profile current
                 </h2>
 
@@ -257,7 +257,7 @@ export default function CommercialModelsPage() {
               Explore More
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Explore other modeling categories
             </h2>
           </div>
@@ -271,7 +271,7 @@ export default function CommercialModelsPage() {
                 className="group block h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:bg-white/[0.05]"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-display text-xl text-white">
+                  <h3 className="font-bold tracking-tight text-xl text-white">
                     {item.title}
                   </h3>
 
@@ -301,7 +301,7 @@ export default function CommercialModelsPage() {
                   Important
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Commercial opportunities do not guarantee selection.
                 </h2>
 

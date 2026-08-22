@@ -89,7 +89,7 @@ export default function ModelsBlogCategoryPage() {
               Model Resources
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-5xl">
               Guides to help you prepare your modeling career
             </h2>
 
@@ -109,7 +109,7 @@ export default function ModelsBlogCategoryPage() {
               Model Guides
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Explore model-focused articles
             </h2>
           </div>
@@ -133,7 +133,7 @@ export default function ModelsBlogCategoryPage() {
                     <ArrowRight className="h-5 w-5 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
                   </div>
 
-                  <h3 className="mt-7 font-display text-xl text-white">
+                  <h3 className="mt-7 font-bold tracking-tight text-xl text-white">
                     {article.title}
                   </h3>
 
@@ -160,7 +160,7 @@ export default function ModelsBlogCategoryPage() {
               Portfolio Preparation
             </p>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
               Build a portfolio that represents you
             </h2>
 
@@ -179,7 +179,7 @@ export default function ModelsBlogCategoryPage() {
                   <ImageIcon className="h-5 w-5" />
                 </div>
 
-                <h3 className="mt-6 font-display text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
                   {tip.title}
                 </h3>
 
@@ -206,7 +206,7 @@ export default function ModelsBlogCategoryPage() {
                   Model Checklist
                 </p>
 
-                <h2 className="mt-3 font-display text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
                   Keep your modeling profile ready
                 </h2>
 
@@ -243,7 +243,7 @@ export default function ModelsBlogCategoryPage() {
               <Sparkles className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-display text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
               Explore model categories
             </h2>
 

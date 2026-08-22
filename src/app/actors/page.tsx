@@ -1,166 +1,176 @@
+import React from "react";
 import Link from "next/link";
-import { ArrowRight, Award, Sparkles, Users } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Sparkles, Film, Star, UserCheck } from "lucide-react";
 
-import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
+import { ACTOR_CATEGORIES } from "@/data/actors";
+import { ActorCategoryCard } from "@/components/actors/ActorCategoryCard";
 
-const actorSegments = [
-  {
-    title: "Male Actors",
-    description:
-      "Explore the dedicated male actor category for casting and registration opportunities.",
-    href: "/actors/male-actors/",
-    icon: Users,
-  },
-  {
-    title: "Female Actors",
-    description:
-      "Explore the dedicated female actor category for casting and registration opportunities.",
-    href: "/actors/female-actors/",
-    icon: Sparkles,
-  },
-  {
-    title: "Fresh Faces",
-    description:
-      "A dedicated category for first-time actors and talent without previous professional experience.",
-    href: "/actors/fresh-faces/",
-    icon: Award,
-  },
-  {
-    title: "Experienced Actors",
-    description:
-      "For working actors looking to explore additional roles and casting opportunities.",
-    href: "/actors/experienced-actors/",
-    icon: Award,
-  },
-];
+export const metadata = {
+  title: "Actors & Casting Roster | Delhi Casting Agency (DCA)",
+  description:
+    "Explore Delhi Casting Agency's curated actor roster across Male Actors, Female Actors, Fresh Faces, Experienced Actors, Popular Stars, and Child Actors.",
+};
 
 export default function ActorsPage() {
   return (
-    <main>
-      <PageHero
-        eyebrow="Actors"
-        title="Actor Casting & Registration"
-        description="Explore dedicated actor categories for fresh faces, experienced performers, male actors and female actors."
-      />
+    <main className="min-h-screen bg-[#F5F2EA] text-[#171717]">
+      {/* Hero Header */}
+      <section className="relative isolate overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+              Talent Roster
+            </p>
 
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
+            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-md">
+              <Image
+                src="/images/actors/talwnt actor horizonatl.png"
+                alt="Delhi Casting Agency Actors & Casting Portfolio"
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-[#171717]/20 to-transparent" />
+            </div>
+
+            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-5xl md:text-6xl">
+              Actors &amp; Casting Portfolio
+            </h1>
+
+            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#171717]/75 sm:text-lg">
+              Discover Delhi Casting Agency’s specialized actor roster. From emerging fresh faces and child artists to seasoned screen veterans and mainstream stars.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Breadcrumb Bar */}
+      <div className="mx-auto max-w-7xl px-6 py-6">
         <Breadcrumb
           items={[
-            {
-              label: "Home",
-              href: "/",
-            },
-            {
-              label: "Talents",
-              href: "/talents/",
-            },
-            {
-              label: "Actors",
-            },
+            { label: "Home", href: "/" },
+            { label: "Talents", href: "/talents/" },
+            { label: "Actors" },
           ]}
         />
       </div>
 
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
+      {/* Categories Grid Section */}
+      <section className="mx-auto max-w-7xl px-6 py-8 sm:py-16">
         <Reveal>
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-              Actor Categories
-            </p>
+          <div className="mb-12 max-w-3xl">
+            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+              <Sparkles className="h-3.5 w-3.5" />
+              Representation &amp; Casting Categories
+            </span>
 
-            <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-              Find the actor category that fits your profile
+            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
+              Explore Actor Categories
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
-              The actor section is organized into dedicated segments so that
-              artists can explore opportunities relevant to their experience and
-              profile.
+            <p className="mt-4 text-base leading-relaxed text-[#171717]/75">
+              Browse actors filtered by category, screen experience, and specialty.
+              Every artist profile includes complete physical specifications, verified showreels, digital comp cards, and career credits.
             </p>
           </div>
         </Reveal>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {actorSegments.map((segment, index) => {
-            const Icon = segment.icon;
-
-            return (
-              <Reveal key={segment.title} delay={index * 0.06}>
-                <Link
-                  href={segment.href}
-                  className="group block h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/35 hover:bg-white/[0.05]"
-                >
-                  <div className="flex items-start justify-between gap-5">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                      <Icon className="h-6 w-6" />
-                    </div>
-
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/40 transition-all duration-300 group-hover:border-[#D4AF37]/40 group-hover:text-[#D4AF37]">
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                    </div>
-                  </div>
-
-                  <h3 className="mt-7 font-display text-2xl text-white">
-                    {segment.title}
-                  </h3>
-
-                  <p className="mt-3 max-w-xl text-sm leading-7 text-white/55">
-                    {segment.description}
-                  </p>
-
-                  <div className="mt-6 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
-                    Explore {segment.title}
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </div>
-                </Link>
-              </Reveal>
-            );
-          })}
+        {/* 6 Category Cards Grid */}
+        <div className="grid items-stretch gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {ACTOR_CATEGORIES.map((category, index) => (
+            <Reveal key={category.slug} delay={index * 0.05} className="h-full">
+              <ActorCategoryCard category={category} />
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
+      {/* Highlights / Features Banner */}
+      <section className="mx-auto max-w-7xl px-6 pb-16">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="grid gap-6 rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-6 shadow-xs sm:p-8 md:grid-cols-3">
+            <div className="flex items-start gap-4 p-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#C5A059]/30 bg-[#F5F2EA] text-[#C5A059]">
+                <Film className="h-6 w-6" />
+              </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  For Actors
-                </p>
-
-                <h2 className="mt-4 font-display text-3xl text-white md:text-4xl">
-                  Build a clear and professional talent profile
-                </h2>
-
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-white/55 md:text-base">
-                  Keep your profile information accurate and up to date. Include
-                  relevant photographs, acting experience, skills and portfolio
-                  or social links where appropriate.
+                <h3 className="font-serif text-lg font-bold text-[#171717]">
+                  Verified Video Showreels
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-[#171717]/70">
+                  Screen tests, dramatic monologues and cinematic reels formatted for top casting directors.
                 </p>
               </div>
+            </div>
 
-              <Link
-                href="/register/"
-                className="inline-flex items-center justify-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E2C04A] hover:shadow-lg hover:shadow-[#D4AF37]/20"
-              >
-                Register as an Actor
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+            <div className="flex items-start gap-4 border-t border-[#E2DDD3] p-4 md:border-t-0 md:border-x md:px-6">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#C5A059]/30 bg-[#F5F2EA] text-[#C5A059]">
+                <Star className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-serif text-lg font-bold text-[#171717]">
+                  Complete Comp Cards
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-[#171717]/70">
+                  Interactive multi-tab portfolios including digitals, video reels, Instagram highlights and print work.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 border-t border-[#E2DDD3] p-4 md:border-t-0">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#C5A059]/30 bg-[#F5F2EA] text-[#C5A059]">
+                <UserCheck className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="font-serif text-lg font-bold text-[#171717]">
+                  Direct Casting Access
+                </h3>
+                <p className="mt-1 text-xs leading-relaxed text-[#171717]/70">
+                  Streamlined inquiry and audition scheduling direct with DCA talent managers in Delhi NCR.
+                </p>
+              </div>
             </div>
           </div>
         </Reveal>
       </section>
 
-      <CTASection
-        eyebrow="Start Your Journey"
-        title="Ready to explore acting opportunities?"
-        description="Choose the actor category that best represents your profile and continue exploring the platform."
-        buttonLabel="Register Now"
-        buttonHref="/register/"
-      />
+      {/* For Actors Registration Callout */}
+      <section className="mx-auto max-w-7xl px-6 pb-20">
+        <Reveal>
+          <div className="rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-8 shadow-md sm:p-12">
+            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+                  Talent Representation
+                </span>
+
+                <h2 className="mt-3 font-serif text-2xl font-bold tracking-tight text-[#171717] sm:text-3xl lg:text-4xl">
+                  Are You an Actor Looking for Casting Opportunities?
+                </h2>
+
+                <p className="mt-3 max-w-2xl text-xs leading-relaxed text-[#171717]/75 sm:text-sm">
+                  Register your profile with Delhi Casting Agency to get discovered by directors, production houses, and casting coordinators across Bollywood, OTT series, and commercial advertising.
+                </p>
+              </div>
+
+              <div className="flex items-center">
+                <Link
+                  href="/register/"
+                  className="inline-flex items-center justify-center rounded-full bg-[#171717] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-[#F5F2EA] transition duration-300 hover:bg-[#C5A059] hover:text-[#171717]"
+                >
+                  Register as an Actor
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
     </main>
   );
 }

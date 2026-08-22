@@ -28,10 +28,10 @@ export function SuccessModal({
             className="max-w-md"
           >
             <PartyPopper className="w-12 h-12 text-gold mx-auto" />
-            <h2 className="mt-4 font-display font-bold text-[28px] text-white">
+            <h2 className="mt-4 font-bold text-[28px] tracking-tight text-white">
               Welcome to {SITE.name}!
             </h2>
-            <p className="mt-2.5 text-cream/70 text-sm">
+            <p className="mt-2.5 text-cream/70 text-sm font-normal">
               Congratulations — your Premium Membership is now active.
             </p>
             <p className="mt-4 text-[12.5px] text-cream/50">
