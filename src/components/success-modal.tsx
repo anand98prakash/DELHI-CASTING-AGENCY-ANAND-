@@ -27,7 +27,7 @@ export function SuccessModal({
             transition={{ delay: 0.1 }}
             className="max-w-md"
           >
-            <PartyPopper className="w-12 h-12 text-gold mx-auto" />
+            <PartyPopper className="w-12 h-12 text-[#D4AF37] mx-auto" />
             <h2 className="mt-4 font-bold text-[28px] tracking-tight text-white">
               Welcome to {SITE.name}!
             </h2>
@@ -35,7 +35,7 @@ export function SuccessModal({
               Congratulations — your Premium Membership is now active.
             </p>
             <p className="mt-4 text-[12.5px] text-cream/50">
-              Membership ID: <b className="text-gold">{memberId}</b> &nbsp;·&nbsp; Payment Status:{" "}
+              Membership ID: <b className="text-[#D4AF37]">{memberId}</b> &nbsp;·&nbsp; Payment Status:{" "}
               <b className="text-[#4caf50]">Paid ✅</b>
             </p>
             <a href={SITE.whatsappUrl} target="_blank" rel="noreferrer" className="inline-block mt-6">

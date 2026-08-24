@@ -16,16 +16,16 @@ export const metadata = {
 
 export default function VoiceArtistsPage() {
   return (
-    <main className="min-h-screen bg-[#F5F2EA] text-[#171717]">
+    <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero Header */}
-      <section className="relative isolate overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
+      <section className="relative isolate overflow-hidden border-b border-gray-200 bg-[#F7F7F5] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
         <div className="mx-auto max-w-7xl">
           <Reveal>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               Talent Roster
             </p>
 
-            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-md">
+            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-gray-200 bg-gray-100 shadow-md">
               <Image
                 src="/images/actors/vpice artist horizontal.jpg"
                 alt="Delhi Casting Agency Voice Artists & Dubbing Talents"
@@ -34,14 +34,14 @@ export default function VoiceArtistsPage() {
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-[#171717]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
 
-            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-5xl md:text-6xl">
+            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl">
               Voice Artists &amp; Dubbing Talents
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#171717]/75 sm:text-lg">
+            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#444444] sm:text-lg">
               Explore voice talent divisions for multilingual film dubbing, advertising commercials, audiobook narration, and radio broadcasting.
             </p>
           </Reveal>
@@ -63,16 +63,16 @@ export default function VoiceArtistsPage() {
       <section className="mx-auto max-w-7xl px-6 py-8 sm:py-16">
         <Reveal>
           <div className="mb-10 max-w-3xl">
-            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               <Sparkles className="h-3.5 w-3.5" />
               Representation &amp; Voice Divisions
             </span>
 
-            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
+            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-4xl">
               Explore Voice Categories
             </h2>
 
-            <p className="mt-3 text-base leading-relaxed text-[#171717]/75">
+            <p className="mt-3 text-base leading-relaxed text-[#444444]">
               Browse broadcast-grade voice talents by vocal pitch, native languages, character modulation, and home studio capabilities.
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function VoiceArtistsPage() {
         title="Need Specialized Voices for Films or Commercials?"
         description="Delhi Casting Agency coordinates custom audition voice reels, language supervision, and studio recording."
         buttonLabel="Contact Voice Desk"
-        buttonHref="/contact-us/"
+        buttonHref="/contact/"
       />
     </main>
   );

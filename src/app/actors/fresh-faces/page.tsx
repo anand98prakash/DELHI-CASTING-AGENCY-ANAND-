@@ -28,10 +28,9 @@ export default function FreshFacesPage() {
   const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "fresh-faces");
 
   return (
-    <main className="bg-[#0d0d0d] min-h-screen text-white">
+    <main className="bg-white min-h-screen text-[#111111]">
       {/* Streamlined Category Hero */}
-      <section className="relative isolate overflow-hidden border-b border-white/10 bg-[#0a0a0a] px-4 sm:px-6 lg:px-8 pb-8 pt-24 sm:pt-28">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.16),transparent_38%),linear-gradient(180deg,rgba(10,10,10,0.72),#0a0a0a)]" />
+      <section className="relative isolate overflow-hidden border-b border-gray-200 bg-[#F7F7F5] px-4 sm:px-6 lg:px-8 pb-8 pt-24 sm:pt-28">
         <div className="mx-auto max-w-7xl">
           <div className="mb-4">
             <Breadcrumb
@@ -47,10 +46,10 @@ export default function FreshFacesPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#d4af37] mb-2">
               Talent Roster
             </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#111111]">
               Fresh Faces
             </h1>
-            <p className="mt-2.5 max-w-3xl text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className="mt-2.5 max-w-3xl text-sm sm:text-base text-[#444444] leading-relaxed">
               {category.heroDescription}
             </p>
           </Reveal>
@@ -60,13 +59,13 @@ export default function FreshFacesPage() {
       {/* Featured Profiles Section */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         <Reveal>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3 mb-6 pb-4 border-b border-gray-200">
             <div>
               <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1.5">
                 <Users className="w-3.5 h-3.5" />
                 Emerging Talent
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight">
                 Fresh Face Actor Profiles
               </h2>
             </div>
@@ -86,25 +85,25 @@ export default function FreshFacesPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid gap-8 lg:grid-cols-2 items-stretch">
           <Reveal>
-            <div className="h-full bg-[#181818] border border-white/10 rounded-3xl p-8 flex flex-col justify-between">
+            <div className="h-full bg-[#F7F7F5] border border-gray-200 rounded-3xl p-8 flex flex-col justify-between shadow-xs">
               <div>
                 <span className="text-xs font-semibold uppercase tracking-[0.25em] text-[#d4af37]">
                   For Aspiring Talents
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mt-3 mb-4">
+                <h3 className="text-2xl sm:text-3xl font-bold text-[#111111] mt-3 mb-4">
                   Start Your Acting Journey With DCA
                 </h3>
-                <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-4">
+                <p className="text-[#444444] text-sm sm:text-base leading-relaxed mb-4">
                   The Fresh Faces division is dedicated to discovering new actors, college theatre artists, and passionate performers looking for their first professional screen opportunity.
                 </p>
-                <p className="text-white/70 text-sm sm:text-base leading-relaxed">
+                <p className="text-[#444444] text-sm sm:text-base leading-relaxed">
                   Our talent managers help you build an audition-ready comp card, organize professional test shoots, and present your profile to prominent casting directors.
                 </p>
               </div>
               <div className="pt-6">
                 <Link
                   href="/register/"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d4af37] px-6 py-3.5 text-sm font-bold text-black hover:bg-[#e5c158] transition-all"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d4af37] px-6 py-3.5 text-sm font-bold text-white hover:bg-[#c59b27] transition-all shadow-md"
                 >
                   Register as a Fresh Face
                   <ArrowRight className="w-4 h-4" />
@@ -114,26 +113,26 @@ export default function FreshFacesPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="h-full bg-[#181818] border border-[#d4af37]/20 rounded-3xl p-8 flex flex-col justify-between">
+            <div className="h-full bg-[#F7F7F5] border border-gray-200 rounded-3xl p-8 flex flex-col justify-between shadow-xs">
               <div>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2.5 rounded-xl bg-[#d4af37]/10 text-[#d4af37]">
                     <UserPlus className="w-5 h-5" />
                   </div>
-                  <h4 className="text-xl font-bold text-white">
+                  <h4 className="text-xl font-bold text-[#111111]">
                     Fresh Face Profile Checklist
                   </h4>
                 </div>
                 <div className="space-y-3 mt-4">
                   {profilePoints.map((pt, i) => (
-                    <div key={i} className="flex items-start gap-3 text-sm text-white/80">
+                    <div key={i} className="flex items-start gap-3 text-sm text-[#444444]">
                       <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                       <span>{pt}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="mt-6 p-4 rounded-xl bg-white/[0.02] border border-white/5 text-xs text-white/50">
+              <div className="mt-6 p-4 rounded-xl bg-white border border-gray-200 text-xs text-[#666666]">
                 Tip: Keep headshots natural with minimal makeup to allow directors to envision diverse characters.
               </div>
             </div>
@@ -142,14 +141,14 @@ export default function FreshFacesPage() {
       </section>
 
       {/* Other Categories Switcher */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 border-t border-white/10">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 border-t border-gray-200">
         <Reveal>
           <div className="mb-6">
             <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-1">
               <Sparkles className="w-3.5 h-3.5" />
               Explore More Categories
             </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-white">
+            <h3 className="text-xl sm:text-2xl font-bold text-[#111111]">
               Other Talent Divisions
             </h3>
           </div>
@@ -158,12 +157,12 @@ export default function FreshFacesPage() {
               <Link
                 key={cat.slug}
                 href={cat.route}
-                className="p-4 rounded-xl bg-[#181818] border border-white/10 hover:border-[#d4af37]/60 hover:bg-white/[0.05] transition-all group block text-center"
+                className="p-4 rounded-xl bg-[#F7F7F5] border border-gray-200 hover:border-[#d4af37]/60 hover:bg-white transition-all group block text-center shadow-2xs"
               >
-                <span className="text-sm font-semibold text-white group-hover:text-[#d4af37] transition-colors block">
+                <span className="text-sm font-semibold text-[#111111] group-hover:text-[#d4af37] transition-colors block">
                   {cat.title}
                 </span>
-                <span className="text-[11px] text-white/50 block mt-1">
+                <span className="text-[11px] text-[#666666] block mt-1">
                   {cat.countLabel}
                 </span>
               </Link>

@@ -69,7 +69,7 @@ const processSteps = [
 
 export default function RefundAndCancellationPolicyPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Legal & Trust"
         title="Refund & Cancellation Policy"
@@ -93,7 +93,7 @@ export default function RefundAndCancellationPolicyPage() {
       {/* Important Notice */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-9">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-9 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <ShieldCheck className="h-6 w-6" />
@@ -104,11 +104,11 @@ export default function RefundAndCancellationPolicyPage() {
                   Important
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Please review the actual refund terms before payment
                 </h2>
 
-                <p className="mt-4 text-sm leading-7 text-white/60 md:text-base">
+                <p className="mt-4 text-sm leading-7 text-[#444444] md:text-base">
                   The final published policy must contain the business&apos;s actual
                   refund eligibility rules, cancellation conditions, processing
                   timelines and applicable exceptions. Those specific terms were
@@ -129,17 +129,17 @@ export default function RefundAndCancellationPolicyPage() {
                 01
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Scope of This Policy
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 This policy applies to paid services or membership purchases
                 where the business has published applicable refund and
                 cancellation terms.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The exact services covered by this policy should be confirmed by
                 the business before publication.
               </p>
@@ -151,11 +151,11 @@ export default function RefundAndCancellationPolicyPage() {
                 02
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Refund & Cancellation Conditions
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The following sections are structured for the actual business
                 rules to be inserted and verified.
               </p>
@@ -167,17 +167,17 @@ export default function RefundAndCancellationPolicyPage() {
                   return (
                     <div
                       key={point.title}
-                      className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+                      className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs"
                     >
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
+                      <h3 className="mt-5 font-bold tracking-tight text-xl text-[#111111]">
                         {point.title}
                       </h3>
 
-                      <p className="mt-3 text-sm leading-7 text-white/55">
+                      <p className="mt-3 text-sm leading-7 text-[#555555]">
                         {point.description}
                       </p>
                     </div>
@@ -192,25 +192,18 @@ export default function RefundAndCancellationPolicyPage() {
                 03
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Casting Selection Is Not Guaranteed
               </h2>
 
-              {/* <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
-                Registration or membership does not guarantee casting selection,
-                auditions, roles or paid work. Your current FAQ content also
-                states that membership does not guarantee selection or
-                employment. :contentReference[oaicite:3]{(index = 3)}
-              </p> */}
-
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Registration or membership does not guarantee casting selection,
                 auditions, roles or paid work. Membership should not be
                 understood as a guarantee of selection or employment.
               </p>
 
-              <div className="mt-6 rounded-2xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.04] p-6">
-                <p className="text-sm leading-7 text-white/65">
+              <div className="mt-6 rounded-2xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#444444]">
                   Any refund rights should therefore be based on the actual
                   published refund and cancellation terms, not on whether a user
                   receives a casting opportunity.
@@ -224,7 +217,7 @@ export default function RefundAndCancellationPolicyPage() {
                 04
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 How to Request a Refund or Cancellation
               </h2>
 
@@ -232,18 +225,18 @@ export default function RefundAndCancellationPolicyPage() {
                 {processSteps.map((step) => (
                   <div
                     key={step.number}
-                    className="flex gap-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6"
+                    className="flex gap-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs"
                   >
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-sm font-semibold text-[#D4AF37]">
                       {step.number}
                     </div>
 
                     <div>
-                      <h3 className="font-bold tracking-tight text-lg text-white">
+                      <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                         {step.title}
                       </h3>
 
-                      <p className="mt-2 text-sm leading-7 text-white/55">
+                      <p className="mt-2 text-sm leading-7 text-[#555555]">
                         {step.description}
                       </p>
                     </div>
@@ -258,7 +251,7 @@ export default function RefundAndCancellationPolicyPage() {
                 05
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Information to Include in a Request
               </h2>
 
@@ -273,11 +266,11 @@ export default function RefundAndCancellationPolicyPage() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                    className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 shadow-2xs"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                    <span className="text-sm leading-7 text-white/65">
+                    <span className="text-sm leading-7 text-[#444444]">
                       {item}
                     </span>
                   </div>
@@ -291,25 +284,25 @@ export default function RefundAndCancellationPolicyPage() {
                 06
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Refund Processing
               </h2>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm leading-7 text-white/60">
-                  <strong className="text-white">
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">
                     Verified processing timeline:
                   </strong>{" "}
                   [INSERT ACTUAL REFUND PROCESSING TIME]
                 </p>
 
-                <p className="mt-3 text-sm leading-7 text-white/60">
-                  <strong className="text-white">Refund method:</strong> [INSERT
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">Refund method:</strong> [INSERT
                   ACTUAL REFUND METHOD]
                 </p>
 
-                <p className="mt-3 text-sm leading-7 text-white/60">
-                  <strong className="text-white">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">
                     Applicable payment-provider conditions:
                   </strong>{" "}
                   [INSERT VERIFIED DETAILS]
@@ -323,17 +316,17 @@ export default function RefundAndCancellationPolicyPage() {
                 07
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Exceptions & Special Conditions
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Any exceptions to the standard refund or cancellation rules
                 should be stated clearly here.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm leading-7 text-white/60">
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#555555]">
                   [INSERT VERIFIED EXCEPTIONS, IF ANY.]
                 </p>
               </div>
@@ -345,24 +338,24 @@ export default function RefundAndCancellationPolicyPage() {
                 08
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Contact for Refund Requests
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Use the business&apos;s verified contact information to submit a
                 refund or cancellation request.
               </p>
 
-              <div className="mt-6 flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="mt-6 flex items-start gap-4 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
                 <Mail className="mt-1 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
                 <div>
-                  <p className="text-sm font-semibold text-white">
+                  <p className="text-sm font-semibold text-[#111111]">
                     Refund Contact
                   </p>
 
-                  <p className="mt-2 text-sm text-white/55">
+                  <p className="mt-2 text-sm text-[#555555]">
                     [INSERT REAL REFUND / SUPPORT EMAIL ADDRESS]
                   </p>
                 </div>
@@ -375,18 +368,18 @@ export default function RefundAndCancellationPolicyPage() {
                 09
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Policy Information
               </h2>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm text-white/70">
-                  <strong className="text-white">Effective Date:</strong>{" "}
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm text-[#555555]">
+                  <strong className="text-[#111111]">Effective Date:</strong>{" "}
                   [INSERT VERIFIED EFFECTIVE DATE]
                 </p>
 
-                <p className="mt-2 text-sm text-white/70">
-                  <strong className="text-white">Last Updated:</strong> [INSERT
+                <p className="mt-2 text-sm text-[#555555]">
+                  <strong className="text-[#111111]">Last Updated:</strong> [INSERT
                   VERIFIED LAST UPDATED DATE]
                 </p>
               </div>
@@ -401,9 +394,9 @@ export default function RefundAndCancellationPolicyPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <Link
               href="/privacy-policy/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Privacy Policy
               </h3>
 
@@ -415,9 +408,9 @@ export default function RefundAndCancellationPolicyPage() {
 
             <Link
               href="/terms-and-conditions/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Terms & Conditions
               </h3>
 
@@ -429,9 +422,9 @@ export default function RefundAndCancellationPolicyPage() {
 
             <Link
               href="/disclaimer/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">Disclaimer</h3>
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">Disclaimer</h3>
 
               <div className="mt-4 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
                 View Disclaimer
@@ -447,7 +440,7 @@ export default function RefundAndCancellationPolicyPage() {
         title="Have a question about a refund?"
         description="Contact the business using the verified support details provided in this policy."
         buttonLabel="Contact Us"
-        buttonHref="/contact-us/"
+        buttonHref="/contact/"
       />
     </main>
   );

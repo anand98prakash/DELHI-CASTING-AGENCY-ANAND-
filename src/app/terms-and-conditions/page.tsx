@@ -52,7 +52,7 @@ const importantPoints = [
 
 export default function TermsAndConditionsPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Legal & Trust"
         title="Terms & Conditions"
@@ -76,7 +76,7 @@ export default function TermsAndConditionsPage() {
       {/* Important Notice */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-9">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-9 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <Gavel className="h-6 w-6" />
@@ -87,11 +87,11 @@ export default function TermsAndConditionsPage() {
                   Please Read
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Terms for using this website
                 </h2>
 
-                <p className="mt-4 text-sm leading-7 text-white/60 md:text-base">
+                <p className="mt-4 text-sm leading-7 text-[#444444] md:text-base">
                   These terms describe general expectations for use of the
                   website. The final published legal terms should be reviewed
                   and approved by the business before going live.
@@ -112,17 +112,17 @@ export default function TermsAndConditionsPage() {
                 01
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Acceptance of Terms
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 By accessing or using this website, users should review and
                 agree to the applicable terms governing use of the website and
                 services.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 If you do not agree with the final applicable terms, you should
                 not use the services to which those terms apply.
               </p>
@@ -134,17 +134,17 @@ export default function TermsAndConditionsPage() {
                 02
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Website Services
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Way To Bollywood provides online services and resources intended
                 to support talent discovery, profiles, casting-related
                 opportunities and related activities.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The exact scope of services, availability and eligibility
                 requirements should be based on the services actually offered by
                 the business.
@@ -157,11 +157,11 @@ export default function TermsAndConditionsPage() {
                 03
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 User Responsibilities
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Users are expected to use the website responsibly and provide
                 information that is accurate and appropriate for the service
                 being used.
@@ -174,17 +174,17 @@ export default function TermsAndConditionsPage() {
                   return (
                     <div
                       key={item.title}
-                      className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+                      className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs"
                     >
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
+                      <h3 className="mt-5 font-bold tracking-tight text-xl text-[#111111]">
                         {item.title}
                       </h3>
 
-                      <p className="mt-3 text-sm leading-7 text-white/55">
+                      <p className="mt-3 text-sm leading-7 text-[#555555]">
                         {item.description}
                       </p>
                     </div>
@@ -199,17 +199,17 @@ export default function TermsAndConditionsPage() {
                 04
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 User Content
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Users may submit information, photographs, portfolio material or
                 other content where the website provides a relevant submission
                 facility.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Users should have the necessary rights and permissions to submit
                 material and should not upload unlawful, misleading or
                 infringing content.
@@ -222,17 +222,17 @@ export default function TermsAndConditionsPage() {
                 05
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Casting Opportunities
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Casting opportunities may have individual requirements,
                 selection processes and deadlines. Users should carefully review
                 the information provided for each opportunity before applying.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Publication of an opportunity should not be interpreted as a
                 guarantee of selection, employment or a particular outcome
                 unless the applicable written terms expressly state otherwise.
@@ -245,19 +245,19 @@ export default function TermsAndConditionsPage() {
                 06
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Payments & Membership
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Where paid services or membership options are offered, the
                 applicable price, inclusions, conditions and payment terms
                 should be reviewed before purchase.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm leading-7 text-white/60">
-                  <strong className="text-white">Important:</strong> The final
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">Important:</strong> The final
                   version should contain the business&apos;s actual membership
                   pricing, billing terms, renewal rules and other applicable
                   conditions. These details have not been provided in the source
@@ -280,11 +280,11 @@ export default function TermsAndConditionsPage() {
                 07
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Prohibited Use
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Users should not use the website for unlawful activity,
                 impersonation, fraud, harassment, unauthorised access or
                 activities that interfere with the operation of the website or
@@ -295,11 +295,11 @@ export default function TermsAndConditionsPage() {
                 {importantPoints.map((point) => (
                   <div
                     key={point}
-                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                    className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 shadow-2xs"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                    <span className="text-sm leading-7 text-white/65">
+                    <span className="text-sm leading-7 text-[#444444]">
                       {point}
                     </span>
                   </div>
@@ -313,17 +313,17 @@ export default function TermsAndConditionsPage() {
                 08
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Intellectual Property
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Website content, branding, design, text, graphics and other
                 protected material may be subject to intellectual property
                 rights.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Users should not copy, reproduce, modify, distribute or use
                 protected website material without appropriate permission,
                 except where permitted by applicable law.
@@ -336,11 +336,11 @@ export default function TermsAndConditionsPage() {
                 09
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Third-Party Services & Links
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The website may use third-party services or link to external
                 websites. The final terms should identify material third-party
                 services where appropriate and explain any relevant limitations
@@ -354,11 +354,11 @@ export default function TermsAndConditionsPage() {
                 10
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Disclaimer
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Information provided through the website should not be treated
                 as a guarantee of casting selection, employment, representation
                 or any particular professional outcome unless expressly stated
@@ -380,23 +380,23 @@ export default function TermsAndConditionsPage() {
                 11
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Changes to These Terms
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 These terms may need to be updated when services, website
                 functionality or applicable legal requirements change.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm text-white/70">
-                  <strong className="text-white">Effective Date:</strong>{" "}
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm text-[#555555]">
+                  <strong className="text-[#111111]">Effective Date:</strong>{" "}
                   [INSERT VERIFIED EFFECTIVE DATE]
                 </p>
 
-                <p className="mt-2 text-sm text-white/70">
-                  <strong className="text-white">Last Updated:</strong> [INSERT
+                <p className="mt-2 text-sm text-[#555555]">
+                  <strong className="text-[#111111]">Last Updated:</strong> [INSERT
                   VERIFIED LAST UPDATED DATE]
                 </p>
               </div>
@@ -408,23 +408,23 @@ export default function TermsAndConditionsPage() {
                 12
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Contact
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 For questions regarding these terms, contact the business using
                 its verified contact details.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm leading-7 text-white/70">
-                  <strong className="text-white">Business Name:</strong> [INSERT
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">Business Name:</strong> [INSERT
                   REAL BUSINESS NAME]
                 </p>
 
-                <p className="mt-2 text-sm leading-7 text-white/70">
-                  <strong className="text-white">Contact Email:</strong> [INSERT
+                <p className="mt-2 text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">Contact Email:</strong> [INSERT
                   REAL CONTACT EMAIL]
                 </p>
               </div>
@@ -439,9 +439,9 @@ export default function TermsAndConditionsPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <Link
               href="/privacy-policy/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Privacy Policy
               </h3>
 
@@ -453,9 +453,9 @@ export default function TermsAndConditionsPage() {
 
             <Link
               href="/refund-and-cancellation-policy/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Refund & Cancellation
               </h3>
 
@@ -467,9 +467,9 @@ export default function TermsAndConditionsPage() {
 
             <Link
               href="/disclaimer/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">Disclaimer</h3>
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">Disclaimer</h3>
 
               <div className="mt-4 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
                 View Disclaimer
@@ -485,7 +485,7 @@ export default function TermsAndConditionsPage() {
         title="Have questions about our terms?"
         description="Contact us for clarification regarding the services and applicable terms."
         buttonLabel="Contact Us"
-        buttonHref="/contact-us/"
+        buttonHref="/contact/"
       />
     </main>
   );

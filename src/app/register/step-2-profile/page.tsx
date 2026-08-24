@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, Check, Sparkles, Upload } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Sparkles, Upload, Loader2, AlertCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -12,219 +12,266 @@ import {
   type RegistrationValues,
 } from "@/lib/validation";
 
-import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 
 const fieldInputClass =
-  "w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3.5 text-white placeholder:text-white/30 transition-all duration-300 focus:border-[#D4AF37] focus:bg-[#161616] focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/10";
+  "w-full h-[52px] rounded-xl border border-gray-200 bg-white px-4 text-sm text-[#111111] placeholder:text-[#777777] transition-all duration-300 focus:border-[#D4AF37] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/20 shadow-2xs";
 
 export default function StepTwoProfilePage() {
   const router = useRouter();
 
   const [photos, setPhotos] = useState<FileList | null>(null);
+  const [photoError, setPhotoError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [stepOneData, setStepOneData] = useState<any>(null);
 
-  /*
-   * React Hook Form
-   *
-   * register  -> connects inputs
-   * errors    -> displays validation errors
-   * handleSubmit -> handles form submission
-   */
   const {
     register,
     handleSubmit,
+    reset,
+    setValue,
     formState: { errors },
   } = useForm<RegistrationInput, unknown, RegistrationValues>({
     resolver: zodResolver(registrationSchema),
-    mode: "onBlur",
+    mode: "onChange",
   });
 
-  /*
-   * Make sure Step 1 was completed.
-   *
-   * IMPORTANT:
-   * No setState() is called synchronously inside this effect.
-   * This avoids the React 19 cascading-render warning.
-   */
   useEffect(() => {
     const savedData = sessionStorage.getItem("artist-registration-step-1");
 
     if (!savedData) {
       router.replace("/register/");
+      return;
     }
-  }, [router]);
 
-  /*
-   * Step 2 submit
-   *
-   * Frontend-only flow:
-   * - No backend
-   * - No API
-   * - No JWT
-   * - No Razorpay
-   */
+    try {
+      const parsed = JSON.parse(savedData);
+      setStepOneData(parsed);
+
+      // Populate Step 1 default values into react-hook-form
+      reset({
+        fullName: parsed.fullName || "",
+        mobile: parsed.mobile || "",
+        whatsapp: parsed.whatsapp || "",
+        email: parsed.email || "",
+        gender: parsed.gender || "Female",
+        age: parsed.age ? Number(parsed.age) : 22,
+        city: parsed.city || "",
+        height: parsed.height || "",
+        languages: parsed.languages || "",
+        experience: parsed.experience || "",
+        instagram: parsed.instagram || "",
+        portfolio: parsed.portfolio || "",
+      });
+    } catch (e) {
+      console.error("Failed to parse Step 1 registration data", e);
+      router.replace("/register/");
+    }
+  }, [reset, router]);
+
+  const onInvalid = (formErrors: typeof errors) => {
+    console.error("Form validation errors:", formErrors);
+    setSubmitError("Please fill in all required fields correctly before continuing.");
+    window.scrollTo({ top: 300, behavior: "smooth" });
+  };
+
   const onSubmit = async (data: RegistrationValues) => {
+    setSubmitError(null);
+    setPhotoError(null);
+
+    // Validate Photo Selection
+    if (!photos || photos.length === 0) {
+      setPhotoError("Please upload at least 1 recent photo to complete your profile.");
+      const photoArea = document.getElementById("photo-upload-container");
+      if (photoArea) {
+        photoArea.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      return;
+    }
+
     setSaving(true);
 
     try {
-      const stepOneData = sessionStorage.getItem("artist-registration-step-1");
+      const storedStepOne = sessionStorage.getItem("artist-registration-step-1");
+      const parsedStepOne = storedStepOne ? JSON.parse(storedStepOne) : {};
 
-      if (!stepOneData) {
-        router.replace("/register/");
-        return;
-      }
+      const photoFileList = Array.from(photos);
+      const photoNames = photoFileList.map((file) => file.name);
 
-      const parsedStepOneData = JSON.parse(stepOneData);
-
-      /*
-       * File objects cannot be stored directly in sessionStorage.
-       * For this frontend-only flow we keep the selected file names.
-       */
-      const photoNames = photos
-        ? Array.from(photos).map((file) => file.name)
-        : [];
+      // Preserve Photo metadata & previews
+      const photoSlots = photoFileList.map((file, idx) => ({
+        key: `photo_${idx + 1}`,
+        title: file.name,
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        previewUrl: URL.createObjectURL(file),
+      }));
 
       const completeRegistration = {
-        ...parsedStepOneData,
+        ...parsedStepOne,
         ...data,
         photos: photoNames,
+        photoDetails: photoSlots,
+        createdAt: new Date().toISOString(),
       };
 
+      // 1. Save complete registration in sessionStorage
       sessionStorage.setItem(
         "artist-registration-complete",
-        JSON.stringify(completeRegistration),
+        JSON.stringify(completeRegistration)
       );
 
-      /*
-       * Document transaction flow:
-       *
-       * /register/
-       *      ↓
-       * /register/step-2-profile/
-       *      ↓
-       * /payment/
-       */
-      router.push("/payment/");
-    } catch (error) {
-      console.error("Unable to continue registration:", error);
+      // 2. Save user session in localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem(
+          "dca_user",
+          JSON.stringify({
+            identifier: completeRegistration.email || completeRegistration.mobile,
+            email: completeRegistration.email,
+            name: completeRegistration.fullName,
+            isLoggedIn: true,
+            loginTime: new Date().toISOString(),
+          })
+        );
 
+        // 3. Save DCA artist profile in localStorage for Profile Setup / Dashboard
+        localStorage.setItem(
+          "dca_artist_profile",
+          JSON.stringify({
+            formData: {
+              fullName: completeRegistration.fullName,
+              displayName: completeRegistration.fullName,
+              dob: "1998-05-14",
+              age: String(completeRegistration.age || 24),
+              gender: completeRegistration.gender,
+              city: completeRegistration.city,
+              state: "Delhi NCR",
+              phone: completeRegistration.mobile,
+              email: completeRegistration.email,
+              languages: completeRegistration.languages || "Hindi, English",
+              primaryCategory: "Actor",
+              experience: completeRegistration.experience || "1-2 Years",
+              skills: "Acting, Script Delivery",
+              specialSkills: "Driving, Dancing",
+              previousWork: completeRegistration.experience || "Independent Work",
+              portfolioDescription: "Registered DCA Artist Profile",
+              height: completeRegistration.height || "5'8\"",
+              weight: "65 kg",
+              chest: "38 inches",
+              waist: "30 inches",
+              hips: "36 inches",
+              shoeSize: "9 UK",
+              hairColor: "Black",
+              eyeColor: "Dark Brown",
+              skinTone: "Fair",
+            },
+            photos: photoSlots.length > 0 ? photoSlots : [
+              {
+                key: "primary",
+                title: "Profile / Primary Photo",
+                subtitle: "Upload your main headshot or profile photo",
+                previewUrl: "/images/talents/models/female/aarsha-mohan-main.jpg",
+              }
+            ],
+            savedAt: new Date().toISOString(),
+            completionPercentage: 100,
+          })
+        );
+      }
+
+      // Short delay for user visual feedback then navigate to success
+      setTimeout(() => {
+        router.push("/register/success/");
+      }, 500);
+    } catch (error) {
+      console.error("Unable to save profile registration:", error);
+      setSubmitError("Failed to save your profile. Please try again.");
       setSaving(false);
     }
   };
 
   return (
-    <main>
-      {/* ================================================================ */}
-      {/* HERO                                                             */}
-      {/* ================================================================ */}
+    <main className="min-h-screen bg-white text-[#111111]">
+      {/* Top Header & Breadcrumb Bar with Clearance */}
+      <section className="relative isolate border-b border-gray-200 bg-[#F7F7F5] px-4 pt-28 pb-6 sm:pt-32 sm:pb-8">
+        <div className="mx-auto max-w-4xl text-center">
+          <div className="flex justify-center mb-3">
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Register", href: "/register/" },
+                { label: "Artist Profile" },
+              ]}
+            />
+          </div>
+          <Reveal>
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              STEP 2 OF 2 — ARTIST PORTFOLIO
+            </span>
+            <h1 className="mt-1 font-serif text-3xl sm:text-4xl font-extrabold tracking-tight text-[#111111]">
+              Complete Your Artist Profile
+            </h1>
+            <p className="mt-1.5 text-xs sm:text-sm text-[#555555] max-w-xl mx-auto leading-relaxed">
+              Add information that helps present your talent, experience, and portfolio photos professionally.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-      <PageHero
-        eyebrow="Artist Registration"
-        title="Complete Your Artist Profile"
-        description="Add your talent information and portfolio details to continue your registration."
-      />
-
-      {/* ================================================================ */}
-      {/* BREADCRUMB                                                       */}
-      {/* ================================================================ */}
-
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
-        <Breadcrumb
-          items={[
-            {
-              label: "Home",
-              href: "/",
-            },
-            {
-              label: "Register",
-              href: "/register/",
-            },
-            {
-              label: "Artist Profile",
-            },
-          ]}
-        />
-      </div>
-
-      {/* ================================================================ */}
-      {/* FORM                                                             */}
-      {/* ================================================================ */}
-
-      <section className="mx-auto max-w-5xl px-6 py-12 lg:px-8 lg:py-20">
+      {/* Main Centered Layout */}
+      <section className="mx-auto max-w-2xl px-4 py-8 sm:py-12">
         <Reveal>
-          <div className="overflow-hidden rounded-[32px] border border-[#D4AF37]/20 bg-white/[0.03] p-6 backdrop-blur-xl md:p-10">
-            {/* ========================================================== */}
-            {/* PROGRESS                                                    */}
-            {/* ========================================================== */}
-
-            <div className="mb-10">
-              <div className="mb-3 flex items-center justify-between">
-                <div className="text-sm font-medium text-[#D4AF37]">
-                  Step 2 of 2 — Artist Information
-                </div>
-
-                <span className="text-sm text-white/50">100%</span>
+          <div className="rounded-2xl border border-gray-200 bg-white p-6 sm:p-8 shadow-xs">
+            
+            {/* Submit Error Message */}
+            {submitError && (
+              <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-xs font-semibold text-red-600 flex items-center gap-2">
+                <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+                <span>{submitError}</span>
               </div>
+            )}
 
-              <div className="h-2 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full w-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD86A]" />
+            {/* Progress Bar */}
+            <div className="mb-6">
+              <div className="mb-2 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-[#D4AF37]">
+                <span>Step 2 of 2 — Artist Information</span>
+                <span>100%</span>
               </div>
-
-              <div className="mt-4 flex items-center justify-center gap-3">
-                {/* Step 1 completed */}
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#D4AF37] text-black">
-                  <Check className="h-4 w-4" />
-                </div>
-
-                <div className="h-px w-16 bg-[#D4AF37]" />
-
-                {/* Step 2 */}
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#D4AF37] text-black">
-                  <span className="text-xs font-semibold">2</span>
-                </div>
+              <div className="h-1.5 overflow-hidden rounded-full bg-gray-200">
+                <div className="h-full w-full rounded-full bg-[#D4AF37]" />
               </div>
             </div>
 
-            {/* ========================================================== */}
-            {/* HEADING                                                      */}
-            {/* ========================================================== */}
-
-            <div className="mb-8">
-              <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
-                  <Sparkles size={18} />
-                </div>
-
-                <div>
-                  <h2 className="text-2xl font-bold tracking-tight text-white">
-                    Artist Information
-                  </h2>
-
-                  <div className="mt-2 h-px w-24 bg-gradient-to-r from-[#D4AF37] to-transparent" />
-                </div>
+            {/* Section Title */}
+            <div className="mb-6 border-b border-gray-200 pb-4">
+              <div className="flex items-center gap-2.5">
+                <Sparkles size={18} className="text-[#D4AF37]" />
+                <h2 className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-[#111111]">
+                  Artist Information
+                </h2>
               </div>
-
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/55">
-                Add information that helps present your talent, experience and
-                portfolio professionally.
-              </p>
             </div>
 
-            {/* ========================================================== */}
-            {/* FORM                                                        */}
-            {/* ========================================================== */}
-
+            {/* Form */}
             <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="grid gap-5 md:grid-cols-2"
+              onSubmit={handleSubmit(onSubmit, onInvalid)}
+              className="grid gap-4 sm:grid-cols-2"
             >
-              {/* ======================================================== */}
-              {/* HEIGHT                                                     */}
-              {/* ======================================================== */}
+              {/* Hidden Registered Step 1 Fields */}
+              <input type="hidden" {...register("fullName")} />
+              <input type="hidden" {...register("mobile")} />
+              <input type="hidden" {...register("whatsapp")} />
+              <input type="hidden" {...register("email")} />
+              <input type="hidden" {...register("gender")} />
+              <input type="hidden" {...register("age")} />
+              <input type="hidden" {...register("city")} />
 
+              {/* Height */}
               <Field label="Height" error={errors.height?.message}>
                 <input
                   {...register("height")}
@@ -233,10 +280,7 @@ export default function StepTwoProfilePage() {
                 />
               </Field>
 
-              {/* ======================================================== */}
-              {/* LANGUAGES                                                  */}
-              {/* ======================================================== */}
-
+              {/* Languages Known */}
               <Field label="Languages Known" error={errors.languages?.message}>
                 <input
                   {...register("languages")}
@@ -245,27 +289,21 @@ export default function StepTwoProfilePage() {
                 />
               </Field>
 
-              {/* ======================================================== */}
-              {/* EXPERIENCE                                                 */}
-              {/* ======================================================== */}
-
+              {/* Acting Experience */}
               <Field
-                label="Acting Experience"
+                label="Acting / Modeling Experience"
                 full
                 error={errors.experience?.message}
               >
                 <textarea
                   {...register("experience")}
-                  rows={5}
-                  placeholder="Tell us about your acting, modelling or performance experience..."
-                  className={`${fieldInputClass} resize-none`}
+                  rows={4}
+                  placeholder="Tell us about your acting, modeling or performance experience..."
+                  className="w-full rounded-xl border border-gray-200 bg-white p-4 text-sm text-[#111111] placeholder:text-[#777777] transition-all duration-300 focus:border-[#D4AF37] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/20 shadow-2xs resize-none"
                 />
               </Field>
 
-              {/* ======================================================== */}
-              {/* INSTAGRAM                                                  */}
-              {/* ======================================================== */}
-
+              {/* Instagram Profile */}
               <Field
                 label="Instagram Profile"
                 error={errors.instagram?.message}
@@ -277,10 +315,7 @@ export default function StepTwoProfilePage() {
                 />
               </Field>
 
-              {/* ======================================================== */}
-              {/* PORTFOLIO                                                  */}
-              {/* ======================================================== */}
-
+              {/* Portfolio Link */}
               <Field label="Portfolio Link" error={errors.portfolio?.message}>
                 <input
                   {...register("portfolio")}
@@ -289,52 +324,50 @@ export default function StepTwoProfilePage() {
                 />
               </Field>
 
-              {/* ======================================================== */}
-              {/* PHOTOS                                                     */}
-              {/* ======================================================== */}
-
-              <div className="md:col-span-2">
-                <label className="mb-3 block text-sm font-medium text-white/75">
-                  Upload Recent Photos
+              {/* Photo Upload Area */}
+              <div id="photo-upload-container" className="sm:col-span-2">
+                <label className="mb-2 block text-xs font-bold uppercase tracking-wider text-[#111111]">
+                  Upload Recent Photos *
                 </label>
-
                 <label
                   htmlFor="photos"
-                  className="group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-[#D4AF37]/25 bg-white/[0.02] px-8 py-10 text-center transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/5"
+                  className={`group flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-8 text-center transition-all duration-300 shadow-2xs ${
+                    photoError
+                      ? "border-red-400 bg-red-50/50"
+                      : "border-[#D4AF37]/40 bg-[#F7F7F5] hover:border-[#D4AF37] hover:bg-amber-50/50"
+                  }`}
                 >
-                  <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#D4AF37]/10 transition-transform duration-300 group-hover:scale-110">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#D4AF37]/10 transition-transform duration-300 group-hover:scale-110">
                     {photos?.length ? (
-                      <Check size={30} className="text-[#D4AF37]" />
+                      <Check size={24} className="text-[#D4AF37]" />
                     ) : (
-                      <Upload size={30} className="text-[#D4AF37]" />
+                      <Upload size={24} className="text-[#D4AF37]" />
                     )}
                   </div>
-
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-sm font-bold text-[#111111]">
                     {photos?.length
                       ? `${photos.length} Photo(s) Selected`
                       : "Upload Your Photos"}
                   </h3>
-
-                  <p className="mt-3 max-w-md text-sm leading-7 text-white/55">
-                    Upload 4–5 recent photographs. JPG, JPEG and PNG formats are
-                    supported.
+                  <p className="mt-1 text-xs text-[#555555]">
+                    Upload 4–5 recent photographs. JPG, JPEG, and PNG formats are supported.
                   </p>
-
                   {photos?.length ? (
-                    <div className="mt-4 max-w-lg space-y-1">
+                    <div className="mt-3 max-w-lg space-y-0.5">
                       {Array.from(photos).map((file) => (
-                        <p
-                          key={file.name}
-                          className="truncate text-xs text-white/45"
-                        >
-                          {file.name}
+                        <p key={file.name} className="truncate text-[11px] font-semibold text-[#111111]">
+                          ✓ {file.name} ({(file.size / 1024).toFixed(0)} KB)
                         </p>
                       ))}
                     </div>
                   ) : null}
                 </label>
-
+                {photoError && (
+                  <p className="mt-1.5 text-xs font-semibold text-red-500 flex items-center gap-1">
+                    <AlertCircle className="w-3.5 h-3.5" />
+                    {photoError}
+                  </p>
+                )}
                 <input
                   id="photos"
                   type="file"
@@ -343,43 +376,49 @@ export default function StepTwoProfilePage() {
                   className="hidden"
                   onChange={(event) => {
                     setPhotos(event.target.files);
+                    if (event.target.files && event.target.files.length > 0) {
+                      setPhotoError(null);
+                    }
                   }}
                 />
               </div>
 
-              {/* ======================================================== */}
-              {/* BUTTONS                                                    */}
-              {/* ======================================================== */}
-
-              <div className="mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between md:col-span-2">
+              {/* Navigation Buttons */}
+              <div className="mt-4 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between sm:col-span-2">
                 <Button
                   type="button"
                   variant="ghost"
                   onClick={() => router.push("/register/")}
+                  className="min-h-[48px] rounded-xl border border-gray-200 text-[#111111] hover:bg-gray-100 px-6 text-xs font-bold"
                 >
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back
+                  Back to Step 1
                 </Button>
 
-                <Button type="submit" disabled={saving} className="group">
-                  {saving ? "Saving..." : "Continue to Payment"}
-
-                  {!saving && (
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <Button
+                  type="submit"
+                  disabled={saving}
+                  className="group min-h-[52px] min-w-[220px] rounded-xl bg-[#111111] px-8 text-xs sm:text-sm font-bold uppercase tracking-[0.16em] text-white hover:bg-[#D4AF37] transition-all shadow-md"
+                >
+                  {saving ? (
+                    <span className="flex items-center gap-2">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      CREATING PROFILE...
+                    </span>
+                  ) : (
+                    <>
+                      <span>COMPLETE &amp; CONTINUE</span>
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </>
                   )}
                 </Button>
               </div>
             </form>
 
-            {/* ========================================================== */}
-            {/* FRONTEND NOTICE                                             */}
-            {/* ========================================================== */}
-
-            <div className="mt-8 rounded-2xl border border-white/10 bg-black/20 p-5">
-              <p className="text-center text-sm leading-7 text-white/50">
-                Your profile information is being used only to continue this
-                frontend registration flow. Payment will be handled on the next
-                screen.
+            {/* Footer Notice */}
+            <div className="mt-6 rounded-xl border border-gray-200 bg-[#F7F7F5] p-3.5 text-center">
+              <p className="text-xs text-[#555555]">
+                Your profile information is saved securely to your account session.
               </p>
             </div>
           </div>
@@ -388,10 +427,6 @@ export default function StepTwoProfilePage() {
     </main>
   );
 }
-
-/* ======================================================================== */
-/* FIELD COMPONENT                                                          */
-/* ======================================================================== */
 
 function Field({
   label,
@@ -405,14 +440,12 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <div className={full ? "md:col-span-2" : ""}>
-      <label className="mb-2 block text-sm font-medium text-white/75">
+    <div className={full ? "sm:col-span-2" : ""}>
+      <label className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-[#111111]">
         {label}
       </label>
-
       {children}
-
-      {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-1 text-xs font-semibold text-red-500">{error}</p>}
     </div>
   );
 }

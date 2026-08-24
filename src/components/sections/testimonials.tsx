@@ -41,87 +41,99 @@ export function Testimonials() {
   };
 
   return (
-    <section className="relative overflow-hidden border-b border-[#E2DDD3] bg-[#EFECE4] py-20 sm:py-28">
-      <div className="relative mx-auto max-w-6xl px-6">
+    <section className="relative py-28 overflow-hidden bg-white border-b border-gray-200">
+      {/* Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.05),transparent_70%)]" />
+
+      <div className="relative max-w-6xl mx-auto px-4">
+        {/* Heading */}
         <Reveal>
-          <div className="mb-14 text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+          <div className="text-center mb-16">
+            <p className="text-xs font-semibold tracking-[0.3em] text-[#D4AF37] uppercase">
               The Experience
             </p>
-            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl md:text-5xl lg:text-6xl">
+
+            <h2 className="mt-4 text-4xl md:text-6xl font-bold text-[#111111]">
               What Our Members Say
             </h2>
           </div>
         </Reveal>
 
+        {/* Carousel */}
         <div className="relative flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.96, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: -20 }}
-              transition={{ duration: 0.4 }}
+              exit={{ opacity: 0, scale: 0.9, y: -40 }}
+              transition={{ duration: 0.5 }}
               className="w-full max-w-2xl"
             >
-              <div className="relative overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#F5F2EA] p-8 shadow-lg sm:p-12">
+              <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-[#F7F7F5] p-10 shadow-sm backdrop-blur-xl">
+                {/* Quote icon */}
                 <Quote
-                  className="absolute right-6 top-6 text-[#C5A059]/20"
-                  size={56}
+                  className="absolute right-6 top-6 text-[#D4AF37]/20"
+                  size={60}
                 />
 
+                {/* Stars */}
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star
                       key={i}
-                      size={16}
-                      className="fill-[#C5A059] text-[#C5A059]"
+                      size={18}
+                      className="fill-[#D4AF37] text-[#D4AF37]"
                     />
                   ))}
                 </div>
 
-                <p className="mt-6 font-serif text-lg font-normal italic leading-relaxed text-[#171717]/85 sm:text-xl">
+                {/* Text */}
+                <p className="mt-6 text-lg leading-8 italic text-[#333333]">
                   “{TESTIMONIALS[index].quote}”
                 </p>
 
-                <div className="mt-8 border-t border-[#E2DDD3] pt-6">
-                  <h4 className="font-serif text-lg font-bold text-[#171717]">
-                    {TESTIMONIALS[index].name}
-                  </h4>
-                  <p className="text-xs text-[#171717]/60">
-                    {TESTIMONIALS[index].role} • {TESTIMONIALS[index].city}
-                  </p>
+                {/* User */}
+                <div className="mt-10 flex items-center gap-4">
+                  <div>
+                    <h4 className="text-[#111111] font-semibold text-lg">
+                      {TESTIMONIALS[index].name}
+                    </h4>
+                    <p className="text-sm text-[#666666]">
+                      {TESTIMONIALS[index].role} • {TESTIMONIALS[index].city}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
 
+          {/* Arrows */}
           <button
-            type="button"
             onClick={prev}
             aria-label="Previous testimonial"
-            className="absolute left-0 sm:-left-12 flex h-10 w-10 items-center justify-center rounded-full border border-[#E2DDD3] bg-[#F5F2EA] text-[#171717] transition hover:border-[#C5A059] hover:bg-[#C5A059]"
+            className="absolute left-0 md:-left-12 h-11 w-11 flex items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] hover:bg-gray-100 transition shadow-xs"
           >
             ←
           </button>
 
           <button
-            type="button"
             onClick={next}
             aria-label="Next testimonial"
-            className="absolute right-0 sm:-right-12 flex h-10 w-10 items-center justify-center rounded-full border border-[#E2DDD3] bg-[#F5F2EA] text-[#171717] transition hover:border-[#C5A059] hover:bg-[#C5A059]"
+            className="absolute right-0 md:-right-12 h-11 w-11 flex items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] hover:bg-gray-100 transition shadow-xs"
           >
             →
           </button>
         </div>
 
-        <div className="mt-8 flex justify-center gap-2">
+        {/* Dots */}
+        <div className="flex justify-center mt-8 gap-2">
           {TESTIMONIALS.map((_, i) => (
             <div
               key={i}
               onClick={() => setIndex(i)}
-              className={`h-2.5 rounded-full transition-all cursor-pointer ${
-                i === index ? "w-8 bg-[#C5A059]" : "w-2.5 bg-[#E2DDD3]"
+              className={`h-2 w-2 rounded-full cursor-pointer transition-colors ${
+                i === index ? "bg-[#D4AF37]" : "bg-gray-300"
               }`}
             />
           ))}

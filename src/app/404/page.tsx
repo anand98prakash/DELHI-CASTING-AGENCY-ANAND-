@@ -29,7 +29,7 @@ export default function Custom404Page() {
               Looks like this scene is missing.
             </h2>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/55 md:text-lg">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/75 md:text-lg">
               Don&apos;t worry. You can return to the homepage or explore our casting
               and talent categories to continue your journey.
             </p>
@@ -68,7 +68,7 @@ export default function Custom404Page() {
                   Find your next opportunity
                 </h3>
 
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-white/55">
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-white/75">
                   Browse actors, models, dancers, influencers, voice artists and
                   current casting categories.
                 </p>

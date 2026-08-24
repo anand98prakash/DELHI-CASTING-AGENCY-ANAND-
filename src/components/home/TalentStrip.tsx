@@ -15,9 +15,9 @@ export function TalentStrip() {
   const duplicated = [...TALENT_PHOTOS, ...TALENT_PHOTOS, ...TALENT_PHOTOS];
 
   return (
-    <section className="overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] py-12">
+    <section className="overflow-hidden border-b border-gray-200 bg-[#F7F7F5] py-12">
       <div className="mb-6 text-center">
-        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+        <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
           DCA Roster Spotlight
         </p>
       </div>
@@ -27,7 +27,7 @@ export function TalentStrip() {
           {duplicated.map((item, idx) => (
             <div
               key={idx}
-              className="group relative h-64 w-48 shrink-0 overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-xs sm:h-72 sm:w-56"
+              className="group relative h-64 w-48 shrink-0 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm sm:h-72 sm:w-56"
             >
               <Image
                 src={item.src}
@@ -36,10 +36,10 @@ export function TalentStrip() {
                 sizes="224px"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/85 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-95" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/85 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-95" />
               <div className="absolute inset-x-0 bottom-0 p-4 text-white">
-                <p className="font-serif text-lg font-bold text-[#F5F2EA]">{item.name}</p>
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#C5A059]">
+                <p className="font-serif text-lg font-bold text-white">{item.name}</p>
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#D4AF37]">
                   {item.category}
                 </p>
               </div>

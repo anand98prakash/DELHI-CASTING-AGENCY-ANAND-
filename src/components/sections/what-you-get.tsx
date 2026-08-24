@@ -118,26 +118,28 @@ export function WhatYouGet() {
   };
 
   return (
+    //part B
     <section
       id="benefits"
-      className="relative overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] py-20 sm:py-28"
+      className="relative overflow-hidden bg-white py-20 sm:py-24 md:py-28 border-b border-gray-200"
     >
-      <div className="relative mx-auto max-w-7xl px-6">
+      {/* Background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.06),transparent_60%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/40 bg-[#EFECE4] px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#6B6A50]">
-              <Sparkles size={14} className="text-[#C5A059]" />
-              Premium Membership Benefits
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 sm:px-5 py-2 text-xs sm:text-sm font-medium text-[#D4AF37]">
+              <Sparkles size={15} />
+              Premium Membership
             </div>
 
-            <h2 className="mt-5 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl md:text-5xl lg:text-6xl">
-              Everything Included <br />
-              <span className="italic font-normal text-[#C5A059]">
-                In Your Membership
-              </span>
+            <h2 className="mt-6 text-3xl sm:text-4xl font-bold leading-tight text-[#111111] md:text-6xl">
+              Everything Included
+              <span className="block text-[#D4AF37]">In Your Membership</span>
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-base font-normal leading-relaxed text-[#171717]/70">
+            <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-[#444444]">
               Designed for aspiring actors and models looking for verified
               casting opportunities across films, OTT, television, fashion and
               commercial projects.
@@ -147,7 +149,7 @@ export function WhatYouGet() {
 
         {/* Quick Trust */}
         <Reveal>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <div className="mt-10 sm:mt-12 flex flex-wrap justify-center gap-3 sm:gap-4">
             {[
               "Verified Opportunities",
               "Lifetime Membership",
@@ -156,7 +158,7 @@ export function WhatYouGet() {
             ].map((label) => (
               <div
                 key={label}
-                className="rounded-full border border-[#E2DDD3] bg-[#EFECE4] px-4 py-2 text-xs font-semibold text-[#171717]"
+                className="rounded-full border border-gray-200 bg-[#F7F7F5] px-5 py-3 text-sm font-medium text-[#333333] shadow-xs"
               >
                 {label}
               </div>
@@ -166,30 +168,35 @@ export function WhatYouGet() {
 
         {/* Tabs */}
         <Reveal>
-          <div className="mt-12 flex justify-center">
-            <div className="flex w-full max-w-md rounded-full border border-[#E2DDD3] bg-[#EFECE4] p-1.5 sm:w-auto">
+          <div className="mt-12 sm:mt-16 flex justify-center px-2">
+            <div className="flex w-full max-w-md sm:w-auto rounded-full border border-gray-200 bg-[#F7F7F5] p-1.5 sm:p-2 shadow-xs">
               <TabButton active={tab === "why"} onClick={() => setTab("why")}>
                 Why Members Join
               </TabButton>
-              <TabButton active={tab === "where"} onClick={() => setTab("where")}>
+
+              <TabButton
+                active={tab === "where"}
+                onClick={() => setTab("where")}
+              >
                 Where You Can Apply
               </TabButton>
             </div>
           </div>
         </Reveal>
 
-        {/* Cards Carousel */}
-        <div className="relative mt-12">
+        {/* Cards */}
+        <div className="relative mt-12 sm:mt-16">
+          {/* Prev / Next controls */}
           <button
             type="button"
             aria-label="Previous cards"
             onClick={() => scrollByCard("prev")}
             disabled={!canScrollLeft}
             className={cn(
-              "absolute -left-4 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-[#E2DDD3] bg-[#F5F2EA] text-[#171717] shadow-md transition-all duration-300 sm:flex",
+              "absolute -left-2 sm:-left-5 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] shadow-md transition-opacity duration-300 sm:flex",
               canScrollLeft
-                ? "opacity-100 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#171717]"
-                : "opacity-0 pointer-events-none"
+                ? "opacity-100 hover:border-[#D4AF37] hover:text-[#D4AF37]"
+                : "opacity-0 pointer-events-none",
             )}
           >
             <ChevronLeft size={20} />
@@ -201,57 +208,93 @@ export function WhatYouGet() {
             onClick={() => scrollByCard("next")}
             disabled={!canScrollRight}
             className={cn(
-              "absolute -right-4 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-[#E2DDD3] bg-[#F5F2EA] text-[#171717] shadow-md transition-all duration-300 sm:flex",
+              "absolute -right-2 sm:-right-5 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] shadow-md transition-opacity duration-300 sm:flex",
               canScrollRight
-                ? "opacity-100 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#171717]"
-                : "opacity-0 pointer-events-none"
+                ? "opacity-100 hover:border-[#D4AF37] hover:text-[#D4AF37]"
+                : "opacity-0 pointer-events-none",
             )}
           >
             <ChevronRight size={20} />
           </button>
+
+          {/* Edge fades */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-white to-transparent sm:w-16" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-white to-transparent sm:w-16" />
 
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}
               ref={trackRef}
               onScroll={updateScrollState}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-1 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.45 }}
+              className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-1 pb-4 sm:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              {cards.map((item, index) => (
-                <motion.div
-                  key={item.title}
-                  data-carousel-card
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05, duration: 0.4 }}
-                  className="group relative w-[82%] shrink-0 snap-center rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-6 shadow-xs transition-all duration-500 hover:-translate-y-1.5 hover:border-[#C5A059] hover:shadow-xl sm:w-[310px]"
-                >
-                  <div className="relative -mx-6 -mt-6 mb-5 aspect-4/3 overflow-hidden rounded-t-xl bg-[#EFECE4]">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      sizes="310px"
-                      className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-transparent to-transparent" />
-                  </div>
+              {cards.map((item, index) => {
+                return (
+                  <motion.div
+                    key={item.title}
+                    data-carousel-card
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: index * 0.06,
+                      duration: 0.5,
+                    }}
+                    className="group relative w-[78%] shrink-0 snap-center rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-3 hover:border-[#D4AF37]/50 hover:shadow-xl sm:w-[300px] sm:p-8 lg:w-[320px]"
+                  >
+                    <div className="relative -mx-6 -mt-6 mb-5 h-48 overflow-hidden rounded-t-3xl bg-gray-100">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="h-full w-full object-contain bg-[#111111]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    </div>
 
-                  <h3 className="font-serif text-xl font-bold tracking-tight text-[#171717] transition-colors group-hover:text-[#C5A059]">
-                    {item.title}
-                  </h3>
+                    <h3 className="relative z-10 mt-6 sm:mt-7 text-xl sm:text-2xl font-semibold text-[#111111] transition-colors duration-300 group-hover:text-[#D4AF37]">
+                      {item.title}
+                    </h3>
 
-                  <p className="mt-2 text-xs leading-relaxed text-[#171717]/70">
-                    {item.body}
-                  </p>
-                </motion.div>
-              ))}
+                    <p className="relative z-10 mt-3 sm:mt-4 text-sm sm:text-base leading-6 sm:leading-7 text-[#555555]">
+                      {item.body}
+                    </p>
+
+                    <div className="absolute left-0 bottom-0 h-[2px] w-0 bg-gradient-to-r from-[#D4AF37] via-yellow-500 to-transparent transition-all duration-500 group-hover:w-full z-20" />
+                  </motion.div>
+                );
+              })}
             </motion.div>
           </AnimatePresence>
+
+          <div className="mt-5 flex items-center justify-center gap-3 sm:hidden">
+            <button
+              type="button"
+              aria-label="Previous cards"
+              onClick={() => scrollByCard("prev")}
+              disabled={!canScrollLeft}
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] transition-opacity shadow-xs",
+                canScrollLeft ? "opacity-100" : "opacity-30",
+              )}
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <button
+              type="button"
+              aria-label="Next cards"
+              onClick={() => scrollByCard("next")}
+              disabled={!canScrollRight}
+              className={cn(
+                "flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] transition-opacity shadow-xs",
+                canScrollRight ? "opacity-100" : "opacity-30",
+              )}
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -271,10 +314,10 @@ function TabButton({
     <button
       onClick={onClick}
       className={cn(
-        "relative flex-1 rounded-full px-6 py-2.5 text-xs font-semibold uppercase tracking-wider transition-all duration-300 sm:flex-none",
+        "relative flex-1 sm:flex-none rounded-full px-4 sm:px-7 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap",
         active
-          ? "bg-[#171717] text-[#F5F2EA] shadow-sm"
-          : "text-[#171717]/70 hover:text-[#171717]"
+          ? "bg-[#D4AF37] text-white shadow-xs"
+          : "text-[#555555] hover:text-[#111111]",
       )}
     >
       {children}

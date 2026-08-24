@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getProfileCreateOrSetupUrl } from "@/lib/auth";
 import {
   ChevronRight,
   Sparkles,
@@ -60,13 +61,13 @@ export function ActorProfileView({
   };
 
   return (
-    <div className="min-h-screen bg-[#0d0d0d] text-white">
+    <div className="min-h-screen bg-white text-[#111111]">
       {/* Breadcrumb Bar */}
-      <div className="border-b border-white/10 bg-[#121212]/80 backdrop-blur-md sticky top-16 sm:top-20 z-30">
+      <div className="border-b border-gray-200 bg-[#F7F7F5]/90 backdrop-blur-md sticky top-16 sm:top-20 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center text-xs sm:text-sm text-white/60 overflow-x-auto no-scrollbar whitespace-nowrap"
+            className="flex items-center text-xs sm:text-sm text-[#666666] overflow-x-auto no-scrollbar whitespace-nowrap"
           >
             <Link
               href="/"
@@ -74,21 +75,21 @@ export function ActorProfileView({
             >
               Home
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 mx-2 text-white/30 flex-shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 mx-2 text-gray-400 flex-shrink-0" />
             <Link
               href="/actors"
               className="hover:text-[#d4af37] transition-colors"
             >
               Actors
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 mx-2 text-white/30 flex-shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 mx-2 text-gray-400 flex-shrink-0" />
             <Link
               href={`/actors/${actor.category}`}
               className="hover:text-[#d4af37] transition-colors"
             >
               {actor.categoryLabel}s
             </Link>
-            <ChevronRight className="w-3.5 h-3.5 mx-2 text-white/30 flex-shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 mx-2 text-gray-400 flex-shrink-0" />
             <span className="text-[#d4af37] font-semibold truncate max-w-[200px]">
               {actor.name}
             </span>
@@ -101,7 +102,7 @@ export function ActorProfileView({
         <div className="mb-6">
           <Link
             href={`/actors/${actor.category}`}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm text-white/60 hover:text-[#d4af37] transition-colors"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm text-[#666666] hover:text-[#d4af37] transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to {actor.categoryLabel}s</span>
@@ -114,7 +115,7 @@ export function ActorProfileView({
           <div className="lg:col-span-5">
             <div
               onClick={() => setHeaderLightboxOpen(true)}
-              className="group relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-[#181818] border border-white/10 hover:border-[#d4af37]/60 hover:shadow-2xl hover:shadow-[#d4af37]/10 transition-all duration-300 cursor-pointer"
+              className="group relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-300 cursor-pointer shadow-md"
             >
               <Image
                 src={actor.mainImage}
@@ -125,11 +126,11 @@ export function ActorProfileView({
                 sizes="(max-width: 1024px) 100vw, 40vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
               {/* Click to expand pill */}
-              <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-xs text-white/80 flex items-center gap-1.5 group-hover:border-[#d4af37] group-hover:text-[#d4af37] transition-colors">
-                <Sparkles className="w-3.5 h-3.5" />
+              <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-gray-200 text-xs text-[#111111] flex items-center gap-1.5 group-hover:border-[#d4af37] group-hover:text-[#d4af37] transition-colors shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
                 <span>View Full Size</span>
               </div>
             </div>
@@ -138,7 +139,7 @@ export function ActorProfileView({
             <div className="flex flex-wrap items-center gap-3 mt-4">
               <Link
                 href="/contact"
-                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#d4af37] hover:bg-[#e5c158] text-black font-bold text-sm transition-all duration-300 shadow-lg shadow-[#d4af37]/20"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-bold text-sm transition-all duration-300 shadow-md"
               >
                 <Mail className="w-4 h-4" />
                 <span>Inquire &amp; Cast</span>
@@ -146,7 +147,7 @@ export function ActorProfileView({
               <button
                 onClick={scrollToBiography}
                 type="button"
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 text-sm font-semibold transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-[#F7F7F5] hover:bg-gray-100 text-[#111111] border border-gray-200 text-sm font-semibold transition-colors shadow-xs"
               >
                 <FileText className="w-4 h-4 text-[#d4af37]" />
                 <span>View Biography</span>
@@ -154,12 +155,12 @@ export function ActorProfileView({
               <button
                 onClick={handleShare}
                 type="button"
-                className="p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 transition-colors relative"
+                className="p-3 rounded-xl bg-[#F7F7F5] hover:bg-gray-100 text-[#111111] border border-gray-200 transition-colors relative shadow-xs"
                 title="Share Profile"
               >
-                <Share2 className="w-4 h-4" />
+                <Share2 className="w-4 h-4 text-[#111111]" />
                 {copied && (
-                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#d4af37] text-black text-[10px] font-bold px-2 py-0.5 rounded shadow">
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#d4af37] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">
                     Copied!
                   </span>
                 )}
@@ -170,21 +171,21 @@ export function ActorProfileView({
           {/* Profile Overview, Model Details & Biography Column */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              {/* Badges ABOVE actor name (Requirement #8) */}
+              {/* Badges ABOVE actor name */}
               <div className="flex flex-wrap items-center gap-2.5 mb-3">
                 <span className="text-xs uppercase tracking-widest px-3 py-1 rounded-full bg-[#d4af37]/15 text-[#d4af37] border border-[#d4af37]/30 font-bold">
                   {actor.categoryLabel}
                 </span>
                 {actor.badge && (
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 flex items-center gap-1">
-                    <CheckCircle2 className="w-3.5 h-3.5" />
+                  <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
                     {actor.badge}
                   </span>
                 )}
               </div>
 
               {/* Actor Name */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111111] tracking-tight leading-tight">
                 {actor.name}
               </h1>
 
@@ -194,25 +195,25 @@ export function ActorProfileView({
               </p>
             </div>
 
-            {/* Model Details (Requirement #9) */}
+            {/* Model Details */}
             <ActorQuickSpecs actor={actor} />
 
-            {/* Biography with #biography anchor moved higher (Requirement #10 & #11) */}
+            {/* Biography */}
             <div
               id="biography"
-              className="bg-[#181818] border border-white/10 rounded-2xl p-5 sm:p-6 scroll-mt-24"
+              className="bg-[#F7F7F5] border border-gray-200 rounded-2xl p-5 sm:p-6 scroll-mt-24 shadow-xs"
             >
               <h3 className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold mb-3 flex items-center gap-2">
                 <User className="w-3.5 h-3.5 text-[#d4af37]" />
                 <span>Biography</span>
               </h3>
-              <p className="text-white/80 leading-relaxed text-sm sm:text-base">
+              <p className="text-[#444444] leading-relaxed text-sm sm:text-base">
                 {actor.about}
               </p>
             </div>
 
             {/* Skills & Talents */}
-            <div className="bg-[#181818] border border-white/10 rounded-2xl p-5 sm:p-6">
+            <div className="bg-[#F7F7F5] border border-gray-200 rounded-2xl p-5 sm:p-6 shadow-xs">
               <h3 className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold mb-3 flex items-center gap-2">
                 <Sparkles className="w-3.5 h-3.5 text-[#d4af37]" />
                 <span>Skills &amp; Special Talents</span>
@@ -221,7 +222,7 @@ export function ActorProfileView({
                 {actor.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="text-xs sm:text-sm px-3 py-1.5 rounded-lg bg-white/5 text-white/90 border border-white/10 hover:border-[#d4af37]/40 transition-colors"
+                    className="text-xs sm:text-sm px-3 py-1.5 rounded-lg bg-white text-[#333333] border border-gray-200 hover:border-[#d4af37]/40 transition-colors shadow-2xs"
                   >
                     {skill}
                   </span>
@@ -232,18 +233,18 @@ export function ActorProfileView({
         </div>
 
         {/* Experience & Credits Section */}
-        <div className="mb-14 bg-[#181818] border border-white/10 rounded-2xl p-6 sm:p-8">
+        <div className="mb-14 bg-[#F7F7F5] border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-xs">
           <div className="flex items-center gap-2.5 mb-6">
             <Award className="w-5 h-5 text-[#d4af37]" />
-            <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#111111] tracking-tight">
               Featured Credits &amp; Performance History
             </h2>
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-white/80 border-collapse">
+            <table className="w-full text-left text-sm text-[#444444] border-collapse">
               <thead>
-                <tr className="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
+                <tr className="border-b border-gray-200 text-xs uppercase tracking-wider text-[#666666]">
                   <th className="py-3 px-4">Project / Production</th>
                   <th className="py-3 px-4">Role</th>
                   <th className="py-3 px-4">Type</th>
@@ -251,25 +252,25 @@ export function ActorProfileView({
                   <th className="py-3 px-4">Director / Banner</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-gray-200">
                 {actor.experienceCredits.map((credit, index) => (
                   <tr
                     key={index}
-                    className="hover:bg-white/[0.02] transition-colors"
+                    className="hover:bg-white transition-colors"
                   >
-                    <td className="py-3.5 px-4 font-semibold text-white">
+                    <td className="py-3.5 px-4 font-semibold text-[#111111]">
                       {credit.project}
                     </td>
-                    <td className="py-3.5 px-4 text-[#d4af37]">
+                    <td className="py-3.5 px-4 text-[#d4af37] font-medium">
                       {credit.role}
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="text-xs px-2.5 py-1 rounded bg-white/5 border border-white/5">
+                      <span className="text-xs px-2.5 py-1 rounded bg-white border border-gray-200 text-[#333333]">
                         {credit.type}
                       </span>
                     </td>
-                    <td className="py-3.5 px-4 text-white/60">{credit.year}</td>
-                    <td className="py-3.5 px-4 text-white/60">
+                    <td className="py-3.5 px-4 text-[#666666]">{credit.year}</td>
+                    <td className="py-3.5 px-4 text-[#666666]">
                       {credit.directorOrClient || "Production Studio"}
                     </td>
                   </tr>
@@ -279,14 +280,14 @@ export function ActorProfileView({
           </div>
         </div>
 
-        {/* Interactive Portfolio Section (PHOTOS, VIDEO, INSTAGRAM, PRINT) (Requirement #12) */}
+        {/* Interactive Portfolio Section */}
         <section className="mb-16">
           <div className="mb-6">
             <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold flex items-center gap-1.5 mb-2">
               <Clapperboard className="w-4 h-4 text-[#d4af37]" />
               Artist Media &amp; Comp Card
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight">
               Interactive Portfolio
             </h2>
           </div>
@@ -329,13 +330,13 @@ export function ActorProfileView({
 
         {/* Related Artists Section */}
         {relatedActors.length > 0 && (
-          <section className="mb-16 pt-8 border-t border-white/10">
+          <section className="mb-16 pt-8 border-t border-gray-200">
             <div className="flex items-center justify-between gap-4 mb-6">
               <div>
                 <span className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold">
                   Discover More
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#111111] tracking-tight">
                   Similar {actor.categoryLabel}s
                 </h2>
               </div>
@@ -356,26 +357,26 @@ export function ActorProfileView({
         )}
 
         {/* Call to Action Banner */}
-        <section className="bg-gradient-to-r from-[#181818] via-[#201d14] to-[#181818] border border-[#d4af37]/30 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+        <section className="bg-[#F7F7F5] border border-gray-200 rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden shadow-md">
           <div className="max-w-2xl mx-auto space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111]">
               Interested in Casting {actor.name}?
             </h2>
-            <p className="text-white/70 text-sm sm:text-base">
+            <p className="text-[#555555] text-sm sm:text-base">
               Delhi Casting Agency manages casting inquiries, audition scheduling, contract coordination and direct representation.
             </p>
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="px-8 py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#e5c158] text-black font-bold text-sm shadow-xl shadow-[#d4af37]/20 transition-all duration-300"
+                className="px-8 py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-bold text-sm shadow-md transition-all duration-300"
               >
                 Submit Casting Inquiry
               </Link>
               <Link
-                href="/register"
-                className="px-8 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white font-semibold text-sm border border-white/10 transition-all duration-300"
+                href={getProfileCreateOrSetupUrl()}
+                className="px-8 py-3.5 rounded-xl bg-white text-[#111111] hover:text-[#d4af37] font-semibold text-sm border border-gray-200 transition-all duration-300 shadow-xs"
               >
-                Register as Actor
+                Create Your Profile
               </Link>
             </div>
           </div>

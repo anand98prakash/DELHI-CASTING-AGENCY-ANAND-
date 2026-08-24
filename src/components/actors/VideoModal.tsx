@@ -56,7 +56,7 @@ function VideoPlayerBody({
             <h4 className="text-lg font-bold text-white mb-1">
               Video Unavailable
             </h4>
-            <p className="text-xs sm:text-sm text-white/60 leading-relaxed mb-4">
+            <p className="text-xs sm:text-sm text-white/75 leading-relaxed mb-4">
               The showreel for {actorName} is currently undergoing verification or being updated by our casting team.
             </p>
             {videoUrl && hasError && (
@@ -75,7 +75,7 @@ function VideoPlayerBody({
 
       {/* Footer Details */}
       {video.description && (
-        <div className="p-4 sm:p-5 bg-[#181818] border-t border-white/10 text-xs sm:text-sm text-white/70 flex-shrink-0">
+        <div className="p-4 sm:p-5 bg-[#F7F7F5] border-t border-gray-200 text-xs sm:text-sm text-[#555555] flex-shrink-0">
           <p className="leading-relaxed">{video.description}</p>
         </div>
       )}
@@ -114,24 +114,24 @@ export function VideoModal({
       role="dialog"
       aria-modal="true"
       aria-label="Video Reel Player"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl p-3 sm:p-6 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md p-3 sm:p-6 animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl bg-[#141414] border border-[#d4af37]/40 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]"
+        className="relative w-full max-w-4xl bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-[#181818] z-10 flex-shrink-0">
+        <div className="flex items-center justify-between p-4 sm:p-5 border-b border-gray-200 bg-[#F7F7F5] z-10 flex-shrink-0">
           <div className="flex items-center gap-3 pr-4 min-w-0">
             <div className="p-2 rounded-xl bg-[#d4af37]/10 text-[#d4af37] flex-shrink-0">
               <Film className="w-5 h-5" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-base sm:text-lg font-bold text-white leading-tight truncate">
+              <h3 className="text-base sm:text-lg font-bold text-[#111111] leading-tight truncate">
                 {video.title}
               </h3>
-              <p className="text-xs text-white/50 truncate">
+              <p className="text-xs text-[#555555] truncate">
                 {actorName} &bull; {video.category} {video.duration ? `(${video.duration})` : ""}
               </p>
             </div>
@@ -140,7 +140,7 @@ export function VideoModal({
             onClick={onClose}
             type="button"
             aria-label="Close Video Modal"
-            className="p-2.5 rounded-full bg-white/10 hover:bg-[#d4af37] text-white hover:text-black transition-colors flex-shrink-0"
+            className="p-2.5 rounded-full bg-gray-100 hover:bg-[#d4af37] text-gray-500 hover:text-white transition-colors flex-shrink-0"
           >
             <X className="w-5 h-5" />
           </button>

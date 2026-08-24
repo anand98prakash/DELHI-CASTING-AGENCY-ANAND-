@@ -67,7 +67,7 @@ const reminders = [
 
 export default function IndustryNewsPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Industry News & Resources"
         title="Entertainment Industry News & Insights"
@@ -104,16 +104,16 @@ export default function IndustryNewsPage() {
               Industry Resources
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-5xl">
               Useful insights for your entertainment career
             </h2>
 
-            <p className="mt-6 text-base leading-8 text-white/60 md:text-lg">
+            <p className="mt-6 text-base leading-8 text-[#444444] md:text-lg">
               Explore practical information about careers, casting, auditions,
               portfolios and other topics relevant to talent.
             </p>
 
-            <p className="mt-5 text-sm leading-7 text-white/50">
+            <p className="mt-5 text-sm leading-7 text-[#666666]">
               Industry information can change over time, so always verify
               important details from the relevant official or professional
               source.
@@ -130,11 +130,11 @@ export default function IndustryNewsPage() {
               Featured Resources
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Explore our industry resources
             </h2>
 
-            <p className="mt-5 max-w-3xl text-base leading-8 text-white/60">
+            <p className="mt-5 max-w-3xl text-base leading-8 text-[#444444]">
               Start with these practical guides to help you understand different
               aspects of building a career in entertainment.
             </p>
@@ -149,21 +149,21 @@ export default function IndustryNewsPage() {
               <Reveal key={article.href} delay={index * 0.06}>
                 <Link
                   href={article.href}
-                  className="group block h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:bg-white/[0.05]"
+                  className="group block h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 hover:bg-white shadow-xs"
                 >
                   <div className="flex items-start justify-between gap-5">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                       <Icon className="h-6 w-6" />
                     </div>
 
-                    <ArrowRight className="h-5 w-5 text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
+                    <ArrowRight className="h-5 w-5 text-[#666666] transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
                   </div>
 
-                  <h3 className="mt-7 font-bold tracking-tight text-xl text-white">
+                  <h3 className="mt-7 font-bold tracking-tight text-xl text-[#111111]">
                     {article.title}
                   </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/55">
+                  <p className="mt-3 text-sm leading-7 text-[#555555]">
                     {article.description}
                   </p>
 
@@ -186,7 +186,7 @@ export default function IndustryNewsPage() {
               Topics
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               What you can learn here
             </h2>
           </div>
@@ -195,16 +195,16 @@ export default function IndustryNewsPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {topics.map((topic, index) => (
             <Reveal key={topic.title} delay={index * 0.06}>
-              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+              <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 shadow-xs">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                   <Sparkles className="h-5 w-5" />
                 </div>
 
-                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-[#111111]">
                   {topic.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {topic.description}
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function IndustryNewsPage() {
       {/* Career Reminders */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <CheckCircle2 className="h-6 w-6" />
@@ -227,11 +227,11 @@ export default function IndustryNewsPage() {
                   Career Reminders
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Keep these principles in mind
                 </h2>
 
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
                   Use industry resources as a starting point and make decisions
                   based on accurate, relevant information.
                 </p>
@@ -242,11 +242,11 @@ export default function IndustryNewsPage() {
               {reminders.map((reminder) => (
                 <div
                   key={reminder}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-2xs"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                  <span className="text-sm leading-7 text-white/65">
+                  <span className="text-sm leading-7 text-[#444444]">
                     {reminder}
                   </span>
                 </div>
@@ -259,16 +259,16 @@ export default function IndustryNewsPage() {
       {/* Safety */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-8 md:p-10">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
               Trust & Safety
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-4 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Learn how to recognise casting scams
             </h2>
 
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
               Staying informed also means knowing how to evaluate casting
               opportunities carefully. Learn about common warning signs and
               safer ways to verify opportunities.

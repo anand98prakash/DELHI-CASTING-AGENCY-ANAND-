@@ -1,135 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { ArrowRight, MapPin, Calendar, Ruler } from "lucide-react";
+import Link from "next/link";
 import type { Model } from "@/data/models";
-import { ActorRegisterModal } from "@/components/actors/ActorRegisterModal";
 
 interface ModelCardProps {
   model: Model;
 }
 
 export function ModelCard({ model }: ModelCardProps) {
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-
-  const handleOpenGate = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsRegisterModalOpen(true);
-  };
-
   return (
-    <>
-      <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#C5A059] hover:shadow-xl">
-        <div>
-          {/* Photo Container */}
-          <div
-            onClick={handleOpenGate}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setIsRegisterModalOpen(true);
-              }
-            }}
-            aria-label={`View profile for ${model.name}`}
-            className="relative block aspect-3/4 w-full cursor-pointer overflow-hidden bg-[#EFECE4] focus:outline-none"
-          >
-            <Image
-              src={model.mainImage}
-              alt={`${model.name} - Delhi Casting Agency verified ${model.categoryLabel}`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/90 via-[#171717]/30 to-transparent transition-opacity duration-300 group-hover:opacity-95" />
-
-            {/* Top Badges */}
-            <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between gap-2">
-              <span className="rounded-full border border-white/20 bg-black/50 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#F5F2EA] backdrop-blur-xs">
-                {model.categoryLabel}
-              </span>
-              {model.badge && (
-                <span className="rounded-full border border-[#C5A059]/40 bg-[#C5A059]/20 px-2.5 py-0.5 text-[10px] font-semibold text-[#F5F2EA] backdrop-blur-xs">
-                  {model.badge}
-                </span>
-              )}
-            </div>
-
-            {/* Name & Role overlay on image bottom */}
-            <div className="absolute bottom-3.5 left-4 right-4 text-white">
-              <h3 className="font-serif text-2xl font-bold tracking-tight text-[#F5F2EA] transition-colors group-hover:text-[#C5A059]">
-                {model.name}
-              </h3>
-              <p className="mt-0.5 line-clamp-1 text-xs font-medium text-[#F5F2EA]/75">
-                {model.role}
-              </p>
-            </div>
-          </div>
-
-          {/* Quick Specs metadata */}
-          <div className="p-5 pt-4">
-            <div className="grid grid-cols-3 gap-2 rounded-lg border border-[#E2DDD3] bg-[#F5F2EA] p-2.5 text-center">
-              <div className="flex flex-col items-center">
-                <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#171717]/50">
-                  <Calendar className="h-3 w-3 text-[#C5A059]" /> Age
-                </span>
-                <span className="mt-0.5 text-xs font-bold text-[#171717]">
-                  {model.age} yrs
-                </span>
-              </div>
-              <div className="flex flex-col items-center border-x border-[#E2DDD3] px-1">
-                <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#171717]/50">
-                  <Ruler className="h-3 w-3 text-[#C5A059]" /> Height
-                </span>
-                <span className="mt-0.5 line-clamp-1 text-xs font-bold text-[#171717]">
-                  {model.height}
-                </span>
-              </div>
-              <div className="flex flex-col items-center">
-                <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-[#171717]/50">
-                  <MapPin className="h-3 w-3 text-[#C5A059]" /> City
-                </span>
-                <span className="mt-0.5 line-clamp-1 text-xs font-bold text-[#171717]">
-                  {model.location.split("/")[0].trim()}
-                </span>
-              </div>
-            </div>
-
-            {/* Skills / Categories tags */}
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {model.skills.slice(0, 3).map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-md border border-[#E2DDD3] bg-[#F5F2EA] px-2 py-0.5 text-[10px] font-semibold text-[#171717]/70"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="px-5 pb-5">
-          <button
-            type="button"
-            onClick={handleOpenGate}
-            className="flex w-full items-center justify-center gap-2 rounded-full border border-[#171717] bg-[#171717] py-2.5 text-xs font-bold uppercase tracking-[0.16em] text-[#F5F2EA] transition duration-300 hover:border-[#C5A059] hover:bg-[#C5A059] hover:text-[#171717]"
-          >
-            <span>View Profile</span>
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
-        </div>
+    <Link
+      href={`/models/profile/${model.id}`}
+      className="group block cursor-pointer"
+    >
+      {/* Editorial Portrait Image */}
+      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#F7F7F5]">
+        <Image
+          src={model.mainImage}
+          alt={`${model.name} - ${model.categoryLabel}`}
+          fill
+          unoptimized
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+        />
       </div>
 
-      <ActorRegisterModal
-        isOpen={isRegisterModalOpen}
-        actorName={model.name}
-        actorImage={model.mainImage}
-        onClose={() => setIsRegisterModalOpen(false)}
-      />
-    </>
+      {/* Understated Minimal Typography */}
+      <div className="mt-3 text-left">
+        <h3 className="font-serif text-base sm:text-lg font-bold tracking-tight text-[#111111] transition-colors duration-300 group-hover:text-[#D4AF37] truncate">
+          {model.name}
+        </h3>
+        <p className="text-xs text-[#666666] tracking-wide uppercase font-medium mt-0.5 truncate">
+          {model.location.split("/")[0].trim()}
+        </p>
+      </div>
+    </Link>
   );
 }

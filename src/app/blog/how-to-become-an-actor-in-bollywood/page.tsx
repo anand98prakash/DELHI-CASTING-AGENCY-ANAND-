@@ -63,7 +63,7 @@ const profileChecklist = [
 
 export default function HowToBecomeAnActorInBollywoodPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Actor Career Guide"
         title="How to Become an Actor in Bollywood"
@@ -100,17 +100,17 @@ export default function HowToBecomeAnActorInBollywoodPage() {
               Bollywood Acting Guide
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-[#111111] md:text-5xl">
               Start building your path as an actor
             </h2>
 
-            <p className="mt-6 text-base leading-8 text-white/60 md:text-lg">
+            <p className="mt-6 text-base leading-8 text-[#444444] md:text-lg">
               Becoming an actor is a process of developing your performance
               skills, preparing a professional profile and consistently
               exploring suitable opportunities.
             </p>
 
-            <p className="mt-5 text-base leading-8 text-white/60 md:text-lg">
+            <p className="mt-5 text-base leading-8 text-[#444444] md:text-lg">
               There is no single route into the industry. Different actors
               develop through different combinations of training, practice,
               auditions, experience and networking.
@@ -127,11 +127,11 @@ export default function HowToBecomeAnActorInBollywoodPage() {
               Step by Step
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               A practical path for aspiring actors
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
+            <p className="mt-5 text-base leading-8 text-[#444444]">
               Use these steps as a framework while developing your acting career
               and preparing for suitable opportunities.
             </p>
@@ -141,16 +141,16 @@ export default function HowToBecomeAnActorInBollywoodPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {steps.map((step, index) => (
             <Reveal key={step.number} delay={index * 0.05}>
-              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+              <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 shadow-xs">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-sm font-semibold text-[#D4AF37]">
                   {step.number}
                 </div>
 
-                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-[#111111]">
                   {step.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {step.description}
                 </p>
               </div>
@@ -163,12 +163,12 @@ export default function HowToBecomeAnActorInBollywoodPage() {
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <div className="grid gap-6 md:grid-cols-2">
           <Reveal>
-            <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+            <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 shadow-xs">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <Sparkles className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-[#111111]">
                 Skills worth developing
               </h2>
 
@@ -182,7 +182,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                 ].map((skill) => (
                   <div
                     key={skill}
-                    className="flex items-start gap-3 text-sm text-white/65"
+                    className="flex items-start gap-3 text-sm text-[#444444]"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
                     <span>{skill}</span>
@@ -193,22 +193,22 @@ export default function HowToBecomeAnActorInBollywoodPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+            <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 shadow-xs">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <BookOpen className="h-6 w-6" />
               </div>
 
-              <h2 className="mt-6 font-bold tracking-tight text-2xl text-white">
+              <h2 className="mt-6 font-bold tracking-tight text-2xl text-[#111111]">
                 Keep learning and practising
               </h2>
 
-              <p className="mt-4 text-sm leading-7 text-white/55">
+              <p className="mt-4 text-sm leading-7 text-[#555555]">
                 Regular practice can help you become more comfortable with
                 auditions, self-tapes, scenes and different performance
                 requirements.
               </p>
 
-              <p className="mt-4 text-sm leading-7 text-white/55">
+              <p className="mt-4 text-sm leading-7 text-[#555555]">
                 Study performances, practise scenes and seek constructive
                 feedback where possible.
               </p>
@@ -220,7 +220,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
       {/* Profile */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <UserPlus className="h-6 w-6" />
@@ -231,11 +231,11 @@ export default function HowToBecomeAnActorInBollywoodPage() {
                   Actor Profile
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Prepare your professional profile
                 </h2>
 
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
                   Keep your information current and make sure your profile
                   represents your abilities accurately.
                 </p>
@@ -246,10 +246,10 @@ export default function HowToBecomeAnActorInBollywoodPage() {
               {profileChecklist.map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-2xs"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
-                  <span className="text-sm leading-7 text-white/65">
+                  <span className="text-sm leading-7 text-[#444444]">
                     {item}
                   </span>
                 </div>
@@ -262,16 +262,16 @@ export default function HowToBecomeAnActorInBollywoodPage() {
       {/* Casting */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-8 md:p-10">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <Mic2 className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Be selective about casting opportunities
             </h2>
 
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
               Look for opportunities that match your profile and carefully
               review the requirements before submitting an application. Keep
               your professional information accurate and be cautious of requests
@@ -295,13 +295,13 @@ export default function HowToBecomeAnActorInBollywoodPage() {
           <div className="grid gap-5 md:grid-cols-2">
             <Link
               href="/blog/acting-audition-tips/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
                 Related Guide
               </p>
 
-              <h3 className="mt-3 font-bold tracking-tight text-xl text-white">
+              <h3 className="mt-3 font-bold tracking-tight text-xl text-[#111111]">
                 Acting Audition Tips
               </h3>
 
@@ -313,13 +313,13 @@ export default function HowToBecomeAnActorInBollywoodPage() {
 
             <Link
               href="/blog/how-to-avoid-casting-scams/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
                 Safety Guide
               </p>
 
-              <h3 className="mt-3 font-bold tracking-tight text-xl text-white">
+              <h3 className="mt-3 font-bold tracking-tight text-xl text-[#111111]">
                 How to Avoid Casting Scams
               </h3>
 

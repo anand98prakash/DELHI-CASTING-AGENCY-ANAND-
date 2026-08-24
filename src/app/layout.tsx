@@ -117,7 +117,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-[#F5F2EA] text-[#171717]">
+      <body className="min-h-screen bg-white text-[#111111]">
         <SmoothScrollProvider>
           {/* Global Navbar */}
           <Navbar />

@@ -35,7 +35,7 @@ export default function PaymentFailedPage() {
   };
 
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       {/* ================================================================ */}
       {/* PAGE HERO                                                        */}
       {/* ================================================================ */}
@@ -78,13 +78,13 @@ export default function PaymentFailedPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-12 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] p-7 text-center md:p-12">
+          <div className="overflow-hidden rounded-[32px] border border-gray-200 bg-[#F7F7F5] p-7 text-center md:p-12 shadow-xs">
             {/* ========================================================== */}
             {/* ERROR ICON                                                   */}
             {/* ========================================================== */}
 
-            <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-red-400/20 bg-red-400/10">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-400/10 text-red-400">
+            <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-red-200 bg-red-50">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-100 text-red-600">
                 <AlertCircle className="h-9 w-9" />
               </div>
             </div>
@@ -93,15 +93,15 @@ export default function PaymentFailedPage() {
             {/* STATUS                                                       */}
             {/* ========================================================== */}
 
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-red-400">
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-red-600">
               Payment Failed
             </p>
 
-            <h1 className="mx-auto mt-4 max-w-2xl font-bold tracking-tight text-3xl text-white md:text-5xl">
+            <h1 className="mx-auto mt-4 max-w-2xl font-bold tracking-tight text-3xl text-[#111111] md:text-5xl">
               We couldn&apos;t complete your payment.
             </h1>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/60">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#444444]">
               Your registration information has not been lost. You can return to
               the payment screen and try again.
             </p>
@@ -110,11 +110,11 @@ export default function PaymentFailedPage() {
             {/* FAILURE INFORMATION                                          */}
             {/* ========================================================== */}
 
-            <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-white/10 bg-black/20 p-6 text-left">
+            <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-2xs">
               <div className="flex items-center gap-3">
                 <CreditCard className="h-5 w-5 text-[#D4AF37]" />
 
-                <h2 className="font-semibold text-white">What You Can Do</h2>
+                <h2 className="font-semibold text-[#111111]">What You Can Do</h2>
               </div>
 
               <div className="mt-6 space-y-4">
@@ -142,11 +142,11 @@ export default function PaymentFailedPage() {
             {/* FRONTEND NOTICE                                              */}
             {/* ========================================================== */}
 
-            <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.04] p-5">
+            <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-[#D4AF37]/30 bg-white p-5 shadow-2xs">
               <div className="flex items-start gap-3 text-left">
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                <p className="text-sm leading-7 text-white/50">
+                <p className="text-sm leading-7 text-[#444444]">
                   This is a frontend-only payment failure interface. No real
                   payment gateway or backend transaction verification is
                   connected.
@@ -159,7 +159,7 @@ export default function PaymentFailedPage() {
             {/* ========================================================== */}
 
             <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-              <Button type="button" onClick={handleRetry} className="group">
+              <Button type="button" onClick={handleRetry} className="group bg-[#D4AF37] text-white hover:bg-[#c59b27]">
                 <RefreshCw className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
                 Try Payment Again
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -169,6 +169,7 @@ export default function PaymentFailedPage() {
                 type="button"
                 variant="ghost"
                 onClick={() => router.push("/register/step-2-profile/")}
+                className="text-[#111111] hover:bg-gray-200"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Profile
@@ -201,9 +202,9 @@ function FailureItem({
       </div>
 
       <div>
-        <h3 className="font-medium text-white">{title}</h3>
+        <h3 className="font-medium text-[#111111]">{title}</h3>
 
-        <p className="mt-1 text-sm leading-6 text-white/45">{description}</p>
+        <p className="mt-1 text-sm leading-6 text-[#666666]">{description}</p>
       </div>
     </div>
   );

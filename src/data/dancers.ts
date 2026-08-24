@@ -84,7 +84,7 @@ export const DANCER_CATEGORIES: CategoryMeta[] = [
     heroDescription: "Explore verified lead dancers and soloists featuring elite choreography training, expressive storytelling, and commanding stage magnetism.",
     ctaText: "Explore Lead Dancers",
     countLabel: "14+ Lead Dancers",
-    image: "/images/actors/lead dancers.jpg",
+    image: "/images/talents/dancers/kabir-verma-main.jpg",
     route: "/dancers/lead-dancers/",
   },
   {
@@ -95,7 +95,7 @@ export const DANCER_CATEGORIES: CategoryMeta[] = [
     heroDescription: "Browse synchronized ensemble dancers and troupe performers skilled in rapid choreography learning and immaculate stage coordination.",
     ctaText: "Explore Background Dancers",
     countLabel: "24+ Troupe Artists",
-    image: "/images/actors/Background Dancers.webp",
+    image: "/images/talents/dancers/priya-nair-main.jpg",
     route: "/dancers/background-dancers/",
   },
   {
@@ -106,7 +106,7 @@ export const DANCER_CATEGORIES: CategoryMeta[] = [
     heroDescription: "Discover contemporary and neoclassical dancers bringing breathtaking flexibility, aerial poise, and artistic innovation to the stage.",
     ctaText: "Explore Contemporary Dancers",
     countLabel: "12+ Contemporary Artists",
-    image: "/images/actors/Contemporary Dancers.avif",
+    image: "/images/talents/dancers/anika-rao-main.jpg",
     route: "/dancers/contemporary-dancers/",
   },
   {
@@ -117,7 +117,7 @@ export const DANCER_CATEGORIES: CategoryMeta[] = [
     heroDescription: "Explore dynamic hip-hop and street dancers bringing raw energy, urban flair, and rhythmic precision to music videos and live sets.",
     ctaText: "Explore Hip-Hop Dancers",
     countLabel: "16+ Urban Dancers",
-    image: "/images/actors/Hip-Hop Dancers.avif",
+    image: "/images/talents/dancers/vikram-thapa-main.jpg",
     route: "/dancers/hip-hop-dancers/",
   },
 ];
@@ -136,7 +136,7 @@ export const DANCERS_DATA: Dancer[] = [
     languages: ["Hindi", "English"],
     danceStyles: ["Bollywood Commercial", "Semi-Classical", "Urban Hip-Hop", "Lyrical"],
     trainingAcademy: "Terence Lewis Dance Academy / DCA Fellow",
-    mainImage: "/media/dca/models/dca-model-male-01.jpg",
+    mainImage: "/images/talents/dancers/kabir-verma-main.jpg",
     badge: "Verified Lead Artist",
     about: "Kabir Verma is a powerhouse lead dancer and assistant choreographer who has performed alongside Bollywood A-listers in major feature film songs and global stadium tours.",
     skills: ["High-Energy Bollywood", "Stage Acrobatics", "Choreography Direction", "Partner Lifting"],
@@ -144,21 +144,15 @@ export const DANCERS_DATA: Dancer[] = [
       { project: "IIFA Awards Main Stage Finale", role: "Principal Troupe Lead", type: "Award Show Performance", year: "2025" },
       { project: "T-Series Chartbuster Music Video", role: "Featured Solo Dancer", type: "Bollywood Music Video", year: "2024" },
     ],
-    photos: ["/media/dca/models/dca-model-male-01.jpg", "/media/dca/models/dca-model-fitness-01.jpg"],
-    videos: [
-      {
-        id: "kabir-dance-reel",
-        title: "Kabir Verma Dance Performance Reel",
-        category: "Dance Reel",
-        duration: "0:45",
-        thumbnail: "/media/dca/models/dca-model-male-01.jpg",
-        videoUrl: "/videos/actors/rahul-showreel.mp4",
-        description: "Stage performance and music video dance reel.",
-      },
-    ],
-    instagram: [
-      { id: "kd1", image: "/media/dca/models/dca-model-male-01.jpg", caption: "Rehearsals in progress for the stadium tour 💥", likes: "18.5k", comments: "390", handle: "@kabirverma.dance" },
-    ],
+    photos: [
+      "/images/talents/dancers/kabir-verma/01.jpg",
+      "/images/talents/dancers/kabir-verma/02.png",
+      "/images/talents/dancers/kabir-verma/03.jpg",
+      "/images/talents/dancers/kabir-verma/04.jpg",
+      "/images/talents/dancers/kabir-verma/05.jpg"
+],
+    videos: [],
+    instagram: [],
     print: [],
   },
   {
@@ -174,28 +168,22 @@ export const DANCERS_DATA: Dancer[] = [
     languages: ["English", "Hindi", "Kannada"],
     danceStyles: ["Contemporary", "Kathak Fusion", "Modern Ballet", "Floorwork"],
     trainingAcademy: "Attakkalari Centre for Movement Arts",
-    mainImage: "/media/dca/models/dca-model-female-01.jpg",
+    mainImage: "/images/talents/dancers/anika-rao-main.jpg",
     badge: "Verified DCA Artist",
     about: "Anika Rao is a celebrated contemporary movement artist known for poetic musicality, incredible flexibility, and evocative emotional storytelling in dance films and theatrical productions.",
     skills: ["Fluid Floorwork", "Kathak Footwork", "Flexibility & Extensions", "Dance Theatre"],
     experienceCredits: [
       { project: "Serendipity Arts Festival Showcase", role: "Solo Performer", type: "Theatre Dance Production", year: "2025" },
     ],
-    photos: ["/media/dca/models/dca-model-female-01.jpg", "/media/dca/models/dca-model-plus-size-01.jpg"],
-    videos: [
-      {
-        id: "anika-contemporary",
-        title: "Anika Rao Movement Piece",
-        category: "Contemporary",
-        duration: "0:40",
-        thumbnail: "/media/dca/models/dca-model-female-01.jpg",
-        videoUrl: "/videos/actors/ananya-showreel.mp4",
-        description: "Lyrical contemporary dance performance.",
-      },
-    ],
-    instagram: [
-      { id: "ad1", image: "/media/dca/models/dca-model-female-01.jpg", caption: "Poetry in motion 🩰", likes: "22.3k", comments: "510", handle: "@anikarao.dance" },
-    ],
+    photos: [
+      "/images/talents/dancers/anika-rao/01.jpg",
+      "/images/talents/dancers/anika-rao/02.png",
+      "/images/talents/dancers/anika-rao/03.jpg",
+      "/images/talents/dancers/anika-rao/04.jpg",
+      "/images/talents/dancers/anika-rao/05.jpg"
+],
+    videos: [],
+    instagram: [],
     print: [],
   },
   {
@@ -211,14 +199,19 @@ export const DANCERS_DATA: Dancer[] = [
     languages: ["Hindi", "English", "Nepali"],
     danceStyles: ["Popping & Locking", "Breaking (B-Boying)", "Urban Choreo", "Krump"],
     trainingAcademy: "Delhi Street Dance Collective",
-    mainImage: "/media/dca/models/dca-model-fitness-01.jpg",
+    mainImage: "/images/talents/dancers/vikram-thapa-main.jpg",
     badge: "Street Pro",
     about: "Vikram Thapa is an explosive urban dancer and battle champion who brings razor-sharp isolations and acrobatic power moves to commercial video shoots and live events.",
     skills: ["Power Moves", "Isolations", "Freestyle Battles", "Sync Choreo"],
     experienceCredits: [
       { project: "Red Bull Dance Your Style India", role: "Finalist & Performer", type: "Live Concert Tour", year: "2025" },
     ],
-    photos: ["/media/dca/models/dca-model-fitness-01.jpg", "/media/dca/models/dca-model-commercial-01.jpg"],
+    photos: [
+      "/images/talents/dancers/vikram-thapa/01.jpg",
+      "/images/talents/dancers/vikram-thapa/02.jpg",
+      "/images/talents/dancers/vikram-thapa/03.jpg",
+      "/images/talents/dancers/vikram-thapa/04.jpeg"
+],
     videos: [],
     instagram: [],
     print: [],
@@ -236,14 +229,19 @@ export const DANCERS_DATA: Dancer[] = [
     languages: ["Hindi", "English", "Malayalam"],
     danceStyles: ["Bollywood Troupe", "Folk Fusion", "Commercial Jazz"],
     trainingAcademy: "Shiamak Davar Institute of Performing Arts",
-    mainImage: "/media/dca/models/dca-model-plus-size-01.jpg",
+    mainImage: "/images/talents/dancers/priya-nair-main.jpg",
     badge: "Ensemble Pro",
     about: "Priya Nair is a disciplined ensemble dancer with exceptional spatial awareness, swift formation adaptation, and vibrant expressions for high-energy music videos and award shows.",
     skills: ["Sync Formations", "Bollywood Pacing", "Prop Choreography", "Costume Handling"],
     experienceCredits: [
       { project: "Filmfare Awards Opening Act", role: "Troupe Dancer", type: "Award Show Performance", year: "2025" },
     ],
-    photos: ["/media/dca/models/dca-model-plus-size-01.jpg", "/media/dca/models/dca-model-female-01.jpg"],
+    photos: [
+      "/images/talents/dancers/priya-nair/01.jpg",
+      "/images/talents/dancers/priya-nair/02.jpg",
+      "/images/talents/dancers/priya-nair/03.jpg",
+      "/images/talents/dancers/priya-nair/04.jpg"
+],
     videos: [],
     instagram: [],
     print: [],

@@ -35,7 +35,7 @@ export default function PaymentSuccessPage() {
   }, [router]);
 
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       {/* ================================================================ */}
       {/* PAGE HERO                                                        */}
       {/* ================================================================ */}
@@ -78,13 +78,13 @@ export default function PaymentSuccessPage() {
 
       <section className="mx-auto max-w-4xl px-6 py-12 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="overflow-hidden rounded-[32px] border border-[#D4AF37]/25 bg-white/[0.03] p-7 text-center md:p-12">
+          <div className="overflow-hidden rounded-[32px] border border-gray-200 bg-[#F7F7F5] p-7 text-center md:p-12 shadow-xs">
             {/* ========================================================== */}
             {/* SUCCESS ICON                                                 */}
             {/* ========================================================== */}
 
             <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#D4AF37] text-black">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#D4AF37] text-white">
                 <Check className="h-8 w-8" />
               </div>
             </div>
@@ -97,11 +97,11 @@ export default function PaymentSuccessPage() {
               Payment Successful
             </p>
 
-            <h1 className="mx-auto mt-4 max-w-2xl font-bold tracking-tight text-3xl text-white md:text-5xl">
+            <h1 className="mx-auto mt-4 max-w-2xl font-bold tracking-tight text-3xl text-[#111111] md:text-5xl">
               Your registration journey is complete.
             </h1>
 
-            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/60">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#444444]">
               Your registration information has been saved for this frontend
               demonstration flow. Continue to the community access page for the
               next step.
@@ -111,11 +111,11 @@ export default function PaymentSuccessPage() {
             {/* CONFIRMATION CARD                                            */}
             {/* ========================================================== */}
 
-            <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-white/10 bg-black/20 p-6 text-left">
+            <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-gray-200 bg-white p-6 text-left shadow-2xs">
               <div className="flex items-center gap-3">
                 <CheckCircle2 className="h-5 w-5 text-[#D4AF37]" />
 
-                <h2 className="font-semibold text-white">
+                <h2 className="font-semibold text-[#111111]">
                   Registration Confirmation
                 </h2>
               </div>
@@ -138,11 +138,11 @@ export default function PaymentSuccessPage() {
             {/* IMPORTANT NOTICE                                             */}
             {/* ========================================================== */}
 
-            <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.04] p-5">
+            <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-[#D4AF37]/30 bg-white p-5 shadow-2xs">
               <div className="flex items-start gap-3 text-left">
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                <p className="text-sm leading-7 text-white/50">
+                <p className="text-sm leading-7 text-[#444444]">
                   This is a frontend-only payment confirmation interface. No
                   real payment gateway or backend payment verification is
                   connected.
@@ -158,7 +158,7 @@ export default function PaymentSuccessPage() {
               <Button
                 type="button"
                 onClick={() => router.push("/community-access/")}
-                className="group"
+                className="group bg-[#D4AF37] text-white hover:bg-[#c59b27]"
               >
                 Continue to Community Access
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -177,8 +177,8 @@ export default function PaymentSuccessPage() {
 
 function ConfirmationItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-5 border-b border-white/10 pb-4 last:border-b-0 last:pb-0">
-      <span className="text-sm text-white/50">{label}</span>
+    <div className="flex items-center justify-between gap-5 border-b border-gray-100 pb-4 last:border-b-0 last:pb-0">
+      <span className="text-sm text-[#444444]">{label}</span>
 
       <span className="text-sm font-medium text-[#D4AF37]">{value}</span>
     </div>

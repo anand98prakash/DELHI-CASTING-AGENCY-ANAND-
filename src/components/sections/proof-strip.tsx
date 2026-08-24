@@ -18,17 +18,21 @@ export function ProofStrip() {
   const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
 
   return (
-    <section className="relative overflow-hidden border-y border-[#E2DDD3] bg-[#EFECE4]">
+    <section className="relative overflow-hidden border-y border-gray-200 bg-[#F7F7F5]">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_70%)]" />
+
       {/* Top Marquee */}
-      <div className="relative overflow-hidden border-b border-[#E2DDD3] py-3.5 bg-[#F5F2EA]">
+      <div className="relative overflow-hidden border-b border-gray-200 py-4">
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
           {items.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-4 whitespace-nowrap border-r border-[#E2DDD3] px-8"
+              className="flex items-center gap-4 whitespace-nowrap border-r border-gray-200 px-8"
             >
-              <Sparkles size={13} className="text-[#C5A059]" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#171717]/70">
+              <Sparkles size={14} className="text-[#D4AF37] opacity-80" />
+
+              <span className="text-xs font-semibold uppercase tracking-[0.22em] text-[#333333]">
                 {item}
               </span>
             </div>
@@ -38,21 +42,21 @@ export function ProofStrip() {
 
       {/* Stats */}
       <Reveal>
-        <div className="relative mx-auto max-w-6xl px-6 py-16 sm:px-8 lg:px-10">
-          <div className="mb-12 text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/30 bg-[#F5F2EA] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#6B6A50]">
-              <ShieldCheck size={15} className="text-[#C5A059]" />
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mb-14 text-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-5 py-2 text-sm font-medium text-[#D4AF37]">
+              <ShieldCheck size={16} />
               Trusted Across India
             </div>
 
-            <h2 className="mt-5 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl md:text-5xl">
-              Thousands of Artists <br />
-              <span className="italic font-normal text-[#C5A059]">
+            <h2 className="mt-6 text-3xl font-bold text-[#111111] md:text-5xl">
+              Thousands of Artists
+              <span className="block text-[#D4AF37]">
                 Trust Delhi Casting Agency
               </span>
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-sm font-normal leading-relaxed text-[#171717]/70 sm:text-base">
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#444444]">
               Join one of India&apos;s growing communities of aspiring actors,
               models and performers receiving verified casting opportunities.
             </p>
@@ -62,7 +66,7 @@ export function ProofStrip() {
             {STATS.map((stat) => (
               <div
                 key={stat.label}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group flex min-h-[160px] flex-col items-center justify-center rounded-xl border border-[#E2DDD3] bg-[#F5F2EA] px-6 py-8 text-center shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#C5A059] hover:shadow-md"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] group flex min-h-[170px] flex-col items-center justify-center rounded-[28px] border border-gray-200 bg-white px-6 py-8 text-center shadow-sm backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#D4AF37]/50 hover:shadow-md"
               >
                 <Counter target={stat.target} label={stat.label} />
               </div>

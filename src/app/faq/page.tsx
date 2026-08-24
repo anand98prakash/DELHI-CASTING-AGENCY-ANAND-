@@ -124,7 +124,7 @@ export default function FAQPage() {
               Clear answers before you get started.
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/55">
+            <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-white/75">
               Review the most common questions about creating a profile and
               exploring casting opportunities.
             </p>
@@ -163,7 +163,7 @@ export default function FAQPage() {
                       className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
                         isOpen
                           ? "border-[#D4AF37]/40 bg-[#D4AF37]/10 text-[#D4AF37]"
-                          : "border-white/10 bg-white/[0.03] text-white/50"
+                          : "border-white/10 bg-white/[0.03] text-white/75"
                       }`}
                     >
                       <ChevronDown
@@ -181,7 +181,7 @@ export default function FAQPage() {
                   >
                     <div className="overflow-hidden">
                       <div className="border-t border-white/10 px-6 pb-6 pt-5">
-                        <p className="text-sm leading-7 text-white/55">
+                        <p className="text-sm leading-7 text-white/75">
                           {faq.answer}
                         </p>
                       </div>
@@ -211,7 +211,7 @@ export default function FAQPage() {
                   Keep your expectations realistic.
                 </h2>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-white/75">
                   Casting opportunities can have different requirements,
                   eligibility criteria and selection processes. Registration or
                   membership should not be understood as a guarantee of

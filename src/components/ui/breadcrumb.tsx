@@ -13,12 +13,12 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   );
 
   return (
-    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-white/45">
-      <Link href="/" className="transition hover:text-gold">Home</Link>
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-[#666666]">
+      <Link href="/" className="transition hover:text-[#D4AF37]">Home</Link>
       {filteredItems.map((item) => (
         <span key={`${item.label}-${item.href ?? "current"}`} className="flex items-center gap-2">
-          <ChevronRight className="h-3.5 w-3.5" />
-          {item.href ? <Link href={item.href} className="transition hover:text-gold">{item.label}</Link> : <span className="text-white/70">{item.label}</span>}
+          <ChevronRight className="h-3.5 w-3.5 text-gray-400" />
+          {item.href ? <Link href={item.href} className="transition hover:text-[#D4AF37]">{item.label}</Link> : <span className="text-[#111111] font-semibold">{item.label}</span>}
         </span>
       ))}
     </nav>

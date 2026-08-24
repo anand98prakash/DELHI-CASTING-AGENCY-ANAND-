@@ -16,9 +16,9 @@ function NetflixLogo() {
 
 function PrimeVideoLogo() {
   return (
-    <div className="flex items-center gap-1.5 font-black text-white text-sm sm:text-base tracking-tight">
+    <div className="flex items-center gap-1.5 font-black text-[#111111] text-sm sm:text-base tracking-tight">
       <span className="text-[#00A8E1]">prime</span>
-      <span className="text-white">video</span>
+      <span className="text-[#111111]">video</span>
       <svg className="w-4 h-2.5 text-[#00A8E1] fill-current" viewBox="0 0 40 15">
         <path d="M0 5 Q 20 15 40 0 L 35 3 L 38 -2 Z" />
       </svg>
@@ -29,7 +29,7 @@ function PrimeVideoLogo() {
 function ZeeTvLogo() {
   return (
     <div className="flex items-center gap-2 px-1">
-      <span className="text-base sm:text-lg font-black text-purple-500 tracking-wider">ZEE</span>
+      <span className="text-base sm:text-lg font-black text-purple-600 tracking-wider">ZEE</span>
       <span className="text-xs font-extrabold text-white px-1.5 py-0.5 bg-purple-600 rounded">TV</span>
     </div>
   );
@@ -38,7 +38,7 @@ function ZeeTvLogo() {
 function SonyLogo() {
   return (
     <div className="flex flex-col items-center">
-      <span className="text-sm sm:text-base font-black tracking-widest text-white">SONY</span>
+      <span className="text-sm sm:text-base font-black tracking-widest text-[#111111]">SONY</span>
       <span className="text-[9px] font-bold tracking-tighter text-[#D4AF37]">ENTERTAINMENT</span>
     </div>
   );
@@ -52,7 +52,7 @@ function ColorsTvLogo() {
         <span className="w-2.5 h-2.5 rounded-full bg-amber-400 inline-block opacity-90" />
         <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block opacity-90" />
       </div>
-      <span className="text-xs sm:text-sm font-extrabold text-white tracking-widest">COLORS</span>
+      <span className="text-xs sm:text-sm font-extrabold text-[#111111] tracking-widest">COLORS</span>
     </div>
   );
 }
@@ -60,26 +60,26 @@ function ColorsTvLogo() {
 function DisneyHotstarLogo() {
   return (
     <div className="flex items-center gap-1.5">
-      <span className="text-xs sm:text-sm font-black text-blue-400 tracking-tight">Disney+</span>
-      <span className="text-xs sm:text-sm font-black text-amber-400">hotstar</span>
+      <span className="text-xs sm:text-sm font-black text-blue-600 tracking-tight">Disney+</span>
+      <span className="text-xs sm:text-sm font-black text-amber-500">hotstar</span>
     </div>
   );
 }
 
 function JioCinemaLogo() {
   return (
-    <div className="flex items-center gap-1 bg-pink-600/20 px-2.5 py-1 rounded-lg border border-pink-500/30">
-      <span className="text-xs sm:text-sm font-black text-pink-500">Jio</span>
-      <span className="text-xs sm:text-sm font-bold text-white">Cinema</span>
+    <div className="flex items-center gap-1 bg-pink-50 px-2.5 py-1 rounded-lg border border-pink-200">
+      <span className="text-xs sm:text-sm font-black text-pink-600">Jio</span>
+      <span className="text-xs sm:text-sm font-bold text-gray-900">Cinema</span>
     </div>
   );
 }
 
 function YrfLogo() {
   return (
-    <div className="flex items-center gap-1.5 font-black text-amber-400 text-xs sm:text-sm tracking-widest border border-amber-400/40 px-2 py-0.5 rounded">
+    <div className="flex items-center gap-1.5 font-black text-[#D4AF37] text-xs sm:text-sm tracking-widest border border-[#D4AF37]/50 px-2 py-0.5 rounded">
       <span>YRF</span>
-      <span className="text-[9px] text-white/80 font-semibold">STUDIOS</span>
+      <span className="text-[9px] text-[#444444] font-semibold">STUDIOS</span>
     </div>
   );
 }
@@ -87,8 +87,8 @@ function YrfLogo() {
 function BalajiLogo() {
   return (
     <div className="flex items-center gap-1.5">
-      <span className="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-500 to-amber-200 text-black flex items-center justify-center text-xs font-black">B</span>
-      <span className="text-xs sm:text-sm font-extrabold text-white tracking-wider">BALAJI</span>
+      <span className="w-5 h-5 rounded-full bg-gradient-to-tr from-amber-500 to-amber-200 text-white flex items-center justify-center text-xs font-black">B</span>
+      <span className="text-xs sm:text-sm font-extrabold text-[#111111] tracking-wider">BALAJI</span>
     </div>
   );
 }
@@ -105,7 +105,7 @@ function MtvLogo() {
 function TimesLogo() {
   return (
     <div className="flex items-center gap-1">
-      <span className="text-xs sm:text-sm font-black text-white tracking-widest border-b border-red-500 pb-0.5">TIMES</span>
+      <span className="text-xs sm:text-sm font-black text-[#111111] tracking-widest border-b border-red-500 pb-0.5">TIMES</span>
       <span className="text-[9px] font-bold text-red-500">NETWORK</span>
     </div>
   );
@@ -138,7 +138,7 @@ export function BrandMarquee() {
   const marqueeItems = [...BRAND_LOGOS, ...BRAND_LOGOS];
 
   return (
-    <section className="relative overflow-hidden border-b border-white/10 bg-[#0a0a0a] py-12 lg:py-16">
+    <section className="relative overflow-hidden border-b border-gray-200 bg-white py-12 lg:py-16">
       {/* Background Subtle Gradient */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.04),transparent_75%)] pointer-events-none" />
 
@@ -150,21 +150,21 @@ export function BrandMarquee() {
             INDUSTRY NETWORK
           </span>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111]">
             Industry Brands &amp; Platforms
           </h3>
 
-          <p className="mt-2 text-xs sm:text-sm font-normal text-white/60 max-w-xl mx-auto">
+          <p className="mt-2 text-xs sm:text-sm font-normal text-[#444444] max-w-xl mx-auto">
             Operating within the broader entertainment, streaming, media, fashion, and broadcast ecosystem.
           </p>
         </div>
       </Reveal>
 
       {/* Infinite Horizontal Marquee */}
-      <div className="relative w-full overflow-hidden border-y border-white/10 py-5 bg-[#121212]">
+      <div className="relative w-full overflow-hidden border-y border-gray-200 py-5 bg-[#F7F7F5]">
         {/* Left & Right Fading Edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#121212] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#121212] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-[#F7F7F5] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-[#F7F7F5] to-transparent z-10 pointer-events-none" />
 
         <div className="flex w-max animate-marquee hover:[animation-play-state:paused] items-center gap-4 sm:gap-6">
           {marqueeItems.map((item, index) => {
@@ -172,7 +172,7 @@ export function BrandMarquee() {
             return (
               <div
                 key={index}
-                className="group flex items-center justify-center whitespace-nowrap rounded-2xl border border-white/10 bg-[#181818] px-6 py-4 transition-all duration-300 hover:border-[#D4AF37]/50 hover:bg-[#201d14] shadow-md cursor-default shrink-0 min-w-[140px] sm:min-w-[160px] h-[58px]"
+                className="group flex items-center justify-center whitespace-nowrap rounded-2xl border border-gray-200 bg-white px-6 py-4 transition-all duration-300 hover:border-[#D4AF37]/50 shadow-xs cursor-default shrink-0 min-w-[140px] sm:min-w-[160px] h-[58px]"
               >
                 <LogoComponent />
               </div>

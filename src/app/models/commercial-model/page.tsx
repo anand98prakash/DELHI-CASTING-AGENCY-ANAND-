@@ -65,7 +65,7 @@ const relatedCategories = [
 
 export default function CommercialModelsPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Commercial Models"
         title="Commercial Model Casting & Registration"
@@ -103,17 +103,17 @@ export default function CommercialModelsPage() {
                 Commercial Model Category
               </p>
 
-              <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+              <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
                 Present your commercial modeling profile
               </h2>
 
-              <p className="mt-5 text-base leading-8 text-white/60">
+              <p className="mt-5 text-base leading-8 text-[#444444]">
                 The commercial model category is designed for talent interested
                 in advertising, brand campaigns, catalogues, lifestyle content
                 and other commercial modeling requirements.
               </p>
 
-              <p className="mt-4 text-base leading-8 text-white/60">
+              <p className="mt-4 text-base leading-8 text-[#444444]">
                 Keep your photographs, experience, skills and portfolio
                 information accurate so your profile clearly represents your
                 current capabilities.
@@ -121,7 +121,7 @@ export default function CommercialModelsPage() {
 
               <Link
                 href="/register/"
-                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E2C04A] hover:shadow-lg hover:shadow-[#D4AF37]/20"
+                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c59b27] shadow-md"
               >
                 Register as a Model
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -130,19 +130,17 @@ export default function CommercialModelsPage() {
           </Reveal>
 
           <Reveal delay={0.12}>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
-
+            <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 shadow-xs">
               <div className="relative">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                   <ShoppingBag className="h-6 w-6" />
                 </div>
 
-                <h3 className="mt-6 font-bold tracking-tight text-2xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-2xl text-[#111111]">
                   Build a commercial-ready profile
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   Highlight the qualities and experience that are relevant to
                   commercial and brand-focused requirements.
                 </p>
@@ -151,7 +149,7 @@ export default function CommercialModelsPage() {
                   {profilePoints.slice(0, 3).map((point) => (
                     <div
                       key={point}
-                      className="flex items-start gap-3 text-sm text-white/65"
+                      className="flex items-start gap-3 text-sm text-[#444444]"
                     >
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
                       <span>{point}</span>
@@ -172,11 +170,11 @@ export default function CommercialModelsPage() {
               Commercial Opportunities
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Types of commercial requirements
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
+            <p className="mt-5 text-base leading-8 text-[#444444]">
               Commercial modeling can cover a wide range of brand and
               advertising requirements. Always review the specific details of
               each casting opportunity.
@@ -187,16 +185,16 @@ export default function CommercialModelsPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {opportunityTypes.map((item, index) => (
             <Reveal key={item.title} delay={index * 0.06}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#D4AF37]/30">
+              <div className="h-full rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-colors hover:border-[#D4AF37]/40 shadow-xs">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                   <BriefcaseBusiness className="h-5 w-5" />
                 </div>
 
-                <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
+                <h3 className="mt-5 font-bold tracking-tight text-xl text-[#111111]">
                   {item.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {item.description}
                 </p>
               </div>
@@ -208,7 +206,7 @@ export default function CommercialModelsPage() {
       {/* Profile Preparation */}
       <section className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <Camera className="h-6 w-6" />
@@ -219,11 +217,11 @@ export default function CommercialModelsPage() {
                   Profile Preparation
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Keep your commercial profile current
                 </h2>
 
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
                   Use recent photographs and provide accurate information about
                   your experience, skills and portfolio. A clear profile helps
                   communicate your suitability for different requirements.
@@ -235,11 +233,11 @@ export default function CommercialModelsPage() {
               {profilePoints.map((point) => (
                 <div
                   key={point}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-2xs"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                  <span className="text-sm leading-7 text-white/65">
+                  <span className="text-sm leading-7 text-[#444444]">
                     {point}
                   </span>
                 </div>
@@ -257,7 +255,7 @@ export default function CommercialModelsPage() {
               Explore More
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Explore other modeling categories
             </h2>
           </div>
@@ -268,17 +266,17 @@ export default function CommercialModelsPage() {
             <Reveal key={item.href} delay={index * 0.05}>
               <Link
                 href={item.href}
-                className="group block h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:bg-white/[0.05]"
+                className="group block h-full rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 hover:bg-white shadow-xs"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-bold tracking-tight text-xl text-white">
+                  <h3 className="font-bold tracking-tight text-xl text-[#111111]">
                     {item.title}
                   </h3>
 
                   <ArrowRight className="h-5 w-5 shrink-0 text-[#D4AF37] transition-transform group-hover:translate-x-1" />
                 </div>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {item.description}
                 </p>
               </Link>
@@ -290,7 +288,7 @@ export default function CommercialModelsPage() {
       {/* Important Notice */}
       <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-9">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-9 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <Sparkles className="h-5 w-5" />
@@ -301,11 +299,11 @@ export default function CommercialModelsPage() {
                   Important
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Commercial opportunities do not guarantee selection.
                 </h2>
 
-                <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55">
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-[#555555]">
                   Individual commercial opportunities can have their own
                   requirements, eligibility criteria and selection processes.
                   Registration or membership does not guarantee auditions,

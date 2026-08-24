@@ -54,7 +54,7 @@ export function ActorQuickSpecs({ actor }: ActorQuickSpecsProps) {
   ];
 
   return (
-    <div className="bg-[#181818] border border-white/10 rounded-2xl p-5 sm:p-6">
+    <div className="bg-[#F7F7F5] border border-gray-200 rounded-2xl p-5 sm:p-6 shadow-xs">
       <h3 className="text-xs uppercase tracking-widest text-[#d4af37] font-semibold mb-4 flex items-center gap-2">
         <span>Model Details</span>
       </h3>
@@ -64,13 +64,13 @@ export function ActorQuickSpecs({ actor }: ActorQuickSpecsProps) {
           return (
             <div
               key={item.label}
-              className="bg-white/[0.03] border border-white/5 rounded-xl p-3.5 hover:border-[#d4af37]/30 transition-colors"
+              className="bg-white border border-gray-200 rounded-xl p-3.5 hover:border-[#d4af37]/50 transition-colors shadow-2xs"
             >
-              <div className="flex items-center gap-1.5 text-white/50 text-xs font-medium mb-1">
+              <div className="flex items-center gap-1.5 text-[#666666] text-xs font-medium mb-1">
                 <Icon className="w-3.5 h-3.5 text-[#d4af37]" />
                 <span>{item.label}</span>
               </div>
-              <p className="text-white font-semibold text-sm sm:text-base leading-snug">
+              <p className="text-[#111111] font-semibold text-sm sm:text-base leading-snug">
                 {item.value}
               </p>
             </div>

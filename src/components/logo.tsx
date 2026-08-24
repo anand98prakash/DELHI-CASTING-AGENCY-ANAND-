@@ -3,19 +3,21 @@ import { cn } from "@/lib/utils";
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center gap-3", className)}>
-      <Image
-        src="/images/logos/logo.png"
-        alt="Delhi Casting Agency"
-        width={100}
-        height={100}
-        priority
-        className="h-12 w-auto object-contain rounded-0.5 md:h-14"
-      />
+    <div className={cn("flex items-center gap-3.5 shrink-0", className)}>
+      <div className="relative flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg bg-white border border-gray-200 p-1 shadow-xs sm:h-12 sm:w-12">
+        <Image
+          src="/images/logos/logo.png"
+          alt="Delhi Casting Agency"
+          width={80}
+          height={80}
+          priority
+          className="h-full w-full object-contain"
+        />
+      </div>
 
-      <p className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.30em] text-[#f3bd0c]">
-        Delhi Casting Agency
-      </p>
+      <span className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#D4AF37] whitespace-nowrap sm:text-xs">
+        DELHI CASTING AGENCY
+      </span>
     </div>
   );
 }

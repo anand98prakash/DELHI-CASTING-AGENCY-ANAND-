@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Minus, Plus, Sparkles } from "lucide-react";
+
 import { Reveal } from "@/components/ui/reveal";
 
 const FAQS = [
@@ -36,23 +37,24 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="relative overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] py-20 sm:py-28">
+    <section id="faq" className="relative overflow-hidden bg-[#F7F7F5] py-28 border-b border-gray-200">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(212,175,55,0.06),transparent_65%)]" />
+
       <div className="relative mx-auto max-w-5xl px-6">
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#C5A059]/40 bg-[#EFECE4] px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#6B6A50]">
-              <Sparkles size={14} className="text-[#C5A059]" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-5 py-2 text-sm font-medium text-[#D4AF37]">
+              <Sparkles size={15} />
               Need Help?
             </div>
 
-            <h2 className="mt-5 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl md:text-5xl lg:text-6xl">
-              Frequently Asked <br />
-              <span className="italic font-normal text-[#C5A059]">
-                Questions
-              </span>
+            <h2 className="mt-6 text-4xl font-bold leading-tight text-[#111111] md:text-6xl">
+              Frequently Asked
+              <span className="block text-[#D4AF37]">Questions</span>
             </h2>
 
-            <p className="mx-auto mt-4 max-w-2xl text-base font-normal leading-relaxed text-[#171717]/70">
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#444444]">
               Find answers to the most common questions about our premium
               membership, verified casting opportunities and registration
               process.
@@ -61,45 +63,86 @@ export function FAQ() {
         </Reveal>
 
         <Reveal>
-          <div className="mt-14 space-y-4">
+          <div className="mt-20 space-y-5">
             {FAQS.map((item, index) => {
               const isOpen = openIndex === index;
 
               return (
-                <div
+                <motion.div
                   key={item.q}
-                  className="overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] transition duration-300 hover:border-[#C5A059]"
+                  layout
+                  whileHover={{ y: -2 }}
+                  transition={{ duration: 0.25 }}
+                  className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xs backdrop-blur-xl transition-all duration-300 hover:border-[#D4AF37]/50"
                 >
                   <button
-                    type="button"
                     onClick={() => setOpenIndex(isOpen ? null : index)}
                     aria-expanded={isOpen}
                     aria-controls={`faq-${index}`}
-                    className="flex w-full items-center justify-between gap-6 px-6 py-5 text-left font-serif text-lg font-bold text-[#171717]"
+                    className="flex w-full items-center justify-between gap-6 px-7 py-6 text-left"
                   >
-                    <span>{item.q}</span>
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#E2DDD3] bg-[#F5F2EA] text-[#C5A059]">
-                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
-                    </div>
+                    <span className="text-lg font-semibold text-[#111111]">
+                      {item.q}
+                    </span>
+
+                    <motion.div
+                      animate={{
+                        rotate: isOpen ? 180 : 0,
+                      }}
+                      whileHover={{
+                        scale: 1.2,
+                        rotate: isOpen ? 180 : 90,
+                      }}
+                      whileTap={{
+                        scale: 0.9,
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 450,
+                        damping: 18,
+                      }}
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-[#F7F7F5] transition-all duration-300 hover:border-[#D4AF37]"
+                    >
+                      {isOpen ? (
+                        <Minus size={18} className="text-[#D4AF37]" />
+                      ) : (
+                        <Plus size={18} className="text-[#D4AF37]" />
+                      )}
+                    </motion.div>
                   </button>
 
                   <AnimatePresence initial={false}>
                     {isOpen && (
                       <motion.div
                         id={`faq-${index}`}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        initial={{
+                          height: 0,
+                          opacity: 0,
+                        }}
+                        animate={{
+                          height: "auto",
+                          opacity: 1,
+                        }}
+                        exit={{
+                          height: 0,
+                          opacity: 0,
+                        }}
+                        transition={{
+                          duration: 0.3,
+                        }}
                         className="overflow-hidden"
                       >
-                        <div className="border-t border-[#E2DDD3] px-6 py-5 text-xs font-normal leading-relaxed text-[#171717]/75 sm:text-sm">
-                          {item.a}
+                        <div className="px-7 pb-7">
+                          <div className="h-px w-full bg-gradient-to-r from-[#D4AF37]/30 via-[#D4AF37]/15 to-transparent" />
+
+                          <p className="mt-5 leading-8 text-[#555555]">
+                            {item.a}
+                          </p>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </motion.div>
               );
             })}
           </div>

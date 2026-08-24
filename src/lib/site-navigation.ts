@@ -6,8 +6,6 @@ export type NavGroup = {
 
 export const NAV_GROUPS: NavGroup[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about-us/" },
-  { label: "How It Works", href: "/how-it-works/" },
   {
     label: "Talents",
     href: "/talents/",
@@ -21,6 +19,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: "Voice Artists", href: "/voice-artists/" },
     ],
   },
+  { label: "How It Works", href: "/how-it-works/" },
   {
     label: "Casting Calls",
     href: "/casting-calls/",
@@ -35,6 +34,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: "Fashion Shows", href: "/casting-calls/fashion-shows/" },
     ],
   },
+  { label: "About", href: "/about-us/" },
   {
     label: "Blog",
     href: "/blog/",

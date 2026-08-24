@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-paper: #F5F2EA;
-  --color-cream: #EFECE4;
+  --color-paper: #FFFFFF;
+  --color-cream: #F7F7F5;
   --color-white: #FFFFFF;
-  --color-beige: #F6F3ED;
-  --color-ink: #171717;
-  --color-charcoal: #111111;
-  --color-muted: #77736C;
-  --color-muted-light: #A39E93;
+  --color-beige: #FAFAFA;
+  --color-ink: #111111;
+  --color-charcoal: #222222;
+  --color-muted: rgba(17, 17, 17, 0.6);
+  --color-muted-light: rgba(17, 17, 17, 0.8);
   --color-olive: #6B6A50;
-  --color-oxblood: #6E2424;
-  --color-gold: #C5A059;
-  --color-gold-soft: #DFB76C;
-  --color-border-warm: #E2DDD3;
+  --color-oxblood: #D92D20;
+  --color-gold: #D4AF37;
+  --color-gold-soft: #C59B27;
+  --color-border-warm: rgba(229, 229, 229, 1);
 
   --font-serif: var(--font-playfair), "Playfair Display", "Cormorant Garamond", Georgia, serif;
   --font-sans: var(--font-manrope), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -48,13 +48,13 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  background-color: #FFFFFF;
+  color: #111111;
 }
 
 body {
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  background-color: #FFFFFF;
+  color: #111111;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,31 +62,31 @@ body {
 }
 
 ::selection {
-  background: var(--color-gold);
-  color: var(--color-white);
+  background: #D4AF37;
+  color: #FFFFFF;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid #D4AF37;
   outline-offset: 3px;
 }
 
-/* Custom Editorial Scrollbar */
+/* Custom Editorial Light Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-paper);
+  background: #F7F7F5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C8C3B8;
+  background: #D1D5DB;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A8A295;
+  background: #D4AF37;
 }
 
 /* Lenis Smooth Scroll */
@@ -99,21 +99,21 @@ html.lenis, html.lenis body {
 
 /* Editorial Glass & Overlay Utilities */
 .editorial-card-gradient {
-  background: linear-gradient(180deg, rgba(23, 23, 23, 0) 40%, rgba(23, 23, 23, 0.85) 100%);
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0) 40%, rgba(17, 17, 17, 0.85) 100%);
 }
 
 .editorial-hero-gradient {
-  background: linear-gradient(180deg, rgba(245, 242, 234, 0.8) 0%, rgba(245, 242, 234, 0.2) 50%, rgba(245, 242, 234, 1) 100%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0.9) 100%);
 }
 
 .bg-paper {
-  background-color: #F5F2EA;
+  background-color: #FFFFFF;
 }
 
 .bg-cream {
-  background-color: #EFECE4;
+  background-color: #F7F7F5;
 }
 
 .bg-beige {
-  background-color: #F6F3ED;
+  background-color: #FAFAFA;
 }

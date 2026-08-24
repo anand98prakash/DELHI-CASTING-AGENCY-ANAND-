@@ -1,278 +1,306 @@
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight, Award, Users, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { CTASection } from "@/components/ui/cta-section";
 import { Reveal } from "@/components/ui/reveal";
-import { OFFICIAL_DCA_INSTAGRAM_URL, OFFICIAL_DCA_LINKEDIN_URL } from "@/data/media";
-
-function InstagramIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  );
-}
-
-function LinkedinIcon({ className = "w-4 h-4" }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
-
-const categoryThumbnails: Record<string, { image: string; href: string }> = {
-  Actors: { image: "/media/dca/actors/dca-actor-male-01.jpg", href: "/actors/" },
-  Models: { image: "/media/dca/models/dca-model-fashion-01.jpg", href: "/models/" },
-  "Child Artists": { image: "/media/dca/child-artists/dca-child-artist-01.jpg", href: "/child-artists/" },
-  Influencers: { image: "/media/dca/influencers/dca-influencer-community-01.jpg", href: "/influencers/" },
-  Dancers: { image: "/media/dca/dancers/dca-dancer-performance-01.jpg", href: "/dancers/" },
-  "Voice Artists": { image: "/media/dca/voice-artists/dca-voice-studio-01.jpg", href: "/voice-artists/" },
-};
+import { getProfileCreateOrSetupUrl } from "@/lib/auth";
 
 export const metadata = {
   title: "About Us | Delhi Casting Agency (DCA)",
   description:
-    "Discover the story, approach, and values behind Delhi Casting Agency — an online-first platform connecting talent with casting opportunities across India.",
+    "Learn about Delhi Casting Agency (DCA), our approach to talent representation, artist profiles, and casting opportunity discovery in India.",
 };
 
 export default function AboutUsPage() {
   return (
-    <main className="min-h-screen bg-[#F5F2EA] text-[#171717]">
-      {/* Hero Header */}
-      <section className="relative isolate overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
-        <div className="mx-auto max-w-7xl">
+    <main className="min-h-screen bg-white text-[#111111]">
+      
+      {/* HERO SECTION — TYPOGRAPHY & EDITORIAL HEADER */}
+      <section className="relative isolate overflow-hidden border-b border-gray-200 bg-[#F7F7F5] px-6 pb-16 pt-28 sm:pb-20 sm:pt-36">
+        <div className="mx-auto max-w-5xl text-center">
           <Reveal>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
-              About Delhi Casting Agency
-            </p>
-
-            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-md">
-              <Image
-                src="/images/actors/contact horizontally.jpg"
-                alt="About Delhi Casting Agency - Connecting Talent With Opportunities"
-                fill
-                priority
-                sizes="(max-width: 1280px) 100vw, 1280px"
-                className="object-cover object-center"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-[#171717]/20 to-transparent" />
+            <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
+              <Sparkles size={14} />
+              <span>ABOUT DELHI CASTING AGENCY</span>
             </div>
 
-            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-5xl md:text-6xl">
-              Connecting Talent With Opportunities
+            <h1 className="text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+              Connecting Talent With the Right Opportunities
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#171717]/75 sm:text-lg">
-              Discover the story, approach and values behind Delhi Casting Agency.
-            </p>
+            <div className="mx-auto mt-6 max-w-3xl space-y-4 text-base font-normal leading-relaxed text-[#444444] sm:text-lg">
+              <p>
+                Delhi Casting Agency (DCA) is a talent and casting platform created for actors, models, performers and emerging artists looking to discover relevant opportunities across India&apos;s entertainment and creative industry.
+              </p>
+              <p>
+                We aim to make the casting journey more organized, transparent and accessible by bringing talent and casting opportunities together through a professional digital platform.
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* Breadcrumb */}
-      <div className="mx-auto max-w-7xl px-6 py-6">
+      {/* BREADCRUMB */}
+      <div className="mx-auto max-w-6xl px-6 py-6">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "About Us" }]} />
       </div>
 
-      {/* Our Story */}
-      <section className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <Reveal>
-            <div>
-              <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
-                <Sparkles className="h-3.5 w-3.5" />
-                Discovering Stars, Creating Legacies
-              </span>
+      {/* SECTION 1 — OUR APPROACH */}
+      <section className="mx-auto max-w-6xl px-6 py-12 lg:py-20">
+        <Reveal>
+          <div className="rounded-3xl border border-gray-200 bg-white p-8 md:p-14 shadow-md">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+              OUR APPROACH
+            </span>
 
-              <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
-                Bridging talent and industry across India
-              </h2>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#111111] sm:text-4xl">
+              Built Around Talent, Opportunity &amp; Professionalism
+            </h2>
 
-              <p className="mt-4 text-base font-normal leading-relaxed text-[#171717]/80 sm:text-lg">
-                Delhi Casting Agency is dedicated to discovering, grooming, and connecting top talent with the film, television, commercial, and digital media industry across India.
+            <div className="mt-6 space-y-4 text-base leading-relaxed text-[#444444] border-t border-gray-200 pt-6">
+              <p>
+                At DCA, we believe every artist has a unique identity, ability and story.
               </p>
+              <p>
+                Our platform is designed to help artists present themselves professionally, maintain relevant profile information and discover casting opportunities that match their talent, category and experience.
+              </p>
+              <p>
+                We focus on creating a professional environment where aspiring and experienced artists can build their presence and stay connected with opportunities.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
 
-              <div className="mt-5 space-y-3 text-xs leading-relaxed text-[#171717]/70 sm:text-sm">
-                <p>
-                  Our platform brings together diverse talent categories under a structured ecosystem, bridging the gap between aspiring performers and production requirements.
+      {/* SECTIONS 2 & 3 — FOR ARTISTS & FOR CASTING PROFESSIONALS */}
+      <section className="mx-auto max-w-6xl px-6 py-8 lg:py-12">
+        <div className="grid gap-8 lg:grid-cols-2">
+          
+          {/* FOR ARTISTS */}
+          <Reveal>
+            <div className="flex h-full flex-col justify-between rounded-3xl border border-gray-200 bg-white p-8 md:p-10 shadow-md">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+                  FOR ARTISTS
+                </span>
+
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#111111] sm:text-3xl">
+                  A Professional Space for Actors, Models &amp; Artists
+                </h2>
+
+                <p className="mt-4 text-sm text-[#444444]">
+                  DCA helps artists build and present a professional talent profile.
                 </p>
 
-                <p>
-                  From actors, fashion models, and child artists to dancers, influencers, and voice artists, we support talent discovery with a commitment to excellence and transparent expectations.
-                </p>
-
-                <p>
-                  The goal is to create a clear and professional experience for talent while keeping expectations realistic about casting and selection.
-                </p>
-              </div>
-
-              <div className="mt-6 border-t border-[#E2DDD3] pt-4 flex flex-wrap items-center gap-4 text-xs font-semibold">
-                <a
-                  href={OFFICIAL_DCA_INSTAGRAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#C5A059] hover:underline"
-                >
-                  <InstagramIcon className="h-4 w-4 text-[#C5A059]" />
-                  <span>Instagram: @delhicastingagency</span>
-                </a>
-                <span className="text-[#171717]/20">•</span>
-                <a
-                  href={OFFICIAL_DCA_LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#C5A059] hover:underline"
-                >
-                  <LinkedinIcon className="h-4 w-4 text-[#C5A059]" />
-                  <span>LinkedIn: Delhi Casting Agency</span>
-                </a>
+                <ul className="mt-6 space-y-3.5 border-t border-gray-200 pt-6">
+                  {[
+                    "Create and maintain a professional artist profile",
+                    "Add portfolio and casting photographs",
+                    "Showcase skills, experience and talent categories",
+                    "Maintain relevant physical and professional details",
+                    "Discover casting calls and opportunities",
+                    "Stay informed about relevant casting requirements",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-[#333333]">
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37] mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </Reveal>
 
+          {/* FOR CASTING PROFESSIONALS */}
           <Reveal delay={0.1}>
-            <div className="space-y-4 rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-6 shadow-md sm:p-8">
-              <InfoCard
-                icon={<Users className="h-5 w-5" />}
-                title="Talent Focused"
-                description="Dedicated categories help artists find the areas most relevant to them."
-              />
+            <div className="flex h-full flex-col justify-between rounded-3xl border border-gray-200 bg-white p-8 md:p-10 shadow-md">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+                  FOR CASTING PROFESSIONALS
+                </span>
 
-              <InfoCard
-                icon={<Award className="h-5 w-5" />}
-                title="Professional Approach"
-                description="A structured platform for discovering casting-related opportunities."
-              />
+                <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#111111] sm:text-3xl">
+                  Discover Talent More Efficiently
+                </h2>
 
-              <InfoCard
-                icon={<ShieldCheck className="h-5 w-5" />}
-                title="Transparent Expectations"
-                description="Casting opportunities do not automatically guarantee selection or work."
-              />
+                <p className="mt-4 text-sm text-[#444444]">
+                  DCA provides a platform where casting professionals can discover talent across different categories.
+                </p>
+
+                <ul className="mt-6 space-y-3.5 border-t border-gray-200 pt-6">
+                  {[
+                    "Talent category",
+                    "Experience",
+                    "Location",
+                    "Skills",
+                    "Physical specifications",
+                    "Portfolio and profile information",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-[#333333]">
+                      <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D4AF37] mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <p className="mt-6 border-t border-gray-200 pt-4 text-xs leading-relaxed text-[#666666]">
+                  This helps make the initial talent-discovery process more organized and efficient.
+                </p>
+              </div>
             </div>
           </Reveal>
+
         </div>
       </section>
 
-      {/* Talent Categories */}
-      <section className="mx-auto max-w-7xl px-6 py-12 border-t border-[#E2DDD3]">
+      {/* SECTION 4 — OUR COMMITMENT (4 TEXT CARDS) */}
+      <section className="mx-auto max-w-6xl px-6 py-12 lg:py-20">
         <Reveal>
-          <div className="mx-auto mb-10 max-w-3xl text-center">
-            <span className="flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
-              <Sparkles className="h-3.5 w-3.5" />
-              What We Cover
+          <div className="mb-10 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+              OUR COMMITMENT
             </span>
-
-            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
-              One platform for multiple talent categories
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#111111] sm:text-4xl">
+              What We Stand For
             </h2>
-
-            <p className="mt-3 text-base leading-relaxed text-[#171717]/75">
-              Explore dedicated sections designed around different types of talent and casting requirements.
-            </p>
           </div>
         </Reveal>
 
-        <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            "Actors",
-            "Models",
-            "Child Artists",
-            "Influencers",
-            "Dancers",
-            "Voice Artists",
-          ].map((category, index) => {
-            const meta = categoryThumbnails[category];
-
-            return (
-              <Reveal key={category} delay={index * 0.05} className="h-full">
-                <div className="group flex h-full flex-col justify-between overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#C5A059] hover:shadow-xl">
-                  <div className="flex flex-1 flex-col">
-                    <Link
-                      href={meta?.href || "/talents/"}
-                      className="relative mb-4 aspect-16/10 w-full shrink-0 overflow-hidden rounded-lg bg-[#F5F2EA]"
-                    >
-                      <Image
-                        src={meta?.image || "/images/actors/talent male actore.png"}
-                        alt={category}
-                        fill
-                        sizes="350px"
-                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-transparent to-transparent" />
-                    </Link>
-
-                    <h3 className="font-serif text-2xl font-bold tracking-tight text-[#171717] transition-colors group-hover:text-[#C5A059]">
-                      {category}
-                    </h3>
-
-                    <p className="mt-2 flex-1 text-xs leading-relaxed text-[#171717]/75">
-                      Explore the dedicated {category.toLowerCase()} section.
-                    </p>
-                  </div>
-
-                  <div className="mt-6 flex shrink-0 items-center justify-between border-t border-[#E2DDD3] pt-4">
-                    <Link
-                      href={meta?.href || "/talents/"}
-                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#171717] transition-colors group-hover:text-[#C5A059]"
-                    >
-                      <span>Explore {category}</span>
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-[#171717]/40">
-                      DCA Verified
-                    </span>
-                  </div>
+            {
+              num: "01",
+              title: "PROFESSIONALISM",
+              body: "We encourage artists to maintain accurate and professional profiles.",
+            },
+            {
+              num: "02",
+              title: "TRANSPARENCY",
+              body: "Opportunity details and requirements should be reviewed carefully before applying.",
+            },
+            {
+              num: "03",
+              title: "ACCESSIBILITY",
+              body: "We aim to make relevant casting opportunities easier for artists to discover through a digital platform.",
+            },
+            {
+              num: "04",
+              title: "TALENT FIRST",
+              body: "Our platform is built around helping artists present their abilities and connect with opportunities.",
+            },
+          ].map((card, idx) => (
+            <Reveal key={card.num} delay={idx * 0.05} className="h-full">
+              <div className="flex h-full flex-col justify-between rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-sm transition duration-300 hover:border-[#D4AF37]/50">
+                <div>
+                  <span className="font-mono text-3xl font-extrabold text-[#D4AF37]">
+                    {card.num}
+                  </span>
+                  <h3 className="mt-3 text-base font-bold tracking-wider text-[#111111]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#555555]">
+                    {card.body}
+                  </p>
                 </div>
-              </Reveal>
-            );
-          })}
+              </div>
+            </Reveal>
+          ))}
         </div>
       </section>
 
-      {/* Global CTA */}
-      <CTASection
-        eyebrow="Ready to Get Started?"
-        title="Take the next step toward your casting journey."
-        description="Explore the platform and choose the path that fits your talent."
-        buttonLabel="Register Now"
-        buttonHref="/register/"
-      />
-    </main>
-  );
-}
+      {/* SECTION 5 — HOW DCA WORKS (4 NUMBERED STEPS) */}
+      <section className="mx-auto max-w-6xl px-6 py-12 lg:py-16">
+        <Reveal>
+          <div className="rounded-3xl border border-gray-200 bg-white p-8 md:p-12 shadow-md">
+            <div className="mb-10 text-center">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+                HOW DCA WORKS
+              </span>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#111111] sm:text-4xl">
+                A Simple Journey From Profile to Opportunity
+              </h2>
+            </div>
 
-function InfoCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="rounded-lg border border-[#E2DDD3] bg-[#F5F2EA] p-4">
-      <div className="flex items-start gap-3">
-        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[#C5A059]/30 bg-[#EFECE4] text-[#C5A059]">
-          {icon}
-        </div>
-        <div>
-          <h3 className="font-serif text-base font-bold tracking-tight text-[#171717]">
-            {title}
-          </h3>
-          <p className="mt-1 text-xs leading-relaxed text-[#171717]/70">
-            {description}
-          </p>
-        </div>
-      </div>
-    </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  num: "01",
+                  title: "CREATE YOUR PROFILE",
+                  body: "Build your artist profile with your personal, professional and portfolio information.",
+                },
+                {
+                  num: "02",
+                  title: "COMPLETE YOUR PROFILE",
+                  body: "Add relevant photographs, skills, experience and other casting information.",
+                },
+                {
+                  num: "03",
+                  title: "DISCOVER OPPORTUNITIES",
+                  body: "Explore casting calls relevant to your talent category and profile.",
+                },
+                {
+                  num: "04",
+                  title: "APPLY & CONNECT",
+                  body: "Review opportunity requirements and proceed according to the casting process.",
+                },
+              ].map((step, idx) => (
+                <div
+                  key={step.num}
+                  className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs"
+                >
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
+                    STEP {step.num}
+                  </span>
+                  <h3 className="mt-2 text-base font-bold text-[#111111]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#555555]">
+                    {step.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* SECTION 6 — FINAL CTA SECTION (OUR VISION) */}
+      <section className="mx-auto max-w-6xl px-6 py-16 lg:py-24">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-14 text-center shadow-md">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+              OUR VISION
+            </span>
+
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl">
+              Your Talent Deserves to Be Seen.
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-[#444444] sm:text-lg">
+              We want to build a professional digital ecosystem where talented individuals can present Governments and casting professionals can discover the right talent more efficiently.
+            </p>
+
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href={getProfileCreateOrSetupUrl()}
+                className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition duration-300 hover:bg-[#C59B27] shadow-md"
+              >
+                <span>Create Your Profile</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                href="/casting-calls/"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-[#111111] transition duration-300 hover:border-[#D4AF37] hover:text-[#D4AF37] shadow-xs"
+              >
+                <span>Explore Casting Opportunities</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+    </main>
   );
 }

@@ -1,8 +1,8 @@
 export type InfluencerCategorySlug =
-  | "instagram-influencers"
-  | "youtube-influencers"
+  | "fashion-influencers"
   | "lifestyle-influencers"
-  | "fashion-influencers";
+  | "instagram-influencers"
+  | "youtube-influencers";
 
 export interface VideoItem {
   id: string;
@@ -34,7 +34,7 @@ export interface PrintItem {
 export interface ExperienceCredit {
   project: string;
   role: string;
-  type: "Brand Collaboration" | "Sponsored Reel / Video" | "Event Ambassador" | "Product Launch" | "Digital Campaign";
+  type: "Brand Collaboration" | "Product Launch" | "Digital Campaign" | "Event Attendance";
   year: string;
   directorOrClient?: string;
 }
@@ -46,13 +46,17 @@ export interface Influencer {
   categoryLabel: string;
   role: string;
   age: number;
+  height: string;
+  experience: string;
   location: string;
   languages: string[];
-  platform: string;
-  followers: string;
-  engagementRate: string;
-  primaryNiche: string;
-  handle: string;
+  followersCount: string;
+  followers?: string;
+  handle?: string;
+  platform?: string;
+  engagementRate?: string;
+  primaryNiche?: string;
+  niche: string[];
   mainImage: string;
   badge?: string;
   about: string;
@@ -78,48 +82,48 @@ export interface CategoryMeta {
 
 export const INFLUENCER_CATEGORIES: CategoryMeta[] = [
   {
+    slug: "fashion-influencers",
+    title: "Fashion Influencers",
+    headline: "Style Creators & Fashion Content Specialists",
+    description: "Trending fashion creators specializing in outfit styling reels, luxury brand unboxings, seasonal lookbooks, and fashion week coverage.",
+    heroDescription: "Explore fashion creators driving style trends, street fashion, and high-impact brand partnerships across digital platforms.",
+    ctaText: "Explore Fashion Influencers",
+    countLabel: "20+ Style Creators",
+    image: "/images/talents/influencers/aanya-mehta-main.jpg",
+    route: "/influencers/fashion-influencers/",
+  },
+  {
+    slug: "lifestyle-influencers",
+    title: "Lifestyle Influencers",
+    headline: "Wellness, Travel & Daily Vlogging Creators",
+    description: "Engaging lifestyle creators sharing authentic daily routines, luxury hotel reviews, wellness tips, and consumer tech recommendations.",
+    heroDescription: "Connect with authentic lifestyle creators driving consumer trust, brand integration, and high engagement across social media.",
+    ctaText: "Explore Lifestyle Influencers",
+    countLabel: "25+ Lifestyle Creators",
+    image: "/images/talents/influencers/rohan-kapoor-inf-main.jpg",
+    route: "/influencers/lifestyle-influencers/",
+  },
+  {
     slug: "instagram-influencers",
     title: "Instagram Influencers",
-    headline: "Visual Storytellers, Trendsetters & Brand Creators",
-    description: "High-engagement Instagram creators specializing in reels, aesthetic imagery, brand integrations, and lifestyle endorsements.",
-    heroDescription: "Connect with verified Instagram creators driving high-impact brand awareness, authentic reel storytelling, and targeted engagement.",
+    headline: "Reels & Short-Form Content Pioneers",
+    description: "High-reach Instagram creators commanding loyal followings through viral reels, aesthetic grids, and interactive stories.",
+    heroDescription: "Browse high-converting Instagram creators with verified engagement rates for sponsored posts and digital activations.",
     ctaText: "Explore Instagram Influencers",
-    countLabel: "20+ Verified Creators",
-    image: "/images/actors/insta influencer.png",
+    countLabel: "30+ Instagram Creators",
+    image: "/images/talents/influencers/aanya-mehta-main.jpg",
     route: "/influencers/instagram-influencers/",
   },
   {
     slug: "youtube-influencers",
     title: "YouTube Influencers",
-    headline: "Long-Form Content Creators, Vloggers & Reviewers",
-    description: "Established YouTubers creating deep-dive product reviews, travel vlogs, tech breakdowns, and episodic entertainment.",
-    heroDescription: "Browse dynamic YouTube creators offering dedicated sponsorship integrations, long-form reviews, and high-retention video content.",
+    headline: "Long-Form Vloggers & Video Reviewers",
+    description: "Established YouTubers producing in-depth video reviews, cinematic travel vlogs, beauty tutorials, and brand integration videos.",
+    heroDescription: "Discover high-authority YouTube creators offering deep brand integration, dedicated video reviews, and long-term audience impact.",
     ctaText: "Explore YouTube Influencers",
-    countLabel: "15+ Channel Partners",
-    image: "/images/actors/youtube influencer.jpg",
+    countLabel: "15+ YouTube Creators",
+    image: "/images/talents/influencers/rohan-kapoor-inf-main.jpg",
     route: "/influencers/youtube-influencers/",
-  },
-  {
-    slug: "lifestyle-influencers",
-    title: "Lifestyle Influencers",
-    headline: "Daily Life, Travel, Food & Wellness Creators",
-    description: "Relatable lifestyle creators sharing everyday inspiration, hospitality reviews, wellness routines, and experiential stories.",
-    heroDescription: "Discover engaging lifestyle creators connecting premium hospitality, wellness, and consumer brands with passionate audiences.",
-    ctaText: "Explore Lifestyle Influencers",
-    countLabel: "18+ Lifestyle Creators",
-    image: "/images/actors/lifestyle influencer.jpg",
-    route: "/influencers/lifestyle-influencers/",
-  },
-  {
-    slug: "fashion-influencers",
-    title: "Fashion Influencers",
-    headline: "Style Curators, Lookbook Creators & Beauty Gurus",
-    description: "Fashion-forward creators sharing style lookbooks, beauty transformations, luxury unboxings, and red-carpet trend coverage.",
-    heroDescription: "Explore influential fashion and beauty creators with strong aesthetic curation and high-converting audience trust.",
-    ctaText: "Explore Fashion Influencers",
-    countLabel: "16+ Fashion Creators",
-    image: "/images/actors/fashion influencer.png",
-    route: "/influencers/fashion-influencers/",
   },
 ];
 
@@ -127,130 +131,61 @@ export const INFLUENCERS_DATA: Influencer[] = [
   {
     id: "aanya-mehta",
     name: "Aanya Mehta",
-    category: "instagram-influencers",
-    categoryLabel: "Instagram Influencer",
-    role: "Fashion & Lifestyle Creator",
+    category: "fashion-influencers",
+    categoryLabel: "Fashion Influencer",
+    role: "Luxury Fashion & Beauty Creator",
     age: 24,
-    location: "New Delhi / Mumbai",
+    height: "5'8\"",
+    experience: "4 Years",
+    location: "New Delhi / NCR",
     languages: ["English", "Hindi"],
-    platform: "Instagram & YouTube",
-    followers: "450K+",
-    engagementRate: "4.8%",
-    primaryNiche: "Fashion, Luxury & Beauty",
-    handle: "@aanyamehta.style",
-    mainImage: "/media/dca/models/dca-model-female-01.jpg",
-    badge: "Top Tier Creator",
-    about: "Aanya Mehta is a Delhi-based digital creator renowned for editorial aesthetics, curated fashion lookbooks, and authentic luxury brand integrations. Her audience engages heavily with her daily styling tips and beauty recommendations.",
-    skills: ["Reel Production", "Brand Endorsement", "Aesthetic Photography", "Live Hosting", "Beauty Reviews"],
+    followersCount: "450K+",
+    niche: ["Luxury Fashion", "Skincare", "Haute Couture", "Travel"],
+    mainImage: "/images/talents/influencers/aanya-mehta-main.jpg",
+    badge: "Top Fashion Creator",
+    about: "Aanya Mehta is a prominent Delhi-based fashion and luxury lifestyle content creator known for high-aesthetic Instagram reels and brand partnerships with global cosmetics brands.",
+    skills: ["Reel Direction", "Aesthetic Styling", "Brand Integration", "Live Hosting"],
     experienceCredits: [
-      { project: "L'Oréal Paris Festive Glow Campaign", role: "Digital Brand Ambassador", type: "Digital Campaign", year: "2025" },
-      { project: "Zara Autumn/Winter Lookbook Reel", role: "Creator Collaboration", type: "Sponsored Reel / Video", year: "2024" },
+      { project: "Sephora India Festive Edit", role: "Brand Ambassador", type: "Brand Collaboration", year: "2025" },
     ],
-    photos: ["/media/dca/models/dca-model-female-01.jpg", "/media/dca/models/dca-model-fashion-01.jpg"],
-    videos: [
-      {
-        id: "aanya-reel",
-        title: "Aanya Mehta Creator Showreel",
-        category: "Creator Reel",
-        duration: "0:45",
-        thumbnail: "/media/dca/models/dca-model-female-01.jpg",
-        videoUrl: "/videos/actors/ananya-showreel.mp4",
-        description: "Highlights of top-performing brand campaigns and lifestyle content.",
-      },
-    ],
-    instagram: [
-      { id: "ai1", image: "/media/dca/models/dca-model-female-01.jpg", caption: "Festive glam with @lorealparis ✨", likes: "48.2k", comments: "1.2k", handle: "@aanyamehta.style" },
-    ],
-    print: [
-      { id: "aip1", image: "/media/dca/models/dca-model-female-01.jpg", brand: "L'Oréal Paris", campaign: "Festive Radiance 2025", year: "2025" },
-    ],
-  },
-  {
-    id: "rohan-kapoor",
-    name: "Rohan Kapoor",
-    category: "youtube-influencers",
-    categoryLabel: "YouTube Creator",
-    role: "Tech & Lifestyle Vlogger",
-    age: 27,
-    location: "New Delhi / Gurugram",
-    languages: ["English", "Hindi"],
-    platform: "YouTube (820K Subs)",
-    followers: "820K+",
-    engagementRate: "6.2%",
-    primaryNiche: "Consumer Tech & Smart Living",
-    handle: "@rohankapoortech",
-    mainImage: "/media/dca/models/dca-model-male-01.jpg",
-    badge: "Verified Creator",
-    about: "Rohan Kapoor runs one of North India's fastest-growing tech and lifestyle YouTube channels, producing cinematic hardware reviews, travel vlogs, and consumer tech buying guides.",
-    skills: ["Cinematic Video Production", "Tech Reviews", "Keynote Coverage", "Long-form Storytelling"],
-    experienceCredits: [
-      { project: "Samsung Galaxy Unpacked Keynote Sponsor", role: "Official Tech Partner", type: "Brand Collaboration", year: "2025" },
-    ],
-    photos: ["/media/dca/models/dca-model-male-01.jpg", "/media/dca/models/dca-model-commercial-01.jpg"],
-    videos: [
-      {
-        id: "rohan-vlog",
-        title: "Rohan Kapoor Channel Reel",
-        category: "YouTube Reel",
-        duration: "0:50",
-        thumbnail: "/media/dca/models/dca-model-male-01.jpg",
-        videoUrl: "/videos/actors/rahul-showreel.mp4",
-        description: "Best cinematic moments and brand integration highlights.",
-      },
-    ],
+    photos: [
+      "/images/talents/influencers/aanya-mehta/01.jpg",
+      "/images/talents/influencers/aanya-mehta/02.jpg",
+      "/images/talents/influencers/aanya-mehta/03.jpg",
+      "/images/talents/influencers/aanya-mehta/04.jpg",
+      "/images/talents/influencers/aanya-mehta/05.jpg"
+],
+    videos: [],
     instagram: [],
     print: [],
   },
   {
-    id: "zara-khan",
-    name: "Zara Khan",
+    id: "rohan-kapoor",
+    name: "Rohan Kapoor",
     category: "lifestyle-influencers",
     categoryLabel: "Lifestyle Influencer",
-    role: "Travel & Wellness Creator",
-    age: 26,
-    location: "New Delhi / Goa",
-    languages: ["English", "Hindi", "Urdu"],
-    platform: "Instagram & Threads",
-    followers: "310K+",
-    engagementRate: "5.1%",
-    primaryNiche: "Experiential Travel & Wellness",
-    handle: "@zarakhan.wander",
-    mainImage: "/media/dca/models/dca-model-plus-size-01.jpg",
-    badge: "Lifestyle Partner",
-    about: "Zara Khan documents boutique travel, mindful living, and sustainable wellness routines with poetic captions and stunning visual direction.",
-    skills: ["Travel Storytelling", "Hospitality Review", "Wellness Vlogs", "Photography"],
+    role: "Fitness & Tech Vlogger",
+    age: 27,
+    height: "6'0\"",
+    experience: "5 Years",
+    location: "New Delhi / Gurugram",
+    languages: ["English", "Hindi", "Punjabi"],
+    followersCount: "680K+",
+    niche: ["Fitness", "Consumer Tech", "Men's Grooming", "Automotive"],
+    mainImage: "/images/talents/influencers/rohan-kapoor-inf-main.jpg",
+    badge: "Verified Creator",
+    about: "Rohan Kapoor is a dynamic lifestyle vlogger and tech enthusiast delivering high-production video reviews, workout routines, and men's grooming recommendations.",
+    skills: ["Cinematic Vlogging", "Product Reviewing", "Fitness Coaching", "Public Speaking"],
     experienceCredits: [
-      { project: "Taj Hotels Boutique Retreat Feature", role: "Featured Creator", type: "Brand Collaboration", year: "2025" },
+      { project: "OnePlus Nord Series Launch", role: "Featured Tech Reviewer", type: "Product Launch", year: "2025" },
     ],
-    photos: ["/media/dca/models/dca-model-plus-size-01.jpg", "/media/dca/models/dca-model-female-01.jpg"],
-    videos: [],
-    instagram: [
-      { id: "zi1", image: "/media/dca/models/dca-model-plus-size-01.jpg", caption: "Sunrise moments in the Himalayas 🏔️", likes: "26.4k", comments: "580", handle: "@zarakhan.wander" },
-    ],
-    print: [],
-  },
-  {
-    id: "siddharth-roy",
-    name: "Siddharth Roy",
-    category: "fashion-influencers",
-    categoryLabel: "Fashion Influencer",
-    role: "Menswear & Grooming Specialist",
-    age: 28,
-    location: "New Delhi",
-    languages: ["English", "Hindi"],
-    platform: "Instagram & YouTube",
-    followers: "280K+",
-    engagementRate: "4.5%",
-    primaryNiche: "Menswear Styling & Grooming",
-    handle: "@siddharth.menswear",
-    mainImage: "/media/dca/models/dca-model-fitness-01.jpg",
-    badge: "Style Specialist",
-    about: "Siddharth Roy helps modern Indian men refine their wardrobe with practical capsule collection guides, grooming routines, and sneaker styling tips.",
-    skills: ["Menswear Styling", "Grooming Tutorials", "Product Photography", "Brand Endorsement"],
-    experienceCredits: [
-      { project: "Bombay Shaving Company Festive Ambassador", role: "Lead Influencer", type: "Digital Campaign", year: "2025" },
-    ],
-    photos: ["/media/dca/models/dca-model-fitness-01.jpg", "/media/dca/models/dca-model-male-01.jpg"],
+    photos: [
+      "/images/talents/influencers/rohan-kapoor/01.jpg",
+      "/images/talents/influencers/rohan-kapoor/02.jpg",
+      "/images/talents/influencers/rohan-kapoor/03.jpg",
+      "/images/talents/influencers/rohan-kapoor/04.jpeg",
+      "/images/talents/influencers/rohan-kapoor/05.jpg"
+],
     videos: [],
     instagram: [],
     print: [],
@@ -262,11 +197,11 @@ export function getAllInfluencers(): Influencer[] {
 }
 
 export function getInfluencerById(id: string): Influencer | undefined {
-  return INFLUENCERS_DATA.find((i) => i.id === id);
+  return INFLUENCERS_DATA.find((inf) => inf.id === id);
 }
 
 export function getInfluencersByCategory(category: InfluencerCategorySlug): Influencer[] {
-  return INFLUENCERS_DATA.filter((i) => i.category === category);
+  return INFLUENCERS_DATA.filter((inf) => inf.category === category);
 }
 
 export function getInfluencerCategoryBySlug(slug: InfluencerCategorySlug): CategoryMeta | undefined {

@@ -10,7 +10,7 @@ export const buttonVariants = cva(
         primary:
           "bg-gradient-to-br from-gold-soft via-gold to-[#b8912a] text-black shadow-[0_18px_40px_rgba(0,0,0,0.4)] hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgba(212,175,55,0.5),0_22px_44px_rgba(0,0,0,0.4)]",
         ghost:
-          "border border-gold/50 text-gold hover:bg-gold hover:text-black",
+          "border border-gold/50 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black",
         whatsapp: "bg-[#25D366] text-black hover:-translate-y-0.5",
       },
       size: {

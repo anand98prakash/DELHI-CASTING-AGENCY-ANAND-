@@ -52,7 +52,7 @@ const userResponsibilities = [
 
 export default function DisclaimerPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Legal & Trust"
         title="Disclaimer"
@@ -76,7 +76,7 @@ export default function DisclaimerPage() {
       {/* Main Notice */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-10">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-10 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <ShieldCheck className="h-6 w-6" />
@@ -87,11 +87,11 @@ export default function DisclaimerPage() {
                   Important Notice
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Casting opportunities are not guaranteed
                 </h2>
 
-                <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+                <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                   Registration or membership does not guarantee casting
                   selection, auditions, roles, paid work or employment. Every
                   casting opportunity can have its own requirements and
@@ -111,11 +111,11 @@ export default function DisclaimerPage() {
               What You Should Know
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Important information before using the platform
             </h2>
 
-            <p className="mt-5 max-w-3xl text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-5 max-w-3xl text-sm leading-8 text-[#444444] md:text-base">
               Please understand the following points when creating a profile,
               becoming a member or exploring casting opportunities.
             </p>
@@ -128,16 +128,16 @@ export default function DisclaimerPage() {
 
             return (
               <Reveal key={point.title} delay={index * 0.06}>
-                <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+                <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 shadow-xs">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                     <Icon className="h-6 w-6" />
                   </div>
 
-                  <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
+                  <h3 className="mt-6 font-bold tracking-tight text-xl text-[#111111]">
                     {point.title}
                   </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/55">
+                  <p className="mt-3 text-sm leading-7 text-[#555555]">
                     {point.description}
                   </p>
                 </div>
@@ -150,7 +150,7 @@ export default function DisclaimerPage() {
       {/* Membership */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <FileText className="h-6 w-6" />
             </div>
@@ -159,17 +159,17 @@ export default function DisclaimerPage() {
               Membership
             </p>
 
-            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Membership does not guarantee work
             </h2>
 
-            <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
               Membership or payment for a service should not be understood as a
               promise that an artist will receive an audition, casting
               selection, role, employment or paid project.
             </p>
 
-            <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
               Users should review the actual membership details, applicable
               terms and refund/cancellation conditions before completing a
               purchase.
@@ -186,7 +186,7 @@ export default function DisclaimerPage() {
 
               <Link
                 href="/terms-and-conditions/"
-                className="inline-flex items-center text-sm font-semibold text-white/60 transition-colors hover:text-white"
+                className="inline-flex items-center text-sm font-semibold text-[#666666] transition-colors hover:text-[#111111]"
               >
                 Terms & Conditions
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -199,7 +199,7 @@ export default function DisclaimerPage() {
       {/* Casting Calls */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <CheckCircle2 className="h-6 w-6" />
             </div>
@@ -208,11 +208,11 @@ export default function DisclaimerPage() {
               Casting Opportunities
             </p>
 
-            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Each casting call has its own requirements
             </h2>
 
-            <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
               Casting calls can vary by role, production, talent category,
               experience, age range, skills, location requirements and other
               criteria. Always review the individual casting information before
@@ -238,11 +238,11 @@ export default function DisclaimerPage() {
               Your Responsibility
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Make informed decisions
             </h2>
 
-            <p className="mt-5 max-w-3xl text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-5 max-w-3xl text-sm leading-8 text-[#444444] md:text-base">
               Users are responsible for reviewing information and making
               decisions appropriate to their own circumstances.
             </p>
@@ -252,10 +252,10 @@ export default function DisclaimerPage() {
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {userResponsibilities.map((item) => (
             <Reveal key={item}>
-              <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5">
+              <div className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 shadow-2xs">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                <span className="text-sm leading-7 text-white/65">{item}</span>
+                <span className="text-sm leading-7 text-[#444444]">{item}</span>
               </div>
             </Reveal>
           ))}
@@ -265,7 +265,7 @@ export default function DisclaimerPage() {
       {/* Scam Warning */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-8 md:p-10">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <AlertTriangle className="h-6 w-6" />
             </div>
@@ -274,11 +274,11 @@ export default function DisclaimerPage() {
               Safety
             </p>
 
-            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Be careful with unrealistic promises
             </h2>
 
-            <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
               Be cautious with unsolicited offers, unrealistic guarantees or
               requests for sensitive information. Verify important details
               before making payments or sharing personal information.
@@ -298,22 +298,22 @@ export default function DisclaimerPage() {
       {/* No Professional Advice */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <Info className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Information is provided for general purposes
             </h2>
 
-            <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
               Information published on this website is intended to help users
               understand the available services and opportunities. It should not
               be interpreted as a guarantee of a particular professional result.
             </p>
 
-            <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+            <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
               Users should evaluate individual opportunities and applicable
               terms before taking action.
             </p>
@@ -327,9 +327,9 @@ export default function DisclaimerPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <Link
               href="/privacy-policy/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Privacy Policy
               </h3>
 
@@ -341,9 +341,9 @@ export default function DisclaimerPage() {
 
             <Link
               href="/terms-and-conditions/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Terms & Conditions
               </h3>
 
@@ -355,9 +355,9 @@ export default function DisclaimerPage() {
 
             <Link
               href="/refund-and-cancellation-policy/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Refund & Cancellation
               </h3>
 
@@ -375,7 +375,7 @@ export default function DisclaimerPage() {
         title="Need more information?"
         description="Review our legal pages or contact the agency for questions about the website and its services."
         buttonLabel="Contact Us"
-        buttonHref="/contact-us/"
+        buttonHref="/contact/"
       />
     </main>
   );

@@ -24,13 +24,13 @@ const talentTypes = [
   {
     title: "Experienced Actors",
     description: "For working actors with previous professional experience.",
-    href: "/actors/experienced-actors/",
+    href: "/actors/experienced/",
   },
 ];
 
 export default function MaleActorsPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Male Actors"
         title="Male Actor Casting & Registration"
@@ -68,17 +68,17 @@ export default function MaleActorsPage() {
                 Male Actor Category
               </p>
 
-              <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+              <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
                 Present your acting profile professionally
               </h2>
 
-              <p className="mt-5 text-base leading-8 text-white/60">
+              <p className="mt-5 text-base leading-8 text-[#444444]">
                 The male actor category is designed for artists who want to
                 present their acting profile and explore relevant casting
                 opportunities.
               </p>
 
-              <p className="mt-4 text-base leading-8 text-white/60">
+              <p className="mt-4 text-base leading-8 text-[#444444]">
                 Keep your profile information accurate and up to date so that
                 your experience, skills and portfolio clearly represent your
                 current talent.
@@ -86,7 +86,7 @@ export default function MaleActorsPage() {
 
               <Link
                 href="/register/"
-                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#E2C04A] hover:shadow-lg hover:shadow-[#D4AF37]/20"
+                className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c59b27] shadow-md"
               >
                 Register as an Actor
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -95,19 +95,17 @@ export default function MaleActorsPage() {
           </Reveal>
 
           <Reveal delay={0.12}>
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-              <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-[#D4AF37]/10 blur-3xl" />
-
+            <div className="relative overflow-hidden rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 shadow-xs">
               <div className="relative">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                   <UserRound className="h-6 w-6" />
                 </div>
 
-                <h3 className="mt-6 font-bold tracking-tight text-2xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-2xl text-[#111111]">
                   Build a complete profile
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   Include the information that helps communicate your acting
                   profile clearly.
                 </p>
@@ -116,7 +114,7 @@ export default function MaleActorsPage() {
                   {profilePoints.slice(0, 3).map((point) => (
                     <div
                       key={point}
-                      className="flex items-start gap-3 text-sm text-white/65"
+                      className="flex items-start gap-3 text-sm text-[#444444]"
                     >
                       <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#D4AF37]" />
                       <span>{point}</span>
@@ -137,11 +135,11 @@ export default function MaleActorsPage() {
               Profile Preparation
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               What to include in your profile
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
+            <p className="mt-5 text-base leading-8 text-[#444444]">
               A clear profile makes it easier to communicate your experience,
               skills and suitability for different casting requirements.
             </p>
@@ -151,12 +149,12 @@ export default function MaleActorsPage() {
         <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {profilePoints.map((point, index) => (
             <Reveal key={point} delay={index * 0.05}>
-              <div className="h-full rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-colors hover:border-[#D4AF37]/30">
+              <div className="h-full rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-colors hover:border-[#D4AF37]/40 shadow-xs">
                 <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#D4AF37]/10 text-[#D4AF37]">
                   <CheckCircle2 className="h-4 w-4" />
                 </div>
 
-                <p className="mt-4 text-sm leading-7 text-white/65">{point}</p>
+                <p className="mt-4 text-sm leading-7 text-[#444444]">{point}</p>
               </div>
             </Reveal>
           ))}
@@ -171,7 +169,7 @@ export default function MaleActorsPage() {
               Explore More
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Explore other actor categories
             </h2>
           </div>
@@ -182,17 +180,17 @@ export default function MaleActorsPage() {
             <Reveal key={item.href} delay={index * 0.06}>
               <Link
                 href={item.href}
-                className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/30 hover:bg-white/[0.05]"
+                className="group block rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37]/40 hover:bg-white shadow-xs"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-bold tracking-tight text-xl text-white">
+                  <h3 className="font-bold tracking-tight text-xl text-[#111111]">
                     {item.title}
                   </h3>
 
                   <ArrowRight className="h-5 w-5 text-[#D4AF37] transition-transform group-hover:translate-x-1" />
                 </div>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {item.description}
                 </p>
               </Link>
@@ -204,16 +202,16 @@ export default function MaleActorsPage() {
       {/* Important Note */}
       <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8 lg:pb-24">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-9">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-9 shadow-xs">
             <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
               Important
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-4 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Casting opportunities do not guarantee selection.
             </h2>
 
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#555555]">
               Individual casting opportunities can have their own requirements,
               eligibility criteria and selection processes. Registration or
               membership should not be understood as a guarantee of auditions,

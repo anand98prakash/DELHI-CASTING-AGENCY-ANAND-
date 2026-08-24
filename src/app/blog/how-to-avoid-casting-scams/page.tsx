@@ -94,7 +94,7 @@ const checklist = [
 
 export default function HowToAvoidCastingScamsPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Casting Safety Guide"
         title="How to Avoid Casting Scams"
@@ -131,17 +131,17 @@ export default function HowToAvoidCastingScamsPage() {
               Trust & Safety
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-white md:text-5xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl leading-tight text-[#111111] md:text-5xl">
               Protect yourself when exploring casting opportunities
             </h2>
 
-            <p className="mt-6 text-base leading-8 text-white/60 md:text-lg">
+            <p className="mt-6 text-base leading-8 text-[#444444] md:text-lg">
               The entertainment industry includes legitimate opportunities, but
               aspiring talent can also encounter misleading offers, unrealistic
               promises and fraudulent casting approaches.
             </p>
 
-            <p className="mt-5 text-base leading-8 text-white/60 md:text-lg">
+            <p className="mt-5 text-base leading-8 text-[#444444] md:text-lg">
               The safest approach is to slow down, verify important details and
               avoid making decisions based only on promises of guaranteed work
               or selection.
@@ -158,11 +158,11 @@ export default function HowToAvoidCastingScamsPage() {
               Warning Signs
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               Watch for these red flags
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
+            <p className="mt-5 text-base leading-8 text-[#444444]">
               A single warning sign does not automatically prove that an
               opportunity is fraudulent, but multiple warning signs should make
               you stop and verify the situation carefully.
@@ -176,16 +176,16 @@ export default function HowToAvoidCastingScamsPage() {
 
             return (
               <Reveal key={item.title} delay={index * 0.06}>
-                <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+                <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 shadow-xs">
                   <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                     <Icon className="h-6 w-6" />
                   </div>
 
-                  <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
+                  <h3 className="mt-6 font-bold tracking-tight text-xl text-[#111111]">
                     {item.title}
                   </h3>
 
-                  <p className="mt-3 text-sm leading-7 text-white/55">
+                  <p className="mt-3 text-sm leading-7 text-[#555555]">
                     {item.description}
                   </p>
                 </div>
@@ -203,11 +203,11 @@ export default function HowToAvoidCastingScamsPage() {
               Stay Safe
             </p>
 
-            <h2 className="mt-4 font-bold tracking-tight text-3xl text-white md:text-4xl">
+            <h2 className="mt-4 font-bold tracking-tight text-3xl text-[#111111] md:text-4xl">
               A safer way to evaluate an opportunity
             </h2>
 
-            <p className="mt-5 text-base leading-8 text-white/60">
+            <p className="mt-5 text-base leading-8 text-[#444444]">
               Use this checklist before sharing sensitive information,
               committing to an opportunity or making a payment.
             </p>
@@ -217,16 +217,16 @@ export default function HowToAvoidCastingScamsPage() {
         <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {safetySteps.map((step, index) => (
             <Reveal key={step.number} delay={index * 0.05}>
-              <div className="h-full rounded-3xl border border-white/10 bg-white/[0.03] p-7">
+              <div className="h-full rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 shadow-xs">
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-sm font-semibold text-[#D4AF37]">
                   {step.number}
                 </div>
 
-                <h3 className="mt-6 font-bold tracking-tight text-xl text-white">
+                <h3 className="mt-6 font-bold tracking-tight text-xl text-[#111111]">
                   {step.title}
                 </h3>
 
-                <p className="mt-3 text-sm leading-7 text-white/55">
+                <p className="mt-3 text-sm leading-7 text-[#555555]">
                   {step.description}
                 </p>
               </div>
@@ -238,7 +238,7 @@ export default function HowToAvoidCastingScamsPage() {
       {/* Payment Safety */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-8 md:p-10">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <CreditCard className="h-6 w-6" />
             </div>
@@ -247,11 +247,11 @@ export default function HowToAvoidCastingScamsPage() {
               Before Making a Payment
             </p>
 
-            <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               Understand exactly what you are paying for
             </h2>
 
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
               Payment or membership should never be treated as a guarantee of an
               audition, casting opportunity, selection or employment. Carefully
               review the terms and details associated with any payment before
@@ -267,10 +267,10 @@ export default function HowToAvoidCastingScamsPage() {
               ].map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-2xs"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
-                  <span className="text-sm leading-7 text-white/65">
+                  <span className="text-sm leading-7 text-[#444444]">
                     {item}
                   </span>
                 </div>
@@ -283,7 +283,7 @@ export default function HowToAvoidCastingScamsPage() {
       {/* Verification Checklist */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <FileSearch className="h-6 w-6" />
@@ -294,7 +294,7 @@ export default function HowToAvoidCastingScamsPage() {
                   Verification Checklist
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Ask these questions before proceeding
                 </h2>
               </div>
@@ -304,11 +304,11 @@ export default function HowToAvoidCastingScamsPage() {
               {checklist.map((item) => (
                 <div
                   key={item}
-                  className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                  className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-white p-5 shadow-2xs"
                 >
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                  <span className="text-sm leading-7 text-white/65">
+                  <span className="text-sm leading-7 text-[#444444]">
                     {item}
                   </span>
                 </div>
@@ -321,16 +321,16 @@ export default function HowToAvoidCastingScamsPage() {
       {/* Important Notice */}
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-20">
         <Reveal>
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 md:p-10">
+          <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 md:p-10 shadow-xs">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
               <ShieldCheck className="h-6 w-6" />
             </div>
 
-            <h2 className="mt-6 font-bold tracking-tight text-2xl text-white md:text-3xl">
+            <h2 className="mt-6 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
               When in doubt, verify before acting
             </h2>
 
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/55 md:text-base">
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-[#444444] md:text-base">
               Never let urgency or excitement force you into a decision. Verify
               important details independently, protect sensitive information and
               review the terms before making payments or committing to an
@@ -338,7 +338,7 @@ export default function HowToAvoidCastingScamsPage() {
             </p>
 
             <Link
-              href="/contact-us/"
+              href="/contact/"
               className="mt-7 inline-flex items-center text-sm font-semibold text-[#D4AF37]"
             >
               Contact Us

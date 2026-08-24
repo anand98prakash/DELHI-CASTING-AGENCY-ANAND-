@@ -54,8 +54,8 @@ export function PortfolioGallery({
 
   if (lightboxItems.length === 0) {
     return (
-      <div className="text-center py-12 px-4 bg-[#181818] border border-white/10 rounded-2xl">
-        <p className="text-white/50 text-sm">
+      <div className="text-center py-12 px-4 bg-[#F7F7F5] border border-gray-200 rounded-2xl shadow-xs">
+        <p className="text-[#555555] text-sm">
           No photos or portfolio media available in this section.
         </p>
       </div>
@@ -71,7 +71,7 @@ export function PortfolioGallery({
               key={index}
               type="button"
               onClick={() => handleOpenLightbox(index)}
-              className="group relative w-full aspect-[3/4] bg-[#181818] border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+              className="group relative w-full aspect-[3/4] bg-gray-100 border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#d4af37] shadow-xs"
             >
               <Image
                 src={url}
@@ -82,7 +82,7 @@ export function PortfolioGallery({
                 className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                <div className="p-3 rounded-full bg-black/70 text-[#d4af37] border border-[#d4af37]/40">
+                <div className="p-3 rounded-full bg-white/90 text-[#d4af37] border border-[#d4af37]/40 shadow-sm">
                   <Maximize2 className="w-5 h-5" />
                 </div>
               </div>
@@ -94,7 +94,7 @@ export function PortfolioGallery({
             <div
               key={item.id || index}
               onClick={() => handleOpenLightbox(index)}
-              className="group relative w-full aspect-[4/5] bg-[#181818] border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-300"
+              className="group relative w-full aspect-[4/5] bg-gray-100 border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:border-[#d4af37]/60 hover:shadow-md transition-all duration-300 shadow-xs"
             >
               <Image
                 src={item.image}
@@ -104,11 +104,11 @@ export function PortfolioGallery({
                 sizes="(max-width: 640px) 50vw, 33vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-4">
                 <p className="text-white text-xs line-clamp-2 mb-2 font-medium">
                   {item.caption}
                 </p>
-                <div className="flex items-center gap-4 text-xs text-white/80">
+                <div className="flex items-center gap-4 text-xs text-white/90">
                   <span className="flex items-center gap-1">
                     <Heart className="w-3.5 h-3.5 text-red-400 fill-red-400" />
                     {item.likes}
@@ -127,7 +127,7 @@ export function PortfolioGallery({
             <div
               key={item.id || index}
               onClick={() => handleOpenLightbox(index)}
-              className="group relative w-full aspect-[3/4] bg-[#181818] border border-white/10 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:border-[#d4af37]/60 hover:shadow-xl transition-all duration-300"
+              className="group relative w-full aspect-[3/4] bg-gray-100 border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer hover:border-[#d4af37]/60 hover:shadow-md transition-all duration-300 shadow-xs"
             >
               <Image
                 src={item.image}
@@ -137,7 +137,7 @@ export function PortfolioGallery({
                 sizes="(max-width: 640px) 50vw, 33vw"
                 className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-4">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity flex flex-col justify-end p-4">
                 <div className="flex items-center gap-1.5 text-[11px] text-[#d4af37] font-semibold uppercase tracking-wider mb-1">
                   <Newspaper className="w-3.5 h-3.5" />
                   <span>{item.brand}</span>
@@ -145,7 +145,7 @@ export function PortfolioGallery({
                 <h4 className="text-white font-bold text-sm leading-tight mb-1">
                   {item.campaign}
                 </h4>
-                <span className="text-[11px] text-white/60">{item.year}</span>
+                <span className="text-[11px] text-white/80">{item.year}</span>
               </div>
             </div>
           ))}

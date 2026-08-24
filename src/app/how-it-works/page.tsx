@@ -1,7 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowRight,
   CheckCircle2,
   FileText,
   Search,
@@ -77,16 +75,16 @@ export const metadata = {
 
 export default function HowItWorksPage() {
   return (
-    <main className="min-h-screen bg-[#F5F2EA] text-[#171717]">
+    <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero Header */}
-      <section className="relative isolate overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
+      <section className="relative isolate overflow-hidden border-b border-gray-200 bg-[#F7F7F5] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
         <div className="mx-auto max-w-7xl">
           <Reveal>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               How It Works
             </p>
 
-            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-md">
+            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-gray-200 bg-gray-100 shadow-md">
               <Image
                 src="/images/actors/how it work horizontal.png"
                 alt="How It Works - Delhi Casting Agency"
@@ -95,14 +93,14 @@ export default function HowItWorksPage() {
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-[#171717]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
 
-            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-5xl md:text-6xl">
+            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl">
               From Registration to Casting Opportunities
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#171717]/75 sm:text-lg">
+            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#444444] sm:text-lg">
               Understand the journey from creating your artist profile to exploring relevant casting calls.
             </p>
           </Reveal>
@@ -118,16 +116,16 @@ export default function HowItWorksPage() {
       <section className="mx-auto max-w-7xl px-6 py-12 lg:py-16">
         <Reveal>
           <div className="mb-10 max-w-3xl">
-            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               <Sparkles className="h-3.5 w-3.5" />
-              The Process
+              THE PROCESS
             </span>
 
-            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
+            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-4xl">
               A simple journey for artists
             </h2>
 
-            <p className="mt-3 text-base leading-relaxed text-[#171717]/75">
+            <p className="mt-3 text-base leading-relaxed text-[#444444]">
               The platform follows a straightforward journey: registration, verification, portfolio preparation and discovering relevant casting calls.
             </p>
           </div>
@@ -139,26 +137,26 @@ export default function HowItWorksPage() {
 
             return (
               <Reveal key={step.number} delay={index * 0.05}>
-                <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#C5A059] hover:shadow-xl md:flex-row md:items-center">
+                <div className="group flex flex-col justify-between overflow-hidden rounded-xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#D4AF37] hover:bg-white md:flex-row md:items-center">
                   <div className="flex flex-1 items-start gap-5">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#C5A059]/30 bg-[#F5F2EA] font-serif text-xl font-bold text-[#C5A059]">
+                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-[#D4AF37]/30 bg-white font-serif text-xl font-bold text-[#D4AF37] shadow-xs">
                       {step.number}
                     </div>
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <Icon className="h-4 w-4 text-[#C5A059]" />
-                        <h3 className="font-serif text-xl font-bold tracking-tight text-[#171717]">
+                        <Icon className="h-4 w-4 text-[#D4AF37]" />
+                        <h3 className="font-serif text-xl font-bold tracking-tight text-[#111111]">
                           {step.title}
                         </h3>
                       </div>
-                      <p className="mt-2 text-xs leading-relaxed text-[#171717]/75 sm:text-sm">
+                      <p className="mt-2 text-xs leading-relaxed text-[#555555] sm:text-sm">
                         {step.description}
                       </p>
                     </div>
                   </div>
 
-                  <div className="relative mt-4 aspect-16/10 w-full shrink-0 overflow-hidden rounded-lg bg-[#F5F2EA] md:mt-0 md:w-48">
+                  <div className="relative mt-4 aspect-16/10 w-full shrink-0 overflow-hidden rounded-lg bg-gray-100 md:mt-0 md:w-48">
                     <Image
                       src={step.image}
                       alt={step.title}
@@ -175,20 +173,20 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Before You Register */}
-      <section className="border-y border-[#E2DDD3] bg-[#EFECE4] py-14">
+      <section className="border-y border-gray-200 bg-[#F7F7F5] py-14">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
             <div className="max-w-4xl">
-              <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+              <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
                 <ShieldCheck className="h-4 w-4" />
-                Before You Register
+                BEFORE YOU REGISTER
               </span>
 
-              <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
+              <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-4xl">
                 Prepare your profile
               </h2>
 
-              <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#171717]/75">
+              <p className="mt-3 max-w-2xl text-base leading-relaxed text-[#444444]">
                 A well-presented profile makes it easier to communicate your talent, experience and skills when exploring opportunities.
               </p>
             </div>
@@ -197,9 +195,9 @@ export default function HowItWorksPage() {
           <div className="mt-10 grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {preparationItems.map((item, index) => (
               <Reveal key={item.title} delay={index * 0.05} className="h-full">
-                <div className="group flex h-full flex-col justify-between overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#F5F2EA] p-5 shadow-xs transition duration-300 hover:border-[#C5A059]">
+                <div className="group flex h-full flex-col justify-between overflow-hidden rounded-xl border border-gray-200 bg-white p-5 shadow-xs transition duration-300 hover:border-[#D4AF37]">
                   <div>
-                    <div className="relative mb-4 aspect-16/10 w-full overflow-hidden rounded-lg bg-[#EFECE4]">
+                    <div className="relative mb-4 aspect-16/10 w-full overflow-hidden rounded-lg bg-gray-100">
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -209,12 +207,12 @@ export default function HowItWorksPage() {
                       />
                     </div>
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-[#C5A059]" />
-                      <h3 className="font-serif text-base font-bold text-[#171717]">
+                      <CheckCircle2 className="h-4 w-4 text-[#D4AF37]" />
+                      <h3 className="font-serif text-base font-bold text-[#111111]">
                         {item.title}
                       </h3>
                     </div>
-                    <p className="mt-2 text-xs leading-relaxed text-[#171717]/70">
+                    <p className="mt-2 text-xs leading-relaxed text-[#666666]">
                       Keep this information clear and up to date in your artist profile.
                     </p>
                   </div>

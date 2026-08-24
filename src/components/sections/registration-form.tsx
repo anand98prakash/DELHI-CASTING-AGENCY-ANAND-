@@ -103,12 +103,6 @@ export function RegistrationForm({ onSuccess }: Props) {
     const valid = await trigger(STEP_1_FIELDS);
 
     if (!valid) {
-      /*
-       * Find the first invalid field and focus it.
-       * This prevents the button from appearing
-       * like it is doing nothing.
-       */
-
       const firstError = STEP_1_FIELDS.find((field) => errors[field]);
 
       if (firstError) {
@@ -120,16 +114,14 @@ export function RegistrationForm({ onSuccess }: Props) {
 
     setStep(2);
 
-    /*
-     * Scroll to the beginning of Step 2
-     * after the animation starts.
-     */
-
     setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      const regSection = document.getElementById("registration");
+      if (regSection) {
+        regSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }, 100);
   };
 
@@ -141,10 +133,13 @@ export function RegistrationForm({ onSuccess }: Props) {
     setStep(1);
 
     setTimeout(() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      const regSection = document.getElementById("registration");
+      if (regSection) {
+        regSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
     }, 100);
   };
 
@@ -153,12 +148,6 @@ export function RegistrationForm({ onSuccess }: Props) {
   ========================================================= */
 
   const onSubmit = async (data: RegistrationValues) => {
-    /*
-     * Extra protection:
-     * The real submission should only happen
-     * from Step 2.
-     */
-
     if (step !== 2) {
       await handleNext();
       return;
@@ -198,15 +187,13 @@ export function RegistrationForm({ onSuccess }: Props) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto w-full max-w-5xl overflow-hidden rounded-[32px] border border-[#D4AF37]/20 bg-white/[0.03] p-5 backdrop-blur-xl sm:p-6 md:p-10"
+      className="mx-auto w-full max-w-5xl overflow-hidden rounded-[32px] border border-gray-200 bg-white p-5 shadow-sm sm:p-6 md:p-10"
     >
-      {/* =====================================================
-          STEP INDICATOR
-      ===================================================== */}
+      {/* STEP INDICATOR */}
 
       <div className="mb-10">
         <div className="mb-3 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-sm text-[#D4AF37]">
+          <div className="flex items-center gap-2 text-sm font-medium text-[#D4AF37]">
             <Sparkles size={15} />
 
             <span>
@@ -215,12 +202,12 @@ export function RegistrationForm({ onSuccess }: Props) {
             </span>
           </div>
 
-          <span className="shrink-0 text-sm text-white/60">{progress}%</span>
+          <span className="shrink-0 text-sm font-medium text-[#555555]">{progress}%</span>
         </div>
 
-        <div className="h-3 overflow-hidden rounded-full bg-white/10">
+        <div className="h-3 overflow-hidden rounded-full bg-gray-100">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#FFD86A] transition-all duration-500"
+            className="h-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#C59B27] transition-all duration-500"
             style={{
               width: `${progress}%`,
             }}
@@ -232,32 +219,28 @@ export function RegistrationForm({ onSuccess }: Props) {
         <div className="mt-4 flex items-center justify-center gap-3">
           <div
             className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-              step >= 1 ? "bg-[#D4AF37]" : "bg-white/20"
+              step >= 1 ? "bg-[#D4AF37]" : "bg-gray-300"
             }`}
           />
 
           <div
             className={`h-px w-16 transition-all duration-300 ${
-              step === 2 ? "bg-[#D4AF37]" : "bg-white/20"
+              step === 2 ? "bg-[#D4AF37]" : "bg-gray-300"
             }`}
           />
 
           <div
             className={`h-2.5 w-2.5 rounded-full transition-all duration-300 ${
-              step === 2 ? "bg-[#D4AF37]" : "bg-white/20"
+              step === 2 ? "bg-[#D4AF37]" : "bg-gray-300"
             }`}
           />
         </div>
       </div>
 
-      {/* =====================================================
-          STEPS
-      ===================================================== */}
+      {/* STEPS */}
 
       <AnimatePresence mode="wait">
-        {/* ===================================================
-            STEP 1
-        =================================================== */}
+        {/* STEP 1 */}
 
         {step === 1 && (
           <motion.div
@@ -400,9 +383,7 @@ export function RegistrationForm({ onSuccess }: Props) {
               </Field>
             </div>
 
-            {/* =================================================
-                NEXT BUTTON
-            ================================================= */}
+            {/* NEXT BUTTON */}
 
             <motion.div
               initial={{
@@ -424,9 +405,9 @@ export function RegistrationForm({ onSuccess }: Props) {
               <Button
                 type="button"
                 onClick={handleNext}
-                className="group min-h-12 min-w-[150px]"
+                className="group min-h-12 min-w-[200px]"
               >
-                Continue
+                CONTINUE TO STEP 2
                 <ArrowRight
                   size={18}
                   className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1"
@@ -437,7 +418,7 @@ export function RegistrationForm({ onSuccess }: Props) {
             {/* Validation message */}
 
             {Object.keys(errors).length > 0 && (
-              <p className="mt-4 text-center text-sm text-red-400">
+              <p className="mt-4 text-center text-sm font-medium text-red-500">
                 Please complete the required information above before
                 continuing.
               </p>
@@ -445,9 +426,7 @@ export function RegistrationForm({ onSuccess }: Props) {
           </motion.div>
         )}
 
-        {/* ===================================================
-            STEP 2
-        =================================================== */}
+        {/* STEP 2 */}
 
         {step === 2 && (
           <motion.div
@@ -531,13 +510,13 @@ export function RegistrationForm({ onSuccess }: Props) {
               {/* Upload */}
 
               <div className="md:col-span-2">
-                <label className="mb-3 block text-sm font-medium text-white/75">
+                <label className="mb-3 block text-sm font-semibold text-[#111111]">
                   Upload Recent Photos
                 </label>
 
                 <label
                   htmlFor="photos"
-                  className="group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-[#D4AF37]/25 bg-white/[0.02] px-6 py-10 text-center transition-all duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37]/5 sm:px-8"
+                  className="group flex cursor-pointer flex-col items-center justify-center rounded-3xl border-2 border-dashed border-[#D4AF37]/40 bg-[#F7F7F5] px-6 py-10 text-center transition-all duration-300 hover:border-[#D4AF37] hover:bg-amber-50/50 shadow-xs sm:px-8"
                 >
                   <div className="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#D4AF37]/10 transition-transform duration-300 group-hover:scale-110">
                     {photos?.length ? (
@@ -547,13 +526,13 @@ export function RegistrationForm({ onSuccess }: Props) {
                     )}
                   </div>
 
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-[#111111]">
                     {photos?.length
                       ? `${photos.length} Photo(s) Selected`
                       : "Upload Your Photos"}
                   </h3>
 
-                  <p className="mt-3 max-w-md text-sm leading-7 text-white/55">
+                  <p className="mt-3 max-w-md text-sm leading-7 text-[#555555]">
                     Upload 4–5 recent photographs. JPG, JPEG and PNG formats are
                     supported.
                   </p>
@@ -570,9 +549,7 @@ export function RegistrationForm({ onSuccess }: Props) {
               </div>
             </div>
 
-            {/* =================================================
-                PAYMENT METHODS
-            ================================================= */}
+            {/* PAYMENT METHODS */}
 
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               {[
@@ -583,16 +560,14 @@ export function RegistrationForm({ onSuccess }: Props) {
               ].map((item) => (
                 <div
                   key={item}
-                  className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-3 text-center text-sm text-white/70 transition-all duration-300 hover:border-[#D4AF37]/40 hover:bg-[#D4AF37]/5 sm:px-5"
+                  className="rounded-full border border-gray-200 bg-[#F7F7F5] px-4 py-3 text-center text-sm font-medium text-[#333333] transition-all duration-300 hover:border-[#D4AF37]/50 shadow-xs sm:px-5"
                 >
                   {item}
                 </div>
               ))}
             </div>
 
-            {/* =================================================
-                BACK + SUBMIT
-            ================================================= */}
+            {/* SUBMIT BUTTONS */}
 
             <motion.div
               initial={{
@@ -615,7 +590,7 @@ export function RegistrationForm({ onSuccess }: Props) {
                 type="button"
                 onClick={handleBack}
                 variant="ghost"
-                className="group min-h-12"
+                className="group min-h-12 border border-gray-200 text-[#111111] hover:bg-gray-100"
               >
                 <ArrowLeft size={18} className="mr-2 inline-block" />
                 Back
@@ -648,7 +623,7 @@ export function RegistrationForm({ onSuccess }: Props) {
               </Button>
             </motion.div>
 
-            <p className="mt-5 text-center text-sm leading-7 text-white/55">
+            <p className="mt-5 text-center text-sm leading-7 text-[#555555]">
               Your payment is processed securely through Razorpay. Your personal
               information is protected and never shared with third parties.
             </p>
@@ -677,7 +652,7 @@ function SectionTitle({
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold text-white">{title}</h3>
+        <h3 className="text-xl font-semibold text-[#111111]">{title}</h3>
 
         <div className="mt-2 h-px w-24 bg-gradient-to-r from-[#D4AF37] to-transparent" />
       </div>
@@ -690,7 +665,7 @@ function SectionTitle({
 ============================================================ */
 
 export const fieldInputClass =
-  "w-full rounded-xl border border-white/10 bg-[#111111] px-4 py-3.5 text-white placeholder:text-white/30 transition-all duration-300 focus:border-[#D4AF37] focus:bg-[#161616] focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/10";
+  "w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 transition-all duration-300 focus:border-[#D4AF37] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15 shadow-xs";
 
 /* ============================================================
    FIELD
@@ -711,7 +686,7 @@ function Field({
 }) {
   return (
     <div className={`${full ? "md:col-span-2" : ""}`}>
-      <label className="mb-2 flex items-center gap-2 text-sm font-medium text-white/75">
+      <label className="mb-2 flex items-center gap-2 text-sm font-semibold text-[#111111]">
         {icon && <span className="text-[#D4AF37]">{icon}</span>}
 
         {label}
@@ -719,7 +694,7 @@ function Field({
 
       {children}
 
-      {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-2 text-sm font-medium text-red-500">{error}</p>}
     </div>
   );
 }

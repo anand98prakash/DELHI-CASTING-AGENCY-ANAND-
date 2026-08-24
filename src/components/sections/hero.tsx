@@ -1,133 +1,296 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, ShieldCheck, Sparkles, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 import { SITE } from "@/lib/constants";
 
 export function Hero() {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const triggerRegistration = () => {
-    window.dispatchEvent(new CustomEvent("open-registration"));
-  };
-
   return (
-    <section
-      id="top"
-      className="relative min-h-[92vh] overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] pt-24 pb-16 lg:pt-32 lg:pb-24"
-    >
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          {/* LEFT CONTENT - 6 COLUMNS */}
-          <div
-            className={`transition-all duration-1000 lg:col-span-6 ${
-              mounted
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-6"
-            }`}
+    <section className="relative min-h-screen overflow-hidden bg-white">
+      {/* Ambient Gold & Warm Background Glows */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[35%] top-[5%] h-[650px] w-[650px] rounded-full bg-[#D4AF37]/10 blur-[160px]" />
+        <div className="absolute right-[8%] top-[25%] h-[500px] w-[500px] rounded-full bg-[#D4AF37]/[0.07] blur-[150px]" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white to-transparent" />
+      </div>
+
+      {/* Main Hero Container */}
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[1500px] items-center px-5 pb-16 pt-28 sm:px-8 lg:px-12 xl:px-16">
+        <div className="grid w-full items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-8 xl:gap-14">
+          {/* =====================================================
+              LEFT SIDE — CONTENT & BRANDING
+          ===================================================== */}
+
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-2xl text-center lg:text-left"
           >
             {/* Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#C5A059]/40 bg-[#EFECE4] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#6B6A50]">
-              <Sparkles className="h-3.5 w-3.5 text-[#C5A059]" />
-              <span>Verified Indian Talent & Casting</span>
+            <div className="mb-8 flex justify-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-5 py-2 text-sm text-[#A88416] backdrop-blur-md">
+                <Sparkles size={15} />
+                <span>Verified Casting Opportunities</span>
+              </div>
             </div>
 
-            {/* Title */}
-            <h1 className="font-serif text-4xl font-extrabold leading-[1.08] tracking-tight text-[#171717] sm:text-5xl md:text-6xl lg:text-7xl">
-              Your Story <br />
-              <span className="italic font-normal text-[#C5A059]">
+            {/* Brand */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}
+              className="mb-6 text-base sm:text-lg uppercase tracking-[0.35em] text-[#444444] text-center"
+            >
+              WAY TO{" "}
+              <span className="block mt-2 text-4xl sm:text-5xl md:text-6xl font-[var(--font-fredoka)] font-bold tracking-wide text-[#111111]">
+                BOLLYWOOD
+              </span>
+            </motion.p>
+
+            {/* Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
+              className="text-5xl font-bold leading-[1.1] text-[#111111] md:text-7xl lg:text-8xl text-center"
+            >
+              Your Story
+              <br />
+              <span className="bg-gradient-to-r from-[#B58B20] via-[#D4AF37] to-[#B58B20] bg-clip-text text-transparent">
                 Could Start Here.
               </span>
-            </h1>
+            </motion.h1>
 
-            {/* Tagline */}
-            <p className="mt-6 max-w-lg text-base font-normal leading-relaxed text-[#171717]/75 sm:text-lg">
-              {SITE.tagline || "Verified casting opportunities for Bollywood, OTT series, TV commercials, and high-fashion brand campaigns across India."}
-            </p>
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{
+                delay: 0.6,
+              }}
+              className="mt-8 max-w-xl text-lg leading-8 text-[#555555]"
+            >
+              {SITE.tagline}
+            </motion.p>
 
-            {/* CTAs */}
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <button
-                type="button"
-                onClick={triggerRegistration}
-                className="group inline-flex items-center gap-3 rounded-full bg-[#171717] px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#F5F2EA] transition duration-300 hover:bg-[#C5A059] hover:text-[#171717] hover:shadow-xl"
+            {/* CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.8,
+              }}
+              className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start"
+            >
+              <Button
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("open-registration"));
+                }}
+                className="bg-[#111111] text-white hover:bg-[#222222]"
               >
-                Become Premium Member
-                <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
-              </button>
+                Become Premium
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
 
-              <Link
-                href="/actors"
-                className="inline-flex items-center gap-2 rounded-full border border-[#171717]/20 bg-transparent px-7 py-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#171717] transition duration-300 hover:border-[#171717] hover:bg-[#EFECE4]"
-              >
-                Explore Talent
-              </Link>
-            </div>
+              <p className="text-sm text-[#555555]">
+                ₹3,999 • Lifetime Membership
+              </p>
+            </motion.div>
 
-            {/* Trust Points */}
-            <div className="mt-10 flex flex-wrap items-center gap-6 border-t border-[#E2DDD3] pt-6 text-xs font-medium text-[#171717]/70">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-[#C5A059]" />
-                <span>Verified Audition Calls</span>
+            {/* Trust Badges */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="mt-12 flex flex-wrap items-center justify-center gap-4 px-4"
+            >
+              {/* Verified Auditions */}
+              <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm text-[#333333] shadow-sm">
+                <ShieldCheck size={16} className="text-[#D4AF37]" />
+                Verified Auditions
               </div>
-              <div className="flex items-center gap-2">
-                <Star className="h-4 w-4 text-[#C5A059]" />
-                <span>500+ Indian Artists</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-[#171717]">₹3,999</span>
-                <span>Lifetime Membership</span>
-              </div>
-            </div>
-          </div>
 
-          {/* RIGHT EDITORIAL CAMPAIGN PHOTOGRAPHY - 6 COLUMNS */}
-          <div
-            className={`transition-all duration-1000 delay-200 lg:col-span-6 ${
-              mounted
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-95"
-            }`}
+              {/* Daily WhatsApp Updates */}
+              <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm text-[#333333] shadow-sm">
+                <MessageCircle size={16} className="text-[#D4AF37]" />
+                Daily WhatsApp Updates
+              </div>
+
+              {/* Lifetime Membership */}
+              <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm text-[#333333] shadow-sm">
+                <ShieldCheck size={16} className="text-[#D4AF37]" />
+                Lifetime Membership
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* =====================================================
+              RIGHT SIDE — EXACT 6-PHOTO EDITORIAL MASONRY GRID
+          ===================================================== */}
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="relative flex w-full max-w-xl items-center justify-center -mt-6 sm:-mt-10 lg:-mt-16 xl:-mt-20"
           >
-            <div className="relative mx-auto aspect-4/5 w-full max-w-lg overflow-hidden rounded-2xl border border-[#E2DDD3] bg-[#EFECE4] shadow-2xl">
-              <Image
-                src="/media/dca/about/dca-about-hero-01.jpg"
-                alt="Delhi Casting Agency Editorial Indian Talent Campaign"
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-1000 ease-out hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-transparent to-transparent" />
+            {/* Ambient Radial Glow */}
+            <div className="absolute h-[420px] w-[420px] rounded-full bg-[#D4AF37]/10 blur-[120px]" />
 
-              {/* Editorial Caption */}
-              <div className="absolute inset-x-0 bottom-0 p-8 text-white">
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C5A059]">
-                  Editorial Showcase
-                </p>
-                <p className="mt-1 font-serif text-2xl font-bold tracking-tight text-[#F5F2EA]">
-                  Representing Modern Indian Cinema & Fashion
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-[#F5F2EA]/75">
-                  Direct connection with verified production houses across Delhi, Mumbai & India.
-                </p>
-              </div>
+            {/* 3D Perspective Container */}
+            <div className="relative w-full" style={{ perspective: "1200px" }}>
+              {/* OUTER WRAPPER — Slow Continuous Vertical Floating Animation */}
+              <motion.div
+                animate={{
+                  y: [-8, 8, -8],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="relative w-full"
+              >
+                {/* INNER CARD — Smooth 180deg 3D Y-Axis Hover Rotation */}
+                <motion.div
+                  whileHover={{
+                    rotateY: -180,
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    ease: "easeInOut",
+                  }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                  }}
+                  className="relative w-full overflow-visible rounded-[32px] border border-gray-200 bg-white p-8 shadow-xl transform-gpu cursor-pointer"
+                >
+                  {/* 3 Columns Masonry Grid */}
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4">
+                    {/* COLUMN 1 */}
+                    <div className="flex flex-col gap-3 sm:gap-4">
+                      {/* Photo 1 */}
+                      <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-gray-200 bg-[#F7F7F5]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/actors/editorial_grid_1.png"
+                          alt="High fashion editorial model"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      </div>
 
-              {/* Floating Stat Pill */}
-              <div className="absolute top-6 right-6 rounded-xl border border-white/20 bg-[#171717]/85 px-4 py-3 text-white backdrop-blur-md shadow-lg">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C5A059]">
-                  Active Auditions
+                      {/* Photo 2 */}
+                      <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-gray-200 bg-[#F7F7F5]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/actors/editorial_grid_2.png"
+                          alt="Editorial fashion model"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      </div>
+                    </div>
+
+                    {/* COLUMN 2 */}
+                    <div className="flex flex-col gap-3 pt-5 sm:gap-4 sm:pt-8">
+                      {/* Photo 3 */}
+                      <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-[#D4AF37]/40 bg-[#F7F7F5]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/actors/editorial_grid_3.png"
+                          alt="Indian commercial talent"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      </div>
+
+                      {/* Photo 4 */}
+                      <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-[#D4AF37]/40 bg-[#F7F7F5]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/actors/editorial_grid_4.png"
+                          alt="The Suit Edit fashion model"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      </div>
+                    </div>
+
+                    {/* COLUMN 3 */}
+                    <div className="flex flex-col gap-3 sm:gap-4">
+                      {/* Photo 5 */}
+                      <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-gray-200 bg-[#F7F7F5]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/actors/editorial_grid_5.png"
+                          alt="Contemporary model"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      </div>
+
+                      {/* Photo 6 */}
+                      <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl border border-gray-200 bg-[#F7F7F5]">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src="/images/actors/editorial_grid_6.png"
+                          alt="Denim style editorial model"
+                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* FLOATING CARD 1 — MEMBERS 5,000+ */}
+              <motion.div
+                animate={{
+                  y: [-10, 10, -10],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="pointer-events-none absolute -right-3 top-6 rounded-2xl border border-[#D4AF37]/30 bg-white px-5 py-4 shadow-lg"
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-[#A88416]">
+                  Members
                 </p>
-                <p className="font-serif text-xl font-bold text-[#F5F2EA]">120+ Open</p>
-              </div>
+
+                <h4 className="mt-2 text-2xl font-bold text-[#111111]">
+                  5,000+
+                </h4>
+              </motion.div>
+
+              {/* FLOATING CARD 2 — OPPORTUNITIES 2,000+ */}
+              <motion.div
+                animate={{
+                  y: [8, -8, 8],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="pointer-events-none absolute -left-4 bottom-6 rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-lg"
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-[#A88416]">
+                  Opportunities
+                </p>
+
+                <h4 className="mt-2 text-2xl font-bold text-[#111111]">
+                  2,000+
+                </h4>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

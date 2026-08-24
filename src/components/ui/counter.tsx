@@ -28,7 +28,7 @@ export function Counter({ target, label }: { target: number; label: string }) {
 
   return (
     <div ref={ref} className="text-center">
-      <div className="text-[28px] md:text-[38px] font-extrabold tracking-tight text-gold">
+      <div className="text-[28px] md:text-[38px] font-extrabold tracking-tight text-[#D4AF37]">
         {value.toLocaleString()}
         {value === target ? "+" : ""}
       </div>

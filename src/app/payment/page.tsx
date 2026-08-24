@@ -73,7 +73,7 @@ export default function PaymentPage() {
   };
 
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       {/* ================================================================ */}
       {/* HERO                                                             */}
       {/* ================================================================ */}
@@ -121,12 +121,12 @@ export default function PaymentPage() {
           {/* ============================================================ */}
 
           <Reveal>
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 lg:sticky lg:top-28">
+            <div className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-7 shadow-xs lg:sticky lg:top-28">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#D4AF37]">
                 Registration Summary
               </p>
 
-              <h2 className="mt-4 font-bold tracking-tight text-2xl text-white">
+              <h2 className="mt-4 font-bold tracking-tight text-2xl text-[#111111]">
                 Artist Membership
               </h2>
 
@@ -152,11 +152,11 @@ export default function PaymentPage() {
                 />
               </div>
 
-              <div className="my-7 h-px bg-white/10" />
+              <div className="my-7 h-px bg-gray-200" />
 
               {/* Membership Fee */}
               <div className="flex items-center justify-between">
-                <span className="text-sm text-white/50">Membership Fee</span>
+                <span className="text-sm text-[#444444]">Membership Fee</span>
 
                 <span className="font-bold tracking-tight text-xl text-[#D4AF37]">
                   As applicable
@@ -164,8 +164,8 @@ export default function PaymentPage() {
               </div>
 
               {/* Price Disclaimer */}
-              <div className="mt-5 rounded-2xl border border-[#D4AF37]/15 bg-[#D4AF37]/[0.04] p-4">
-                <p className="text-xs leading-6 text-white/50">
+              <div className="mt-5 rounded-2xl border border-[#D4AF37]/30 bg-white p-4 shadow-2xs">
+                <p className="text-xs leading-6 text-[#555555]">
                   The provided website structure document does not specify an
                   exact membership amount. Therefore, no unverified price is
                   displayed here.
@@ -176,7 +176,7 @@ export default function PaymentPage() {
               <div className="mt-6 flex items-start gap-3">
                 <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                <p className="text-xs leading-6 text-white/45">
+                <p className="text-xs leading-6 text-[#666666]">
                   Please review the applicable terms, cancellation and refund
                   information before completing payment.
                 </p>
@@ -189,7 +189,7 @@ export default function PaymentPage() {
           {/* ============================================================ */}
 
           <Reveal delay={0.1}>
-            <div className="rounded-3xl border border-[#D4AF37]/20 bg-white/[0.03] p-7 md:p-9">
+            <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-9 shadow-xs">
               {/* Header */}
               <div className="flex items-start justify-between gap-5">
                 <div>
@@ -197,11 +197,11 @@ export default function PaymentPage() {
                     Secure Checkout
                   </p>
 
-                  <h2 className="mt-3 font-bold tracking-tight text-3xl text-white">
+                  <h2 className="mt-3 font-bold tracking-tight text-3xl text-[#111111]">
                     Payment
                   </h2>
 
-                  <p className="mt-3 text-sm leading-7 text-white/50">
+                  <p className="mt-3 text-sm leading-7 text-[#444444]">
                     Choose a payment method to continue.
                   </p>
                 </div>
@@ -245,12 +245,12 @@ export default function PaymentPage() {
               {/* SELECTED METHOD                                            */}
               {/* ======================================================== */}
 
-              <div className="mt-7 rounded-2xl border border-white/10 bg-black/20 p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-white/40">
+              <div className="mt-7 rounded-2xl border border-gray-200 bg-white p-5 shadow-2xs">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#666666]">
                   Selected Method
                 </p>
 
-                <p className="mt-2 text-base font-medium text-white">
+                <p className="mt-2 text-base font-medium text-[#111111]">
                   {paymentMethod === "upi"
                     ? "UPI Payment"
                     : paymentMethod === "card"
@@ -258,7 +258,7 @@ export default function PaymentPage() {
                       : "Net Banking"}
                 </p>
 
-                <p className="mt-2 text-sm leading-6 text-white/45">
+                <p className="mt-2 text-sm leading-6 text-[#666666]">
                   This is a frontend payment interface. No real payment gateway
                   is connected.
                 </p>
@@ -276,7 +276,7 @@ export default function PaymentPage() {
                   className="mt-1 h-4 w-4 accent-[#D4AF37]"
                 />
 
-                <span className="text-sm leading-6 text-white/55">
+                <span className="text-sm leading-6 text-[#444444]">
                   I have reviewed the applicable membership information, terms
                   and refund/cancellation conditions and understand that
                   membership does not guarantee casting selection or work.
@@ -291,7 +291,7 @@ export default function PaymentPage() {
                 type="button"
                 onClick={handlePayment}
                 disabled={!agreed || processing}
-                className="mt-8 w-full justify-center"
+                className="mt-8 w-full justify-center bg-[#D4AF37] text-white hover:bg-[#c59b27] disabled:bg-gray-300 disabled:text-gray-500"
               >
                 {processing ? "Processing..." : "Continue to Payment"}
 
@@ -299,7 +299,7 @@ export default function PaymentPage() {
               </Button>
 
               {!agreed && (
-                <p className="mt-3 text-center text-xs text-white/35">
+                <p className="mt-3 text-center text-xs text-[#666666]">
                   Please accept the acknowledgement above to continue.
                 </p>
               )}
@@ -308,7 +308,7 @@ export default function PaymentPage() {
               {/* SECURITY                                                   */}
               {/* ======================================================== */}
 
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-white/10 pt-6">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 border-t border-gray-200 pt-6">
                 <SecurityItem text="Secure Interface" />
 
                 <SecurityItem text="Frontend Demo" />
@@ -327,7 +327,7 @@ export default function PaymentPage() {
           <button
             type="button"
             onClick={() => router.push("/register/step-2-profile/")}
-            className="inline-flex items-center gap-2 text-sm font-medium text-white/45 transition-colors hover:text-[#D4AF37]"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#666666] transition-colors hover:text-[#D4AF37]"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Artist Profile
@@ -355,7 +355,7 @@ function SummaryItem({
         {icon}
       </div>
 
-      <span className="text-sm text-white/60">{label}</span>
+      <span className="text-sm text-[#444444]">{label}</span>
     </div>
   );
 }
@@ -383,14 +383,14 @@ function PaymentMethod({
       onClick={onClick}
       className={`flex w-full items-center gap-4 rounded-2xl border p-5 text-left transition-all duration-300 ${
         active
-          ? "border-[#D4AF37]/50 bg-[#D4AF37]/[0.07]"
-          : "border-white/10 bg-white/[0.02] hover:border-white/20"
+          ? "border-[#D4AF37]/50 bg-[#D4AF37]/10"
+          : "border-gray-200 bg-white hover:border-gray-300"
       }`}
     >
       {/* Icon */}
       <div
         className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${
-          active ? "bg-[#D4AF37]/15 text-[#D4AF37]" : "bg-white/5 text-white/50"
+          active ? "bg-[#D4AF37]/20 text-[#D4AF37]" : "bg-gray-100 text-[#555555]"
         }`}
       >
         {icon}
@@ -398,18 +398,18 @@ function PaymentMethod({
 
       {/* Text */}
       <div className="min-w-0 flex-1">
-        <h3 className="font-medium text-white">{title}</h3>
+        <h3 className="font-medium text-[#111111]">{title}</h3>
 
-        <p className="mt-1 text-xs leading-5 text-white/40">{description}</p>
+        <p className="mt-1 text-xs leading-5 text-[#666666]">{description}</p>
       </div>
 
       {/* Radio */}
       <div
         className={`h-5 w-5 shrink-0 rounded-full border ${
-          active ? "border-[#D4AF37] bg-[#D4AF37]" : "border-white/20"
+          active ? "border-[#D4AF37] bg-[#D4AF37]" : "border-gray-300"
         }`}
       >
-        {active && <div className="m-1 h-2.5 w-2.5 rounded-full bg-black" />}
+        {active && <div className="m-1 h-2.5 w-2.5 rounded-full bg-white" />}
       </div>
     </button>
   );
@@ -421,8 +421,8 @@ function PaymentMethod({
 
 function SecurityItem({ text }: { text: string }) {
   return (
-    <div className="flex items-center gap-2 text-xs text-white/35">
-      <ShieldCheck className="h-4 w-4 text-[#D4AF37]/70" />
+    <div className="flex items-center gap-2 text-xs text-[#666666]">
+      <ShieldCheck className="h-4 w-4 text-[#D4AF37]" />
 
       {text}
     </div>

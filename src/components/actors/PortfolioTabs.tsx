@@ -72,7 +72,7 @@ export function PortfolioTabs({
   ];
 
   return (
-    <div className="border-b border-white/10 pb-1">
+    <div className="border-b border-gray-200 pb-1">
       <nav
         className="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-2"
         aria-label="Portfolio Sections"
@@ -88,21 +88,21 @@ export function PortfolioTabs({
               type="button"
               className={`flex items-center gap-2.5 px-4 sm:px-6 py-3 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase whitespace-nowrap transition-all duration-300 ${
                 isActive
-                  ? "bg-[#d4af37] text-black shadow-lg shadow-[#d4af37]/20 border border-[#d4af37]"
-                  : "bg-[#181818] text-white/70 hover:text-white hover:bg-[#222] border border-white/10"
+                  ? "bg-[#d4af37] text-white shadow-md border border-[#d4af37]"
+                  : "bg-[#F7F7F5] text-[#555555] hover:text-[#111111] hover:bg-gray-100 border border-gray-200"
               }`}
             >
               <Icon
                 className={`w-4 h-4 ${
-                  isActive ? "text-black" : "text-[#d4af37]"
+                  isActive ? "text-white" : "text-[#d4af37]"
                 }`}
               />
               <span>{tab.label}</span>
               <span
                 className={`text-[11px] px-2 py-0.5 rounded-full font-semibold ${
                   isActive
-                    ? "bg-black/20 text-black"
-                    : "bg-white/10 text-white/60"
+                    ? "bg-black/20 text-white"
+                    : "bg-gray-200 text-[#444444]"
                 }`}
               >
                 {tab.count}

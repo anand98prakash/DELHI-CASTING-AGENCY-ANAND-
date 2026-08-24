@@ -16,16 +16,16 @@ export const metadata = {
 
 export default function ModelsPage() {
   return (
-    <main className="min-h-screen bg-[#F5F2EA] text-[#171717]">
+    <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero Header */}
-      <section className="relative isolate overflow-hidden border-b border-[#E2DDD3] bg-[#F5F2EA] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
+      <section className="relative isolate overflow-hidden border-b border-gray-200 bg-[#F7F7F5] px-6 pb-12 pt-28 sm:pb-16 sm:pt-36">
         <div className="mx-auto max-w-7xl">
           <Reveal>
-            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               Talent Roster
             </p>
 
-            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#EFECE4] shadow-md">
+            <div className="relative mb-8 aspect-21/7 max-h-[280px] w-full overflow-hidden rounded-xl border border-gray-200 bg-gray-100 shadow-md">
               <Image
                 src="/images/actors/model femal 1.png"
                 alt="Delhi Casting Agency Models & Fashion Portfolio"
@@ -34,14 +34,14 @@ export default function ModelsPage() {
                 sizes="(max-width: 1280px) 100vw, 1280px"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#171717]/80 via-[#171717]/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
 
-            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-5xl md:text-6xl">
+            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl">
               Models &amp; Fashion Portfolio
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#171717]/75 sm:text-lg">
+            <p className="mt-4 max-w-3xl text-base font-normal leading-relaxed text-[#444444] sm:text-lg">
               Discover professional models for high-fashion runways, designer editorials, brand commercial advertisements, and lifestyle campaigns.
             </p>
           </Reveal>
@@ -63,16 +63,16 @@ export default function ModelsPage() {
       <section className="mx-auto max-w-7xl px-6 py-8 sm:py-16">
         <Reveal>
           <div className="mb-10 max-w-3xl">
-            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#C5A059]">
+            <span className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
               <Sparkles className="h-3.5 w-3.5" />
               Representation &amp; Model Divisions
             </span>
 
-            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl">
+            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-4xl">
               Explore Model Categories
             </h2>
 
-            <p className="mt-3 text-base leading-relaxed text-[#171717]/75">
+            <p className="mt-3 text-base leading-relaxed text-[#444444]">
               Browse professional models filtered by specialization, height, runway experience, and campaign history.
             </p>
           </div>
@@ -94,7 +94,7 @@ export default function ModelsPage() {
         title="Looking to Cast Professional Models for Your Brand?"
         description="Delhi Casting Agency manages talent bookings, contracts, fittings, and full campaign logistics for premier brands."
         buttonLabel="Contact Booking Desk"
-        buttonHref="/contact-us/"
+        buttonHref="/contact/"
       />
     </main>
   );

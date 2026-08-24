@@ -4,66 +4,84 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 
 import { Reveal } from "@/components/ui/reveal";
+import { Button } from "@/components/ui/button";
 import { SITE } from "@/lib/constants";
 
 export function Closing() {
-  const triggerRegistration = () => {
-    window.dispatchEvent(new CustomEvent("open-registration"));
-  };
-
   return (
-    <section className="relative overflow-hidden border-b border-[#E2DDD3] bg-[#EFECE4] py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-white py-24 border-b border-gray-200">
+      {/* Background Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06),transparent_65%)]" />
+
       <Reveal>
         <div className="relative mx-auto max-w-5xl px-6">
-          <div className="overflow-hidden rounded-xl border border-[#E2DDD3] bg-[#F5F2EA] p-8 text-center shadow-xl sm:p-14">
-            <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#C5A059]/40 bg-[#EFECE4] px-5 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#6B6A50]">
-              <Sparkles size={14} className="text-[#C5A059]" />
-              Premium Membership
-            </div>
+          <motion.div
+            whileHover={{ scale: 1.01 }}
+            transition={{ duration: 0.35 }}
+            className="overflow-hidden rounded-[36px] border border-gray-200 bg-[#F7F7F5] p-8 text-center shadow-md backdrop-blur-xl md:p-14"
+          >
+            {/* Glow */}
+            <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-[#D4AF37]/10 blur-[120px]" />
 
-            <h2 className="mt-6 font-serif text-3xl font-extrabold tracking-tight text-[#171717] sm:text-4xl md:text-5xl lg:text-6xl">
-              Start Your <br />
-              <span className="italic font-normal text-[#C5A059]">
-                Bollywood & Casting Journey
-              </span>
-            </h2>
-
-            <p className="mx-auto mt-4 max-w-2xl text-base font-normal leading-relaxed text-[#171717]/75">
-              Join thousands of aspiring actors and models who have already
-              become members of {SITE.agency}. Take the next step toward your
-              dream with verified casting opportunities.
-            </p>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <div className="flex items-center gap-2 rounded-full border border-[#E2DDD3] bg-[#EFECE4] px-5 py-2.5 text-xs font-semibold text-[#171717]">
-                <ShieldCheck size={16} className="text-[#C5A059]" />
-                Secure One-Time Payment
+            <div className="relative z-10">
+              {/* Badge */}
+              <div className="mx-auto inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-5 py-2 text-sm font-medium text-[#D4AF37]">
+                <Sparkles size={15} />
+                Premium Membership
               </div>
 
-              <div className="flex items-center gap-2 rounded-full border border-[#E2DDD3] bg-[#EFECE4] px-5 py-2.5 text-xs font-semibold text-[#171717]">
-                ⭐ Lifetime Membership
+              {/* Heading */}
+              <h2 className="mt-8 text-4xl font-bold leading-tight text-[#111111] md:text-6xl">
+                Start Your
+                <span className="block text-[#D4AF37]">Bollywood Journey</span>
+              </h2>
+
+              {/* Description */}
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#444444]">
+                Join thousands of aspiring actors and models who have already
+                become members of {SITE.agency}. Take the next step toward your
+                dream with verified casting opportunities.
+              </p>
+
+              {/* Trust */}
+              <div className="mt-10 flex flex-wrap justify-center gap-4">
+                <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-[#333333] shadow-xs">
+                  <ShieldCheck size={16} className="text-[#D4AF37]" />
+                  Secure One-Time Payment
+                </div>
+
+                <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-[#333333] shadow-xs">
+                  ⭐ Lifetime Membership
+                </div>
               </div>
-            </div>
 
-            <div className="mt-10 flex justify-center">
-              <button
-                type="button"
-                onClick={triggerRegistration}
-                className="group inline-flex items-center gap-3 rounded-full bg-[#171717] px-9 py-4 text-xs font-bold uppercase tracking-[0.2em] text-[#F5F2EA] transition duration-300 hover:bg-[#C5A059] hover:text-[#171717] hover:shadow-xl"
-              >
-                Become a Premium Member
-                <ArrowRight className="h-4 w-4 transition duration-300 group-hover:translate-x-1" />
-              </button>
-            </div>
+              {/* CTA */}
+              <motion.div className="mt-12" whileHover={{ scale: 1.03 }}>
+                <Button
+                  size="block"
+                  className="group"
+                  onClick={() => {
+                    window.dispatchEvent(new Event("open-registration"));
+                  }}
+                >
+                  Become a Premium Member
+                  <ArrowRight
+                    size={18}
+                    className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </Button>
+              </motion.div>
 
-            <p className="mt-4 text-xs text-[#171717]/60">
-              One-Time Payment of{" "}
-              <span className="font-bold text-[#171717]">
-                ₹{SITE.price.toLocaleString()}
-              </span>{" "}
-              • Lifetime Access • No Renewal Charges
-            </p>
-          </div>
+              {/* Price */}
+              <p className="mt-6 text-base text-[#555555]">
+                One-Time Payment of{" "}
+                <span className="font-semibold text-[#D4AF37]">
+                  ₹{SITE.price.toLocaleString()}
+                </span>{" "}
+                • Lifetime Access • No Renewal Charges
+              </p>
+            </div>
+          </motion.div>
         </div>
       </Reveal>
     </section>

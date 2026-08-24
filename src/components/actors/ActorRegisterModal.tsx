@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X, ArrowRight } from "lucide-react";
+import { getProfileCreateOrSetupUrl } from "@/lib/auth";
 
 interface ActorRegisterModalProps {
   isOpen: boolean;
@@ -56,11 +57,11 @@ export function ActorRegisterModal({
       aria-modal="true"
       aria-labelledby="access-modal-title"
       aria-describedby="access-modal-desc"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 sm:p-6 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 sm:p-6 animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[500px] bg-[#141414]/95 border border-white/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/90 flex flex-col text-center"
+        className="relative w-full max-w-[500px] bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top-Right Understated Close Button (×) */}
@@ -68,7 +69,7 @@ export function ActorRegisterModal({
           onClick={onClose}
           type="button"
           aria-label="Close"
-          className="absolute top-4 sm:top-5 right-4 sm:right-5 p-2 rounded-full text-white/40 hover:text-white hover:bg-white/10 transition-colors z-10"
+          className="absolute top-4 sm:top-5 right-4 sm:right-5 p-2 rounded-full text-gray-400 hover:text-[#111111] hover:bg-gray-100 transition-colors z-10"
         >
           <X className="w-5 h-5" />
         </button>
@@ -78,7 +79,7 @@ export function ActorRegisterModal({
           {displayImages.map((img, idx) => (
             <div
               key={idx}
-              className="relative aspect-[3/4] rounded-xl overflow-hidden bg-[#181818] border border-white/10 shadow-md group"
+              className="relative aspect-[3/4] rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-xs group"
             >
               <Image
                 src={img.src}
@@ -88,7 +89,7 @@ export function ActorRegisterModal({
                 sizes="(max-width: 640px) 20vw, 100px"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60" />
             </div>
           ))}
         </div>
@@ -96,13 +97,13 @@ export function ActorRegisterModal({
         {/* Heading */}
         <h3
           id="access-modal-title"
-          className="text-2xl sm:text-[26px] font-bold text-white tracking-tight leading-snug mb-2.5"
+          className="text-2xl sm:text-[26px] font-bold text-[#111111] tracking-tight leading-snug mb-2.5"
         >
           Access Exclusive Actor Profiles
         </h3>
 
         {/* Subheading / Value Proposition */}
-        <p className="text-sm sm:text-base text-white/90 font-medium leading-relaxed mb-2 max-w-sm mx-auto">
+        <p className="text-sm sm:text-base text-[#444444] font-medium leading-relaxed mb-2 max-w-sm mx-auto">
           {actorName ? (
             <>
               Discover <span className="text-[#d4af37] font-semibold">{actorName}’s</span> verified portfolio, photos and casting details.
@@ -115,7 +116,7 @@ export function ActorRegisterModal({
         {/* Supporting Description */}
         <p
           id="access-modal-desc"
-          className="text-xs sm:text-sm text-white/60 leading-relaxed mb-7 max-w-sm mx-auto"
+          className="text-xs sm:text-sm text-[#666666] leading-relaxed mb-7 max-w-sm mx-auto"
         >
           Register with DCA to unlock complete actor profiles and portfolio information.
         </p>
@@ -123,17 +124,17 @@ export function ActorRegisterModal({
         {/* Actions Stack */}
         <div className="flex flex-col items-center gap-3 w-full">
           <Link
-            href="/register/"
+            href={getProfileCreateOrSetupUrl()}
             onClick={onClose}
-            className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#e5c158] text-black font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg"
+            className="inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-semibold text-sm transition-all duration-200 shadow-md hover:shadow-lg"
           >
-            <span>Register Now</span>
+            <span>Create Your Profile</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
           <button
             onClick={onClose}
             type="button"
-            className="text-xs sm:text-sm text-white/50 hover:text-white transition-colors py-1 font-medium"
+            className="text-xs sm:text-sm text-[#666666] hover:text-[#111111] transition-colors py-1 font-medium"
           >
             Not now
           </button>

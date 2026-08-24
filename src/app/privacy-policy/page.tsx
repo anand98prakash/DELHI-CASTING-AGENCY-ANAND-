@@ -51,7 +51,7 @@ const userRights = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <main>
+    <main className="bg-white min-h-screen text-[#111111]">
       <PageHero
         eyebrow="Legal & Trust"
         title="Privacy Policy"
@@ -75,7 +75,7 @@ export default function PrivacyPolicyPage() {
       {/* Important Notice */}
       <section className="mx-auto max-w-5xl px-6 py-10 lg:px-8 lg:py-16">
         <Reveal>
-          <div className="rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/[0.04] p-7 md:p-9">
+          <div className="rounded-3xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-7 md:p-9 shadow-xs">
             <div className="flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#D4AF37]/10 text-[#D4AF37]">
                 <ShieldCheck className="h-6 w-6" />
@@ -86,11 +86,11 @@ export default function PrivacyPolicyPage() {
                   Please Read
                 </p>
 
-                <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+                <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                   Your privacy matters
                 </h2>
 
-                <p className="mt-4 text-sm leading-7 text-white/60 md:text-base">
+                <p className="mt-4 text-sm leading-7 text-[#444444] md:text-base">
                   This page explains the general categories of information that
                   may be handled when you use this website. The final published
                   policy should contain the agency&apos;s actual legal entity
@@ -112,29 +112,29 @@ export default function PrivacyPolicyPage() {
                 01
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Who We Are
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 This website is operated by:
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm leading-7 text-white/70">
-                  <strong className="text-white">
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">
                     Business / Agency Name:
                   </strong>{" "}
                   [INSERT REAL LEGAL / BUSINESS NAME]
                 </p>
 
-                <p className="mt-2 text-sm leading-7 text-white/70">
-                  <strong className="text-white">Website:</strong> [INSERT REAL
+                <p className="mt-2 text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">Website:</strong> [INSERT REAL
                   WEBSITE URL]
                 </p>
 
-                <p className="mt-2 text-sm leading-7 text-white/70">
-                  <strong className="text-white">Privacy Contact:</strong>{" "}
+                <p className="mt-2 text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">Privacy Contact:</strong>{" "}
                   [INSERT REAL PRIVACY CONTACT EMAIL]
                 </p>
               </div>
@@ -145,11 +145,11 @@ export default function PrivacyPolicyPage() {
                 02
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Information We May Collect
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Depending on how you use the website, information may be
                 provided when you register, create a talent profile, contact us,
                 submit information or use other available services.
@@ -162,17 +162,17 @@ export default function PrivacyPolicyPage() {
                   return (
                     <div
                       key={point.title}
-                      className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
+                      className="rounded-3xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs"
                     >
                       <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                         <Icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="mt-5 font-bold tracking-tight text-xl text-white">
+                      <h3 className="mt-5 font-bold tracking-tight text-xl text-[#111111]">
                         {point.title}
                       </h3>
 
-                      <p className="mt-3 text-sm leading-7 text-white/55">
+                      <p className="mt-3 text-sm leading-7 text-[#555555]">
                         {point.description}
                       </p>
                     </div>
@@ -186,18 +186,18 @@ export default function PrivacyPolicyPage() {
                 03
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 How Information May Be Used
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Information may be used for purposes connected with operating
                 the website and providing the services you request, including
                 managing registrations, profiles, communications and relevant
                 casting-related activities.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The exact purposes and legal basis for processing should be
                 confirmed in the final version of this policy based on the
                 actual services and systems used by the business.
@@ -209,17 +209,17 @@ export default function PrivacyPolicyPage() {
                 04
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Sharing of Information
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Personal information should only be shared or disclosed as
                 permitted by the applicable privacy policy, law and the services
                 actually used by the business.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The final policy should identify relevant service providers,
                 processors or other recipients where applicable. Do not publish
                 generic claims here without verifying the actual services
@@ -232,17 +232,17 @@ export default function PrivacyPolicyPage() {
                 05
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Data Security
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Reasonable security measures should be used to protect
                 information handled through the website and associated services.
                 No online system can be represented as completely risk-free.
               </p>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 The final policy should describe the actual security practices
                 used by the business rather than making unsupported technical
                 claims.
@@ -254,19 +254,19 @@ export default function PrivacyPolicyPage() {
                 06
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Data Retention
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Information should be retained only for as long as necessary for
                 the applicable purpose, legal obligations or other legitimate
                 requirements.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm leading-7 text-white/60">
-                  <strong className="text-white">
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm leading-7 text-[#555555]">
+                  <strong className="text-[#111111]">
                     Actual retention periods:
                   </strong>{" "}
                   [INSERT VERIFIED RETENTION DETAILS]
@@ -279,11 +279,11 @@ export default function PrivacyPolicyPage() {
                 07
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Your Privacy Requests
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 Depending on applicable law, you may have rights relating to
                 information held about you. Contact the business using the
                 verified privacy contact details for questions or requests.
@@ -293,11 +293,11 @@ export default function PrivacyPolicyPage() {
                 {userRights.map((right) => (
                   <div
                     key={right}
-                    className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/20 p-5"
+                    className="flex items-start gap-3 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 shadow-2xs"
                   >
                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
-                    <span className="text-sm leading-7 text-white/65">
+                    <span className="text-sm leading-7 text-[#444444]">
                       {right}
                     </span>
                   </div>
@@ -310,23 +310,23 @@ export default function PrivacyPolicyPage() {
                 08
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Contact Us About Privacy
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 For privacy-related questions or requests, contact:
               </p>
 
-              <div className="mt-5 flex items-start gap-4 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
+              <div className="mt-5 flex items-start gap-4 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
                 <Mail className="mt-1 h-5 w-5 shrink-0 text-[#D4AF37]" />
 
                 <div>
-                  <p className="text-sm font-semibold text-white">
+                  <p className="text-sm font-semibold text-[#111111]">
                     Privacy Contact
                   </p>
 
-                  <p className="mt-2 text-sm text-white/55">
+                  <p className="mt-2 text-sm text-[#555555]">
                     [INSERT REAL PRIVACY EMAIL ADDRESS]
                   </p>
                 </div>
@@ -338,25 +338,25 @@ export default function PrivacyPolicyPage() {
                 09
               </p>
 
-              <h2 className="mt-3 font-bold tracking-tight text-2xl text-white md:text-3xl">
+              <h2 className="mt-3 font-bold tracking-tight text-2xl text-[#111111] md:text-3xl">
                 Policy Updates
               </h2>
 
-              <p className="mt-4 text-sm leading-8 text-white/60 md:text-base">
+              <p className="mt-4 text-sm leading-8 text-[#444444] md:text-base">
                 This policy may need to be updated when the website, services,
                 processing practices or applicable legal requirements change.
                 The published policy should show its actual effective or updated
                 date.
               </p>
 
-              <div className="mt-5 rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <p className="text-sm text-white/70">
-                  <strong className="text-white">Effective Date:</strong>{" "}
+              <div className="mt-5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs">
+                <p className="text-sm text-[#555555]">
+                  <strong className="text-[#111111]">Effective Date:</strong>{" "}
                   [INSERT VERIFIED EFFECTIVE DATE]
                 </p>
 
-                <p className="mt-2 text-sm text-white/70">
-                  <strong className="text-white">Last Updated:</strong> [INSERT
+                <p className="mt-2 text-sm text-[#555555]">
+                  <strong className="text-[#111111]">Last Updated:</strong> [INSERT
                   VERIFIED LAST UPDATED DATE]
                 </p>
               </div>
@@ -371,9 +371,9 @@ export default function PrivacyPolicyPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <Link
               href="/terms-and-conditions/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Terms & Conditions
               </h3>
 
@@ -385,9 +385,9 @@ export default function PrivacyPolicyPage() {
 
             <Link
               href="/refund-and-cancellation-policy/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">
                 Refund & Cancellation
               </h3>
 
@@ -399,9 +399,9 @@ export default function PrivacyPolicyPage() {
 
             <Link
               href="/disclaimer/"
-              className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/30"
+              className="group rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 transition-all hover:-translate-y-1 hover:border-[#D4AF37]/40 shadow-xs"
             >
-              <h3 className="font-bold tracking-tight text-lg text-white">Disclaimer</h3>
+              <h3 className="font-bold tracking-tight text-lg text-[#111111]">Disclaimer</h3>
 
               <div className="mt-4 inline-flex items-center text-sm font-semibold text-[#D4AF37]">
                 View Disclaimer
@@ -417,7 +417,7 @@ export default function PrivacyPolicyPage() {
         title="Questions about your information?"
         description="Contact the agency using the verified privacy contact details provided in this policy."
         buttonLabel="Contact Us"
-        buttonHref="/contact-us/"
+        buttonHref="/contact/"
       />
     </main>
   );
