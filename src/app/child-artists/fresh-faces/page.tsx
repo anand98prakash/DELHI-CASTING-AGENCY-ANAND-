@@ -110,7 +110,7 @@ export default function FreshChildArtistsPage() {
         title="Ready to Audition Debut Child Artists?"
         description="Delhi Casting Agency connects promising new child talents with ongoing casting calls."
         buttonLabel="Register Child Artist"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

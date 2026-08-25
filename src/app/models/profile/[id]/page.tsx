@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getAllModels, getModelById, getModelsByCategory } from "@/data/models";
+import { getAllModels, getModelById, getRelatedModels } from "@/data/models";
 import { ModelProfileView } from "@/components/models/ModelProfileView";
 
 interface ModelProfilePageProps {
@@ -44,9 +44,7 @@ export default async function ModelProfilePage({
     notFound();
   }
 
-  const similarModels = getModelsByCategory(model.category)
-    .filter((m) => m.id !== model.id)
-    .slice(0, 4);
+  const similarModels = getRelatedModels(model.id, model.category, 8);
 
   return <ModelProfileView model={model} similarModels={similarModels} />;
 }

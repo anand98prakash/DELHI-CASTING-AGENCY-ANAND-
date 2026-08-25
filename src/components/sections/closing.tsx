@@ -61,7 +61,7 @@ export function Closing() {
                   size="block"
                   className="group"
                   onClick={() => {
-                    window.dispatchEvent(new Event("open-registration"));
+                    window.dispatchEvent(new CustomEvent("open-premium-modal"));
                   }}
                 >
                   Become a Premium Member

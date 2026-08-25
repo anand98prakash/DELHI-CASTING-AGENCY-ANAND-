@@ -110,7 +110,7 @@ export default function CastingCallsPage() {
 
               <div className="flex items-center">
                 <Link
-                  href="/register/"
+                  href="/profile/setup"
                   className="inline-flex items-center justify-center rounded-full bg-[#111111] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition duration-300 hover:bg-[#D4AF37]"
                 >
                   Register as Talent
@@ -128,7 +128,7 @@ export default function CastingCallsPage() {
         title="Ready to apply for casting calls?"
         description="Create your DCA talent profile and submit your portfolio for suitable casting opportunities."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

@@ -337,7 +337,7 @@ export default function HowToBecomeAnActorInBollywoodPage() {
         title="Ready to build your acting profile?"
         description="Register your talent profile and explore actor casting opportunities."
         buttonLabel="Register as an Actor"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

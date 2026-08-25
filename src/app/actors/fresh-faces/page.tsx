@@ -102,7 +102,7 @@ export default function FreshFacesPage() {
               </div>
               <div className="pt-6">
                 <Link
-                  href="/register/"
+                  href="/profile/setup"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d4af37] px-6 py-3.5 text-sm font-bold text-white hover:bg-[#c59b27] transition-all shadow-md"
                 >
                   Register as a Fresh Face
@@ -177,7 +177,7 @@ export default function FreshFacesPage() {
         title="Ready to Cast or Audition New Talent?"
         description="Delhi Casting Agency connects promising new talent with ongoing film, web series, and commercial casting calls."
         buttonLabel="Register as Talent"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

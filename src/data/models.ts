@@ -431,7 +431,180 @@ export const MODELS_DATA: Model[] = [
       "/images/talents/models/male/rohan-mehra/03.jpg",
       "/images/talents/models/male/rohan-mehra/04.jpg",
       "/images/talents/models/male/rohan-mehra/05.jpg"
-],
+    ],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "zara-khan",
+    name: "Zara Khan",
+    category: "female-models",
+    categoryLabel: "Female Model",
+    role: "High Fashion & Runway Model",
+    age: 23,
+    height: "5'10\"",
+    experience: "4 Years",
+    location: "New Delhi",
+    languages: ["English", "Hindi"],
+    eyeColor: "Hazel",
+    hair: "Black",
+    bustOrChest: "33 in",
+    waist: "24 in",
+    hips: "35 in",
+    shoeSize: "7.5 UK",
+    mainImage: "/media/dca/models/dca-model-fashion-01.jpg",
+    badge: "Runway Specialist",
+    about: "Zara Khan is a high-fashion runway model with extensive experience walkings for top couture designers and fashion weeks.",
+    skills: ["High Fashion Ramp Walk", "Editorial Lookbook", "Designer Couture"],
+    experienceCredits: [
+      { project: "India Couture Week", role: "Ramp Model", type: "Fashion Runway", year: "2025" }
+    ],
+    photos: ["/media/dca/models/dca-model-fashion-01.jpg"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "simran-kaur",
+    name: "Simran Kaur",
+    category: "female-models",
+    categoryLabel: "Female Model",
+    role: "Commercial & Print Model",
+    age: 24,
+    height: "5'8\"",
+    experience: "3 Years",
+    location: "Delhi NCR",
+    languages: ["English", "Hindi", "Punjabi"],
+    eyeColor: "Dark Brown",
+    hair: "Dark Brown",
+    bustOrChest: "34 in",
+    waist: "25 in",
+    hips: "36 in",
+    shoeSize: "7 UK",
+    mainImage: "/images/actors/casting-calls-femael modeal.png",
+    badge: "Commercial Model",
+    about: "Simran Kaur is a versatile commercial face featured in e-commerce catalogs and print advertisements across India.",
+    skills: ["Catalog Posing", "Brand Shoots", "Commercial Print"],
+    experienceCredits: [
+      { project: "Myntra Summer Lookbook", role: "Lead Model", type: "Brand Campaign", year: "2024" }
+    ],
+    photos: ["/images/actors/casting-calls-femael modeal.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "tanvi-sharma",
+    name: "Tanvi Sharma",
+    category: "female-models",
+    categoryLabel: "Female Model",
+    role: "Lifestyle & Beauty Model",
+    age: 22,
+    height: "5'7.5\"",
+    experience: "3 Years",
+    location: "Gurugram",
+    languages: ["English", "Hindi"],
+    eyeColor: "Brown",
+    hair: "Brown",
+    bustOrChest: "32 in",
+    waist: "24 in",
+    hips: "35 in",
+    shoeSize: "6.5 UK",
+    mainImage: "/images/actors/female photography.png",
+    badge: "Beauty Specialist",
+    about: "Tanvi Sharma specializes in skincare, cosmetics, and lifestyle commercial print campaigns.",
+    skills: ["Beauty Closeups", "Skincare Ads", "Expression Control"],
+    experienceCredits: [
+      { project: "Lakme Beauty Campaign", role: "Face Model", type: "Commercial", year: "2025" }
+    ],
+    photos: ["/images/actors/female photography.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "arav-singh",
+    name: "Arav Singh",
+    category: "male-models",
+    categoryLabel: "Male Model",
+    role: "Commercial Menswear Lead",
+    age: 26,
+    height: "6'1\"",
+    experience: "5 Years",
+    location: "New Delhi",
+    languages: ["English", "Hindi"],
+    eyeColor: "Black",
+    hair: "Black",
+    bustOrChest: "40 in",
+    waist: "31 in",
+    hips: "38 in",
+    shoeSize: "10 UK",
+    mainImage: "/media/dca/models/dca-model-male-01.jpg",
+    badge: "Mainboard Model",
+    about: "Arav Singh is a commercial male model featured in suiting catalogs, ethnic wear collections, and TVCs.",
+    skills: ["Suiting Posing", "Ethnic Wear Ramp", "Brand Campaign"],
+    experienceCredits: [
+      { project: "Raymond Fine Clothing Edit", role: "Lead Model", type: "Brand Campaign", year: "2024" }
+    ],
+    photos: ["/media/dca/models/dca-model-male-01.jpg"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "dev-kapoor",
+    name: "Dev Kapoor",
+    category: "male-models",
+    categoryLabel: "Male Model",
+    role: "Fitness & Casual Wear Model",
+    age: 25,
+    height: "6'0\"",
+    experience: "4 Years",
+    location: "Noida / Delhi",
+    languages: ["English", "Hindi"],
+    eyeColor: "Brown",
+    hair: "Dark Brown",
+    bustOrChest: "42 in",
+    waist: "30 in",
+    hips: "37 in",
+    shoeSize: "9.5 UK",
+    mainImage: "/images/actors/model male 1.png",
+    about: "Dev Kapoor is a fitness enthusiast and commercial menswear model with high athletic definition.",
+    skills: ["Activewear", "Fitness Shoots", "Lifestyle Commercial"],
+    experienceCredits: [
+      { project: "Decathlon Active Campaign", role: "Lead Athlete", type: "Brand Campaign", year: "2025" }
+    ],
+    photos: ["/images/actors/model male 1.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "harsh-vardhan",
+    name: "Harsh Vardhan",
+    category: "male-models",
+    categoryLabel: "Male Model",
+    role: "Runway & Editorial Model",
+    age: 27,
+    height: "6'2\"",
+    experience: "5 Years",
+    location: "Delhi NCR",
+    languages: ["English", "Hindi"],
+    eyeColor: "Dark Brown",
+    hair: "Black",
+    bustOrChest: "39 in",
+    waist: "30 in",
+    hips: "37 in",
+    shoeSize: "10.5 UK",
+    mainImage: "/images/actors/model male 2.png",
+    badge: "Runway Pro",
+    about: "Harsh Vardhan is a high-fashion male model with sharp features and a strong runway walk.",
+    skills: ["Runway Pacing", "High Fashion Editorial", "Designer Campaigns"],
+    experienceCredits: [
+      { project: "Delhi Fashion Week", role: "Showstopper Model", type: "Fashion Runway", year: "2025" }
+    ],
+    photos: ["/images/actors/model male 2.png"],
     videos: [],
     instagram: [],
     print: []
@@ -448,6 +621,15 @@ export function getModelById(id: string): Model | undefined {
 
 export function getModelsByCategory(category: ModelCategorySlug): Model[] {
   return MODELS_DATA.filter((m) => m.category === category);
+}
+
+export function getRelatedModels(currentId: string, category: ModelCategorySlug, limit: number = 8): Model[] {
+  const sameCategory = MODELS_DATA.filter((m) => m.id !== currentId && m.category === category);
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+  const otherModels = MODELS_DATA.filter((m) => m.id !== currentId && m.category !== category);
+  return [...sameCategory, ...otherModels].slice(0, limit);
 }
 
 export function getModelCategoryBySlug(slug: ModelCategorySlug): CategoryMeta | undefined {

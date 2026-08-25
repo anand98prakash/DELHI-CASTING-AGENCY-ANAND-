@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getAllVoiceArtists, getVoiceArtistById, getVoiceArtistsByCategory } from "@/data/voice-artists";
+import { getAllVoiceArtists, getVoiceArtistById, getRelatedVoiceArtists } from "@/data/voice-artists";
 import { VoiceArtistProfileView } from "@/components/voice-artists/VoiceArtistProfileView";
 
 interface VoiceArtistProfilePageProps {
@@ -44,9 +44,7 @@ export default async function VoiceArtistProfilePage({
     notFound();
   }
 
-  const similarArtists = getVoiceArtistsByCategory(artist.category)
-    .filter((a) => a.id !== artist.id)
-    .slice(0, 4);
+  const similarArtists = getRelatedVoiceArtists(artist.id, artist.category, 8);
 
   return <VoiceArtistProfileView artist={artist} similarArtists={similarArtists} />;
 }

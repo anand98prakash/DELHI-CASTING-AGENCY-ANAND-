@@ -165,9 +165,170 @@ export const CHILD_ARTISTS_DATA: ChildArtist[] = [
       "/images/talents/child-artists/ananya-joshi/01.jpg",
       "/images/talents/child-artists/ananya-joshi/02.jpg",
       "/images/talents/child-artists/ananya-joshi/03.jpg"
-],
+    ],
     videos: [],
   },
+  {
+    id: "aarav-verma-kid",
+    name: "Aarav Verma",
+    category: "boys",
+    categoryLabel: "Boy Child Artist",
+    role: "TVC & Print Kid Lead",
+    age: 9,
+    height: "4'2\"",
+    experience: "3 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    guardianName: "Sunil Verma (Father)",
+    guardianContact: "+91 9811X XXXXX",
+    mainImage: "/images/actors/child artist boys.jpg",
+    badge: "Verified Child Artist",
+    about: "Aarav is an expressive 9-year-old child actor with major brand commercial experience and movie appearance.",
+    skills: ["Dialogue Memory", "Natural Acting", "Commercial Posing"],
+    experienceCredits: [
+      { project: "Bournvita Campaign", role: "Lead Kid", type: "TV Commercial", year: "2024" }
+    ],
+    photos: ["/images/actors/child artist boys.jpg"],
+    videos: []
+  },
+  {
+    id: "myra-sharma",
+    name: "Myra Sharma",
+    category: "girls",
+    categoryLabel: "Girl Child Artist",
+    role: "Commercial & Drama Kid",
+    age: 8,
+    height: "4'0\"",
+    experience: "2 Years",
+    location: "Gurugram / Delhi",
+    languages: ["Hindi", "English"],
+    guardianName: "Kavita Sharma (Mother)",
+    guardianContact: "+91 9812X XXXXX",
+    mainImage: "/images/actors/child artist female.jpg",
+    badge: "Verified Child Artist",
+    about: "Myra Sharma is a charming 8-year-old female child artist who loves acting and camera work.",
+    skills: ["Expressive Face", "Prompt Following", "Catalogue Posing"],
+    experienceCredits: [
+      { project: "Kinder Joy Ad", role: "Featured Girl", type: "TV Commercial", year: "2025" }
+    ],
+    photos: ["/images/actors/child artist female.jpg"],
+    videos: []
+  },
+  {
+    id: "vihaan-kapoor-kid",
+    name: "Vihaan Kapoor",
+    category: "fresh-faces",
+    categoryLabel: "Fresh Face Child Artist",
+    role: "Fresh Face & Model",
+    age: 6,
+    height: "3'8\"",
+    experience: "1 Year",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    guardianName: "Amit Kapoor (Father)",
+    guardianContact: "+91 9813X XXXXX",
+    mainImage: "/images/actors/fresh child artist.webp",
+    badge: "Emerging Kid Talent",
+    about: "Vihaan is a photogenic 6-year-old child artist featuring in fashion lookbooks and print ads.",
+    skills: ["Natural Smile", "Camera Friendly", "Quick Learner"],
+    experienceCredits: [
+      { project: "Max Kids Apparel", role: "Lookbook Model", type: "Print Campaign", year: "2024" }
+    ],
+    photos: ["/images/actors/fresh child artist.webp"],
+    videos: []
+  },
+  {
+    id: "kavya-singh-kid",
+    name: "Kavya Singh",
+    category: "girls",
+    categoryLabel: "Girl Child Artist",
+    role: "Drama & Movie Kid Lead",
+    age: 10,
+    height: "4'4\"",
+    experience: "4 Years",
+    location: "Noida / Delhi",
+    languages: ["Hindi", "English"],
+    guardianName: "Meenakshi Singh (Mother)",
+    guardianContact: "+91 9814X XXXXX",
+    mainImage: "/images/actors/child artist horizontal.png",
+    badge: "Verified Child Artist",
+    about: "Kavya is a talented 10-year-old child actress who played emotional young roles in feature films and OTT shows.",
+    skills: ["Emotional Acting", "Dialogue Diction", "Voice Over"],
+    experienceCredits: [
+      { project: "Chhoti Si Asha (Feature Film)", role: "Young Asha", type: "Feature Film", year: "2024" }
+    ],
+    photos: ["/images/actors/child artist horizontal.png"],
+    videos: []
+  },
+  {
+    id: "kabir-gupta-kid",
+    name: "Kabir Gupta",
+    category: "boys",
+    categoryLabel: "Boy Child Artist",
+    role: "Commercial & Print Kid",
+    age: 8,
+    height: "3'11\"",
+    experience: "2 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    guardianName: "Rohit Gupta (Father)",
+    guardianContact: "+91 9815X XXXXX",
+    mainImage: "/media/dca/models/dca-model-catalogue-01.jpg",
+    badge: "Verified Child Artist",
+    about: "Kabir is an active 8-year-old commercial kid model featuring in toy brand commercials and print catalogs.",
+    skills: ["Playful Expression", "High Energy", "Action Posing"],
+    experienceCredits: [
+      { project: "HotWheels India TVC", role: "Lead Kid", type: "TV Commercial", year: "2025" }
+    ],
+    photos: ["/media/dca/models/dca-model-catalogue-01.jpg"],
+    videos: []
+  },
+  {
+    id: "tara-mehta-kid",
+    name: "Tara Mehta",
+    category: "fresh-faces",
+    categoryLabel: "Fresh Face Child Artist",
+    role: "Fresh Face Kid",
+    age: 5,
+    height: "3'5\"",
+    experience: "1 Year",
+    location: "Gurugram",
+    languages: ["Hindi", "English"],
+    guardianName: "Neha Mehta (Mother)",
+    guardianContact: "+91 9816X XXXXX",
+    mainImage: "/images/actors/editorial_grid_1.png",
+    badge: "Emerging Kid Talent",
+    about: "Tara is a cute 5-year-old kid model with natural innocence and sweet camera presence.",
+    skills: ["Cute Smile", "Charming Demeanor"],
+    experienceCredits: [
+      { project: "Pampers Baby Edit", role: "Baby Model", type: "TV Commercial", year: "2024" }
+    ],
+    photos: ["/images/actors/editorial_grid_1.png"],
+    videos: []
+  },
+  {
+    id: "arjun-sharma-kid",
+    name: "Arjun Sharma",
+    category: "boys",
+    categoryLabel: "Boy Child Artist",
+    role: "TV Serial & Web Kid",
+    age: 11,
+    height: "4'6\"",
+    experience: "4 Years",
+    location: "Delhi NCR",
+    languages: ["Hindi", "English"],
+    guardianName: "Sanjay Sharma (Father)",
+    guardianContact: "+91 9817X XXXXX",
+    mainImage: "/images/actors/editorial_grid_4.png",
+    badge: "Verified Child Artist",
+    about: "Arjun is a sharp 11-year-old child actor with experience in Hindi prime time TV serials and web series.",
+    skills: ["Complex Dialogue", "Scene Focus", "Director Direction"],
+    experienceCredits: [
+      { project: "Balika Vadha 2", role: "Young Hero", type: "TV Commercial", year: "2024" }
+    ],
+    photos: ["/images/actors/editorial_grid_4.png"],
+    videos: []
+  }
 ];
 
 export function getAllChildArtists(): ChildArtist[] {
@@ -180,6 +341,15 @@ export function getChildArtistById(id: string): ChildArtist | undefined {
 
 export function getChildArtistsByCategory(category: ChildArtistCategorySlug): ChildArtist[] {
   return CHILD_ARTISTS_DATA.filter((ca) => ca.category === category);
+}
+
+export function getRelatedChildArtists(currentId: string, category: ChildArtistCategorySlug, limit: number = 8): ChildArtist[] {
+  const sameCategory = CHILD_ARTISTS_DATA.filter((ca) => ca.id !== currentId && ca.category === category);
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+  const otherArtists = CHILD_ARTISTS_DATA.filter((ca) => ca.id !== currentId && ca.category !== category);
+  return [...sameCategory, ...otherArtists].slice(0, limit);
 }
 
 export function getChildArtistCategoryBySlug(slug: ChildArtistCategorySlug): CategoryMeta | undefined {

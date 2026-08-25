@@ -23,11 +23,22 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { isUserAuthenticated, clearDCAUserSession } from "@/lib/auth";
+import {
+  isUserAuthenticated,
+  getUserSession,
+  clearDCAUserSession,
+} from "@/lib/auth";
+import {
+  PremiumFlowModal,
+  PremiumModalStep,
+} from "@/components/premium-flow-modal";
 
 export default function DashboardPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"profile" | "opportunities" | "saved">("profile");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
+  const [userRole, setUserRole] = useState<"artist" | "brand">("artist");
 
   const [profileData, setProfileData] = useState({
     fullName: "Aarav Sharma",
@@ -66,6 +77,21 @@ export default function DashboardPage() {
         router.push("/login");
         return;
       }
+
+      const session = getUserSession();
+      const storedArtist = localStorage.getItem("dca_artist_profile");
+      const storedBrand = localStorage.getItem("dca_brand_profile");
+
+      if (session?.role === "brand") {
+        setUserRole("brand");
+      } else if (session?.role === "artist") {
+        setUserRole("artist");
+      } else if (storedBrand && !storedArtist) {
+        setUserRole("brand");
+      } else {
+        setUserRole("artist");
+      }
+
       const stored = localStorage.getItem("dca_artist_profile");
       if (stored) {
         try {
@@ -84,31 +110,55 @@ export default function DashboardPage() {
         }
       }
     }
-  }, []);
+  }, [router]);
 
   const handleLogout = () => {
     clearDCAUserSession();
     router.push("/login");
   };
 
+  const handleOpenPremiumCheckout = () => {
+    if (!isUserAuthenticated()) {
+      setModalInitialStep("role_select");
+    } else {
+      const session = getUserSession();
+      const isBrandAccount = userRole === "brand" || session?.role === "brand";
+      if (isBrandAccount) {
+        setModalInitialStep("brand_checkout");
+      } else {
+        setModalInitialStep("artist_checkout");
+      }
+    }
+    setModalOpen(true);
+  };
+
+  const isBrand = userRole === "brand";
+
   return (
     <main className="min-h-screen bg-white text-[#111111]">
       <PageHero
-        eyebrow="Artist Portal"
+        eyebrow={isBrand ? "Brand & Casting Portal" : "Artist Portal"}
         title={`Welcome, ${profileData.fullName}`}
-        description="Manage your artist profile, portfolio headshots, and review verified casting calls."
+        description={
+          isBrand
+            ? "Manage your company profile, post casting requirements, and source verified talent."
+            : "Manage your artist profile, portfolio headshots, and review verified casting calls."
+        }
       />
 
       <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
         <Breadcrumb
-          items={[{ label: "Home", href: "/" }, { label: "Artist Dashboard" }]}
+          items={[
+            { label: "Home", href: "/" },
+            { label: isBrand ? "Brand Dashboard" : "Artist Dashboard" },
+          ]}
         />
       </div>
 
       <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
         <div className="grid gap-8 lg:grid-cols-12">
           
-          {/* LEFT SIDEBAR — USER ACTIONS & STATS */}
+          {/* LEFT SIDEBAR — USER ACTIONS, STATS & PREMIUM CTA */}
           <div className="lg:col-span-4 space-y-6">
             <Reveal>
               <div className="rounded-3xl border border-gray-200 bg-white p-6 shadow-md">
@@ -139,7 +189,9 @@ export default function DashboardPage() {
                 <div className="mt-6 border-t border-gray-200 pt-5">
                   <div className="flex items-center justify-between text-xs font-semibold">
                     <span className="text-[#555555]">Profile Completion</span>
-                    <span className="text-[#D4AF37] font-bold">{profileData.completionPercentage}%</span>
+                    <span className="text-[#D4AF37] font-bold">
+                      {profileData.completionPercentage}%
+                    </span>
                   </div>
                   <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-gray-100 border border-gray-200">
                     <div
@@ -162,7 +214,7 @@ export default function DashboardPage() {
                   >
                     <div className="flex items-center gap-2">
                       <User size={16} />
-                      <span>My Casting Profile</span>
+                      <span>{isBrand ? "Company Profile" : "My Casting Profile"}</span>
                     </div>
                     <ArrowRight size={14} />
                   </button>
@@ -178,7 +230,7 @@ export default function DashboardPage() {
                   >
                     <div className="flex items-center gap-2">
                       <Briefcase size={16} />
-                      <span>Matched Opportunities</span>
+                      <span>{isBrand ? "My Casting Posts" : "Matched Opportunities"}</span>
                     </div>
                     <span className="rounded-full bg-[#D4AF37]/20 px-2 py-0.5 text-[10px] font-bold text-[#D4AF37]">
                       12 Open
@@ -196,7 +248,7 @@ export default function DashboardPage() {
                   >
                     <div className="flex items-center gap-2">
                       <Bookmark size={16} />
-                      <span>Saved Audition Calls</span>
+                      <span>{isBrand ? "Shortlisted Talent" : "Saved Audition Calls"}</span>
                     </div>
                     <span className="rounded-full bg-gray-200 px-2 py-0.5 text-[10px] font-bold text-[#555555]">
                       4 Saved
@@ -204,14 +256,47 @@ export default function DashboardPage() {
                   </button>
                 </div>
 
+                {/* =========================================================
+                    CLEARLY VISIBLE PREMIUM CTA CARD IN DASHBOARD SIDEBAR
+                ========================================================= */}
+                <div className="mt-6 rounded-2xl border border-[#D4AF37]/40 bg-[#F7F7F5] p-5 text-center shadow-xs">
+                  <div className="inline-flex items-center justify-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#D4AF37]">
+                    <Sparkles size={13} />
+                    <span>{isBrand ? "Brand Premium" : "Artist Premium"}</span>
+                  </div>
+
+                  <h3 className="mt-2 font-serif text-sm font-bold text-[#111111]">
+                    {isBrand
+                      ? "Premium Casting Account"
+                      : "Lifetime Premium Membership"}
+                  </h3>
+
+                  <p className="mt-1 text-xs text-[#555555]">
+                    {isBrand
+                      ? "Direct access to verified talent & priority sourcing"
+                      : "Verified casting calls & priority profile visibility"}
+                  </p>
+
+                  <button
+                    type="button"
+                    onClick={handleOpenPremiumCheckout}
+                    className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-[#D4AF37] py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition hover:bg-[#C59B27] cursor-pointer"
+                  >
+                    <span>
+                      {isBrand ? "GO PREMIUM — ₹9,999" : "GO PREMIUM — ₹3,999"}
+                    </span>
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
+
                 {/* Actions */}
                 <div className="mt-6 border-t border-gray-200 pt-5 space-y-3">
                   <Link
-                    href="/profile/setup"
+                    href={isBrand ? "/register/brand" : "/profile/setup"}
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#D4AF37]/40 bg-[#D4AF37]/10 py-3 text-xs font-bold uppercase tracking-wider text-[#D4AF37] transition hover:bg-[#D4AF37] hover:text-white"
                   >
                     <Edit size={14} />
-                    <span>Edit Profile &amp; Photos</span>
+                    <span>{isBrand ? "Edit Brand Details" : "Edit Profile & Photos"}</span>
                   </Link>
 
                   <button
@@ -247,7 +332,7 @@ export default function DashboardPage() {
                     </div>
 
                     <Link
-                      href="/profile/setup"
+                      href={isBrand ? "/register/brand" : "/profile/setup"}
                       className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#D4AF37] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#C59B27] shadow-xs"
                     >
                       <Edit size={14} />
@@ -326,12 +411,24 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  {/* Verification Status Banner */}
-                  <div className="mt-8 flex items-center gap-3 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-4 text-xs">
-                    <ShieldCheck size={20} className="shrink-0 text-[#D4AF37]" />
-                    <p className="text-[#444444]">
-                      Your artist profile is registered with <strong className="text-[#111111]">Delhi Casting Agency</strong>. Premium members receive priority audition calls on WhatsApp.
-                    </p>
+                  {/* Verification Status Banner with Secondary Premium Upgrade Button */}
+                  <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 text-xs">
+                    <div className="flex items-center gap-3">
+                      <ShieldCheck size={24} className="shrink-0 text-[#D4AF37]" />
+                      <p className="text-[#444444]">
+                        {isBrand
+                          ? "Your brand account is registered with Delhi Casting Agency. Upgrade to Premium for direct talent access."
+                          : "Your artist profile is registered with Delhi Casting Agency. Upgrade to Premium for priority audition calls on WhatsApp."}
+                      </p>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={handleOpenPremiumCheckout}
+                      className="shrink-0 rounded-xl bg-[#111111] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition hover:bg-[#D4AF37] cursor-pointer"
+                    >
+                      {isBrand ? "GO PREMIUM — ₹9,999" : "GO PREMIUM — ₹3,999"}
+                    </button>
                   </div>
 
                 </div>
@@ -342,10 +439,12 @@ export default function DashboardPage() {
               <Reveal>
                 <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-8 shadow-md">
                   <h2 className="font-serif text-2xl font-bold text-[#111111] mb-2">
-                    Matched Casting Opportunities
+                    {isBrand ? "Active Casting Announcements" : "Matched Casting Opportunities"}
                   </h2>
                   <p className="text-xs text-[#555555] mb-6">
-                    Recent auditions matching your category: {profileData.primaryCategory}
+                    {isBrand
+                      ? "Casting briefs posted under your brand account"
+                      : `Recent auditions matching your category: ${profileData.primaryCategory}`}
                   </p>
 
                   <div className="space-y-4">
@@ -403,20 +502,20 @@ export default function DashboardPage() {
               <Reveal>
                 <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-8 shadow-md">
                   <h2 className="font-serif text-2xl font-bold text-[#111111] mb-2">
-                    Saved Audition Calls
+                    {isBrand ? "Bookmarked Talent Profiles" : "Saved Audition Calls"}
                   </h2>
                   <p className="text-xs text-[#555555] mb-6">
-                    Bookmarked opportunities for quick reference
+                    Bookmarked items for quick reference
                   </p>
 
                   <div className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-8 text-center text-xs text-[#555555]">
                     <Bookmark size={32} className="mx-auto mb-3 text-[#D4AF37]" />
-                    <p>You have 4 saved casting calls in your profile.</p>
+                    <p>You have 4 saved items in your account.</p>
                     <Link
                       href="/casting-calls/"
                       className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#D4AF37] px-5 py-2.5 font-bold uppercase text-white hover:bg-[#C59B27] shadow-xs"
                     >
-                      Browse Casting Calls
+                      Browse Platform
                     </Link>
                   </div>
                 </div>
@@ -426,6 +525,13 @@ export default function DashboardPage() {
 
         </div>
       </section>
+
+      {/* Premium Checkout Modal Component */}
+      <PremiumFlowModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialStep={modalInitialStep}
+      />
     </main>
   );
 }

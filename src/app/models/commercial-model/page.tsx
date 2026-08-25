@@ -120,7 +120,7 @@ export default function CommercialModelsPage() {
               </p>
 
               <Link
-                href="/register/"
+                href="/profile/setup"
                 className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c59b27] shadow-md"
               >
                 Register as a Model
@@ -320,7 +320,7 @@ export default function CommercialModelsPage() {
         title="Ready to showcase your commercial profile?"
         description="Register your talent profile and explore commercial modeling opportunities available on the platform."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

@@ -18,14 +18,14 @@ export function CTASection({
   eyebrow = "Take the next step",
   title,
   description,
-  href = "/register/",
+  href = "/profile/setup",
   label = "Register Now",
   buttonHref,
   buttonLabel,
 }: CTASectionProps) {
   const rawHref = buttonHref ?? href;
   const finalHref = (rawHref === "/register" || rawHref === "/register/") 
-    ? getProfileCreateOrSetupUrl() 
+    ? "/profile/setup" 
     : rawHref;
   const finalLabel = buttonLabel ?? label;
 

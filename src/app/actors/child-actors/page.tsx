@@ -101,7 +101,7 @@ export default function ChildActorsPage() {
               </div>
               <div className="pt-6">
                 <Link
-                  href="/register/"
+                  href="/profile/setup"
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d4af37] px-6 py-3.5 text-sm font-bold text-white hover:bg-[#c59b27] transition-all shadow-md"
                 >
                   Register Child Artist

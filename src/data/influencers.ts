@@ -185,11 +185,207 @@ export const INFLUENCERS_DATA: Influencer[] = [
       "/images/talents/influencers/rohan-kapoor/03.jpg",
       "/images/talents/influencers/rohan-kapoor/04.jpeg",
       "/images/talents/influencers/rohan-kapoor/05.jpg"
-],
+    ],
     videos: [],
     instagram: [],
     print: [],
   },
+  {
+    id: "kriti-sharma-inf",
+    name: "Kriti Sharma",
+    category: "fashion-influencers",
+    categoryLabel: "Fashion Influencer",
+    role: "High-Fashion & Luxury Creator",
+    handle: "@kritisharma_style",
+    platform: "Instagram & YouTube",
+    followers: "520K",
+    age: 24,
+    height: "5'7\"",
+    experience: "4 Years",
+    location: "New Delhi",
+    languages: ["English", "Hindi"],
+    followersCount: "520K+",
+    niche: ["Fashion", "Styling", "Luxury"],
+    mainImage: "/images/actors/fashion influencer.png",
+    badge: "Verified Creator",
+    about: "Kriti Sharma is a high-fashion digital creator specializing in luxury lookbooks and runway trend breakdowns.",
+    skills: ["Fashion Styling", "Lookbook Editing", "Brand Collaborations"],
+    experienceCredits: [
+      { project: "Zara Spring Collection", role: "Featured Stylist", type: "Brand Collaboration", year: "2025" }
+    ],
+    photos: ["/images/actors/fashion influencer.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "arjun-vlog",
+    name: "Arjun Vlogs",
+    category: "youtube-influencers",
+    categoryLabel: "YouTube Creator",
+    role: "Travel & Moto Vlogger",
+    handle: "@arjunvlogsofficial",
+    platform: "YouTube",
+    followers: "1.2M",
+    age: 26,
+    height: "5'11\"",
+    experience: "5 Years",
+    location: "Gurugram / Delhi",
+    languages: ["Hindi", "English"],
+    followersCount: "1.2M+",
+    niche: ["Travel", "Automotive", "Vlogging"],
+    mainImage: "/images/actors/lifestyle influencer.jpg",
+    badge: "Top Creator",
+    about: "Arjun is a premier travel and automotive vlogger documenting road trips, supercar reviews, and luxury resort stays.",
+    skills: ["4K Video Production", "Drone Cinematography", "Sponsorship Integration"],
+    experienceCredits: [
+      { project: "Mahindra Thar Expedition", role: "Vlogger Lead", type: "Product Launch", year: "2024" }
+    ],
+    photos: ["/images/actors/lifestyle influencer.jpg"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "riya-insta",
+    name: "Riya Malhotra",
+    category: "instagram-influencers",
+    categoryLabel: "Instagram Influencer",
+    role: "Beauty & Skincare Creator",
+    handle: "@riyamalhotra_official",
+    platform: "Instagram",
+    followers: "890K",
+    age: 23,
+    height: "5'6\"",
+    experience: "4 Years",
+    location: "New Delhi",
+    languages: ["English", "Hindi"],
+    followersCount: "890K+",
+    niche: ["Beauty", "Skincare", "Reels"],
+    mainImage: "/images/actors/insta influencer.png",
+    badge: "Verified Creator",
+    about: "Riya Malhotra creates viral short-form beauty tutorials and lifestyle reels with over 50M+ monthly impressions.",
+    skills: ["Short Form Video", "Makeup Tutorials", "Brand Endorsement"],
+    experienceCredits: [
+      { project: "Maybelline New York Reel Series", role: "Brand Ambassador", type: "Digital Campaign", year: "2025" }
+    ],
+    photos: ["/images/actors/insta influencer.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "kabir-tech",
+    name: "Kabir Tech",
+    category: "lifestyle-influencers",
+    categoryLabel: "Lifestyle Influencer",
+    role: "Tech & Grooming Vlogger",
+    handle: "@kabir_lifestyle",
+    platform: "Instagram & YouTube",
+    followers: "410K",
+    age: 27,
+    height: "6'0\"",
+    experience: "5 Years",
+    location: "Delhi NCR",
+    languages: ["English", "Hindi"],
+    followersCount: "410K+",
+    niche: ["Tech Gadgets", "Grooming", "Fitness"],
+    mainImage: "/images/actors/editorial_grid_4.png",
+    badge: "Verified Creator",
+    about: "Kabir focuses on smart lifestyle tech, wearable fitness devices, and urban men's grooming routines.",
+    skills: ["Tech Reviews", "Fitness Vlogging", "Unboxing"],
+    experienceCredits: [
+      { project: "Samsung Galaxy Ecosystem", role: "Reviewer", type: "Product Launch", year: "2024" }
+    ],
+    photos: ["/images/actors/editorial_grid_4.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "tanvi-beauty",
+    name: "Tanvi Beauty",
+    category: "fashion-influencers",
+    categoryLabel: "Fashion Influencer",
+    role: "Ethnic & Festive Stylist",
+    handle: "@tanvibeauty_style",
+    platform: "Instagram",
+    followers: "350K",
+    age: 22,
+    height: "5'7\"",
+    experience: "3 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    followersCount: "350K+",
+    niche: ["Ethnic Wear", "Festive Styling"],
+    mainImage: "/images/actors/editorial_grid_2.png",
+    badge: "Verified Creator",
+    about: "Tanvi specializes in ethnic bridal styling, saree draping tutorials, and festive fashion edits.",
+    skills: ["Ethnic Styling", "Festive Lookbooks", "Reel Production"],
+    experienceCredits: [
+      { project: "FabIndia Festive Edit", role: "Creator Partner", type: "Digital Campaign", year: "2024" }
+    ],
+    photos: ["/images/actors/editorial_grid_2.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "siddharth-vlogs",
+    name: "Siddharth Vlogs",
+    category: "youtube-influencers",
+    categoryLabel: "YouTube Creator",
+    role: "Food & Lifestyle Host",
+    handle: "@siddharthvlogs",
+    platform: "YouTube",
+    followers: "750K",
+    age: 25,
+    height: "5'11\"",
+    experience: "4 Years",
+    location: "Noida / Delhi",
+    languages: ["Hindi", "English"],
+    followersCount: "750K+",
+    niche: ["Urban Culture", "Food Vlogs"],
+    mainImage: "/images/actors/editorial_grid_5.png",
+    badge: "Top Creator",
+    about: "Siddharth hosts popular street food discovery vlogs and urban youth culture shows.",
+    skills: ["Food Vlogging", "Live Interactivity", "Storytelling"],
+    experienceCredits: [
+      { project: "Zomato Food Fest", role: "Host Vlogger", type: "Event Attendance", year: "2025" }
+    ],
+    photos: ["/images/actors/editorial_grid_5.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "pooja-reels",
+    name: "Pooja Reels",
+    category: "instagram-influencers",
+    categoryLabel: "Instagram Influencer",
+    role: "Dance & Fashion Reels Creator",
+    handle: "@poojareelsofficial",
+    platform: "Instagram",
+    followers: "600K",
+    age: 24,
+    height: "5'6.5\"",
+    experience: "3 Years",
+    location: "Delhi",
+    languages: ["Hindi", "English"],
+    followersCount: "600K+",
+    niche: ["Dance Reels", "Fashion"],
+    mainImage: "/images/actors/editorial_grid_3.png",
+    badge: "Verified Creator",
+    about: "Pooja combines high-energy dance trends with street fashion styling on Instagram Reels.",
+    skills: ["Dance Trends", "Fashion Reels", "Virality"],
+    experienceCredits: [
+      { project: "Puma India Reel Campaign", role: "Dance Creator", type: "Digital Campaign", year: "2024" }
+    ],
+    photos: ["/images/actors/editorial_grid_3.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  }
 ];
 
 export function getAllInfluencers(): Influencer[] {
@@ -202,6 +398,15 @@ export function getInfluencerById(id: string): Influencer | undefined {
 
 export function getInfluencersByCategory(category: InfluencerCategorySlug): Influencer[] {
   return INFLUENCERS_DATA.filter((inf) => inf.category === category);
+}
+
+export function getRelatedInfluencers(currentId: string, category: InfluencerCategorySlug, limit: number = 8): Influencer[] {
+  const sameCategory = INFLUENCERS_DATA.filter((i) => i.id !== currentId && i.category === category);
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+  const otherInfluencers = INFLUENCERS_DATA.filter((i) => i.id !== currentId && i.category !== category);
+  return [...sameCategory, ...otherInfluencers].slice(0, limit);
 }
 
 export function getInfluencerCategoryBySlug(slug: InfluencerCategorySlug): CategoryMeta | undefined {

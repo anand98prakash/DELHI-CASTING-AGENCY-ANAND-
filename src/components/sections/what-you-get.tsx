@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 import { Reveal } from "@/components/ui/reveal";
@@ -89,14 +89,16 @@ export function WhatYouGet() {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
 
   const cards = tab === "why" ? WHY : WHERE;
 
   const updateScrollState = () => {
     const el = trackRef.current;
     if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    setCanScrollLeft(el.scrollLeft > 10);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 10);
   };
 
   useEffect(() => {
@@ -110,15 +112,36 @@ export function WhatYouGet() {
     if (!el) return;
     const card = el.querySelector<HTMLElement>("[data-carousel-card]");
     const step = (card?.offsetWidth ?? 300) + 24;
-    el.scrollBy({
-      left: direction === "next" ? step : -step,
-      behavior: "smooth",
-    });
+    
+    if (direction === "next") {
+      const isAtEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 10;
+      if (isAtEnd) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: step, behavior: "smooth" });
+      }
+    } else {
+      const isAtStart = el.scrollLeft <= 10;
+      if (isAtStart) {
+        el.scrollTo({ left: el.scrollWidth, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: -step, behavior: "smooth" });
+      }
+    }
     setTimeout(updateScrollState, 350);
   };
 
+  useEffect(() => {
+    if (shouldReduceMotion || isHovered) return;
+
+    const timer = setInterval(() => {
+      scrollByCard("next");
+    }, 4500);
+
+    return () => clearInterval(timer);
+  }, [tab, isHovered, shouldReduceMotion]);
+
   return (
-    //part B
     <section
       id="benefits"
       className="relative overflow-hidden bg-white py-20 sm:py-24 md:py-28 border-b border-gray-200"
@@ -184,19 +207,18 @@ export function WhatYouGet() {
           </div>
         </Reveal>
 
-        {/* Cards */}
+        {/* Cards Carousel */}
         <div className="relative mt-12 sm:mt-16">
-          {/* Prev / Next controls */}
+          {/* Left / Right controls */}
           <button
             type="button"
             aria-label="Previous cards"
             onClick={() => scrollByCard("prev")}
-            disabled={!canScrollLeft}
             className={cn(
-              "absolute -left-2 sm:-left-5 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] shadow-md transition-opacity duration-300 sm:flex",
+              "absolute -left-2 sm:-left-5 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] shadow-md transition-all duration-300 hover:scale-105 hover:border-[#D4AF37] hover:text-[#D4AF37] hover:shadow-lg sm:flex cursor-pointer",
               canScrollLeft
-                ? "opacity-100 hover:border-[#D4AF37] hover:text-[#D4AF37]"
-                : "opacity-0 pointer-events-none",
+                ? "opacity-100"
+                : "opacity-40 hover:opacity-100",
             )}
           >
             <ChevronLeft size={20} />
@@ -206,12 +228,11 @@ export function WhatYouGet() {
             type="button"
             aria-label="Next cards"
             onClick={() => scrollByCard("next")}
-            disabled={!canScrollRight}
             className={cn(
-              "absolute -right-2 sm:-right-5 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] shadow-md transition-opacity duration-300 sm:flex",
+              "absolute -right-2 sm:-right-5 top-1/2 z-20 hidden -translate-y-1/2 h-11 w-11 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] shadow-md transition-all duration-300 hover:scale-105 hover:border-[#D4AF37] hover:text-[#D4AF37] hover:shadow-lg sm:flex cursor-pointer",
               canScrollRight
-                ? "opacity-100 hover:border-[#D4AF37] hover:text-[#D4AF37]"
-                : "opacity-0 pointer-events-none",
+                ? "opacity-100"
+                : "opacity-40 hover:opacity-100",
             )}
           >
             <ChevronRight size={20} />
@@ -226,10 +247,12 @@ export function WhatYouGet() {
               key={tab}
               ref={trackRef}
               onScroll={updateScrollState}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -30 }}
-              transition={{ duration: 0.45 }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
               className="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-1 pb-4 sm:gap-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {cards.map((item, index) => {
@@ -237,13 +260,15 @@ export function WhatYouGet() {
                   <motion.div
                     key={item.title}
                     data-carousel-card
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{
-                      delay: index * 0.06,
-                      duration: 0.5,
+                      delay: index * 0.05,
+                      duration: 0.45,
+                      ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="group relative w-[78%] shrink-0 snap-center rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-3 hover:border-[#D4AF37]/50 hover:shadow-xl sm:w-[300px] sm:p-8 lg:w-[320px]"
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    className="group relative w-[78%] shrink-0 snap-center rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-500 hover:border-[#D4AF37]/50 hover:shadow-xl sm:w-[300px] sm:p-8 lg:w-[320px]"
                   >
                     <div className="relative -mx-6 -mt-6 mb-5 h-48 overflow-hidden rounded-t-3xl bg-gray-100">
                       <img
@@ -274,11 +299,7 @@ export function WhatYouGet() {
               type="button"
               aria-label="Previous cards"
               onClick={() => scrollByCard("prev")}
-              disabled={!canScrollLeft}
-              className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] transition-opacity shadow-xs",
-                canScrollLeft ? "opacity-100" : "opacity-30",
-              )}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] transition-all shadow-xs active:scale-95 hover:border-[#D4AF37]"
             >
               <ChevronLeft size={18} />
             </button>
@@ -286,11 +307,7 @@ export function WhatYouGet() {
               type="button"
               aria-label="Next cards"
               onClick={() => scrollByCard("next")}
-              disabled={!canScrollRight}
-              className={cn(
-                "flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] transition-opacity shadow-xs",
-                canScrollRight ? "opacity-100" : "opacity-30",
-              )}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-[#111111] transition-all shadow-xs active:scale-95 hover:border-[#D4AF37]"
             >
               <ChevronRight size={18} />
             </button>

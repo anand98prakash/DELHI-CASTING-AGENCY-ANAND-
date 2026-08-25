@@ -64,7 +64,7 @@ export default function CommunityAccessPage() {
             },
             {
               label: "Register",
-              href: "/register/",
+              href: "/profile/setup",
             },
             {
               label: "Payment",

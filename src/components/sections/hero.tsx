@@ -1,12 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { ArrowRight, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { SITE } from "@/lib/constants";
+import { getProfileCreateOrSetupUrl } from "@/lib/auth";
 
 export function Hero() {
+  const router = useRouter();
+
   return (
     <section className="relative min-h-screen overflow-hidden bg-white">
       {/* Ambient Gold & Warm Background Glows */}
@@ -64,6 +68,70 @@ export function Hero() {
               </span>
             </motion.h1>
 
+            {/* Side-By-Side CTAs: REGISTER AS ARTIST | REGISTER AS BRAND */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-4 lg:justify-start"
+            >
+              <motion.button
+                type="button"
+                onClick={() => router.push(getProfileCreateOrSetupUrl())}
+                whileHover={{
+                  y: -3,
+                  scale: 1.03,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 25,
+                }}
+                className="group relative w-full sm:w-auto min-w-[200px] overflow-hidden rounded-full border-2 border-[#111111] bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#111111] transition-all duration-500 hover:border-[#D4AF37] hover:text-white hover:shadow-[0_10px_25px_rgba(212,175,55,0.25)] cursor-pointer"
+              >
+                {/* Gold hover fill */}
+                <span className="absolute inset-0 origin-left scale-x-0 bg-[#D4AF37] transition-transform duration-500 ease-out group-hover:scale-x-100" />
+
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  REGISTER AS ARTIST
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">
+                    →
+                  </span>
+                </span>
+              </motion.button>
+
+              <motion.button
+                type="button"
+                onClick={() => router.push("/register/brand")}
+                whileHover={{
+                  y: -3,
+                  scale: 1.03,
+                }}
+                whileTap={{
+                  scale: 0.97,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 25,
+                }}
+                className="group relative w-full sm:w-auto min-w-[200px] overflow-hidden rounded-full border-2 border-[#111111] bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#111111] transition-all duration-500 hover:border-[#D4AF37] hover:text-white hover:shadow-[0_10px_25px_rgba(212,175,55,0.25)] cursor-pointer"
+              >
+                {/* Gold hover fill */}
+                <span className="absolute inset-0 origin-left scale-x-0 bg-[#D4AF37] transition-transform duration-500 ease-out group-hover:scale-x-100" />
+
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  REGISTER AS BRAND
+                  <span className="inline-block transition-transform duration-300 group-hover:translate-x-1.5">
+                    →
+                  </span>
+                </span>
+              </motion.button>
+            </motion.div>
+
             {/* Description */}
             <motion.p
               initial={{ opacity: 0 }}
@@ -71,33 +139,49 @@ export function Hero() {
               transition={{
                 delay: 0.6,
               }}
-              className="mt-8 max-w-xl text-lg leading-8 text-[#555555]"
+              className="mt-6 max-w-xl text-lg leading-8 text-[#555555] text-center lg:text-left"
             >
-              {SITE.tagline}
+              Verified casting calls across India, delivered to artists who are
+              ready.
             </motion.p>
 
             {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.8,
-              }}
-              className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start"
+              transition={{ delay: 0.8 }}
+              className="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start"
             >
-              <Button
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent("open-registration"));
+              <motion.div
+                whileHover={{ y: -4, scale: 1.03 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 18,
                 }}
-                className="bg-[#111111] text-white hover:bg-[#222222]"
               >
-                Become Premium
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+                <Button
+                  onClick={() => {
+                    window.dispatchEvent(new CustomEvent("open-premium-modal"));
+                  }}
+                  className="group relative overflow-hidden rounded-full bg-[#111111] px-7 py-3.5 text-sm font-bold uppercase tracking-[0.12em] text-white transition-all duration-500 hover:bg-[#D4AF37] hover:text-white hover:shadow-[0_12px_30px_rgba(212,175,55,0.30)]"
+                >
+                  <span className="relative z-10 flex items-center">
+                    Become Premium
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </Button>
+              </motion.div>
 
-              <p className="text-sm text-[#555555]">
-                ₹3,999 • Lifetime Membership
-              </p>
+              <motion.p
+                initial={{ opacity: 0, x: -8 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1 }}
+                className="text-sm font-medium text-[#555555]"
+              >
+               <b> ₹3,999 <span className="mx-1">•</span> Lifetime Membership</b>
+              </motion.p>
             </motion.div>
 
             {/* Trust Badges */}

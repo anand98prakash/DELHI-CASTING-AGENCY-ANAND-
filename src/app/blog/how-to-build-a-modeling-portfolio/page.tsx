@@ -321,7 +321,7 @@ export default function HowToBuildAModelingPortfolioPage() {
         title="Ready to showcase your modeling profile?"
         description="Keep your portfolio current and explore modeling opportunities that match your profile."
         buttonLabel="Register as a Model"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

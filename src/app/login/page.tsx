@@ -162,14 +162,23 @@ export default function LoginPage() {
               </Button>
 
               {/* Register Prompt */}
-              <div className="mt-4 border-t border-gray-200 pt-4 text-center">
+              <div className="mt-4 border-t border-gray-200 pt-4 text-center space-y-2">
                 <p className="text-xs text-[#555555]">
                   Don&apos;t have an artist profile yet?{" "}
                   <Link
-                    href="/register"
+                    href="/profile/setup"
                     className="font-bold text-[#111111] hover:text-[#D4AF37] transition-colors"
                   >
                     Create Your Profile &rarr;
+                  </Link>
+                </p>
+                <p className="text-xs text-[#555555]">
+                  Are you a Brand or Casting Agency?{" "}
+                  <Link
+                    href="/register/brand"
+                    className="font-bold text-[#D4AF37] hover:underline transition-colors"
+                  >
+                    Register as Brand &rarr;
                   </Link>
                 </p>
               </div>

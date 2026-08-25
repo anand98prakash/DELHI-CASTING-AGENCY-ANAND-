@@ -229,7 +229,7 @@ export default function HowItWorksPage() {
         title="Ready to create your artist profile?"
         description="Register your talent profile and explore the platform."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

@@ -92,7 +92,7 @@ export const FOOTER_GROUPS = [
       { label: "Actors", href: "/blog/category/actors/" },
       { label: "Models", href: "/blog/category/models/" },
       { label: "Industry News", href: "/blog/category/industry-news/" },
-      { label: "Register", href: "/register/" },
+      { label: "Register", href: "/profile/setup" },
     ],
   },
   {

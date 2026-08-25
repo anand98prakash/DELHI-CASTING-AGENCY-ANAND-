@@ -59,7 +59,7 @@ export default function PaymentFailedPage() {
             },
             {
               label: "Register",
-              href: "/register/",
+              href: "/profile/setup",
             },
             {
               label: "Payment",
@@ -168,7 +168,7 @@ export default function PaymentFailedPage() {
               <Button
                 type="button"
                 variant="ghost"
-                onClick={() => router.push("/register/step-2-profile/")}
+                onClick={() => router.push("/profile/setup")}
                 className="text-[#111111] hover:bg-gray-200"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />

@@ -57,10 +57,10 @@ export function DancerCategoryCard({ category }: DancerCategoryCardProps) {
       <div className="mt-6 pt-4 border-t border-gray-200 flex items-center justify-between shrink-0">
         <Link
           href={category.route}
-          className="inline-flex items-center gap-2 text-sm font-bold text-[#111111] group-hover:text-[#d4af37] transition-colors"
+          className="group/link inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-[0.08em] text-[#111111] hover:text-[#D4AF37] transition-colors"
         >
           <span>{category.ctaText}</span>
-          <ArrowRight className="w-4 h-4 text-[#d4af37] group-hover:translate-x-1 transition-transform duration-300 motion-reduce:group-hover:translate-x-0" />
+          <ArrowRight className="w-4 h-4 text-[#D4AF37] transition-transform duration-300 group-hover/link:translate-x-1.5 group-hover:translate-x-1.5" />
         </Link>
 
         <span className="text-xs text-[#666666] font-medium">

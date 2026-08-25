@@ -111,7 +111,7 @@ export default function ChildArtistsPage() {
 
               <div className="flex items-center">
                 <Link
-                  href="/register/"
+                  href="/profile/setup"
                   className="inline-flex items-center justify-center rounded-full bg-[#111111] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition duration-300 hover:bg-[#D4AF37]"
                 >
                   Register Child Artist

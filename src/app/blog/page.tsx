@@ -266,7 +266,7 @@ export default function BlogPage() {
         title="Ready to take the next step?"
         description="Explore our resources and prepare yourself for your next casting opportunity."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

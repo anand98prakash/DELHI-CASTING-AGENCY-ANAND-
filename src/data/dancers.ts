@@ -241,11 +241,161 @@ export const DANCERS_DATA: Dancer[] = [
       "/images/talents/dancers/priya-nair/02.jpg",
       "/images/talents/dancers/priya-nair/03.jpg",
       "/images/talents/dancers/priya-nair/04.jpg"
-],
+    ],
     videos: [],
     instagram: [],
     print: [],
   },
+  {
+    id: "rohit-sharma-dancer",
+    name: "Rohit Sharma",
+    category: "lead-dancers",
+    categoryLabel: "Lead Dancer",
+    role: "Bollywood & Urban Lead",
+    age: 26,
+    height: "5'10\"",
+    experience: "6 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    danceStyles: ["Bollywood", "Urban Choreo", "Hip-Hop"],
+    trainingAcademy: "Kingdom of Dreams Choreography Wing",
+    mainImage: "/images/actors/lead dancers.jpg",
+    badge: "Verified Lead Artist",
+    about: "Rohit Sharma is a dynamic lead dancer featuring high-octane Bollywood choreography and urban video performances.",
+    skills: ["Bollywood Solo", "Rhythmic Sync", "Stage Chemistry"],
+    experienceCredits: [
+      { project: "Bollywood Dhamaka Tour", role: "Lead Dancer", type: "Bollywood Music Video", year: "2024" }
+    ],
+    photos: ["/images/actors/lead dancers.jpg"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "megha-sen",
+    name: "Megha Sen",
+    category: "contemporary-dancers",
+    categoryLabel: "Contemporary Dancer",
+    role: "Modern & Neoclassical Performer",
+    age: 24,
+    height: "5'6\"",
+    experience: "5 Years",
+    location: "Gurugram / Delhi",
+    languages: ["Hindi", "English"],
+    danceStyles: ["Contemporary", "Lyrical Jazz", "Modern Ballet"],
+    trainingAcademy: "Delhi Dance Academy",
+    mainImage: "/images/actors/Contemporary Dancers.avif",
+    badge: "Verified DCA Artist",
+    about: "Megha Sen is a graceful contemporary dancer specializing in fluid lyrical storytelling and stage fusion.",
+    skills: ["Lyrical Expression", "Partnering", "Modern Jazz"],
+    experienceCredits: [
+      { project: "Delhi Contemporary Fest", role: "Soloist", type: "Theatre Dance Production", year: "2025" }
+    ],
+    photos: ["/images/actors/Contemporary Dancers.avif"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "rahul-kapoor-hiphop",
+    name: "Rahul Kapoor",
+    category: "hip-hop-dancers",
+    categoryLabel: "Hip-Hop Dancer",
+    role: "Street & Popping Specialist",
+    age: 23,
+    height: "5'9.5\"",
+    experience: "4 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    danceStyles: ["Popping", "Locking", "Urban Choreography"],
+    trainingAcademy: "Urban Dance Project",
+    mainImage: "/images/actors/Hip-Hop Dancers.avif",
+    badge: "Street Specialist",
+    about: "Rahul Kapoor brings sharp urban isolations and popping choreography to music videos and commercial brand sets.",
+    skills: ["Popping & Locking", "Freestyle", "Video Sync"],
+    experienceCredits: [
+      { project: "Street Battle Delhi", role: "Winner", type: "Live Concert Tour", year: "2024" }
+    ],
+    photos: ["/images/actors/Hip-Hop Dancers.avif"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "neha-verma-dancer",
+    name: "Neha Verma",
+    category: "background-dancers",
+    categoryLabel: "Background Dancer",
+    role: "Ensemble Troupe Performer",
+    age: 22,
+    height: "5'5\"",
+    experience: "3 Years",
+    location: "Noida / Delhi",
+    languages: ["Hindi", "English"],
+    danceStyles: ["Bollywood Troupe", "Folk Fusion"],
+    trainingAcademy: "Shiamak Davar Alumni",
+    mainImage: "/images/actors/Background Dancers.webp",
+    badge: "Ensemble Pro",
+    about: "Neha Verma is an energetic troupe dancer experienced in grand TV show performances and film songs.",
+    skills: ["Troupe Formations", "Rapid Learning", "Stage Energy"],
+    experienceCredits: [
+      { project: "Star Screen Awards", role: "Troupe Performer", type: "Award Show Performance", year: "2024" }
+    ],
+    photos: ["/images/actors/Background Dancers.webp"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "siddharth-roy-dancer",
+    name: "Siddharth Roy",
+    category: "lead-dancers",
+    categoryLabel: "Lead Dancer",
+    role: "Commercial & Stage Soloist",
+    age: 27,
+    height: "6'0\"",
+    experience: "7 Years",
+    location: "Delhi NCR",
+    languages: ["Hindi", "English"],
+    danceStyles: ["Bollywood", "Contemporary", "Hip-Hop"],
+    trainingAcademy: "TIPA Choreography Wing",
+    mainImage: "/images/actors/dancers horizontal.jpg",
+    badge: "Verified Lead Artist",
+    about: "Siddharth Roy is a versatile soloist and lead performer featured in high-budget music videos and live shows.",
+    skills: ["Lead Performance", "Stage Presence", "Acrobatic Stunts"],
+    experienceCredits: [
+      { project: "T-Series Remix Night", role: "Featured Lead", type: "Bollywood Music Video", year: "2025" }
+    ],
+    photos: ["/images/actors/dancers horizontal.jpg"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "pooja-chhabra",
+    name: "Pooja Chhabra",
+    category: "contemporary-dancers",
+    categoryLabel: "Contemporary Dancer",
+    role: "Kathak & Lyrical Fusion",
+    age: 24,
+    height: "5'7\"",
+    experience: "5 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    danceStyles: ["Kathak", "Contemporary", "Fusion"],
+    trainingAcademy: "Gandharva Mahavidyalaya",
+    mainImage: "/images/actors/editorial_grid_1.png",
+    badge: "Verified DCA Artist",
+    about: "Pooja Chhabra is a trained classical Kathak dancer who seamlessly integrates modern lyrical movement into dance films.",
+    skills: ["Kathak Spin", "Fluidity", "Expression"],
+    experienceCredits: [
+      { project: "Classical Fusion Night", role: "Solo Dancer", type: "Theatre Dance Production", year: "2024" }
+    ],
+    photos: ["/images/actors/editorial_grid_1.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  }
 ];
 
 export function getAllDancers(): Dancer[] {
@@ -258,6 +408,15 @@ export function getDancerById(id: string): Dancer | undefined {
 
 export function getDancersByCategory(category: DancerCategorySlug): Dancer[] {
   return DANCERS_DATA.filter((d) => d.category === category);
+}
+
+export function getRelatedDancers(currentId: string, category: DancerCategorySlug, limit: number = 8): Dancer[] {
+  const sameCategory = DANCERS_DATA.filter((d) => d.id !== currentId && d.category === category);
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+  const otherDancers = DANCERS_DATA.filter((d) => d.id !== currentId && d.category !== category);
+  return [...sameCategory, ...otherDancers].slice(0, limit);
 }
 
 export function getDancerCategoryBySlug(slug: DancerCategorySlug): CategoryMeta | undefined {

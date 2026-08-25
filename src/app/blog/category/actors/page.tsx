@@ -225,7 +225,7 @@ export default function ActorsBlogCategoryPage() {
         title="Ready to explore acting opportunities?"
         description="Keep learning, keep your profile updated and explore suitable casting opportunities."
         buttonLabel="Register as an Actor"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

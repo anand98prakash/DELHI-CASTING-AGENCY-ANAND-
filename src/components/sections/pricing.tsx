@@ -15,6 +15,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { RegistrationForm } from "@/components/sections/registration-form";
 import { SuccessModal } from "@/components/success-modal";
+import { PremiumFlowModal, PremiumModalStep } from "@/components/premium-flow-modal";
+import { getUserSession, isUserAuthenticated } from "@/lib/auth";
 import { SITE } from "@/lib/constants";
 
 const PERKS = [
@@ -28,43 +30,50 @@ const PERKS = [
 
 export function Pricing() {
   const [open, setOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
+  const [isRegistrationFlow, setIsRegistrationFlow] = useState(false);
   const [memberId, setMemberId] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
-  // 👇 ADD THIS HERE
-  // const openRegistration = () => {
-  //   setOpen(true);
+  const handleBecomePremium = () => {
+    setIsRegistrationFlow(false);
+    if (!isUserAuthenticated()) {
+      setModalInitialStep("role_select");
+    } else {
+      const session = getUserSession();
+      if (session?.role === "brand") {
+        setModalInitialStep("brand_checkout");
+      } else if (session?.role === "artist") {
+        setModalInitialStep("artist_checkout");
+      } else {
+        setModalInitialStep("role_select");
+      }
+    }
+    setModalOpen(true);
+  };
 
-  //   setTimeout(() => {
-  //     formRef.current?.scrollIntoView({
-  //       behavior: "smooth",
-  //       block: "start",
-  //     });
-  //   }, 500);
-  // };
-
-  const openRegistration = () => {
-    setOpen(true);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        formRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      });
-    });
+  const handleOpenRegistration = () => {
+    setIsRegistrationFlow(true);
+    setModalInitialStep("role_select");
+    setModalOpen(true);
   };
 
   useEffect(() => {
-    const openRegistrationEvent = () => {
-      openRegistration();
+    const openRegistrationHandler = () => {
+      handleOpenRegistration();
     };
 
-    window.addEventListener("open-registration", openRegistrationEvent);
+    const openPremiumHandler = () => {
+      handleBecomePremium();
+    };
+
+    window.addEventListener("open-registration", openRegistrationHandler);
+    window.addEventListener("open-premium-modal", openPremiumHandler);
 
     return () => {
-      window.removeEventListener("open-registration", openRegistrationEvent);
+      window.removeEventListener("open-registration", openRegistrationHandler);
+      window.removeEventListener("open-premium-modal", openPremiumHandler);
     };
   }, []);
 
@@ -153,7 +162,7 @@ export function Pricing() {
                   Secure Payment
                 </div>
 
-                <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-[#F7F7F5] px-4 py-2 text-sm font-medium text-[#333333] shadow-xs">
+                <div className="flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-2 text-sm font-medium text-[#D4AF37] shadow-xs">
                   <BadgeCheck size={16} className="text-[#D4AF37]" />
                   Lifetime Access
                 </div>
@@ -190,8 +199,8 @@ export function Pricing() {
                 transition={{ delay: 0.5 }}
                 className="mt-10"
               >
-                <Button size="block" onClick={openRegistration}>
-                  Become a Premium Member
+                <Button size="block" onClick={handleBecomePremium}>
+                  Become Premium
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
 
@@ -221,7 +230,7 @@ export function Pricing() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="mt-10 rounded-3xl border border-gray-200 bg-white p-8 text-center shadow-md"
+          className="mt-10 rounded-3xl border border-gray-200 bg-[#F7F7F5] p-8 text-center shadow-md"
         >
           <h3 className="text-3xl font-bold text-[#111111]">
             Start Your <span className="text-[#D4AF37]">Bollywood Journey</span>
@@ -238,7 +247,7 @@ export function Pricing() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <span className="rounded-full border border-gray-200 bg-[#F7F7F5] px-4 py-2 text-sm font-medium text-[#333333]">
+            <span className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#333333]">
               🔒 Secure One-Time Payment
             </span>
 
@@ -249,10 +258,10 @@ export function Pricing() {
 
           <Button
             size="block"
-            onClick={openRegistration}
+            onClick={handleBecomePremium}
             className="mx-auto mt-8 max-w-md"
           >
-            Become a Premium Member
+            Become Premium
             <ArrowRight className="ml-2 h-5 w-5" />
           </Button>
 
@@ -302,6 +311,12 @@ export function Pricing() {
       </div>
 
       <SuccessModal memberId={memberId} onClose={() => setMemberId(null)} />
+      <PremiumFlowModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialStep={modalInitialStep}
+        isRegistrationFlow={isRegistrationFlow}
+      />
     </section>
   );
 }

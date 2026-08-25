@@ -173,7 +173,7 @@ export default function SuccessStoriesPage() {
         title="Ready to create your artist profile?"
         description="Explore the platform and start building your professional talent profile."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
 
       {/* Secondary Link */}

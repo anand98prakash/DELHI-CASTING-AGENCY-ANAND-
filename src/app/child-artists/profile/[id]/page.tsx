@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getAllChildArtists, getChildArtistById, getChildArtistsByCategory } from "@/data/child-artists";
+import { getAllChildArtists, getChildArtistById, getRelatedChildArtists } from "@/data/child-artists";
 import { ChildArtistProfileView } from "@/components/child-artists/ChildArtistProfileView";
 
 interface ChildArtistProfilePageProps {
@@ -44,9 +44,7 @@ export default async function ChildArtistProfilePage({
     notFound();
   }
 
-  const similarArtists = getChildArtistsByCategory(artist.category)
-    .filter((a) => a.id !== artist.id)
-    .slice(0, 4);
+  const similarArtists = getRelatedChildArtists(artist.id, artist.category, 8);
 
   return <ChildArtistProfileView artist={artist} similarArtists={similarArtists} />;
 }

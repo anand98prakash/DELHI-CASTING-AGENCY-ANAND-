@@ -1,4 +1,6 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -11,6 +13,8 @@ import {
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { CTASection } from "@/components/ui/cta-section";
 import { Reveal } from "@/components/ui/reveal";
+import { PremiumFlowModal, PremiumModalStep } from "@/components/premium-flow-modal";
+import { getUserSession, isUserAuthenticated } from "@/lib/auth";
 
 const includedItems = [
   {
@@ -59,13 +63,26 @@ const notGuaranteedItems = [
   "Guaranteed income or number of opportunities",
 ];
 
-export const metadata = {
-  title: "Membership | Delhi Casting Agency (DCA)",
-  description:
-    "Understand what Delhi Casting Agency membership includes and what it does not guarantee before registering your artist profile.",
-};
-
 export default function MembershipPage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
+
+  const handleBecomePremium = () => {
+    if (!isUserAuthenticated()) {
+      setModalInitialStep("role_select");
+    } else {
+      const session = getUserSession();
+      if (session?.role === "brand") {
+        setModalInitialStep("brand_checkout");
+      } else if (session?.role === "artist") {
+        setModalInitialStep("artist_checkout");
+      } else {
+        setModalInitialStep("role_select");
+      }
+    }
+    setModalOpen(true);
+  };
+
   return (
     <main className="min-h-screen bg-white text-[#111111]">
       {/* Hero Header */}
@@ -154,29 +171,72 @@ export default function MembershipPage() {
       <section className="mx-auto max-w-7xl px-6 py-12 border-t border-gray-200">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal>
-            <div className="rounded-xl border border-gray-200 bg-[#F7F7F5] p-8 shadow-md">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
-                Membership Fee
-              </span>
-              <h2 className="mt-2 font-serif text-3xl font-bold text-[#111111]">
-                Lifetime Access
-              </h2>
-              <p className="mt-3 text-xs leading-relaxed text-[#555555]">
-                The membership fee is part of the registration journey. Please refer to the registration/payment flow for the currently applicable fee before completing payment.
-              </p>
-              <div className="mt-6 rounded-lg border border-gray-200 bg-white p-4 text-xs text-[#555555]">
-                <div className="flex items-start gap-2">
-                  <Info className="h-4 w-4 shrink-0 text-[#D4AF37]" />
-                  <span>Lifetime Membership • No Renewal Charges</span>
+            <div className="grid gap-6 sm:grid-cols-2">
+              {/* Artist Plan */}
+              <div className="rounded-xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-md">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+                  Artist Plan
+                </span>
+                <h3 className="mt-2 font-serif text-xl font-bold text-[#111111]">
+                  Premium Artist Membership
+                </h3>
+                <div className="mt-3 flex items-end gap-1">
+                  <span className="text-lg font-bold text-[#D4AF37]">₹</span>
+                  <span className="text-4xl font-extrabold text-[#D4AF37]">3,999</span>
+                  <span className="text-xs font-semibold text-gray-500 mb-1"> / lifetime</span>
                 </div>
+                <p className="mt-2 text-xs text-[#555555]">
+                  One-time payment for verified casting calls &amp; priority profile visibility.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isUserAuthenticated()) {
+                      setModalInitialStep("artist_checkout");
+                    } else {
+                      setModalInitialStep("role_select");
+                    }
+                    setModalOpen(true);
+                  }}
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-xs font-bold uppercase tracking-wider text-white transition duration-300 hover:bg-[#D4AF37] cursor-pointer"
+                >
+                  <span>Become Premium — ₹3,999</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
               </div>
-              <Link
-                href="/register/"
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#111111] py-3.5 text-xs font-bold uppercase tracking-[0.18em] text-white transition duration-300 hover:bg-[#D4AF37]"
-              >
-                <span>Continue to Registration</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+
+              {/* Brand Plan */}
+              <div className="rounded-xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-md">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+                  Brand &amp; Casting Plan
+                </span>
+                <h3 className="mt-2 font-serif text-xl font-bold text-[#111111]">
+                  Premium Casting Account
+                </h3>
+                <div className="mt-3 flex items-end gap-1">
+                  <span className="text-lg font-bold text-[#D4AF37]">₹</span>
+                  <span className="text-4xl font-extrabold text-[#D4AF37]">9,999</span>
+                  <span className="text-xs font-semibold text-gray-500 mb-1"> / lifetime</span>
+                </div>
+                <p className="mt-2 text-xs text-[#555555]">
+                  One-time payment for direct talent access &amp; priority casting placement.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (isUserAuthenticated()) {
+                      setModalInitialStep("brand_checkout");
+                    } else {
+                      setModalInitialStep("role_select");
+                    }
+                    setModalOpen(true);
+                  }}
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#D4AF37] py-3 text-xs font-bold uppercase tracking-wider text-white transition duration-300 hover:bg-[#C59B27] cursor-pointer"
+                >
+                  <span>Become Premium — ₹9,999</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
           </Reveal>
 
@@ -234,8 +294,14 @@ export default function MembershipPage() {
         eyebrow="Ready to Continue?"
         title="Create your artist profile."
         description="Start the registration journey and review the applicable membership information before payment."
-        buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonLabel="Become Premium"
+        buttonHref="#"
+      />
+
+      <PremiumFlowModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialStep={modalInitialStep}
       />
     </main>
   );

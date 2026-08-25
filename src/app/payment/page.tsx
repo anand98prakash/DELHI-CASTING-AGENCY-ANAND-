@@ -42,7 +42,7 @@ export default function PaymentPage() {
     const registration = sessionStorage.getItem("artist-registration-complete");
 
     if (!registration) {
-      router.replace("/register/");
+      router.replace("/profile/setup");
     }
   }, [router]);
 
@@ -97,11 +97,11 @@ export default function PaymentPage() {
             },
             {
               label: "Register",
-              href: "/register/",
+              href: "/profile/setup",
             },
             {
               label: "Artist Profile",
-              href: "/register/step-2-profile/",
+              href: "/profile/setup",
             },
             {
               label: "Payment",
@@ -326,7 +326,7 @@ export default function PaymentPage() {
         <div className="mt-8">
           <button
             type="button"
-            onClick={() => router.push("/register/step-2-profile/")}
+            onClick={() => router.push("/profile/setup")}
             className="inline-flex items-center gap-2 text-sm font-medium text-[#666666] transition-colors hover:text-[#D4AF37]"
           >
             <ArrowLeft className="h-4 w-4" />

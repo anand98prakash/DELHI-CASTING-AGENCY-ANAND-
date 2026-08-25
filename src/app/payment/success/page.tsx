@@ -59,7 +59,7 @@ export default function PaymentSuccessPage() {
             },
             {
               label: "Register",
-              href: "/register/",
+              href: "/profile/setup",
             },
             {
               label: "Payment",

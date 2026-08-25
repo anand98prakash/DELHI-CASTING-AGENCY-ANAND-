@@ -119,21 +119,34 @@ export function Navbar() {
 
           {/* DESKTOP ACTIONS: LOGIN & REGISTER NOW */}
           <div className="hidden items-center gap-4 lg:flex">
-            <Link
-              href="/login"
-              className="whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.14em] text-[#111111] transition duration-200 hover:text-[#D4AF37] flex items-center gap-1.5"
+            <motion.div
+              whileHover={{ y: -1, scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              <User className="h-3.5 w-3.5 text-[#D4AF37]" />
-              <span>Login</span>
-            </Link>
+              <Link
+                href="/login"
+                className="group whitespace-nowrap text-[13px] font-semibold uppercase tracking-[0.14em] text-[#111111] transition duration-200 hover:text-[#D4AF37] flex items-center gap-1.5"
+              >
+                <User className="h-3.5 w-3.5 text-[#D4AF37] transition-transform duration-200 group-hover:scale-110" />
+                <span>Login</span>
+                <ArrowRight className="h-3.5 w-3.5 opacity-0 -ml-1 transition-all duration-300 group-hover:opacity-100 group-hover:ml-0.5 text-[#D4AF37]" />
+              </Link>
+            </motion.div>
 
-            <Link
-              href={getProfileCreateOrSetupUrl()}
-              className="group flex items-center gap-2 rounded-full border border-[#D4AF37] bg-white px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.16em] text-[#111111] transition duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white shadow-xs whitespace-nowrap"
+            <motion.button
+              type="button"
+              whileHover={{ y: -2, scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent("open-registration"));
+              }}
+              className="group flex items-center gap-2 rounded-full border-2 border-[#D4AF37] bg-white px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.16em] text-[#111111] transition duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white shadow-xs hover:shadow-md hover:shadow-[#D4AF37]/20 whitespace-nowrap cursor-pointer"
             >
               <span>REGISTER NOW</span>
-              <ArrowRight className="h-3.5 w-3.5 transition duration-300 group-hover:translate-x-1 text-[#D4AF37] group-hover:text-white" />
-            </Link>
+              <ArrowRight className="h-3.5 w-3.5 transition duration-300 group-hover:translate-x-1.5 text-[#D4AF37] group-hover:text-white" />
+            </motion.button>
           </div>
 
           {/* MOBILE MENU TOGGLE BUTTON */}
@@ -245,14 +258,17 @@ export function Navbar() {
                 </div>
               </nav>
 
-              <Link
-                href={getProfileCreateOrSetupUrl()}
-                onClick={closeMobile}
-                className="mt-8 flex min-h-14 items-center justify-center gap-2 rounded-full border border-[#D4AF37] bg-[#D4AF37] px-6 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition active:scale-[0.98] shadow-md"
+              <button
+                type="button"
+                onClick={() => {
+                  closeMobile();
+                  window.dispatchEvent(new CustomEvent("open-registration"));
+                }}
+                className="mt-8 flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#D4AF37] bg-[#D4AF37] px-6 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition active:scale-[0.98] shadow-md cursor-pointer"
               >
                 <span>REGISTER NOW</span>
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </button>
             </div>
           </motion.aside>
         )}

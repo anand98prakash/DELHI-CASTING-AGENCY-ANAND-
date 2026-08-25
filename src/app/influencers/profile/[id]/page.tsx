@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getAllInfluencers, getInfluencerById, getInfluencersByCategory } from "@/data/influencers";
+import { getAllInfluencers, getInfluencerById, getRelatedInfluencers } from "@/data/influencers";
 import { InfluencerProfileView } from "@/components/influencers/InfluencerProfileView";
 
 interface InfluencerProfilePageProps {
@@ -44,9 +44,7 @@ export default async function InfluencerProfilePage({
     notFound();
   }
 
-  const similarInfluencers = getInfluencersByCategory(influencer.category)
-    .filter((i) => i.id !== influencer.id)
-    .slice(0, 4);
+  const similarInfluencers = getRelatedInfluencers(influencer.id, influencer.category, 8);
 
   return <InfluencerProfileView influencer={influencer} similarInfluencers={similarInfluencers} />;
 }

@@ -35,7 +35,7 @@ export default function RegistrationSuccessPage() {
             <Breadcrumb
               items={[
                 { label: "Home", href: "/" },
-                { label: "Register", href: "/register/" },
+                { label: "Register", href: "/profile/setup" },
                 { label: "Success" },
               ]}
             />
@@ -100,7 +100,7 @@ export default function RegistrationSuccessPage() {
               </Link>
 
               <Link
-                href="/register/step-2-profile"
+                href="/profile/setup"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-gray-50 text-[#555555] border border-gray-200 font-semibold text-xs transition-all shadow-2xs"
               >
                 <Edit3 className="w-4 h-4 text-[#D4AF37]" />

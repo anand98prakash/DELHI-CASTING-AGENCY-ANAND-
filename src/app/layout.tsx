@@ -7,6 +7,7 @@ import { Analytics } from "@/components/analytics";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { ScrollNavigation } from "@/components/layout/scroll-navigation";
 import { OFFICIAL_DCA_INSTAGRAM_URL } from "@/data/media";
 
 const manrope = Manrope({
@@ -129,6 +130,7 @@ export default function RootLayout({
           <Footer />
 
           <Analytics />
+          <ScrollNavigation />
         </SmoothScrollProvider>
       </body>
     </html>

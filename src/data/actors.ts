@@ -393,7 +393,207 @@ export const ACTORS_DATA: Actor[] = [
       "/images/talents/actors/female/kriti-sen/03.jpg",
       "/images/talents/actors/female/kriti-sen/04.png",
       "/images/talents/actors/female/kriti-sen/05.png"
-],
+    ],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "aditya-roy",
+    name: "Aditya Roy",
+    category: "male",
+    categoryLabel: "Male Actor",
+    role: "Action & Drama Lead",
+    age: 28,
+    height: "183 cm (6'0\")",
+    experience: "5 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    eyeColor: "Dark Brown",
+    hair: "Black",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/male actor.png",
+    about: "Dynamic screen presence with extensive background in theatre, action choreography, and OTT thriller series.",
+    skills: ["Action Choreography", "Voice Modulation", "Theatre Acting"],
+    experienceCredits: [
+      { project: "Delhi Crime Files", role: "Inspector Vikram", type: "OTT / Web Series", year: "2024" }
+    ],
+    digitals: ["/images/actors/male actor.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "sid-malhotra-actor",
+    name: "Siddharth Malhotra",
+    category: "male",
+    categoryLabel: "Male Actor",
+    role: "Romantic Lead",
+    age: 26,
+    height: "180 cm (5'11\")",
+    experience: "4 Years",
+    location: "Gurugram / Delhi",
+    languages: ["Hindi", "English", "Punjabi"],
+    eyeColor: "Hazel",
+    hair: "Dark Brown",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/editorial_grid_4.png",
+    about: "Versatile romantic lead with strong camera appeal and commercial campaign experience for national brands.",
+    skills: ["Romantic Comedy", "Screen Acting", "Commercial Posing"],
+    experienceCredits: [
+      { project: "Love in Delhi", role: "Kabir", type: "Feature Film", year: "2024" }
+    ],
+    digitals: ["/images/actors/editorial_grid_4.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "vikram-rathore",
+    name: "Vikram Rathore",
+    category: "male",
+    categoryLabel: "Male Actor",
+    role: "Character Actor",
+    age: 32,
+    height: "181 cm (5'11.5\")",
+    experience: "8 Years",
+    location: "Noida / Delhi",
+    languages: ["Hindi", "English"],
+    eyeColor: "Black",
+    hair: "Black",
+    badge: "Senior Performer",
+    mainImage: "/images/actors/editorial_grid_5.png",
+    about: "Intense dramatic actor specializing in grey roles, corporate thrillers, and period dramas.",
+    skills: ["Method Acting", "Character Study", "Dialogue Precision"],
+    experienceCredits: [
+      { project: "The Bureau", role: "Officer Rathore", type: "OTT / Web Series", year: "2024" }
+    ],
+    digitals: ["/images/actors/editorial_grid_5.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "karan-singh",
+    name: "Karan Singh",
+    category: "male",
+    categoryLabel: "Male Actor",
+    role: "Lead Drama Actor",
+    age: 29,
+    height: "184 cm (6'0.5\")",
+    experience: "6 Years",
+    location: "Delhi NCR",
+    languages: ["Hindi", "English"],
+    eyeColor: "Brown",
+    hair: "Dark Brown",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/editorial_grid_6.png",
+    about: "Screen-commanding lead actor with classical theatre training and extensive TV commercial portfolio.",
+    skills: ["Theatre", "Dialogue Delivery", "Voice Modulation"],
+    experienceCredits: [
+      { project: "Capital Chronicles", role: "Ranveer", type: "OTT / Web Series", year: "2025" }
+    ],
+    digitals: ["/images/actors/editorial_grid_6.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "riya-malhotra-actress",
+    name: "Riya Malhotra",
+    category: "female",
+    categoryLabel: "Female Actor",
+    role: "Commercial & OTT Lead",
+    age: 25,
+    height: "173 cm (5'8\")",
+    experience: "4 Years",
+    location: "New Delhi",
+    languages: ["Hindi", "English"],
+    eyeColor: "Dark Brown",
+    hair: "Black",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/model female 1.png",
+    about: "Expressive screen actor with strong improvisational skills and prominent appearances in web series and commercials.",
+    skills: ["Camera Acting", "Improvisation", "Contemporary Posing"],
+    experienceCredits: [
+      { project: "Urban Stories", role: "Meera", type: "OTT / Web Series", year: "2024" }
+    ],
+    digitals: ["/images/actors/model female 1.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "meera-kapoor",
+    name: "Meera Kapoor",
+    category: "female",
+    categoryLabel: "Female Actor",
+    role: "Theatre & Screen Performer",
+    age: 27,
+    height: "171 cm (5'7.5\")",
+    experience: "5 Years",
+    location: "Delhi",
+    languages: ["Hindi", "English"],
+    eyeColor: "Brown",
+    hair: "Dark Brown",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/editorial_grid_1.png",
+    about: "Passionate dramatic actor trained in classical theatre and contemporary screen performance.",
+    skills: ["Classical Theatre", "Emotion Delivery", "Diction"],
+    experienceCredits: [
+      { project: "Raza Theatre Festival", role: "Leading Lady", type: "Theatre", year: "2024" }
+    ],
+    digitals: ["/images/actors/editorial_grid_1.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "tara-sharma",
+    name: "Tara Sharma",
+    category: "female",
+    categoryLabel: "Female Actor",
+    role: "Lead Drama Actor",
+    age: 26,
+    height: "170 cm (5'7\")",
+    experience: "4 Years",
+    location: "Delhi / Gurugram",
+    languages: ["Hindi", "English"],
+    eyeColor: "Black",
+    hair: "Black",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/editorial_grid_2.png",
+    about: "Charismatic actress with versatile emotional range for feature films and commercial brand shoots.",
+    skills: ["Dramatic Acting", "Voice Modulation", "Camera Expressions"],
+    experienceCredits: [
+      { project: "Rising Stars", role: "Simran", type: "Feature Film", year: "2025" }
+    ],
+    digitals: ["/images/actors/editorial_grid_2.png"],
+    videos: [],
+    instagram: [],
+    print: []
+  },
+  {
+    id: "pooja-verma-actress",
+    name: "Pooja Verma",
+    category: "female",
+    categoryLabel: "Female Actor",
+    role: "TV & Film Actor",
+    age: 28,
+    height: "172 cm (5'7.5\")",
+    experience: "6 Years",
+    location: "Delhi NCR",
+    languages: ["Hindi", "English", "Punjabi"],
+    eyeColor: "Brown",
+    hair: "Dark Brown",
+    badge: "Verified DCA Artist",
+    mainImage: "/images/actors/editorial_grid_3.png",
+    about: "Seasoned television and OTT actress with extensive portfolio across prime time dramas and digital series.",
+    skills: ["Television Acting", "Screen Presence", "Voice Over"],
+    experienceCredits: [
+      { project: "Bandhan", role: "Anjali (Parallel Lead)", type: "Television", year: "2024" }
+    ],
+    digitals: ["/images/actors/editorial_grid_3.png"],
     videos: [],
     instagram: [],
     print: []
@@ -412,8 +612,13 @@ export function getActorsByCategory(category: ActorCategorySlug): Actor[] {
   return ACTORS_DATA.filter((a) => a.category === category);
 }
 
-export function getRelatedActors(currentId: string, category: ActorCategorySlug, limit: number = 3): Actor[] {
-  return ACTORS_DATA.filter((a) => a.id !== currentId && a.category === category).slice(0, limit);
+export function getRelatedActors(currentId: string, category: ActorCategorySlug, limit: number = 8): Actor[] {
+  const sameCategory = ACTORS_DATA.filter((a) => a.id !== currentId && a.category === category);
+  if (sameCategory.length >= limit) {
+    return sameCategory.slice(0, limit);
+  }
+  const otherActors = ACTORS_DATA.filter((a) => a.id !== currentId && a.category !== category);
+  return [...sameCategory, ...otherActors].slice(0, limit);
 }
 
 export function getCategoryBySlug(slug: ActorCategorySlug): CategoryMeta | undefined {

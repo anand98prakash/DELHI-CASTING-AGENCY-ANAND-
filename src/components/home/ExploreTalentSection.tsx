@@ -142,10 +142,10 @@ export function ExploreTalentSection() {
 
                   <Link
                     href={cat.route}
-                    className="group/link inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#111111] hover:text-[#D4AF37] transition-colors shrink-0"
+                    className="group/link inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold uppercase tracking-[0.08em] text-[#111111] hover:text-[#D4AF37] transition-colors shrink-0"
                   >
                     <span>EXPLORE CATEGORY</span>
-                    <ArrowRight className="h-4 w-4 text-[#D4AF37] transition-transform duration-300 group-hover/link:translate-x-1" />
+                    <ArrowRight className="h-4 w-4 text-[#D4AF37] transition-transform duration-300 group-hover/link:translate-x-1.5" />
                   </Link>
                 </div>
 

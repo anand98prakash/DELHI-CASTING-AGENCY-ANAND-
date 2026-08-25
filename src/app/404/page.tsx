@@ -91,7 +91,7 @@ export default function Custom404Page() {
         title="Ready to start your journey?"
         description="Create your talent profile and explore opportunities available on the platform."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );

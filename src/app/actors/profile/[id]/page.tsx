@@ -49,7 +49,7 @@ export default async function ActorProfilePage({
     notFound();
   }
 
-  const relatedActors = getRelatedActors(actor.id, actor.category, 3);
+  const relatedActors = getRelatedActors(actor.id, actor.category, 8);
 
   return <ActorProfileView actor={actor} relatedActors={relatedActors} />;
 }

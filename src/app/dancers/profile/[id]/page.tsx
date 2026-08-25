@@ -2,7 +2,7 @@ import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-import { getAllDancers, getDancerById, getDancersByCategory } from "@/data/dancers";
+import { getAllDancers, getDancerById, getRelatedDancers } from "@/data/dancers";
 import { DancerProfileView } from "@/components/dancers/DancerProfileView";
 
 interface DancerProfilePageProps {
@@ -44,9 +44,7 @@ export default async function DancerProfilePage({
     notFound();
   }
 
-  const similarDancers = getDancersByCategory(dancer.category)
-    .filter((d) => d.id !== dancer.id)
-    .slice(0, 4);
+  const similarDancers = getRelatedDancers(dancer.id, dancer.category, 8);
 
   return <DancerProfileView dancer={dancer} similarDancers={similarDancers} />;
 }

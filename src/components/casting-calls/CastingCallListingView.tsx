@@ -244,7 +244,7 @@ export function CastingCallListingView({
         title="Ready to apply for casting calls?"
         description="Create your DCA talent profile and submit your portfolio to verified directors."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
 
       {/* Modals */}

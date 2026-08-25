@@ -85,7 +85,7 @@ export default function MaleActorsPage() {
               </p>
 
               <Link
-                href="/register/"
+                href="/profile/setup"
                 className="mt-8 inline-flex items-center rounded-xl bg-[#D4AF37] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c59b27] shadow-md"
               >
                 Register as an Actor
@@ -226,7 +226,7 @@ export default function MaleActorsPage() {
         title="Ready to create your actor profile?"
         description="Register your talent profile and provide accurate information about your acting experience, skills and portfolio."
         buttonLabel="Register Now"
-        buttonHref="/register/"
+        buttonHref="/profile/setup"
       />
     </main>
   );
