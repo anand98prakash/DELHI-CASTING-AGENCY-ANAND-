@@ -21,7 +21,7 @@ export function ChildArtistCategoryCard({ category }: ChildArtistCategoryCardPro
         </div>
 
         {/* 2. Category Title (DCA GOLD) */}
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#d4af37] group-hover:text-[#d4af37] transition-colors leading-tight mb-1">
+        <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-[#d4af37] group-hover:text-[#d4af37] transition-colors leading-tight mb-1">
           {category.title}
         </h2>
 

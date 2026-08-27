@@ -13,36 +13,32 @@ export interface DCAUser {
   isPremium?: boolean;
 }
 
-export function isUserAuthenticated(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    const userStr = localStorage.getItem("dca_user");
-    if (!userStr) return false;
-    const user: DCAUser = JSON.parse(userStr);
-    return Boolean(user && user.isLoggedIn === true && Boolean(user.identifier || user.email));
-  } catch {
-    return false;
-  }
-}
-
 export function getUserSession(): DCAUser | null {
   if (typeof window === "undefined") return null;
   try {
     const userStr = localStorage.getItem("dca_user");
     if (!userStr) return null;
     const user: DCAUser = JSON.parse(userStr);
-    if (!user || !user.isLoggedIn || (!user.identifier && !user.email)) return null;
+    if (!user || user.isLoggedIn !== true || (!user.identifier && !user.email)) {
+      return null;
+    }
     return user;
   } catch {
     return null;
   }
 }
 
+export function isUserAuthenticated(): boolean {
+  return getUserSession() !== null;
+}
+
 export function getProfileCreateOrSetupUrl(): string {
+  const session = getUserSession();
+  if (session?.role === "brand") return "/register/brand";
   return "/profile/setup";
 }
 
-export function setDCAUserSession(emailOrPhone: string, role?: "artist" | "brand") {
+export function setDCAUserSession(emailOrPhone: string, role: "artist" | "brand" = "artist") {
   if (typeof window !== "undefined") {
     const existing = getUserSession();
     localStorage.setItem(

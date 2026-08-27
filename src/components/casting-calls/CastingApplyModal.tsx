@@ -98,7 +98,7 @@ export function CastingApplyModal({
         {/* Heading */}
         <h3
           id="casting-modal-title"
-          className="text-2xl sm:text-[26px] font-bold text-[#111111] tracking-tight leading-snug mb-2.5"
+          className="font-serif text-2xl sm:text-[26px] font-bold text-[#111111] tracking-tight leading-snug mb-2.5"
         >
           Register to Apply
         </h3>

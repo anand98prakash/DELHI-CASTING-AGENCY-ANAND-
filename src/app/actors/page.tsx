@@ -37,7 +37,7 @@ export default function ActorsPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
 
-            <h1 className="text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl">
+            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl">
               Actors &amp; Casting Portfolio
             </h1>
 
@@ -68,7 +68,7 @@ export default function ActorsPage() {
               Representation &amp; Casting Categories
             </span>
 
-            <h2 className="mt-3 font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-4xl">
+            <h2 className="mt-3 font-sans text-3xl font-extrabold tracking-tight text-[#111111] sm:text-4xl">
               Explore Actor Categories
             </h2>
 

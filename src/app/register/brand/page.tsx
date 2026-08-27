@@ -6,12 +6,6 @@ import {
   ArrowRight,
   Building2,
   CheckCircle2,
-  FileText,
-  Globe,
-  Mail,
-  MapPin,
-  Phone,
-  Sparkles,
   User,
 } from "lucide-react";
 
@@ -19,7 +13,8 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { setDCAUserSession } from "@/lib/auth";
+import { setDCAUserSession, setUserPremiumStatus } from "@/lib/auth";
+import { launchRazorpayCheckout } from "@/lib/razorpay";
 
 const inputClass =
   "w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 transition-all duration-300 focus:border-[#D4AF37] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15 shadow-xs";
@@ -52,7 +47,7 @@ export default function BrandRegisterPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
 
@@ -69,13 +64,34 @@ export default function BrandRegisterPage() {
       );
     }
 
-    setTimeout(() => {
+    try {
+      await launchRazorpayCheckout({
+        name: formData.fullName || formData.companyName,
+        email: formData.email,
+        contact: formData.phone,
+        amount: 9999,
+        description: "Brand Premium Casting Account — ₹9,999",
+        onSuccess: () => {
+          setUserPremiumStatus(true);
+          setSubmitting(false);
+          setSaved(true);
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 500);
+        },
+        onDismiss: () => {
+          setSubmitting(false);
+          setSaved(true);
+          setTimeout(() => {
+            router.push("/dashboard");
+          }, 500);
+        },
+      });
+    } catch (err) {
+      console.error("Brand checkout error", err);
       setSubmitting(false);
-      setSaved(true);
-      setTimeout(() => {
-        router.push("/dashboard");
-      }, 500);
-    }, 600);
+      router.push("/dashboard");
+    }
   };
 
   return (

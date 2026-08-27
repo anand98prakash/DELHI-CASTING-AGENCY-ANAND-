@@ -8,7 +8,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  Send,
   Sparkles,
   UserCheck,
   Briefcase,
@@ -92,7 +91,7 @@ export default function ContactUsPage() {
               <span>CONTACT DELHI CASTING AGENCY</span>
             </div>
 
-            <h1 className="text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
+            <h1 className="font-serif text-3xl font-extrabold tracking-tight text-[#111111] sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
               Let&apos;s Connect
             </h1>
 
@@ -119,7 +118,7 @@ export default function ContactUsPage() {
                 SEND AN ENQUIRY
               </span>
 
-              <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#111111] sm:text-3xl">
+              <h2 className="mt-3 font-serif text-2xl font-bold tracking-tight text-[#111111] sm:text-3xl">
                 How Can We Help?
               </h2>
 
@@ -132,7 +131,7 @@ export default function ContactUsPage() {
               {submitted ? (
                 <div className="mt-8 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-8 text-center">
                   <CheckCircle2 className="mx-auto h-12 w-12 text-[#D4AF37]" />
-                  <h3 className="mt-4 text-xl font-bold text-[#111111]">
+                  <h3 className="mt-4 font-serif text-xl font-bold text-[#111111]">
                     Enquiry Submitted Successfully
                   </h3>
                   <p className="mt-2 text-xs leading-relaxed text-[#555555]">

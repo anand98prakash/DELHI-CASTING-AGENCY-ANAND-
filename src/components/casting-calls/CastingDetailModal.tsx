@@ -77,7 +77,7 @@ export function CastingDetailModal({
         </div>
 
         {/* Title */}
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight leading-snug mb-5">
+        <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#111111] tracking-tight leading-snug mb-5">
           {item.title}
         </h2>
 

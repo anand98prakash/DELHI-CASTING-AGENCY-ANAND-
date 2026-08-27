@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Reveal } from "@/components/ui/reveal";
-import { getProfileCreateOrSetupUrl } from "@/lib/auth";
 
 interface CTASectionProps {
   eyebrow?: string;
@@ -42,7 +41,7 @@ export function CTASection({
               {eyebrow}
             </p>
 
-            <h2 className="text-3xl font-bold leading-tight tracking-tight text-[#111111] sm:text-4xl md:text-5xl">
+            <h2 className="font-sans text-3xl font-extrabold leading-tight tracking-tight text-[#111111] sm:text-4xl md:text-5xl">
               {title}
             </h2>
 

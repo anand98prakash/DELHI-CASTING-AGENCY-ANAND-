@@ -35,7 +35,7 @@ export function TalentCard({ title, description, href, image }: TalentCardProps)
               <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
                 Category
               </p>
-              <h3 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h3 className="font-sans text-2xl font-bold tracking-tight text-white sm:text-3xl">
                 {title}
               </h3>
               {description && (

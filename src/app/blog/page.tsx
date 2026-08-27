@@ -113,7 +113,7 @@ export default function BlogPage() {
               Featured Resources
             </p>
 
-            <h2 className="mt-4 text-3xl font-bold tracking-tight text-[#111111] md:text-4xl">
+            <h2 className="mt-4 font-serif text-3xl font-bold tracking-tight text-[#111111] md:text-4xl">
               Explore our latest guides
             </h2>
           </div>
@@ -137,7 +137,7 @@ export default function BlogPage() {
                     <ArrowRight className="h-5 w-5 text-[#666666] transition-transform group-hover:translate-x-1 group-hover:text-[#D4AF37]" />
                   </div>
 
-                  <h3 className="mt-7 text-2xl font-bold tracking-tight text-[#111111]">
+                  <h3 className="mt-7 font-serif text-2xl font-bold tracking-tight text-[#111111]">
                     {article.title}
                   </h3>
 

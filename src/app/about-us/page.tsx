@@ -192,10 +192,10 @@ export default function AboutUsPage() {
             <Reveal key={card.num} delay={idx * 0.05} className="h-full">
               <div className="flex h-full flex-col justify-between rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-sm transition duration-300 hover:border-[#D4AF37]/50">
                 <div>
-                  <span className="font-mono text-3xl font-extrabold text-[#D4AF37]">
+                  <span className="font-serif text-3xl font-extrabold text-[#D4AF37]">
                     {card.num}
                   </span>
-                  <h3 className="mt-3 text-base font-bold tracking-wider text-[#111111]">
+                  <h3 className="mt-3 font-serif text-base font-bold tracking-wider text-[#111111]">
                     {card.title}
                   </h3>
                   <p className="mt-2 text-xs leading-relaxed text-[#555555]">
@@ -216,7 +216,7 @@ export default function AboutUsPage() {
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
                 HOW DCA WORKS
               </span>
-              <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#111111] sm:text-4xl">
+              <h2 className="mt-3 font-serif text-3xl font-bold tracking-tight text-[#111111] sm:text-4xl">
                 A Simple Journey From Profile to Opportunity
               </h2>
             </div>
@@ -243,7 +243,7 @@ export default function AboutUsPage() {
                   title: "APPLY & CONNECT",
                   body: "Review opportunity requirements and proceed according to the casting process.",
                 },
-              ].map((step, idx) => (
+              ].map((step) => (
                 <div
                   key={step.num}
                   className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-xs"

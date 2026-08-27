@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import {
   ArrowRight,
-  Info,
   ShieldCheck,
   XCircle,
   Sparkles,
@@ -14,7 +14,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { CTASection } from "@/components/ui/cta-section";
 import { Reveal } from "@/components/ui/reveal";
 import { PremiumFlowModal, PremiumModalStep } from "@/components/premium-flow-modal";
-import { getUserSession, isUserAuthenticated } from "@/lib/auth";
+import { isUserAuthenticated } from "@/lib/auth";
 
 const includedItems = [
   {
@@ -51,7 +51,7 @@ const includedItems = [
     title: "A structured online artist profile experience",
     description: "Part of the structured artist membership experience.",
     image: "/images/actors/experience skills.jpg",
-    alt: "Structured online artist profile experience with DCA",
+    alt: "A structured online artist profile experience",
   },
 ];
 
@@ -64,24 +64,9 @@ const notGuaranteedItems = [
 ];
 
 export default function MembershipPage() {
+  const router = useRouter();
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
-
-  const handleBecomePremium = () => {
-    if (!isUserAuthenticated()) {
-      setModalInitialStep("role_select");
-    } else {
-      const session = getUserSession();
-      if (session?.role === "brand") {
-        setModalInitialStep("brand_checkout");
-      } else if (session?.role === "artist") {
-        setModalInitialStep("artist_checkout");
-      } else {
-        setModalInitialStep("role_select");
-      }
-    }
-    setModalOpen(true);
-  };
 
   return (
     <main className="min-h-screen bg-white text-[#111111]">
@@ -191,12 +176,12 @@ export default function MembershipPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    if (isUserAuthenticated()) {
-                      setModalInitialStep("artist_checkout");
+                    if (!isUserAuthenticated()) {
+                      router.push("/profile/setup");
                     } else {
-                      setModalInitialStep("role_select");
+                      setModalInitialStep("artist_checkout");
+                      setModalOpen(true);
                     }
-                    setModalOpen(true);
                   }}
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-xs font-bold uppercase tracking-wider text-white transition duration-300 hover:bg-[#D4AF37] cursor-pointer"
                 >
@@ -224,12 +209,12 @@ export default function MembershipPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    if (isUserAuthenticated()) {
-                      setModalInitialStep("brand_checkout");
+                    if (!isUserAuthenticated()) {
+                      router.push("/register/brand");
                     } else {
-                      setModalInitialStep("role_select");
+                      setModalInitialStep("brand_checkout");
+                      setModalOpen(true);
                     }
-                    setModalOpen(true);
                   }}
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#D4AF37] py-3 text-xs font-bold uppercase tracking-wider text-white transition duration-300 hover:bg-[#C59B27] cursor-pointer"
                 >

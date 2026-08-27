@@ -40,22 +40,22 @@ const photoSlots: PhotoSlotConfig[] = [
   {
     key: "frontPhoto",
     title: "FRONT PHOTO",
-    subtitle: "Upload a clear front-facing headshot or photo",
-  },
-  {
-    key: "backPhoto",
-    title: "BACK PHOTO",
-    subtitle: "Upload a clear back-view photo",
+    subtitle: "Upload a clear front-facing photo.",
   },
   {
     key: "leftPhoto",
     title: "LEFT PHOTO",
-    subtitle: "Upload a clear left-side profile photo",
+    subtitle: "Show your complete left-side profile.",
   },
   {
     key: "rightPhoto",
     title: "RIGHT PHOTO",
-    subtitle: "Upload a clear right-side profile photo",
+    subtitle: "Show your complete right-side profile.",
+  },
+  {
+    key: "backPhoto",
+    title: "BACK PHOTO",
+    subtitle: "Show your back view clearly.",
   },
 ];
 
@@ -109,16 +109,14 @@ export default function ProfileSetupPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (!isUserAuthenticated()) {
-        router.push("/login");
-        return;
-      }
       const stored = localStorage.getItem("dca_artist_profile");
       if (stored) {
         try {
           const parsed = JSON.parse(stored);
-          if (parsed.formData) setFormData(parsed.formData);
-          if (parsed.photoFiles) setPhotoFiles(parsed.photoFiles);
+          requestAnimationFrame(() => {
+            if (parsed.formData) setFormData(parsed.formData);
+            if (parsed.photoFiles) setPhotoFiles(parsed.photoFiles);
+          });
         } catch (e) {
           console.error("Failed to parse stored profile", e);
         }
@@ -712,8 +710,144 @@ export default function ProfileSetupPage() {
                   Upload 4 clear casting photographs (Front, Back, Left, Right) representing your natural appearance.
                 </p>
 
+                {/* REQUIRED PHOTO ANGLES INSTRUCTIONAL SECTION */}
+                <div className="mt-6 rounded-2xl border border-[#D4AF37]/30 bg-[#F7F7F5] p-5 sm:p-6 shadow-xs">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-gray-200/80 pb-4">
+                    <div>
+                      <div className="inline-flex items-center gap-1.5 rounded-full bg-[#D4AF37]/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-[#D4AF37] mb-1">
+                        <Sparkles size={12} />
+                        <span>Casting Guidelines</span>
+                      </div>
+                      <h3 className="font-serif text-lg font-bold text-[#111111]">
+                        Required Photo Angles
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p className="mt-3 text-xs leading-relaxed text-[#555555]">
+                    Please upload clear, recent photos taken in good lighting. Follow the examples below so casting directors can easily review your profile.
+                  </p>
+
+                  {/* 4 Reference Example Cards Layout */}
+                  <div className="mt-5 grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+                    {/* 1. Front View */}
+                    <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-3.5 shadow-2xs">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[#111111]/5 flex items-center justify-center border border-gray-200">
+                        <span className="absolute top-2 left-2 z-10 rounded-md bg-[#111111]/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#D4AF37] backdrop-blur-xs">
+                          Reference
+                        </span>
+                        {/* Pose Graphic: Front View */}
+                        <svg viewBox="0 0 100 120" className="h-full w-full max-h-24 p-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="50" cy="30" r="14" fill="#D4AF37" opacity="0.9" />
+                          <path d="M50 48 C34 48 24 58 22 78 V110 H36 V82 H44 V110 H56 V82 H64 V110 H78 V78 C76 58 66 48 50 48 Z" fill="#111111" />
+                          <path d="M44 30 Q50 35 56 30" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
+                        </svg>
+                      </div>
+                      <span className="mt-2 text-[10px] font-bold uppercase tracking-wider text-[#D4AF37]">
+                        Pose 1
+                      </span>
+                      <h4 className="text-xs font-bold text-[#111111]">1. Front View</h4>
+                      <p className="mt-1 text-[11px] leading-snug text-[#666666]">
+                        Stand straight, face the camera directly, and keep a neutral or smiling expression with no heavy makeup.
+                      </p>
+                    </div>
+
+                    {/* 2. Left Side Profile */}
+                    <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-3.5 shadow-2xs">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[#111111]/5 flex items-center justify-center border border-gray-200">
+                        <span className="absolute top-2 left-2 z-10 rounded-md bg-[#111111]/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#D4AF37] backdrop-blur-xs">
+                          Reference
+                        </span>
+                        {/* Pose Graphic: Left Profile */}
+                        <svg viewBox="0 0 100 120" className="h-full w-full max-h-24 p-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M42 16 C34 16 28 23 28 32 C28 36 30 39 33 42 C30 46 30 54 32 78 V110 H45 V82 H49 V110 H62 V78 C62 58 55 48 42 47 Z" fill="#111111" />
+                          <circle cx="45" cy="30" r="14" fill="#D4AF37" opacity="0.9" />
+                          <path d="M53 30 L60 32 L53 35 Z" fill="#D4AF37" />
+                        </svg>
+                      </div>
+                      <span className="mt-2 text-[10px] font-bold uppercase tracking-wider text-[#D4AF37]">
+                        Pose 2
+                      </span>
+                      <h4 className="text-xs font-bold text-[#111111]">2. Left Side Profile</h4>
+                      <p className="mt-1 text-[11px] leading-snug text-[#666666]">
+                        Turn your body 90 degrees to the right so your left side faces the camera. Pull your hair back from your face.
+                      </p>
+                    </div>
+
+                    {/* 3. Right Side Profile */}
+                    <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-3.5 shadow-2xs">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[#111111]/5 flex items-center justify-center border border-gray-200">
+                        <span className="absolute top-2 left-2 z-10 rounded-md bg-[#111111]/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#D4AF37] backdrop-blur-xs">
+                          Reference
+                        </span>
+                        {/* Pose Graphic: Right Profile */}
+                        <svg viewBox="0 0 100 120" className="h-full w-full max-h-24 p-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M58 16 C66 16 72 23 72 32 C72 36 70 39 67 42 C70 46 70 54 68 78 V110 H55 V82 H51 V110 H38 V78 C38 58 45 48 58 47 Z" fill="#111111" />
+                          <circle cx="55" cy="30" r="14" fill="#D4AF37" opacity="0.9" />
+                          <path d="M47 30 L40 32 L47 35 Z" fill="#D4AF37" />
+                        </svg>
+                      </div>
+                      <span className="mt-2 text-[10px] font-bold uppercase tracking-wider text-[#D4AF37]">
+                        Pose 3
+                      </span>
+                      <h4 className="text-xs font-bold text-[#111111]">3. Right Side Profile</h4>
+                      <p className="mt-1 text-[11px] leading-snug text-[#666666]">
+                        Turn your body 90 degrees to the left so your right side faces the camera. Keep your shoulders back.
+                      </p>
+                    </div>
+
+                    {/* 4. Back View */}
+                    <div className="flex flex-col rounded-xl border border-gray-200 bg-white p-3.5 shadow-2xs">
+                      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[#111111]/5 flex items-center justify-center border border-gray-200">
+                        <span className="absolute top-2 left-2 z-10 rounded-md bg-[#111111]/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#D4AF37] backdrop-blur-xs">
+                          Reference
+                        </span>
+                        {/* Pose Graphic: Back View */}
+                        <svg viewBox="0 0 100 120" className="h-full w-full max-h-24 p-2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <circle cx="50" cy="30" r="14" fill="#111111" />
+                          <path d="M50 48 C34 48 24 58 22 78 V110 H36 V82 H44 V110 H56 V82 H64 V110 H78 V78 C76 58 66 48 50 48 Z" fill="#D4AF37" opacity="0.9" />
+                        </svg>
+                      </div>
+                      <span className="mt-2 text-[10px] font-bold uppercase tracking-wider text-[#D4AF37]">
+                        Pose 4
+                      </span>
+                      <h4 className="text-xs font-bold text-[#111111]">4. Back View</h4>
+                      <p className="mt-1 text-[11px] leading-snug text-[#666666]">
+                        Turn completely around with your back to the camera so casting directors can see your hair length and body posture.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Tips Note */}
+                  <div className="mt-5 rounded-xl border border-amber-200/80 bg-amber-50/70 p-3.5 text-xs text-amber-900">
+                    <p className="font-semibold text-amber-900">
+                      Tip: Use a plain background, good natural lighting, and make sure your full face/body is clearly visible.
+                    </p>
+                    <p className="mt-1 text-[11px] text-amber-800">
+                      Please avoid sunglasses, hats, heavy filters, group photos, or heavily edited images.
+                    </p>
+                  </div>
+                </div>
+
+                {/* UPLOAD YOUR PHOTOS SECTION HEADING */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+                        YOUR PROFILE PHOTOS
+                      </span>
+                      <h3 className="font-serif text-xl font-bold text-[#111111] mt-0.5">
+                        Upload Your Photos
+                      </h3>
+                    </div>
+                  </div>
+                  <p className="mt-1 text-xs text-[#666666]">
+                    Select your 4 clear photographs below matching the reference angles above.
+                  </p>
+                </div>
+
                 {/* 4 Photo Slots Grid (Front, Back, Left, Right) */}
-                <div className="mt-8 grid gap-6 sm:grid-cols-2">
+                <div className="mt-6 grid gap-6 sm:grid-cols-2">
                   {photoSlots.map((slot) => {
                     const previewUrl = photoFiles[slot.key];
 

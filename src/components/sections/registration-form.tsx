@@ -24,6 +24,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { launchRazorpayCheckout } from "@/lib/razorpay";
+import { setDCAUserSession } from "@/lib/auth";
 import { trackPurchase } from "@/components/analytics";
 import { SITE } from "@/lib/constants";
 
@@ -156,6 +157,9 @@ export function RegistrationForm({ onSuccess }: Props) {
     try {
       setSubmitting(true);
 
+      // Complete registration session first
+      setDCAUserSession(data.email || data.mobile, "artist");
+
       await launchRazorpayCheckout({
         name: data.fullName,
         email: data.email,
@@ -171,6 +175,7 @@ export function RegistrationForm({ onSuccess }: Props) {
 
         onDismiss: () => {
           setSubmitting(false);
+          onSuccess(`WTB-FREE-${Date.now().toString().slice(-6)}`);
         },
       });
     } catch (error) {

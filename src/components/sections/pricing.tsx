@@ -1,8 +1,8 @@
 "use client";
 
 // import { useState } from "react";
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
 import { RegistrationForm } from "@/components/sections/registration-form";
 import { SuccessModal } from "@/components/success-modal";
 import { PremiumFlowModal, PremiumModalStep } from "@/components/premium-flow-modal";
-import { getUserSession, isUserAuthenticated } from "@/lib/auth";
+import { getUserSession } from "@/lib/auth";
 import { SITE } from "@/lib/constants";
 
 const PERKS = [
@@ -28,7 +28,10 @@ const PERKS = [
   "Secure One-Time Payment",
 ];
 
+import { useRouter } from "next/navigation";
+
 export function Pricing() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
@@ -36,28 +39,44 @@ export function Pricing() {
   const [memberId, setMemberId] = useState<string | null>(null);
   const formRef = useRef<HTMLDivElement>(null);
 
-  const handleBecomePremium = () => {
-    setIsRegistrationFlow(false);
-    if (!isUserAuthenticated()) {
-      setModalInitialStep("role_select");
-    } else {
-      const session = getUserSession();
-      if (session?.role === "brand") {
-        setModalInitialStep("brand_checkout");
-      } else if (session?.role === "artist") {
-        setModalInitialStep("artist_checkout");
-      } else {
-        setModalInitialStep("role_select");
-      }
-    }
-    setModalOpen(true);
-  };
+  const handleBecomePremium = useCallback(() => {
+    const session = getUserSession();
+    const authenticated =
+      session?.isLoggedIn === true &&
+      Boolean(session.identifier || session.email);
 
-  const handleOpenRegistration = () => {
-    setIsRegistrationFlow(true);
-    setModalInitialStep("role_select");
-    setModalOpen(true);
-  };
+    if (!authenticated) {
+      router.push("/profile/setup");
+      return;
+    }
+
+    if (session.role === "artist") {
+      setIsRegistrationFlow(false);
+      setModalInitialStep("artist_checkout");
+      setModalOpen(true);
+      return;
+    }
+
+    if (session.role === "brand") {
+      setIsRegistrationFlow(false);
+      setModalInitialStep("brand_checkout");
+      setModalOpen(true);
+      return;
+    }
+
+    router.push("/profile/setup");
+  }, [router]);
+
+  const handleOpenRegistration = useCallback(() => {
+    const session = getUserSession();
+    if (!session || !session.isLoggedIn) {
+      router.push("/profile/setup");
+    } else if (session.role === "brand") {
+      router.push("/register/brand");
+    } else {
+      router.push("/profile/setup");
+    }
+  }, [router]);
 
   useEffect(() => {
     const openRegistrationHandler = () => {
@@ -75,7 +94,7 @@ export function Pricing() {
       window.removeEventListener("open-registration", openRegistrationHandler);
       window.removeEventListener("open-premium-modal", openPremiumHandler);
     };
-  }, []);
+  }, [handleBecomePremium, handleOpenRegistration]);
 
   return (
     <section

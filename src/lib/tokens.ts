@@ -15,7 +15,7 @@ export const colors = {
 } as const;
 
 export const fonts = {
-  display: "var(--font-serif), 'Playfair Display', 'Cormorant Garamond', Georgia, serif",
+  display: "var(--font-manrope), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   sans: "var(--font-manrope), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
 } as const;
 

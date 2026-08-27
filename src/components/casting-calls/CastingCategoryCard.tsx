@@ -24,7 +24,7 @@ export function CastingCategoryCard({ category }: CastingCategoryCardProps) {
         </div>
 
         {/* 2. Category Title */}
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111] group-hover:text-[#d4af37] transition-colors leading-tight mb-1">
+        <h2 className="font-sans text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111] group-hover:text-[#d4af37] transition-colors leading-tight mb-1">
           {category.title}
         </h2>
 

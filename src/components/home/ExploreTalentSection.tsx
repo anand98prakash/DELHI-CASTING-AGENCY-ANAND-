@@ -120,7 +120,7 @@ export function ExploreTalentSection() {
               <Sparkles className="h-3.5 w-3.5" />
               EXPLORE OUR TALENT
             </span>
-            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#111111]">
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#111111]">
               EXPLORE OUR TALENT
             </h2>
             <p className="mt-3 text-sm sm:text-base text-[#444444] leading-relaxed">

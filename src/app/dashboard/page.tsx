@@ -8,9 +8,7 @@ import {
   ArrowRight,
   Bookmark,
   Briefcase,
-  CheckCircle2,
   Edit,
-  Globe,
   LogOut,
   MapPin,
   Ruler,
@@ -22,7 +20,6 @@ import {
 import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
-import { Button } from "@/components/ui/button";
 import {
   isUserAuthenticated,
   getUserSession,
@@ -35,10 +32,10 @@ import {
 
 export default function DashboardPage() {
   const router = useRouter();
+  const [userRole, setUserRole] = useState<"artist" | "brand">("artist");
   const [activeTab, setActiveTab] = useState<"profile" | "opportunities" | "saved">("profile");
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
-  const [userRole, setUserRole] = useState<"artist" | "brand">("artist");
 
   const [profileData, setProfileData] = useState({
     fullName: "Aarav Sharma",
@@ -78,37 +75,32 @@ export default function DashboardPage() {
         return;
       }
 
-      const session = getUserSession();
-      const storedArtist = localStorage.getItem("dca_artist_profile");
-      const storedBrand = localStorage.getItem("dca_brand_profile");
-
-      if (session?.role === "brand") {
-        setUserRole("brand");
-      } else if (session?.role === "artist") {
-        setUserRole("artist");
-      } else if (storedBrand && !storedArtist) {
-        setUserRole("brand");
-      } else {
-        setUserRole("artist");
-      }
-
-      const stored = localStorage.getItem("dca_artist_profile");
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (parsed.formData) {
-            setProfileData((prev) => ({ ...prev, ...parsed.formData }));
-          }
-          if (parsed.photos) {
-            const validUrls = parsed.photos
-              .map((slot: { previewUrl: string | null }) => slot.previewUrl)
-              .filter(Boolean);
-            if (validUrls.length > 0) setPhotos(validUrls);
-          }
-        } catch (e) {
-          console.error("Failed to load profile from storage", e);
+      requestAnimationFrame(() => {
+        const session = getUserSession();
+        if (session?.role === "brand") {
+          setUserRole("brand");
+        } else if (session?.role === "artist") {
+          setUserRole("artist");
         }
-      }
+
+        const stored = localStorage.getItem("dca_artist_profile");
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            if (parsed.formData) {
+              setProfileData((prev) => ({ ...prev, ...parsed.formData }));
+            }
+            if (parsed.photos) {
+              const validUrls = parsed.photos
+                .map((slot: { previewUrl: string | null }) => slot.previewUrl)
+                .filter(Boolean);
+              if (validUrls.length > 0) setPhotos(validUrls);
+            }
+          } catch (e) {
+            console.error("Failed to load profile from storage", e);
+          }
+        }
+      });
     }
   }, [router]);
 
@@ -119,15 +111,15 @@ export default function DashboardPage() {
 
   const handleOpenPremiumCheckout = () => {
     if (!isUserAuthenticated()) {
-      setModalInitialStep("role_select");
+      router.push("/profile/setup");
+      return;
+    }
+    const session = getUserSession();
+    const isBrandAccount = userRole === "brand" || session?.role === "brand";
+    if (isBrandAccount) {
+      setModalInitialStep("brand_checkout");
     } else {
-      const session = getUserSession();
-      const isBrandAccount = userRole === "brand" || session?.role === "brand";
-      if (isBrandAccount) {
-        setModalInitialStep("brand_checkout");
-      } else {
-        setModalInitialStep("artist_checkout");
-      }
+      setModalInitialStep("artist_checkout");
     }
     setModalOpen(true);
   };

@@ -20,6 +20,7 @@ import {
   setUserPremiumStatus,
   setUserRole,
 } from "@/lib/auth";
+import { launchRazorpayCheckout } from "@/lib/razorpay";
 
 export type PremiumModalStep =
   | "role_select"
@@ -47,34 +48,32 @@ export function PremiumFlowModal({
 
   useEffect(() => {
     if (isOpen) {
-      setIsProcessing(false);
+      requestAnimationFrame(() => {
+        setIsProcessing(false);
 
-      // STRICT AUTHENTICATION GUARD
-      if (!isUserAuthenticated()) {
-        setStep("role_select");
-        return;
-      }
+        const session = getUserSession();
+        const authenticated =
+          session?.isLoggedIn === true &&
+          Boolean(session.identifier || session.email);
 
-      if (isRegistrationFlow) {
-        setStep("role_select");
-        return;
-      }
+        // STRICT AUTHENTICATION GUARD: Never show payment or role select to logged-out users
+        if (!authenticated) {
+          onClose();
+          router.push("/profile/setup");
+          return;
+        }
 
-      const session = getUserSession();
-      if (!session) {
-        setStep("role_select");
-        return;
-      }
-
-      if (session.role === "brand") {
-        setStep("brand_checkout");
-      } else if (session.role === "artist") {
-        setStep("artist_checkout");
-      } else {
-        setStep("role_select");
-      }
+        if (session?.role === "brand") {
+          setStep("brand_checkout");
+        } else if (session?.role === "artist") {
+          setStep("artist_checkout");
+        } else {
+          onClose();
+          router.push("/profile/setup");
+        }
+      });
     }
-  }, [isOpen, initialStep, isRegistrationFlow]);
+  }, [isOpen, initialStep, isRegistrationFlow, onClose, router]);
 
   if (!isOpen) return null;
 
@@ -97,26 +96,56 @@ export function PremiumFlowModal({
     }
   };
 
-  const handleArtistPayment = () => {
+  const handleArtistPayment = async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    setTimeout(() => {
-      setUserPremiumStatus(true);
-      setUserRole("artist");
+    const session = getUserSession();
+    try {
+      await launchRazorpayCheckout({
+        name: session?.identifier || session?.email || "Artist Member",
+        email: session?.email || "artist@example.com",
+        contact: session?.identifier || "9876543210",
+        amount: 3999,
+        description: "Lifetime Premium Artist Membership — ₹3,999",
+        onSuccess: () => {
+          setUserPremiumStatus(true);
+          setUserRole("artist");
+          setIsProcessing(false);
+          setStep("artist_success");
+        },
+        onDismiss: () => {
+          setIsProcessing(false);
+        },
+      });
+    } catch {
       setIsProcessing(false);
-      setStep("artist_success");
-    }, 2500);
+    }
   };
 
-  const handleBrandPayment = () => {
+  const handleBrandPayment = async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    setTimeout(() => {
-      setUserPremiumStatus(true);
-      setUserRole("brand");
+    const session = getUserSession();
+    try {
+      await launchRazorpayCheckout({
+        name: session?.identifier || session?.email || "Brand Casting Account",
+        email: session?.email || "brand@example.com",
+        contact: session?.identifier || "9876543210",
+        amount: 9999,
+        description: "Brand Premium Casting Account — ₹9,999",
+        onSuccess: () => {
+          setUserPremiumStatus(true);
+          setUserRole("brand");
+          setIsProcessing(false);
+          setStep("brand_success");
+        },
+        onDismiss: () => {
+          setIsProcessing(false);
+        },
+      });
+    } catch {
       setIsProcessing(false);
-      setStep("brand_success");
-    }, 2500);
+    }
   };
 
   return (

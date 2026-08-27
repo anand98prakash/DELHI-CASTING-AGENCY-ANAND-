@@ -2,15 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { CheckCircle2, User, LayoutDashboard, Edit3, ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 
 export default function RegistrationSuccessPage() {
-  const router = useRouter();
-  const [profileData, setProfileData] = useState<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [profileData, setProfileData] = useState<Record<string, any> | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -18,7 +17,9 @@ export default function RegistrationSuccessPage() {
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          setProfileData(parsed.formData || parsed);
+          requestAnimationFrame(() => {
+            setProfileData(parsed.formData || parsed);
+          });
         } catch (e) {
           console.error("Error reading saved profile data", e);
         }
@@ -66,7 +67,7 @@ export default function RegistrationSuccessPage() {
               <div className="mb-6 rounded-xl border border-gray-200 bg-[#F7F7F5] p-4 text-left">
                 <div className="flex items-center justify-between border-b border-gray-200 pb-3 mb-3">
                   <div>
-                    <h3 className="font-bold text-base text-[#111111]">{profileData.fullName || profileData.name || "Artist Profile"}</h3>
+                    <h3 className="font-serif font-bold text-base text-[#111111]">{profileData.fullName || profileData.name || "Artist Profile"}</h3>
                     <p className="text-xs text-[#666666]">{profileData.city || "Delhi NCR"} • {profileData.gender || "Artist"}</p>
                   </div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">

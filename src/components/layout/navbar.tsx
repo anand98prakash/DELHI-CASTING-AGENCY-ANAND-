@@ -8,7 +8,7 @@ import { ArrowRight, ChevronDown, Menu, User, X } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
 import { NAV_GROUPS, type NavGroup } from "@/lib/site-navigation";
-import { getProfileCreateOrSetupUrl } from "@/lib/auth";
+import { AccountTypeModal } from "@/components/auth/AccountTypeModal";
 
 function DesktopDropdown({ group }: { group: NavGroup }) {
   if (!group.items) {
@@ -33,12 +33,12 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
       </Link>
 
       <div className="pointer-events-none absolute left-1/2 top-full w-72 -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-        <div className="rounded-xl border border-gray-200 bg-white p-3 shadow-2xl backdrop-blur-xl">
+        <div className="rounded-xl border border-gray-200 bg-white/98 p-3 shadow-2xl backdrop-blur-xl">
           {group.items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center justify-between rounded-lg px-4 py-2.5 text-xs font-medium uppercase tracking-[0.12em] text-gray-800 transition duration-200 hover:bg-[#F7F7F5] hover:text-[#D4AF37]"
+              className="flex items-center justify-between rounded-lg px-4 py-2.5 text-xs font-medium uppercase tracking-[0.12em] text-[#333333] transition duration-200 hover:bg-[#F7F7F5] hover:text-[#D4AF37]"
             >
               <span>{item.label}</span>
               <ArrowRight className="h-3.5 w-3.5 opacity-0 transition duration-200 group-hover:opacity-100 text-[#D4AF37]" />
@@ -54,6 +54,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
+  const [accountModalOpen, setAccountModalOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => {
@@ -73,6 +74,20 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const handleOpenAccountModal = () => {
+      setAccountModalOpen(true);
+    };
+
+    window.addEventListener("open-registration", handleOpenAccountModal);
+    window.addEventListener("open-account-modal", handleOpenAccountModal);
+
+    return () => {
+      window.removeEventListener("open-registration", handleOpenAccountModal);
+      window.removeEventListener("open-account-modal", handleOpenAccountModal);
+    };
+  }, []);
+
   const closeMobile = () => {
     setMobileOpen(false);
     setMobileGroup(null);
@@ -83,6 +98,13 @@ export function Navbar() {
     setMobileGroup(null);
   };
 
+  const handleRegisterNowClick = () => {
+    setAccountModalOpen(true);
+    if (mobileOpen) {
+      closeMobile();
+    }
+  };
+
   return (
     <>
       <motion.header
@@ -90,13 +112,14 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "fixed inset-x-0 top-0 z-50 w-full transition-all duration-500 border-b border-gray-200",
+          "fixed inset-x-0 top-0 z-50 w-full transition-all duration-500",
           scrolled
-            ? "bg-white/95 py-2 shadow-sm backdrop-blur-md"
-            : "bg-white/90 py-3 backdrop-blur-xs"
+            ? "border-b border-gray-200/80 bg-white/95 py-1 shadow-md backdrop-blur-md"
+            : "bg-white/85 py-2 backdrop-blur-xs"
         )}
       >
         <div className="mx-auto flex h-20 w-full max-w-[1550px] items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10">
+          
           {/* LOGO & BRAND NAME */}
           <Link
             href="/"
@@ -139,9 +162,7 @@ export function Navbar() {
               whileHover={{ y: -2, scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent("open-registration"));
-              }}
+              onClick={handleRegisterNowClick}
               className="group flex items-center gap-2 rounded-full border-2 border-[#D4AF37] bg-white px-5 py-2.5 text-[12px] font-bold uppercase tracking-[0.16em] text-[#111111] transition duration-300 hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white shadow-xs hover:shadow-md hover:shadow-[#D4AF37]/20 whitespace-nowrap cursor-pointer"
             >
               <span>REGISTER NOW</span>
@@ -181,7 +202,7 @@ export function Navbar() {
             <div className="mx-auto w-full max-w-lg">
               <nav className="space-y-2" aria-label="Mobile navigation">
                 {NAV_GROUPS.map((group) => (
-                  <div key={group.label} className="border-b border-gray-200 py-2">
+                  <div key={group.label} className="border-b border-gray-100 py-2">
                     {group.items ? (
                       <>
                         <button
@@ -224,7 +245,7 @@ export function Navbar() {
                                   key={item.href}
                                   href={item.href}
                                   onClick={closeMobile}
-                                  className="block py-2 text-xs font-medium uppercase tracking-wider text-gray-700 transition hover:text-[#D4AF37]"
+                                  className="block py-2 text-xs font-medium uppercase tracking-wider text-[#555555] transition hover:text-[#111111]"
                                 >
                                   {item.label}
                                 </Link>
@@ -246,7 +267,7 @@ export function Navbar() {
                 ))}
 
                 {/* Mobile Login option */}
-                <div className="border-b border-gray-200 py-2">
+                <div className="border-b border-gray-100 py-2">
                   <Link
                     href="/login"
                     onClick={closeMobile}
@@ -260,10 +281,7 @@ export function Navbar() {
 
               <button
                 type="button"
-                onClick={() => {
-                  closeMobile();
-                  window.dispatchEvent(new CustomEvent("open-registration"));
-                }}
+                onClick={handleRegisterNowClick}
                 className="mt-8 flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#D4AF37] bg-[#D4AF37] px-6 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition active:scale-[0.98] shadow-md cursor-pointer"
               >
                 <span>REGISTER NOW</span>
@@ -273,6 +291,11 @@ export function Navbar() {
           </motion.aside>
         )}
       </AnimatePresence>
+
+      <AccountTypeModal
+        isOpen={accountModalOpen}
+        onClose={() => setAccountModalOpen(false)}
+      />
     </>
   );
 }

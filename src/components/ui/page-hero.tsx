@@ -27,7 +27,7 @@ export function PageHero({ eyebrow, title, description, breadcrumbs = [], image 
                   {eyebrow}
                 </p>
               )}
-              <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-[#111111] sm:text-4xl md:text-5xl lg:text-6xl">
+              <h1 className="font-sans text-3xl font-extrabold leading-[1.1] tracking-tight text-[#111111] sm:text-4xl md:text-5xl lg:text-6xl">
                 {title}
               </h1>
               {description && (

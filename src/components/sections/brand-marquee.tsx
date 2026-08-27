@@ -150,7 +150,7 @@ export function BrandMarquee() {
             INDUSTRY NETWORK
           </span>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111]">
+          <h3 className="font-serif text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111111]">
             Industry Brands &amp; Platforms
           </h3>
 

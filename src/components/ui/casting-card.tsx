@@ -33,7 +33,7 @@ export function CastingCard({
           )}
         </div>
 
-        <h3 className="mb-3 text-xl font-bold tracking-tight text-[#111111] transition-colors group-hover:text-[#D4AF37]">
+        <h3 className="font-sans mb-3 text-xl font-bold tracking-tight text-[#111111] transition-colors group-hover:text-[#D4AF37]">
           {title}
         </h3>
 

@@ -48,7 +48,7 @@ export function CastingCallCard({ item, onViewDetails, onApply }: CastingCallCar
         {/* 3. Casting Call Title */}
         <h3
           onClick={() => onViewDetails(item)}
-          className="text-lg sm:text-xl font-bold tracking-tight text-[#111111] group-hover:text-[#d4af37] transition-colors leading-snug mb-3 cursor-pointer"
+          className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[#111111] group-hover:text-[#d4af37] transition-colors leading-snug mb-3 cursor-pointer"
         >
           {item.title}
         </h3>
