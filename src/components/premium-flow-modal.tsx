@@ -63,19 +63,19 @@ export function PremiumFlowModal({
           return;
         }
 
-        if (session?.role === "brand") {
+        if (initialStep === "brand_checkout") {
           setStep("brand_checkout");
-        } else if (session?.role === "artist") {
-          setStep("artist_checkout");
         } else {
-          onClose();
-          router.push("/profile/setup");
+          setStep("artist_checkout");
         }
       });
     }
   }, [isOpen, initialStep, isRegistrationFlow, onClose, router]);
 
   if (!isOpen) return null;
+
+  const session = getUserSession();
+  const isAlreadyPremium = session?.isLoggedIn === true && session?.isPremium === true;
 
   const handleSelectRole = (selectedRole: "artist" | "brand") => {
     if (!isUserAuthenticated()) {
@@ -99,17 +99,21 @@ export function PremiumFlowModal({
   const handleArtistPayment = async () => {
     if (isProcessing) return;
     setIsProcessing(true);
-    const session = getUserSession();
+
     try {
       await launchRazorpayCheckout({
         name: session?.identifier || session?.email || "Artist Member",
         email: session?.email || "artist@example.com",
         contact: session?.identifier || "9876543210",
-        amount: 3999,
-        description: "Lifetime Premium Artist Membership — ₹3,999",
-        onSuccess: () => {
-          setUserPremiumStatus(true);
+        amount: 1999,
+        description: "Artist 3-Month Premium Membership — ₹1,999",
+        onSuccess: (paymentId) => {
           setUserRole("artist");
+          setUserPremiumStatus(true, {
+            plan: "ARTIST_PREMIUM",
+            amount: 1999,
+            paymentId: typeof paymentId === "string" ? paymentId : `WTB-ARTIST-${Date.now().toString().slice(-6)}`,
+          });
           setIsProcessing(false);
           setStep("artist_success");
         },
@@ -132,9 +136,13 @@ export function PremiumFlowModal({
         email: session?.email || "brand@example.com",
         contact: session?.identifier || "9876543210",
         amount: 9999,
-        description: "Brand Premium Casting Account — ₹9,999",
-        onSuccess: () => {
-          setUserPremiumStatus(true);
+        description: "Brand 3-Month Premium Casting Account — ₹9,999",
+        onSuccess: (paymentId) => {
+          setUserPremiumStatus(true, {
+            plan: "BRAND_PREMIUM",
+            amount: 9999,
+            paymentId: typeof paymentId === "string" ? paymentId : `WTB-BRAND-${Date.now().toString().slice(-6)}`,
+          });
           setUserRole("brand");
           setIsProcessing(false);
           setStep("brand_success");
@@ -237,125 +245,180 @@ export function PremiumFlowModal({
         )}
 
         {/* =========================================================
-            ARTIST CHECKOUT (₹3,999)
+            ARTIST CHECKOUT (₹1,999 / 3 MONTHS)
         ========================================================= */}
         {step === "artist_checkout" && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <div className="mx-auto mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
-                <UserCheck size={14} />
-                <span>Artist Premium Plan</span>
+          isAlreadyPremium ? (
+            <div className="space-y-6 text-center">
+              <div className="mx-auto mb-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800">
+                <CheckCircle2 size={16} className="text-emerald-600" />
+                <span>Active Premium Member</span>
               </div>
-              <h2 className="font-serif text-2xl font-bold text-[#111111] sm:text-3xl">
-                Premium Artist Membership
+              <h2 className="font-sans text-2xl font-extrabold text-[#111111] sm:text-3xl">
+                Your Premium Membership is Active
               </h2>
-              <div className="mt-4 flex items-end justify-center gap-1">
-                <span className="mb-1 text-xl font-bold text-[#D4AF37]">₹</span>
-                <span className="text-5xl font-extrabold text-[#D4AF37]">
-                  3,999
-                </span>
-              </div>
-              <p className="mt-1 text-xs font-bold uppercase tracking-widest text-gray-500">
-                One-time payment • Lifetime Access
+              <p className="text-xs text-[#555555] leading-relaxed max-w-md mx-auto">
+                Your DCA Premium artist profile is active and receiving priority casting alerts, WhatsApp updates, and enhanced profile discovery.
               </p>
+              <Button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  router.push("/dashboard");
+                }}
+                className="w-full py-3.5 text-xs font-bold uppercase tracking-wider bg-[#111111] hover:bg-[#D4AF37] text-white"
+              >
+                <span>Go to Artist Dashboard</span>
+                <ArrowRight size={16} className="ml-2" />
+              </Button>
             </div>
-
-            <div className="space-y-2.5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 text-xs text-[#333333]">
-              {[
-                "Lifetime Premium Membership",
-                "Verified Casting Opportunities",
-                "Priority Casting Visibility",
-                "Bollywood, OTT & TV Projects",
-                "Premium Artist Profile",
-                "No Monthly Renewal Charges",
-              ].map((perk) => (
-                <div key={perk} className="flex items-center gap-2.5">
-                  <CheckCircle2 size={16} className="shrink-0 text-[#D4AF37]" />
-                  <span className="font-medium">{perk}</span>
+          ) : (
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="mx-auto mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
+                  <UserCheck size={14} />
+                  <span>Artist Premium Plan</span>
                 </div>
-              ))}
-            </div>
+                <h2 className="font-serif text-2xl font-bold text-[#111111] sm:text-3xl">
+                  3 Months Premium Access
+                </h2>
+                <div className="mt-3 flex items-end justify-center gap-1">
+                  <span className="mb-1 text-xl font-bold text-[#D4AF37]">₹</span>
+                  <span className="text-5xl font-extrabold text-[#D4AF37]">
+                    1,999
+                  </span>
+                </div>
+                <p className="mt-1 text-xs font-bold uppercase tracking-widest text-gray-500">
+                  One-time payment • Valid for 3 months
+                </p>
+              </div>
 
-            <Button
-              type="button"
-              disabled={isProcessing}
-              onClick={handleArtistPayment}
-              className="w-full py-4 text-xs font-bold uppercase tracking-wider"
-            >
-              {isProcessing ? (
-                <span className="flex items-center justify-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Connecting to Payment Gateway...</span>
-                </span>
-              ) : (
-                <>
-                  <span>Proceed to Payment — ₹3,999</span>
-                  <ArrowRight size={16} className="ml-2" />
-                </>
-              )}
-            </Button>
-          </div>
+              <div className="space-y-2.5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 text-xs text-[#333333]">
+                {[
+                  "3-Month Premium Artist Membership",
+                  "Verified Casting Opportunities & WhatsApp Alerts",
+                  "Priority Profile Visibility in Talent Search",
+                  "Bollywood, OTT & TV Project Briefs",
+                  "3 Months Access to Active Projects",
+                ].map((perk) => (
+                  <div key={perk} className="flex items-center gap-2.5">
+                    <CheckCircle2 size={16} className="shrink-0 text-[#D4AF37]" />
+                    <span className="font-medium">{perk}</span>
+                  </div>
+                ))}
+
+                <div className="mt-2 pt-2 border-t border-gray-200 text-[11px] text-[#666666] leading-relaxed">
+                  * Note: Premium membership provides enhanced discovery and casting alerts. Per platform rules, all profiles undergo standard admin review for public publishing.
+                </div>
+              </div>
+
+              <Button
+                type="button"
+                disabled={isProcessing}
+                onClick={handleArtistPayment}
+                className="w-full py-4 text-xs font-bold uppercase tracking-wider"
+              >
+                {isProcessing ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Connecting to Payment Gateway...</span>
+                  </span>
+                ) : (
+                  <>
+                    <span>Proceed to Payment — ₹1,999</span>
+                    <ArrowRight size={16} className="ml-2" />
+                  </>
+                )}
+              </Button>
+            </div>
+          )
         )}
 
         {/* =========================================================
-            BRAND CHECKOUT (₹9,999)
+            BRAND CHECKOUT (₹9,999 / 3 MONTHS)
         ========================================================= */}
         {step === "brand_checkout" && (
-          <div className="space-y-6">
-            <div className="text-center">
-              <div className="mx-auto mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
-                <Building2 size={14} />
-                <span>Brand &amp; Casting Plan</span>
+          isAlreadyPremium ? (
+            <div className="space-y-6 text-center">
+              <div className="mx-auto mb-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-300 bg-emerald-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800">
+                <CheckCircle2 size={16} className="text-emerald-600" />
+                <span>Active Premium Account</span>
               </div>
-              <h2 className="font-serif text-2xl font-bold text-[#111111] sm:text-3xl">
-                Premium Casting Account
+              <h2 className="font-sans text-2xl font-extrabold text-[#111111] sm:text-3xl">
+                Your Brand Premium Account is Active
               </h2>
-              <div className="mt-4 flex items-end justify-center gap-1">
-                <span className="mb-1 text-xl font-bold text-[#D4AF37]">₹</span>
-                <span className="text-5xl font-extrabold text-[#D4AF37]">
-                  9,999
-                </span>
-              </div>
-              <p className="mt-1 text-xs font-bold uppercase tracking-widest text-gray-500">
-                One-time payment • Lifetime Access
+              <p className="text-xs text-[#555555] leading-relaxed max-w-md mx-auto">
+                Your DCA Premium Brand account is active with direct access to verified talent rosters and unlimited casting posts.
               </p>
+              <Button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  router.push("/dashboard");
+                }}
+                className="w-full py-3.5 text-xs font-bold uppercase tracking-wider bg-[#111111] hover:bg-[#D4AF37] text-white"
+              >
+                <span>Go to Dashboard</span>
+                <ArrowRight size={16} className="ml-2" />
+              </Button>
             </div>
-
-            <div className="space-y-2.5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 text-xs text-[#333333]">
-              {[
-                "Lifetime Premium Casting Account",
-                "Direct Access to Verified Talent Rosters",
-                "Post Unlimited Casting Calls & Auditions",
-                "Priority Talent Sourcing Support",
-                "Advanced Applicant Filtering",
-                "No Monthly Renewal Charges",
-              ].map((perk) => (
-                <div key={perk} className="flex items-center gap-2.5">
-                  <CheckCircle2 size={16} className="shrink-0 text-[#D4AF37]" />
-                  <span className="font-medium">{perk}</span>
+          ) : (
+            <div className="space-y-6">
+              <div className="text-center">
+                <div className="mx-auto mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-1 text-xs font-bold uppercase tracking-widest text-[#D4AF37]">
+                  <Building2 size={14} />
+                  <span>Brand &amp; Casting Plan</span>
                 </div>
-              ))}
-            </div>
+                <h2 className="font-serif text-2xl font-bold text-[#111111] sm:text-3xl">
+                  3 Months Premium Casting Access
+                </h2>
+                <div className="mt-4 flex items-end justify-center gap-1">
+                  <span className="mb-1 text-xl font-bold text-[#D4AF37]">₹</span>
+                  <span className="text-5xl font-extrabold text-[#D4AF37]">
+                    9,999
+                  </span>
+                </div>
+                <p className="mt-1 text-xs font-bold uppercase tracking-widest text-gray-500">
+                  One-time payment • Valid for 3 months
+                </p>
+              </div>
 
-            <Button
-              type="button"
-              disabled={isProcessing}
-              onClick={handleBrandPayment}
-              className="w-full py-4 text-xs font-bold uppercase tracking-wider"
-            >
-              {isProcessing ? (
-                <span className="flex items-center justify-center gap-2">
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Connecting to Payment Gateway...</span>
-                </span>
-              ) : (
-                <>
-                  <span>Proceed to Payment — ₹9,999</span>
-                  <ArrowRight size={16} className="ml-2" />
-                </>
-              )}
-            </Button>
-          </div>
+              <div className="space-y-2.5 rounded-2xl border border-gray-200 bg-[#F7F7F5] p-5 text-xs text-[#333333]">
+                {[
+                  "3-Month Premium Casting Account",
+                  "Direct Access to Verified Talent Rosters",
+                  "Post Unlimited Casting Calls & Auditions",
+                  "Priority Talent Sourcing Support",
+                  "Advanced Applicant Filtering",
+                  "3 Months Access to Talent Directory",
+                ].map((perk) => (
+                  <div key={perk} className="flex items-center gap-2.5">
+                    <CheckCircle2 size={16} className="shrink-0 text-[#D4AF37]" />
+                    <span className="font-medium">{perk}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Button
+                type="button"
+                disabled={isProcessing}
+                onClick={handleBrandPayment}
+                className="w-full py-4 text-xs font-bold uppercase tracking-wider"
+              >
+                {isProcessing ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <span>Connecting to Payment Gateway...</span>
+                  </span>
+                ) : (
+                  <>
+                    <span>Proceed to Payment — ₹9,999</span>
+                    <ArrowRight size={16} className="ml-2" />
+                  </>
+                )}
+              </Button>
+            </div>
+          )
         )}
 
         {/* =========================================================
@@ -369,21 +432,21 @@ export function PremiumFlowModal({
 
             <div>
               <h2 className="font-serif text-2xl font-bold text-[#111111] sm:text-3xl">
-                You&apos;re now a Premium Artist
+                Payment Order Submitted
               </h2>
               <p className="mt-2 text-xs text-[#555555]">
-                Your lifetime premium membership has been activated successfully.
+                Your payment order has been submitted for backend verification.
               </p>
             </div>
 
             <div className="mx-auto max-w-sm space-y-3 rounded-2xl border border-emerald-200 bg-emerald-50/50 p-4 text-left text-xs font-semibold text-emerald-900">
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-emerald-600" />
-                <span>Premium membership activated</span>
+                <span>Payment details received</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <CheckCircle2 size={16} className="text-emerald-600" />
-                <span>Premium Artist profile enabled</span>
+                <span>Pending server-side payment verification</span>
               </div>
             </div>
 
@@ -395,7 +458,7 @@ export function PremiumFlowModal({
               }}
               className="w-full py-4 text-xs font-bold uppercase tracking-wider"
             >
-              <span>Go to Artist Dashboard</span>
+              <span>Return to Artist Dashboard</span>
               <ArrowRight size={16} className="ml-2" />
             </Button>
           </div>

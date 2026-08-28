@@ -35,8 +35,8 @@ const WHY = [
     image: "/media/dca/influencers/dca-influencer-community-01.jpg",
   },
   {
-    title: "Lifetime Membership",
-    body: "One payment. Lifetime access. No recurring subscription fees.",
+    title: "3-Month Membership",
+    body: "3 months access to verified audition calls and talent directory.",
     image: "/images/actors/Membership.avif",
   },
 ];
@@ -175,7 +175,7 @@ export function WhatYouGet() {
           <div className="mt-10 sm:mt-12 flex flex-wrap justify-center gap-3 sm:gap-4">
             {[
               "Verified Opportunities",
-              "Lifetime Membership",
+              "3-Month Membership",
               "Priority Updates",
               "Daily WhatsApp Alerts",
             ].map((label) => (

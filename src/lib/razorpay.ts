@@ -54,7 +54,7 @@ export async function launchRazorpayCheckout({
   email,
   contact,
   amount = SITE.price,
-  description = "Lifetime Premium Membership",
+  description = "3-Month Premium Membership",
   onSuccess,
   onDismiss,
 }: LaunchArgs) {

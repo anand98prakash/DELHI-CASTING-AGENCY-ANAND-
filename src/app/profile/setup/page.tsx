@@ -20,7 +20,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { isUserAuthenticated, setDCAUserSession } from "@/lib/auth";
+import { isUserAuthenticated, setDCAUserSession, setUserProfileStatus } from "@/lib/auth";
 
 const inputClass =
   "w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 transition-all duration-300 focus:border-[#D4AF37] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15 shadow-xs";
@@ -156,12 +156,14 @@ export default function ProfileSetupPage() {
     setSaved(true);
 
     if (typeof window !== "undefined") {
-      setDCAUserSession(formData.email || formData.phone || "artist@example.com", "artist");
+      setDCAUserSession(formData.email || formData.phone || "artist@example.com", "artist", true);
+      setUserProfileStatus("PENDING_REVIEW");
       localStorage.setItem(
         "dca_artist_profile",
         JSON.stringify({
           formData,
           photoFiles,
+          status: "PENDING_REVIEW",
           savedAt: new Date().toISOString(),
           completionPercentage: 100,
         })

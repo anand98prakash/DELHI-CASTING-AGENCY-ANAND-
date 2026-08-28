@@ -5,12 +5,15 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, Menu, User, X } from "lucide-react";
 
+import Image from "next/image";
 import { Logo } from "@/components/logo";
 import { cn } from "@/lib/utils";
-import { NAV_GROUPS, type NavGroup } from "@/lib/site-navigation";
+import { NAV_GROUPS, type NavGroup, type NavItem } from "@/lib/site-navigation";
 import { AccountTypeModal } from "@/components/auth/AccountTypeModal";
 
 function DesktopDropdown({ group }: { group: NavGroup }) {
+  const [hoveredItem, setHoveredItem] = useState<NavItem | null>(null);
+
   if (!group.items) {
     return (
       <Link
@@ -22,6 +25,11 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
     );
   }
 
+  const activeItem = hoveredItem || group.items[0];
+  const previewImage = activeItem?.image || group.defaultImage || "/media/dca/actors/dca-actors-hero-banner.jpg";
+  const previewTitle = activeItem?.label || group.label;
+  const previewDesc = activeItem?.description || group.defaultDescription || "";
+
   return (
     <div className="group relative">
       <Link
@@ -32,18 +40,81 @@ function DesktopDropdown({ group }: { group: NavGroup }) {
         <ChevronDown className="h-3.5 w-3.5 shrink-0 text-[#D4AF37] transition duration-200 group-hover:rotate-180" />
       </Link>
 
-      <div className="pointer-events-none absolute left-1/2 top-full w-72 -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100">
-        <div className="rounded-xl border border-gray-200 bg-white/98 p-3 shadow-2xl backdrop-blur-xl">
-          {group.items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center justify-between rounded-lg px-4 py-2.5 text-xs font-medium uppercase tracking-[0.12em] text-[#333333] transition duration-200 hover:bg-[#F7F7F5] hover:text-[#D4AF37]"
-            >
-              <span>{item.label}</span>
-              <ArrowRight className="h-3.5 w-3.5 opacity-0 transition duration-200 group-hover:opacity-100 text-[#D4AF37]" />
-            </Link>
-          ))}
+      <div className="pointer-events-none absolute left-1/2 top-full w-[620px] -translate-x-1/2 translate-y-2 pt-3 opacity-0 transition-all duration-300 group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 z-50">
+        <div className="rounded-2xl border border-gray-200 bg-white/98 p-4 shadow-2xl backdrop-blur-xl grid grid-cols-12 gap-4 items-stretch text-left">
+          
+          {/* Left Column: Menu Items List */}
+          <div className="col-span-6 flex flex-col justify-center space-y-1 pr-1 border-r border-gray-100">
+            <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">
+              {group.label} Categories
+            </div>
+            {group.items.map((item) => {
+              const isActive = activeItem?.href === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onMouseEnter={() => setHoveredItem(item)}
+                  onFocus={() => setHoveredItem(item)}
+                  className={cn(
+                    "group/item flex items-center justify-between rounded-xl px-3.5 py-2 text-xs font-semibold uppercase tracking-[0.12em] transition duration-200",
+                    isActive
+                      ? "bg-[#D4AF37]/10 text-[#D4AF37]"
+                      : "text-[#222222] hover:bg-[#F7F7F5] hover:text-[#D4AF37]"
+                  )}
+                >
+                  <span>{item.label}</span>
+                  <ArrowRight
+                    className={cn(
+                      "h-3.5 w-3.5 text-[#D4AF37] transition-all duration-200",
+                      isActive ? "opacity-100 translate-x-0.5" : "opacity-0 group-hover/item:opacity-100 group-hover/item:translate-x-0.5"
+                    )}
+                  />
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Right Column: Contextual Image Preview */}
+          <div className="col-span-6 flex flex-col justify-between rounded-xl border border-gray-100 bg-[#F7F7F5] p-3">
+            <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-gray-200 shadow-2xs border border-gray-200">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={previewImage}
+                  initial={{ opacity: 0, scale: 1.03 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.22, ease: "easeOut" }}
+                  className="absolute inset-0 h-full w-full"
+                >
+                  <Image
+                    src={previewImage}
+                    alt={previewTitle}
+                    fill
+                    sizes="300px"
+                    className="object-cover object-center"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-2 left-2.5 right-2.5 text-left">
+                    <span className="inline-block text-[9px] font-bold uppercase tracking-wider text-[#D4AF37] bg-black/60 px-2 py-0.5 rounded-full backdrop-blur-xs">
+                      {previewTitle}
+                    </span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            <div className="mt-2 px-0.5 text-left">
+              <h4 className="text-xs font-extrabold uppercase tracking-wider text-[#111111] line-clamp-1">
+                {previewTitle}
+              </h4>
+              <p className="mt-0.5 text-[11px] font-normal leading-relaxed text-[#555555] line-clamp-2">
+                {previewDesc}
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

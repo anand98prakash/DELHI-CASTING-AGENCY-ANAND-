@@ -47,11 +47,11 @@ export function Closing() {
               <div className="mt-10 flex flex-wrap justify-center gap-4">
                 <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-[#333333] shadow-xs">
                   <ShieldCheck size={16} className="text-[#D4AF37]" />
-                  Secure One-Time Payment
+                  Secure Payment
                 </div>
 
                 <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-3 text-sm font-medium text-[#333333] shadow-xs">
-                  ⭐ Lifetime Membership
+                  ⭐ 3-Month Membership
                 </div>
               </div>
 
@@ -74,11 +74,11 @@ export function Closing() {
 
               {/* Price */}
               <p className="mt-6 text-base text-[#555555]">
-                One-Time Payment of{" "}
+                Artist Premium Payment of{" "}
                 <span className="font-semibold text-[#D4AF37]">
                   ₹{SITE.price.toLocaleString()}
                 </span>{" "}
-                • Lifetime Access • No Renewal Charges
+                • 3-Month Access
               </p>
             </div>
           </motion.div>

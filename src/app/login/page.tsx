@@ -161,26 +161,33 @@ export default function LoginPage() {
                 )}
               </Button>
 
-              {/* Register Prompt */}
-              <div className="mt-4 border-t border-gray-200 pt-4 text-center space-y-2">
-                <p className="text-xs text-[#555555]">
-                  Don&apos;t have an artist profile yet?{" "}
+              {/* Register Prompts & CTA Buttons */}
+              <div className="mt-5 border-t border-gray-200 pt-4 space-y-3">
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+                  <span className="text-[#555555] font-medium text-center sm:text-left">
+                    Don&apos;t have an artist profile yet?
+                  </span>
                   <Link
                     href="/profile/setup"
-                    className="font-bold text-[#111111] hover:text-[#D4AF37] transition-colors"
+                    className="inline-flex items-center gap-1.5 shrink-0 rounded-xl bg-[#D4AF37] px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-wider text-white transition duration-200 hover:bg-[#C59B27] shadow-2xs cursor-pointer"
                   >
-                    Create Your Profile &rarr;
+                    <span>Create Your Profile</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                </p>
-                <p className="text-xs text-[#555555]">
-                  Are you a Brand or Casting Agency?{" "}
+                </div>
+
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
+                  <span className="text-[#555555] font-medium text-center sm:text-left">
+                    Are you a Brand or Casting Agency?
+                  </span>
                   <Link
                     href="/register/brand"
-                    className="font-bold text-[#D4AF37] hover:underline transition-colors"
+                    className="inline-flex items-center gap-1.5 shrink-0 rounded-xl border border-gray-300 bg-[#F7F7F5] px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-[#333333] transition duration-200 hover:border-[#D4AF37] hover:text-[#D4AF37] hover:bg-white shadow-2xs cursor-pointer"
                   >
-                    Register as Brand &rarr;
+                    <span>Register as Brand</span>
+                    <ArrowRight className="h-3.5 w-3.5 text-[#D4AF37]" />
                   </Link>
-                </p>
+                </div>
               </div>
             </form>
 

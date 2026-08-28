@@ -2,7 +2,7 @@ export const SITE = {
   name: "Way to Bollywood",
   agency: "Delhi Casting Agency",
   tagline: "Verified casting calls across India, delivered to artists who are ready.",
-  price: 3999,
+  price: 1999,
   currency: "INR",
   whatsappUrl: "https://wa.me/910000000000",
 };

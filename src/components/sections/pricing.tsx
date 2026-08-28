@@ -20,12 +20,12 @@ import { getUserSession } from "@/lib/auth";
 import { SITE } from "@/lib/constants";
 
 const PERKS = [
-  "Lifetime Premium Membership",
+  "3-Month Premium Membership",
   "Verified Casting Opportunities",
   "Priority Daily WhatsApp Updates",
   "Bollywood, OTT & TV Projects",
-  "No Monthly Charges",
-  "Secure One-Time Payment",
+  "No Hidden Charges",
+  "Secure Payment Gateway",
 ];
 
 import { useRouter } from "next/navigation";
@@ -50,21 +50,9 @@ export function Pricing() {
       return;
     }
 
-    if (session.role === "artist") {
-      setIsRegistrationFlow(false);
-      setModalInitialStep("artist_checkout");
-      setModalOpen(true);
-      return;
-    }
-
-    if (session.role === "brand") {
-      setIsRegistrationFlow(false);
-      setModalInitialStep("brand_checkout");
-      setModalOpen(true);
-      return;
-    }
-
-    router.push("/profile/setup");
+    setIsRegistrationFlow(false);
+    setModalInitialStep("artist_checkout");
+    setModalOpen(true);
   }, [router]);
 
   const handleOpenRegistration = useCallback(() => {
@@ -114,11 +102,11 @@ export function Pricing() {
 
             <h2 className="mt-6 text-4xl font-bold leading-tight text-[#111111] md:text-6xl">
               One Membership.
-              <span className="block text-[#D4AF37]">Lifetime Access.</span>
+              <span className="block text-[#D4AF37]">3-Month Access.</span>
             </h2>
 
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-[#444444]">
-              Join our premium membership with a one-time payment and receive
+              Join our premium membership for 3 months and receive
               verified casting opportunities across Bollywood, OTT platforms,
               television, fashion and commercial productions.
             </p>
@@ -144,7 +132,7 @@ export function Pricing() {
               </h3>
 
               <p className="mt-3 text-base text-[#555555]">
-                Lifetime Premium Access
+                3-Month Premium Access
               </p>
 
               {/* Price */}
@@ -155,22 +143,16 @@ export function Pricing() {
                 transition={{ duration: 0.5 }}
                 className="mt-10"
               >
-                <div className="flex items-end justify-center gap-1">
-                  <span className="mb-2 text-2xl font-bold text-[#D4AF37]">
-                    ₹
-                  </span>
-
-                  <span className="text-6xl font-extrabold leading-none text-[#D4AF37] md:text-7xl">
-                    {SITE.price.toLocaleString()}
-                  </span>
+                <div className="flex flex-wrap items-baseline justify-center gap-2">
+                  <span className="text-4xl font-extrabold text-[#D4AF37] md:text-5xl">₹1,999</span>
                 </div>
 
-                <p className="mt-4 text-sm font-semibold uppercase tracking-[0.28em] text-[#777777]">
-                  One-Time Payment
+                <p className="mt-3 text-xs font-semibold uppercase tracking-[0.25em] text-[#777777]">
+                  ₹1,999 • 3 Months Access
                 </p>
 
-                <p className="mt-2 text-sm font-medium text-[#D4AF37]">
-                  Lifetime Access • No Renewal Charges
+                <p className="mt-1.5 text-xs font-medium text-[#D4AF37]">
+                  Artist Premium — 3 Months Access
                 </p>
               </motion.div>
 
@@ -183,7 +165,7 @@ export function Pricing() {
 
                 <div className="flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-2 text-sm font-medium text-[#D4AF37] shadow-xs">
                   <BadgeCheck size={16} className="text-[#D4AF37]" />
-                  Lifetime Access
+                  3-Month Access
                 </div>
               </div>
 
@@ -224,8 +206,7 @@ export function Pricing() {
                 </Button>
 
                 <p className="mt-5 text-sm leading-7 text-[#555555]">
-                  One payment. Lifetime access. No monthly subscription or
-                  renewal fees.
+                  3 Months access to verified casting opportunities &amp; priority visibility.
                 </p>
               </motion.div>
 
@@ -267,11 +248,11 @@ export function Pricing() {
 
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <span className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-[#333333]">
-              🔒 Secure One-Time Payment
+              🔒 Secure Payment
             </span>
 
             <span className="rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-2 text-sm font-medium text-[#D4AF37]">
-              ⭐ Lifetime Membership
+              ⭐ 3-Month Membership
             </span>
           </div>
 
@@ -285,11 +266,11 @@ export function Pricing() {
           </Button>
 
           <p className="mt-5 text-sm text-[#555555]">
-            One-Time Payment of{" "}
+            Artist Premium Payment of{" "}
             <span className="font-semibold text-[#D4AF37]">
               ₹{SITE.price.toLocaleString()}
             </span>{" "}
-            • Lifetime Access • No Renewal Charges
+            • 3 Months Access
           </p>
         </motion.div>
 

@@ -157,22 +157,27 @@ export default function MembershipPage() {
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <Reveal>
             <div className="grid gap-6 sm:grid-cols-2">
-              {/* Artist Plan */}
-              <div className="rounded-xl border border-gray-200 bg-[#F7F7F5] p-6 shadow-md">
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
-                  Artist Plan
+              {/* Artist 3-Month Plan */}
+              <div className="rounded-xl border-2 border-[#D4AF37]/50 bg-white p-6 shadow-md relative flex flex-col justify-between">
+                <span className="absolute -top-3 right-4 bg-[#D4AF37] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full">
+                  Artist Membership
                 </span>
-                <h3 className="mt-2 font-serif text-xl font-bold text-[#111111]">
-                  Premium Artist Membership
-                </h3>
-                <div className="mt-3 flex items-end gap-1">
-                  <span className="text-lg font-bold text-[#D4AF37]">₹</span>
-                  <span className="text-4xl font-extrabold text-[#D4AF37]">3,999</span>
-                  <span className="text-xs font-semibold text-gray-500 mb-1"> / lifetime</span>
+                <div>
+                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
+                    Artist Premium Plan
+                  </span>
+                  <h3 className="mt-2 font-serif text-xl font-bold text-[#111111]">
+                    3-Month Premium Membership
+                  </h3>
+                  <div className="mt-3 flex items-end gap-1">
+                    <span className="text-lg font-bold text-[#D4AF37]">₹</span>
+                    <span className="text-4xl font-extrabold text-[#D4AF37]">1,999</span>
+                    <span className="text-xs font-semibold text-gray-500 mb-1"> / 3 months</span>
+                  </div>
+                  <p className="mt-2 text-xs text-[#555555]">
+                    3 Months access for verified casting calls &amp; priority visibility.
+                  </p>
                 </div>
-                <p className="mt-2 text-xs text-[#555555]">
-                  One-time payment for verified casting calls &amp; priority profile visibility.
-                </p>
                 <button
                   type="button"
                   onClick={() => {
@@ -183,9 +188,9 @@ export default function MembershipPage() {
                       setModalOpen(true);
                     }
                   }}
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#111111] py-3 text-xs font-bold uppercase tracking-wider text-white transition duration-300 hover:bg-[#D4AF37] cursor-pointer"
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-[#D4AF37] py-3 text-xs font-bold uppercase tracking-wider text-white transition duration-300 hover:bg-[#C59B27] cursor-pointer"
                 >
-                  <span>Become Premium — ₹3,999</span>
+                  <span>Become Premium — ₹1,999</span>
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
@@ -201,10 +206,10 @@ export default function MembershipPage() {
                 <div className="mt-3 flex items-end gap-1">
                   <span className="text-lg font-bold text-[#D4AF37]">₹</span>
                   <span className="text-4xl font-extrabold text-[#D4AF37]">9,999</span>
-                  <span className="text-xs font-semibold text-gray-500 mb-1"> / lifetime</span>
+                  <span className="text-xs font-semibold text-gray-500 mb-1"> / 3 months</span>
                 </div>
                 <p className="mt-2 text-xs text-[#555555]">
-                  One-time payment for direct talent access &amp; priority casting placement.
+                  3 Months access for direct talent access &amp; priority casting placement.
                 </p>
                 <button
                   type="button"

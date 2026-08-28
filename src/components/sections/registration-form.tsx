@@ -158,7 +158,7 @@ export function RegistrationForm({ onSuccess }: Props) {
       setSubmitting(true);
 
       // Complete registration session first
-      setDCAUserSession(data.email || data.mobile, "artist");
+      setDCAUserSession(data.email || data.mobile, "artist", true);
 
       await launchRazorpayCheckout({
         name: data.fullName,

@@ -13,8 +13,7 @@ import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { setDCAUserSession, setUserPremiumStatus } from "@/lib/auth";
-import { launchRazorpayCheckout } from "@/lib/razorpay";
+import { setDCAUserSession } from "@/lib/auth";
 
 const inputClass =
   "w-full rounded-xl border border-gray-300 bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 transition-all duration-300 focus:border-[#D4AF37] focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15 shadow-xs";
@@ -52,7 +51,7 @@ export default function BrandRegisterPage() {
     setSubmitting(true);
 
     if (typeof window !== "undefined") {
-      setDCAUserSession(formData.email || formData.phone, "brand");
+      setDCAUserSession(formData.email || formData.phone, "brand", true);
 
       localStorage.setItem(
         "dca_brand_profile",
@@ -64,34 +63,11 @@ export default function BrandRegisterPage() {
       );
     }
 
-    try {
-      await launchRazorpayCheckout({
-        name: formData.fullName || formData.companyName,
-        email: formData.email,
-        contact: formData.phone,
-        amount: 9999,
-        description: "Brand Premium Casting Account — ₹9,999",
-        onSuccess: () => {
-          setUserPremiumStatus(true);
-          setSubmitting(false);
-          setSaved(true);
-          setTimeout(() => {
-            router.push("/dashboard");
-          }, 500);
-        },
-        onDismiss: () => {
-          setSubmitting(false);
-          setSaved(true);
-          setTimeout(() => {
-            router.push("/dashboard");
-          }, 500);
-        },
-      });
-    } catch (err) {
-      console.error("Brand checkout error", err);
-      setSubmitting(false);
+    setSubmitting(false);
+    setSaved(true);
+    setTimeout(() => {
       router.push("/dashboard");
-    }
+    }, 500);
   };
 
   return (

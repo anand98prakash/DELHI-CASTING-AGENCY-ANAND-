@@ -180,7 +180,7 @@ export function Hero() {
                 transition={{ delay: 1 }}
                 className="text-sm font-medium text-[#555555]"
               >
-               <b> ₹3,999 <span className="mx-1">•</span> Lifetime Membership</b>
+               <b> ₹1,999 <span className="mx-1">•</span> 3-Month Membership</b>
               </motion.p>
             </motion.div>
 
@@ -203,10 +203,10 @@ export function Hero() {
                 Daily WhatsApp Updates
               </div>
 
-              {/* Lifetime Membership */}
+              {/* 3-Month Membership */}
               <div className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-5 py-2.5 text-sm text-[#333333] shadow-sm">
                 <ShieldCheck size={16} className="text-[#D4AF37]" />
-                Lifetime Membership
+                3-Month Membership
               </div>
             </motion.div>
           </motion.div>

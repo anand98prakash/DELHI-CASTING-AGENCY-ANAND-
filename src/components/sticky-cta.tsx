@@ -22,14 +22,14 @@ export function StickyCta() {
           <div>
             <div className="flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#D4AF37] font-semibold">
               <Sparkles size={13} />
-              Lifetime Membership
+              3-Month Membership
             </div>
 
             <p className="mt-1 text-xl font-bold text-[#111111]">
               ₹{SITE.price.toLocaleString()}
             </p>
 
-            <p className="text-xs text-[#555555]">One-Time Payment</p>
+            <p className="text-xs text-[#555555]">3 Months Access</p>
           </div>
 
           {/* Button */}
