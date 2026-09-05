@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Next.js build output
+.next/
+*/.next/
+out/
+*/out/
+
+# Environment files and secrets (never commit local credentials)
+.env
+.env.*
+*.env
+*.env.*
+!.env.example
+!*/.env.example
+!*.env.local.example
+!*/.env.local.example
+
+# Logs and system files
+*.log
+.DS_Store
+Thumbs.db
+
+# TypeScript build info
+*.tsbuildinfo
+*/tsconfig.tsbuildinfo
+
+# Build outputs
+dist/
+*/dist/
+
+# Temporary, scratch, and accidental files
+*.zip
+.postman/
+postman/
+npm
+r.json*
+tatus*
+tration*
+scratch/
+get-shit-done-for-antigravity/
