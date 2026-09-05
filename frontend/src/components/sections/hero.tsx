@@ -31,14 +31,14 @@ export function Hero() {
           ===================================================== */}
 
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-2xl text-center lg:text-left"
+            className="w-full max-w-2xl text-center lg:text-left"
           >
             {/* Badge */}
-            <div className="mb-8 flex justify-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-5 py-2 text-sm text-[#A88416] backdrop-blur-md">
+            <div className="mb-6 sm:mb-8 flex justify-center lg:justify-start">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/30 bg-[#D4AF37]/10 px-4 py-1.5 sm:px-5 sm:py-2 text-xs sm:text-sm text-[#A88416] backdrop-blur-md">
                 <Sparkles size={15} />
                 <span>Verified Casting Opportunities</span>
               </div>
@@ -49,12 +49,12 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.45 }}
-              className="mb-6 text-base sm:text-lg uppercase tracking-[0.35em] text-[#444444] text-center"
+              className="mb-4 sm:mb-6 text-sm sm:text-base uppercase tracking-[0.25em] sm:tracking-[0.35em] text-[#444444] text-center lg:text-left"
             >
               WAY TO{" "}
               <span
                 className={cn(
-                  "block mt-1 text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal text-[#111111] font-bold leading-tight capitalize select-none drop-shadow-xs",
+                  "block mt-1 text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-normal text-[#111111] font-bold leading-tight capitalize select-none drop-shadow-xs",
                   dancingScript.className
                 )}
               >
@@ -67,7 +67,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.8 }}
-              className="text-5xl font-bold leading-[1.1] text-[#111111] md:text-7xl lg:text-8xl text-center"
+              className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-[1.15] text-[#111111] text-center lg:text-left"
             >
               Your Story
               <br />
@@ -81,7 +81,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-4 lg:justify-start"
+              className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-md mx-auto lg:mx-0 lg:justify-start"
             >
               <motion.button
                 type="button"
@@ -98,7 +98,7 @@ export function Hero() {
                   stiffness: 400,
                   damping: 25,
                 }}
-                className="group relative w-full sm:w-auto min-w-[200px] overflow-hidden rounded-full border-2 border-[#111111] bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#111111] transition-all duration-500 hover:border-[#D4AF37] hover:text-white hover:shadow-[0_10px_25px_rgba(212,175,55,0.25)] cursor-pointer"
+                className="group relative w-full sm:w-auto min-w-0 sm:min-w-[200px] overflow-hidden rounded-full border-2 border-[#111111] bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#111111] transition-all duration-500 hover:border-[#D4AF37] hover:text-white hover:shadow-[0_10px_25px_rgba(212,175,55,0.25)] cursor-pointer"
               >
                 {/* Gold hover fill */}
                 <span className="absolute inset-0 origin-left scale-x-0 bg-[#D4AF37] transition-transform duration-500 ease-out group-hover:scale-x-100" />
@@ -126,7 +126,7 @@ export function Hero() {
                   stiffness: 400,
                   damping: 25,
                 }}
-                className="group relative w-full sm:w-auto min-w-[200px] overflow-hidden rounded-full border-2 border-[#111111] bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#111111] transition-all duration-500 hover:border-[#D4AF37] hover:text-white hover:shadow-[0_10px_25px_rgba(212,175,55,0.25)] cursor-pointer"
+                className="group relative w-full sm:w-auto min-w-0 sm:min-w-[200px] overflow-hidden rounded-full border-2 border-[#111111] bg-white px-6 py-3.5 text-xs font-bold uppercase tracking-[0.16em] text-[#111111] transition-all duration-500 hover:border-[#D4AF37] hover:text-white hover:shadow-[0_10px_25px_rgba(212,175,55,0.25)] cursor-pointer"
               >
                 {/* Gold hover fill */}
                 <span className="absolute inset-0 origin-left scale-x-0 bg-[#D4AF37] transition-transform duration-500 ease-out group-hover:scale-x-100" />
@@ -230,7 +230,7 @@ export function Hero() {
             className="relative flex w-full max-w-xl items-center justify-center -mt-6 sm:-mt-10 lg:-mt-16 xl:-mt-20"
           >
             {/* Ambient Radial Glow */}
-            <div className="absolute h-[420px] w-[420px] rounded-full bg-[#D4AF37]/10 blur-[120px]" />
+            <div className="absolute h-72 w-72 sm:h-[420px] sm:w-[420px] rounded-full bg-[#D4AF37]/10 blur-[100px] sm:blur-[120px]" />
 
             {/* 3D Perspective Container */}
             <div className="relative w-full" style={{ perspective: "1200px" }}>
@@ -250,7 +250,7 @@ export function Hero() {
                 <motion.div
                   whileHover={{ scale: 1.01 }}
                   transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="relative w-full overflow-visible rounded-[32px] border border-gray-200 bg-white p-8 shadow-xl"
+                  className="relative w-full overflow-visible rounded-3xl sm:rounded-[32px] border border-gray-200 bg-white p-4 sm:p-6 lg:p-8 shadow-xl"
                 >
                   {/* 3 Columns Masonry Grid */}
                   <div className="grid grid-cols-3 gap-3 sm:gap-4">
@@ -342,13 +342,13 @@ export function Hero() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="pointer-events-none absolute -right-3 top-6 rounded-2xl border border-[#D4AF37]/30 bg-white px-5 py-4 shadow-lg"
+                className="pointer-events-none absolute right-1 sm:-right-3 top-3 sm:top-6 rounded-2xl border border-[#D4AF37]/30 bg-white px-3.5 py-2.5 sm:px-5 sm:py-4 shadow-lg"
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-[#A88416]">
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[#A88416]">
                   Members
                 </p>
 
-                <h4 className="mt-2 text-2xl font-bold text-[#111111]">
+                <h4 className="mt-1 sm:mt-2 text-lg sm:text-2xl font-bold text-[#111111]">
                   5,000+
                 </h4>
               </motion.div>
@@ -363,13 +363,13 @@ export function Hero() {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                className="pointer-events-none absolute -left-4 bottom-6 rounded-2xl border border-gray-200 bg-white px-5 py-4 shadow-lg"
+                className="pointer-events-none absolute left-1 sm:-left-4 bottom-3 sm:bottom-6 rounded-2xl border border-gray-200 bg-white px-3.5 py-2.5 sm:px-5 sm:py-4 shadow-lg"
               >
-                <p className="text-xs uppercase tracking-[0.2em] text-[#A88416]">
+                <p className="text-[10px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.2em] text-[#A88416]">
                   Opportunities
                 </p>
 
-                <h4 className="mt-2 text-2xl font-bold text-[#111111]">
+                <h4 className="mt-1 sm:mt-2 text-lg sm:text-2xl font-bold text-[#111111]">
                   2,000+
                 </h4>
               </motion.div>
