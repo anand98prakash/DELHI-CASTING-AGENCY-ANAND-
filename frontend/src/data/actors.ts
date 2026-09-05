@@ -412,13 +412,13 @@ export const ACTORS_DATA: Actor[] = [
     eyeColor: "Dark Brown",
     hair: "Black",
     badge: "Verified DCA Artist",
-    mainImage: "/images/actors/male actor.png",
+    mainImage: "/images/actors/model male 1.png",
     about: "Dynamic screen presence with extensive background in theatre, action choreography, and OTT thriller series.",
     skills: ["Action Choreography", "Voice Modulation", "Theatre Acting"],
     experienceCredits: [
       { project: "Delhi Crime Files", role: "Inspector Vikram", type: "OTT / Web Series", year: "2024" }
     ],
-    digitals: ["/images/actors/male actor.png"],
+    digitals: ["/images/actors/model male 1.png"],
     videos: [],
     instagram: [],
     print: []
@@ -512,13 +512,13 @@ export const ACTORS_DATA: Actor[] = [
     eyeColor: "Dark Brown",
     hair: "Black",
     badge: "Verified DCA Artist",
-    mainImage: "/images/actors/model female 1.png",
+    mainImage: "/images/actors/model femal 1.png",
     about: "Expressive screen actor with strong improvisational skills and prominent appearances in web series and commercials.",
     skills: ["Camera Acting", "Improvisation", "Contemporary Posing"],
     experienceCredits: [
       { project: "Urban Stories", role: "Meera", type: "OTT / Web Series", year: "2024" }
     ],
-    digitals: ["/images/actors/model female 1.png"],
+    digitals: ["/images/actors/model femal 1.png"],
     videos: [],
     instagram: [],
     print: []
