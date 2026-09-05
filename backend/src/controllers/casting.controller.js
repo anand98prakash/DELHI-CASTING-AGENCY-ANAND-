@@ -20,6 +20,20 @@ export async function createCastingCall(req, res) {
             });
             return;
         }
+        // 2b. Authorize verification: Brand must have APPROVED verificationStatus
+        const brandProfile = await prisma.brandProfile.findUnique({
+            where: { userId: req.user.userId },
+            select: { id: true, verificationStatus: true },
+        });
+        if (!brandProfile || brandProfile.verificationStatus !== "APPROVED") {
+            res.status(403).json({
+                success: false,
+                message: brandProfile?.verificationStatus === "REJECTED"
+                    ? "Your brand account verification was rejected. You cannot post casting calls."
+                    : "Your brand account is currently under review. Admin approval is required before you can post casting calls.",
+            });
+            return;
+        }
         // 3. Extract & validate body
         const { title, description, category, location, compensation, startDate, endDate, ageMin, ageMax, gender, requirements, } = req.body;
         // Validate title (required string, non-empty)
@@ -349,7 +363,7 @@ export async function getBrandProfile(req, res) {
             });
             return;
         }
-        const brandProfile = await prisma.brandProfile.findUnique({
+        let brandProfile = await prisma.brandProfile.findUnique({
             where: { userId: req.user.userId },
             select: {
                 id: true,
@@ -364,10 +378,49 @@ export async function getBrandProfile(req, res) {
                 companyDescription: true,
                 companyLogo: true,
                 verificationStatus: true,
+                adminFeedback: true,
+                submittedAt: true,
+                approvedAt: true,
                 createdAt: true,
                 updatedAt: true,
             },
         });
+        // Auto-provision brand profile for brand users if not yet created
+        if (!brandProfile && req.user.role === "BRAND") {
+            const user = await prisma.user.findUnique({
+                where: { id: req.user.userId },
+                select: { email: true },
+            });
+            brandProfile = await prisma.brandProfile.create({
+                data: {
+                    userId: req.user.userId,
+                    companyName: (user?.email ? user.email.split("@")[0] : undefined) ||
+                        "Brand Partner",
+                    email: user?.email || null,
+                    verificationStatus: "PENDING_REVIEW",
+                    submittedAt: new Date(),
+                },
+                select: {
+                    id: true,
+                    userId: true,
+                    companyName: true,
+                    contactName: true,
+                    phone: true,
+                    email: true,
+                    website: true,
+                    city: true,
+                    state: true,
+                    companyDescription: true,
+                    companyLogo: true,
+                    verificationStatus: true,
+                    adminFeedback: true,
+                    submittedAt: true,
+                    approvedAt: true,
+                    createdAt: true,
+                    updatedAt: true,
+                },
+            });
+        }
         res.status(200).json({
             success: true,
             profile: brandProfile,
@@ -378,6 +431,146 @@ export async function getBrandProfile(req, res) {
         res.status(500).json({
             success: false,
             message: "Failed to fetch brand profile",
+        });
+    }
+}
+// ==========================================
+// 4c. PUT /api/brand/profile (Update logged-in Brand's company profile)
+// ==========================================
+export async function updateBrandProfile(req, res) {
+    try {
+        if (!req.user) {
+            res.status(401).json({
+                success: false,
+                message: "Authentication token required",
+            });
+            return;
+        }
+        if (req.user.role !== "BRAND") {
+            res.status(403).json({
+                success: false,
+                message: "Only BRAND users can update brand profiles",
+            });
+            return;
+        }
+        const { companyName, contactName, phone, email, website, city, state, companyDescription, companyLogo, } = req.body;
+        const existingProfile = await prisma.brandProfile.findUnique({
+            where: { userId: req.user.userId },
+        });
+        const updateData = {};
+        if (companyName !== undefined &&
+            typeof companyName === "string" &&
+            companyName.trim() !== "") {
+            updateData.companyName = companyName.trim();
+        }
+        if (contactName !== undefined) {
+            updateData.contactName =
+                typeof contactName === "string" ? contactName.trim() || null : null;
+        }
+        if (phone !== undefined) {
+            updateData.phone =
+                typeof phone === "string" ? phone.trim() || null : null;
+        }
+        if (email !== undefined) {
+            updateData.email =
+                typeof email === "string" ? email.trim() || null : null;
+        }
+        if (website !== undefined) {
+            updateData.website =
+                typeof website === "string" ? website.trim() || null : null;
+        }
+        if (city !== undefined) {
+            updateData.city =
+                typeof city === "string" ? city.trim() || null : null;
+        }
+        if (state !== undefined) {
+            updateData.state =
+                typeof state === "string" ? state.trim() || null : null;
+        }
+        if (companyDescription !== undefined) {
+            updateData.companyDescription =
+                typeof companyDescription === "string"
+                    ? companyDescription.trim() || null
+                    : null;
+        }
+        if (companyLogo !== undefined) {
+            updateData.companyLogo =
+                typeof companyLogo === "string" ? companyLogo.trim() || null : null;
+        }
+        let savedProfile;
+        if (existingProfile) {
+            savedProfile = await prisma.brandProfile.update({
+                where: { userId: req.user.userId },
+                data: updateData,
+                select: {
+                    id: true,
+                    userId: true,
+                    companyName: true,
+                    contactName: true,
+                    phone: true,
+                    email: true,
+                    website: true,
+                    city: true,
+                    state: true,
+                    companyDescription: true,
+                    companyLogo: true,
+                    verificationStatus: true,
+                    adminFeedback: true,
+                    submittedAt: true,
+                    approvedAt: true,
+                    createdAt: true,
+                    updatedAt: true,
+                },
+            });
+        }
+        else {
+            savedProfile = await prisma.brandProfile.create({
+                data: {
+                    userId: req.user.userId,
+                    companyName: updateData.companyName || "Brand Partner",
+                    contactName: updateData.contactName || null,
+                    phone: updateData.phone || null,
+                    email: updateData.email || null,
+                    website: updateData.website || null,
+                    city: updateData.city || null,
+                    state: updateData.state || null,
+                    companyDescription: updateData.companyDescription || null,
+                    companyLogo: updateData.companyLogo || null,
+                    verificationStatus: "PENDING_REVIEW",
+                    submittedAt: new Date(),
+                },
+                select: {
+                    id: true,
+                    userId: true,
+                    companyName: true,
+                    contactName: true,
+                    phone: true,
+                    email: true,
+                    website: true,
+                    city: true,
+                    state: true,
+                    companyDescription: true,
+                    companyLogo: true,
+                    verificationStatus: true,
+                    adminFeedback: true,
+                    submittedAt: true,
+                    approvedAt: true,
+                    createdAt: true,
+                    updatedAt: true,
+                },
+            });
+        }
+        res.status(200).json({
+            success: true,
+            message: "Brand profile updated successfully",
+            profile: savedProfile,
+        });
+    }
+    catch (error) {
+        console.error("Update brand profile error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to update brand profile",
         });
     }
 }

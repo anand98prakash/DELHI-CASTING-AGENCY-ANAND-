@@ -4,12 +4,12 @@ import { createNotification } from "../services/notification.service.js";
 // ==========================================
 // HELPER — GET PARAM ID
 // ==========================================
-function getParamId(req, res) {
+function getParamId(req, res, entityName = "ID") {
     const { id } = req.params;
     if (typeof id !== "string" || id.trim() === "") {
         res.status(400).json({
             success: false,
-            message: "Valid artist ID is required",
+            message: `Valid ${entityName} is required`,
         });
         return null;
     }
@@ -301,6 +301,208 @@ export async function rejectArtist(req, res) {
         res.status(500).json({
             success: false,
             message: "Failed to reject artist",
+        });
+    }
+}
+// ==========================================
+// GET PENDING BRANDS
+// ==========================================
+export async function getPendingBrands(_req, res) {
+    try {
+        const brands = await prisma.brandProfile.findMany({
+            where: {
+                verificationStatus: "PENDING_REVIEW",
+            },
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        email: true,
+                        createdAt: true,
+                    },
+                },
+            },
+            orderBy: [
+                { submittedAt: "asc" },
+                { createdAt: "asc" },
+            ],
+        });
+        res.status(200).json({
+            success: true,
+            count: brands.length,
+            brands,
+        });
+    }
+    catch (error) {
+        console.error("Get pending brands error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch pending brands",
+        });
+    }
+}
+// ==========================================
+// APPROVE BRAND
+// ==========================================
+export async function approveBrand(req, res) {
+    try {
+        const id = getParamId(req, res, "brand ID");
+        if (!id) {
+            return;
+        }
+        const { adminFeedback } = (req.body || {});
+        if (adminFeedback !== undefined) {
+            if (typeof adminFeedback !== "string") {
+                res.status(400).json({
+                    success: false,
+                    message: "Admin feedback must be a string",
+                });
+                return;
+            }
+            if (adminFeedback.length > 2000) {
+                res.status(400).json({
+                    success: false,
+                    message: "Admin feedback cannot exceed 2000 characters",
+                });
+                return;
+            }
+        }
+        const brand = await prisma.brandProfile.findUnique({
+            where: {
+                id,
+            },
+        });
+        if (!brand) {
+            res.status(404).json({
+                success: false,
+                message: "Brand profile not found",
+            });
+            return;
+        }
+        if (brand.verificationStatus !== "PENDING_REVIEW") {
+            res.status(400).json({
+                success: false,
+                message: `Brand cannot be approved from ${brand.verificationStatus} status`,
+            });
+            return;
+        }
+        const updateData = {
+            verificationStatus: "APPROVED",
+            approvedAt: new Date(),
+        };
+        if (adminFeedback !== undefined) {
+            updateData.adminFeedback = adminFeedback.trim() || null;
+        }
+        const updatedBrand = await prisma.brandProfile.update({
+            where: {
+                id,
+            },
+            data: updateData,
+        });
+        // Notify Brand safely
+        await createNotification({
+            userId: brand.userId,
+            type: "SYSTEM",
+            title: "Brand Profile Approved",
+            message: "Your brand profile has been approved. You can now post casting calls.",
+            entityType: "BRAND_PROFILE",
+            entityId: brand.id,
+        });
+        res.status(200).json({
+            success: true,
+            message: "Brand profile approved successfully",
+            brand: updatedBrand,
+        });
+    }
+    catch (error) {
+        console.error("Approve brand error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to approve brand",
+        });
+    }
+}
+// ==========================================
+// REJECT BRAND
+// ==========================================
+export async function rejectBrand(req, res) {
+    try {
+        const id = getParamId(req, res, "brand ID");
+        if (!id) {
+            return;
+        }
+        const { adminFeedback } = (req.body || {});
+        if (adminFeedback !== undefined) {
+            if (typeof adminFeedback !== "string") {
+                res.status(400).json({
+                    success: false,
+                    message: "Admin feedback must be a string",
+                });
+                return;
+            }
+            if (adminFeedback.length > 2000) {
+                res.status(400).json({
+                    success: false,
+                    message: "Admin feedback cannot exceed 2000 characters",
+                });
+                return;
+            }
+        }
+        const brand = await prisma.brandProfile.findUnique({
+            where: {
+                id,
+            },
+        });
+        if (!brand) {
+            res.status(404).json({
+                success: false,
+                message: "Brand profile not found",
+            });
+            return;
+        }
+        if (brand.verificationStatus !== "PENDING_REVIEW") {
+            res.status(400).json({
+                success: false,
+                message: `Brand cannot be rejected from ${brand.verificationStatus} status`,
+            });
+            return;
+        }
+        const updateData = {
+            verificationStatus: "REJECTED",
+            approvedAt: null,
+        };
+        if (adminFeedback !== undefined) {
+            updateData.adminFeedback = adminFeedback.trim() || null;
+        }
+        const updatedBrand = await prisma.brandProfile.update({
+            where: {
+                id,
+            },
+            data: updateData,
+        });
+        const rejectionMsg = updateData.adminFeedback
+            ? `Your brand profile verification was rejected: ${updateData.adminFeedback}`
+            : "Your brand profile verification was rejected. Please review your company information.";
+        // Notify Brand safely
+        await createNotification({
+            userId: brand.userId,
+            type: "SYSTEM",
+            title: "Brand Profile Verification Update",
+            message: rejectionMsg,
+            entityType: "BRAND_PROFILE",
+            entityId: brand.id,
+        });
+        res.status(200).json({
+            success: true,
+            message: "Brand profile rejected",
+            brand: updatedBrand,
+        });
+    }
+    catch (error) {
+        console.error("Reject brand error:", error);
+        res.status(500).json({
+            success: false,
+            message: "Failed to reject brand",
         });
     }
 }

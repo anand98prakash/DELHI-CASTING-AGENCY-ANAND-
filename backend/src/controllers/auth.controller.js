@@ -123,6 +123,7 @@ export async function login(req, res) {
                     : "Admin password verified. MFA setup required.",
                 mfaRequired: true,
                 mfaEnrolled: isMfaEnrolled,
+                mfaSetupRequired: !isMfaEnrolled,
                 mfaToken,
                 user: {
                     id: user.id,

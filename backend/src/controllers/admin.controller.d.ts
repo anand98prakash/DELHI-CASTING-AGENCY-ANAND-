@@ -6,6 +6,9 @@ export declare function getApprovedArtists(_req: AuthRequest, res: Response): Pr
 export declare function getRejectedArtists(_req: AuthRequest, res: Response): Promise<void>;
 export declare function approveArtist(req: AuthRequest, res: Response): Promise<void>;
 export declare function rejectArtist(req: AuthRequest, res: Response): Promise<void>;
+export declare function getPendingBrands(_req: AuthRequest, res: Response): Promise<void>;
+export declare function approveBrand(req: AuthRequest, res: Response): Promise<void>;
+export declare function rejectBrand(req: AuthRequest, res: Response): Promise<void>;
 export declare function getPendingCastingCalls(_req: AuthRequest, res: Response): Promise<void>;
 export declare function approveCastingCall(req: AuthRequest, res: Response): Promise<void>;
 export declare function rejectCastingCall(req: AuthRequest, res: Response): Promise<void>;

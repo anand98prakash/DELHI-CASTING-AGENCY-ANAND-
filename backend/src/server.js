@@ -13,7 +13,7 @@ import notificationRoutes from "./routes/notification.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
 import { getCloudinaryHealthStatus } from "./services/cloudinary.service.js";
 import { getArtistApplications, getCastingCallApplicants, updateApplicationStatus, } from "./controllers/application.controller.js";
-import { getBrandCastingCalls, getBrandProfile } from "./controllers/casting.controller.js";
+import { getBrandCastingCalls, getBrandProfile, updateBrandProfile, } from "./controllers/casting.controller.js";
 import { authenticate } from "./middleware/auth.middleware.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -66,6 +66,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/casting", castingRoutes);
 // Brand aliases
 app.get("/api/brand/profile", authenticate, getBrandProfile);
+app.put("/api/brand/profile", authenticate, updateBrandProfile);
 app.get("/api/brand/casting", authenticate, getBrandCastingCalls);
 app.get("/api/brand/casting/:id/applications", authenticate, getCastingCallApplicants);
 app.patch("/api/brand/applications/:id/status", authenticate, updateApplicationStatus);
