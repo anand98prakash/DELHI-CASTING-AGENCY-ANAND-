@@ -27,7 +27,11 @@ import { authenticate } from "./middleware/auth.middleware.js";
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+const rawFrontendUrl = process.env.FRONTEND_URL || "http://localhost:3000";
+const allowedOrigins = rawFrontendUrl
+  .split(",")
+  .map((u) => u.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
 const isProduction = process.env.NODE_ENV === "production";
 
 // Enable reverse proxy trust for accurate client IP detection in rate limiters
@@ -48,7 +52,8 @@ app.use(
         callback(null, true);
         return;
       }
-      if (origin === FRONTEND_URL) {
+      const cleanOrigin = origin.replace(/\/+$/, "");
+      if (allowedOrigins.includes(cleanOrigin)) {
         callback(null, true);
         return;
       }
