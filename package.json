@@ -14,7 +14,7 @@
     "build:frontend": "npm --prefix frontend run build",
     "start:frontend": "npm --prefix frontend start",
     "build:backend": "npm --prefix backend run build",
-    "start:backend": "npm --prefix backend start",
+    "start:backend": "npm --prefix backend start"
   },
   "dependencies": {
     "@types/bcrypt": "^6.0.0",
