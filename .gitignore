@@ -41,3 +41,21 @@ scratch/
 */scratch/
 uploads/
 */uploads/
+get-shit-done-for-antigravity/
+insta_*.json
+.agents/
+*/.agents/
+.claude/
+*/.claude/
+.cursor/
+*/.cursor/
+.devin/
+*/.devin/
+
+# Local developer notes & specifications
+DEPLOYMENT.md
+details.md
+backend.md
+AGENTS.md
+CLAUDE.md
+push_to_github.bat
