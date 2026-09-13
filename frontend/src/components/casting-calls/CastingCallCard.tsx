@@ -18,7 +18,10 @@ export function CastingCallCard({ item, onViewDetails, onApply }: CastingCallCar
       : "bg-emerald-50 text-emerald-700 border-emerald-200";
 
   return (
-    <div className="group relative flex flex-col justify-between h-full overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 sm:p-7 transition-all duration-500 hover:border-[#d4af37]/60 hover:shadow-md hover:-translate-y-1.5 motion-reduce:hover:translate-y-0 motion-reduce:transition-none shadow-xs text-[#111111]">
+    <div
+      onClick={() => onViewDetails(item)}
+      className="group relative flex flex-col justify-between h-full overflow-hidden rounded-3xl border border-gray-200 bg-white p-6 sm:p-7 transition-all duration-500 hover:border-[#d4af37]/60 hover:shadow-md hover:-translate-y-1.5 motion-reduce:hover:translate-y-0 motion-reduce:transition-none shadow-xs text-[#111111] cursor-pointer"
+    >
       <div className="flex flex-col flex-1">
         {/* 1. Category Eyebrow & Status Badge */}
         <div className="flex items-center justify-between gap-2 mb-3">
@@ -32,8 +35,7 @@ export function CastingCallCard({ item, onViewDetails, onApply }: CastingCallCar
 
         {/* 2. Visual Image Container */}
         <div
-          onClick={() => onViewDetails(item)}
-          className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gray-100 mb-4 border border-gray-200 shrink-0 block cursor-pointer group/img"
+          className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-gray-100 mb-4 border border-gray-200 shrink-0 block group/img"
         >
           <Image
             src={item.image}
@@ -47,8 +49,7 @@ export function CastingCallCard({ item, onViewDetails, onApply }: CastingCallCar
 
         {/* 3. Casting Call Title */}
         <h3
-          onClick={() => onViewDetails(item)}
-          className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[#111111] group-hover:text-[#d4af37] transition-colors leading-snug mb-3 cursor-pointer"
+          className="font-serif text-lg sm:text-xl font-bold tracking-tight text-[#111111] group-hover:text-[#d4af37] transition-colors leading-snug mb-3"
         >
           {item.title}
         </h3>
@@ -80,20 +81,26 @@ export function CastingCallCard({ item, onViewDetails, onApply }: CastingCallCar
       </div>
 
       {/* 6. Bottom CTA Footer */}
-      <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between shrink-0">
+      <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between gap-3 shrink-0">
         <button
           type="button"
-          onClick={() => onViewDetails(item)}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#111111] group-hover:text-[#d4af37] transition-colors"
+          onClick={(e) => {
+            e.stopPropagation();
+            onViewDetails(item);
+          }}
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#111111] group-hover:text-[#d4af37] transition-colors cursor-pointer"
         >
-          <span>View Casting Call</span>
-          <ArrowRight className="w-4 h-4 text-[#d4af37] group-hover:translate-x-1.5 transition-transform duration-300" />
+          <span>View Details</span>
+          <ArrowRight className="w-4 h-4 text-[#d4af37] group-hover:translate-x-1 transition-transform duration-300" />
         </button>
 
         <button
           type="button"
-          onClick={() => onApply(item)}
-          className="px-3.5 py-1.5 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-semibold text-xs transition-all shadow-sm"
+          onClick={(e) => {
+            e.stopPropagation();
+            onApply(item);
+          }}
+          className="px-4 py-2 rounded-full bg-[#d4af37] hover:bg-[#c59b27] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-xs hover:shadow-md cursor-pointer shrink-0"
         >
           Apply Now
         </button>

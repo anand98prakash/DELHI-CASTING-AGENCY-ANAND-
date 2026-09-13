@@ -4,8 +4,8 @@ import { ArrowRight, Users, Sparkles, CheckCircle2, UserPlus } from "lucide-reac
 
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
-import { CTASection } from "@/components/ui/cta-section";
 import { getActorsByCategory, getCategoryBySlug, ACTOR_CATEGORIES } from "@/data/actors";
+import { fetchPublicApprovedTalents, mergeTalentsWithLive } from "@/lib/publicTalents";
 import { ActorGrid } from "@/components/actors/ActorGrid";
 
 export const metadata = {
@@ -22,9 +22,14 @@ const profilePoints = [
   "Audition monologue or self-tape introduction link",
 ];
 
-export default function FreshFacesPage() {
+export default async function FreshFacesPage() {
   const category = getCategoryBySlug("fresh-faces")!;
-  const actors = getActorsByCategory("fresh-faces");
+  const staticActors = getActorsByCategory("fresh-faces");
+  const liveActors = await fetchPublicApprovedTalents({
+    category: "actor",
+    subCategory: "fresh",
+  });
+  const actors = mergeTalentsWithLive(staticActors, liveActors);
   const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "fresh-faces");
 
   return (
@@ -170,15 +175,6 @@ export default function FreshFacesPage() {
           </div>
         </Reveal>
       </section>
-
-      {/* Category CTA */}
-      <CTASection
-        eyebrow="Fresh Faces Casting"
-        title="Ready to Cast or Audition New Talent?"
-        description="Delhi Casting Agency connects promising new talent with ongoing film, web series, and commercial casting calls."
-        buttonLabel="Register as Talent"
-        buttonHref="/profile/setup"
-      />
     </main>
   );
 }

@@ -6,12 +6,18 @@ import {
   getArtistProfile,
   updateArtistProfile,
   uploadArtistPhotos,
+  getPublicArtists,
+  getPublicArtistById,
 } from "../controllers/artist.controller.js";
 
 import { authenticate } from "../middleware/auth.middleware.js";
 import { uploadMiddleware } from "../middleware/upload.middleware.js";
 
 const router = Router();
+
+// Public talent directory (Approved profiles only, no auth required)
+router.get("/public", getPublicArtists);
+router.get("/public/:id", getPublicArtistById);
 
 // Create artist profile
 router.post("/profile", authenticate, createArtistProfile);

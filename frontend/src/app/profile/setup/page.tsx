@@ -1,6 +1,8 @@
+
+
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -92,6 +94,113 @@ const getInitialEmptyFormData = (userEmail = "") => ({
   skinTone: "",
 });
 
+const FIELD_REASON_MAP: Record<string, { title: string; reason: string }> = {
+  fullName: {
+    title: "Full Name",
+    reason: "Please enter your full legal or stage name to complete your profile.",
+  },
+  displayName: {
+    title: "Stage / Display Name",
+    reason: "Please provide your stage or display name.",
+  },
+  dob: {
+    title: "Date of Birth",
+    reason: "Please select your date of birth for age-bracket casting call matching.",
+  },
+  gender: {
+    title: "Gender Identity",
+    reason: "Please select your gender identity for character role matching.",
+  },
+  city: {
+    title: "Current City",
+    reason: "Please specify your base city to receive local casting opportunities.",
+  },
+  state: {
+    title: "State / Region",
+    reason: "Please specify your operating state or province.",
+  },
+  phone: {
+    title: "Contact Phone",
+    reason: "Please provide your contact phone number for audition callback updates.",
+  },
+  email: {
+    title: "Email Address",
+    reason: "Please provide your contact email address.",
+  },
+  accountPassword: {
+    title: "Account Password",
+    reason: "Please create a secure password (minimum 8 characters) for your DCA account.",
+  },
+  languages: {
+    title: "Languages Known",
+    reason: "Please add the languages you speak so casting teams can match you to scripts.",
+  },
+  primaryCategory: {
+    title: "Primary Category",
+    reason: "Please select your primary talent category.",
+  },
+  experience: {
+    title: "Experience Level",
+    reason: "Please select your industry experience level.",
+  },
+  skills: {
+    title: "Acting / Modeling Skills",
+    reason: "Please list your acting or modeling skills to highlight your abilities.",
+  },
+  specialSkills: {
+    title: "Special Skills & Athletics",
+    reason: "Please list any special talents, dance, martial arts, or sports abilities.",
+  },
+  previousWork: {
+    title: "Previous Projects / Experience",
+    reason: "Please highlight any past projects, short films, ads, or theater experience.",
+  },
+  portfolioDescription: {
+    title: "About / Portfolio Summary",
+    reason: "Please complete your About / Portfolio Summary to reach 100% profile score and get discovered by casting directors.",
+  },
+  height: {
+    title: "Height",
+    reason: "Please enter your height measurement for role specifications.",
+  },
+  weight: {
+    title: "Weight",
+    reason: "Please enter your weight in kg for casting specifications.",
+  },
+  chest: {
+    title: "Chest / Bust",
+    reason: "Please provide chest or bust measurement for costume fitting requirements.",
+  },
+  waist: {
+    title: "Waist",
+    reason: "Please provide waist measurement for costume fitting requirements.",
+  },
+  hips: {
+    title: "Hips",
+    reason: "Please provide hip measurements for costume fittings.",
+  },
+  shoeSize: {
+    title: "Shoe Size",
+    reason: "Please specify your shoe size for wardrobe preparation.",
+  },
+  hairColor: {
+    title: "Hair Color",
+    reason: "Please specify your natural or current hair color.",
+  },
+  eyeColor: {
+    title: "Eye Color",
+    reason: "Please specify your eye color.",
+  },
+  skinTone: {
+    title: "Skin Tone",
+    reason: "Please specify your skin tone for on-screen character matching.",
+  },
+  photos: {
+    title: "Profile Photos",
+    reason: "Please upload your 4 casting photographs (Front, Back, Left, Right) to complete your profile.",
+  },
+};
+
 export default function ProfileSetupPage() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState<1 | 2>(1);
@@ -100,7 +209,24 @@ export default function ProfileSetupPage() {
   const [isLoadingProfile, setIsLoadingProfile] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [redirectReason, setRedirectReason] = useState<{
+    field: string;
+    title: string;
+    message: string;
+  } | null>(null);
+  
+  // Password State & Ref
   const [accountPassword, setAccountPassword] = useState("");
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const hasHandledDeepLink = useRef(false);
+
+  // Real-time Phone and Email Uniqueness / Validation states
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [isCheckingAvailability, setIsCheckingAvailability] = useState(false);
+  const phoneCheckTimer = useRef<NodeJS.Timeout | null>(null);
+  const emailCheckTimer = useRef<NodeJS.Timeout | null>(null);
 
   // Form State - initialized empty, filled only with current user's authenticated email
   const [formData, setFormData] = useState(getInitialEmptyFormData());
@@ -190,8 +316,8 @@ export default function ProfileSetupPage() {
                   phone: p.phone || "",
                   email: p.user?.email || session?.email || "",
                   languages: p.languages || "",
-                  primaryCategory: "Actor",
-                  experience: "",
+                  primaryCategory: p.primaryCategory || "Actor",
+                  experience: p.experience || "",
                   skills: p.skills || "",
                   specialSkills: p.specialAbilities || "",
                   previousWork: "",
@@ -267,17 +393,377 @@ export default function ProfileSetupPage() {
       window.addEventListener("dca-auth-logout", handleAuthLogout);
       window.addEventListener("dca-auth-change", handleAuthChange);
       return () => {
+        if (phoneCheckTimer.current) clearTimeout(phoneCheckTimer.current);
+        if (emailCheckTimer.current) clearTimeout(emailCheckTimer.current);
         window.removeEventListener("dca-auth-logout", handleAuthLogout);
         window.removeEventListener("dca-auth-change", handleAuthChange);
       };
     }
   }, [router]);
 
+  // Helper to scroll smoothly to a specific input field (used only on Continue button click)
+  const highlightField = (fieldId: string, shouldFocus = false) => {
+    if (typeof window === "undefined") return;
+    const el =
+      document.getElementById(`field-${fieldId}`) ||
+      document.getElementById(fieldId) ||
+      document.querySelector(`[name="${fieldId}"]`);
+
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (shouldFocus) {
+        if (
+          el instanceof HTMLInputElement ||
+          el instanceof HTMLTextAreaElement ||
+          el instanceof HTMLSelectElement
+        ) {
+          el.focus();
+        }
+      }
+    }
+  };
+
+  // Helper to remove highlight from a field
+  const removeFieldHighlight = (fieldId: string) => {
+    if (typeof window === "undefined") return;
+    const el =
+      document.getElementById(`field-${fieldId}`) ||
+      document.getElementById(fieldId) ||
+      document.querySelector(`[name="${fieldId}"]`);
+
+    if (el) {
+      el.classList.remove(
+        "ring-4",
+        "ring-[#D4AF37]",
+        "border-[#D4AF37]",
+        "!ring-4",
+        "!ring-red-500/30",
+        "!border-red-500",
+        "!border-2",
+        "shadow-lg"
+      );
+    }
+  };
+
+  // Real-time backend availability check for phone and email (without stealing focus)
+  const checkFieldAvailability = async (
+    field: "phone" | "email",
+    value: string
+  ): Promise<boolean> => {
+    const val = value.trim();
+    if (!val || isEditMode) return true;
+
+    if (field === "phone") {
+      const digits = val.replace(/\D/g, "");
+      if (digits.length < 10) return false;
+    } else if (field === "email") {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) return false;
+    }
+
+    try {
+      const res = await fetch(`${API_URL}/api/auth/check-availability`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ [field]: val }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        if (field === "phone") {
+          if (data.phoneExists) {
+            setPhoneError("Phone number is already registered. Please use a different phone number.");
+            return false;
+          } else {
+            setPhoneError(null);
+            return true;
+          }
+        } else if (field === "email") {
+          if (data.emailExists) {
+            setEmailError("This email is already registered. Please log in or use a different email address.");
+            return false;
+          } else {
+            setEmailError(null);
+            return true;
+          }
+        }
+      }
+      return true;
+    } catch (e) {
+      console.warn("Failed to check availability:", e);
+      return true;
+    }
+  };
+
+  // Helper to verify if the highlighted field now satisfies requirements
+  const isFieldSatisfied = (fieldName: string, value: string): boolean => {
+    const val = (value || "").trim();
+    if (!val) return false;
+
+    if (fieldName === "accountPassword") {
+      return val.length >= 8 && !passwordError;
+    }
+    if (fieldName === "phone") {
+      return val.replace(/\D/g, "").length >= 10 && !phoneError;
+    }
+    if (fieldName === "dob") {
+      return !isNaN(Date.parse(val));
+    }
+    if (fieldName === "email") {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val) && !emailError;
+    }
+    return val.length > 0;
+  };
+
+  // Helper to render contextual reason banner directly above the focused field
+  const renderFieldReason = (fieldName: string) => {
+    if (redirectReason && redirectReason.field === fieldName) {
+      return (
+        <div className="mb-2.5 flex items-center justify-between gap-2 rounded-xl border border-amber-300 bg-amber-50 px-3.5 py-2 text-xs font-semibold text-amber-950 shadow-xs">
+          <div className="flex items-center gap-2">
+            <Sparkles size={15} className="text-[#D4AF37] shrink-0" />
+            <span>
+              <strong>Action Required:</strong> {redirectReason.message}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              setRedirectReason(null);
+              removeFieldHighlight(fieldName);
+            }}
+            className="text-amber-700 hover:text-amber-950 text-base font-bold leading-none p-1"
+            aria-label="Dismiss reason"
+          >
+            &times;
+          </button>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  // Step 1 validation before advancing to Step 2
+  const handleContinueStep1 = async () => {
+    if (!formData.fullName.trim()) {
+      setRedirectReason({
+        field: "fullName",
+        title: "Full Name",
+        message: "Please enter your Full Name before continuing to Step 2.",
+      });
+      highlightField("fullName");
+      return;
+    }
+
+    if (!formData.dob.trim()) {
+      setRedirectReason({
+        field: "dob",
+        title: "Date of Birth",
+        message: "Please select your Date of Birth before continuing to Step 2.",
+      });
+      highlightField("dob");
+      return;
+    }
+
+    if (!formData.city.trim()) {
+      setRedirectReason({
+        field: "city",
+        title: "Current City",
+        message: "Please specify your Current City before continuing to Step 2.",
+      });
+      highlightField("city");
+      return;
+    }
+
+    const phoneClean = formData.phone.trim();
+    if (!phoneClean) {
+      setRedirectReason({
+        field: "phone",
+        title: "Contact Phone",
+        message: "Please enter your Contact Phone number before continuing to Step 2.",
+      });
+      highlightField("phone");
+      return;
+    }
+
+    const phoneDigits = phoneClean.replace(/\D/g, "");
+    if (phoneDigits.length < 10) {
+      setPhoneError("Please enter a valid 10-digit phone number.");
+      highlightField("phone", true);
+      return;
+    }
+
+    const emailClean = (formData.email || "").trim().toLowerCase();
+    if (!isEditMode) {
+      if (!emailClean || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailClean)) {
+        setEmailError("Please enter a valid email address.");
+        highlightField("artist_register_email", true);
+        return;
+      }
+
+      if (!accountPassword || accountPassword.length < 8) {
+        setPasswordError("Please enter a secure password with at least 8 characters.");
+        if (passwordRef.current) {
+          passwordRef.current.focus();
+          passwordRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        return;
+      }
+    }
+
+    if (!formData.languages.trim()) {
+      setRedirectReason({
+        field: "languages",
+        title: "Languages Known",
+        message: "Please enter the Languages you speak before continuing to Step 2.",
+      });
+      highlightField("languages");
+      return;
+    }
+
+    // Step 1 Uniqueness check: verify phone & email BEFORE moving to Step 2!
+    if (!isEditMode) {
+      setIsCheckingAvailability(true);
+      try {
+        const checkRes = await fetch(`${API_URL}/api/auth/check-availability`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            phone: phoneClean,
+            email: emailClean,
+          }),
+        });
+        const checkData = await checkRes.json();
+        setIsCheckingAvailability(false);
+
+        if (checkData.phoneExists) {
+          setPhoneError("Phone number is already registered. Please use a different phone number.");
+          highlightField("phone", true);
+          return;
+        }
+
+        if (checkData.emailExists) {
+          setEmailError("This email is already registered. Please log in or use a different email address.");
+          highlightField("artist_register_email", true);
+          return;
+        }
+      } catch (err) {
+        setIsCheckingAvailability(false);
+        console.warn("Availability check error on Step 1:", err);
+      }
+    }
+
+    // Clear any active reason and highlight
+    if (redirectReason?.field) {
+      removeFieldHighlight(redirectReason.field);
+    }
+    setRedirectReason(null);
+
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    setCurrentStep(2);
+  };
+
+  // Automatic scroll & focus for target field (Naukri-style profile completion deep linking)
+  useEffect(() => {
+    if (isLoadingProfile || typeof window === "undefined") return;
+    if (hasHandledDeepLink.current) return;
+
+    const searchParams = new URLSearchParams(window.location.search);
+    const stepParam = searchParams.get("step");
+    if (stepParam === "2") {
+      setCurrentStep(2);
+    }
+
+    const focusParam = searchParams.get("focus");
+    const reasonParam = searchParams.get("reason");
+
+    if (focusParam) {
+      const fieldInfo = FIELD_REASON_MAP[focusParam] || {
+        title: focusParam,
+        reason: "Please complete this section to improve your profile.",
+      };
+
+      setRedirectReason({
+        field: focusParam,
+        title: fieldInfo.title,
+        message: reasonParam || fieldInfo.reason,
+      });
+
+      const timer = setTimeout(() => {
+        highlightField(focusParam);
+      }, 400);
+
+      hasHandledDeepLink.current = true;
+
+      // Clean up URL search parameters so future Step changes don't re-read them
+      try {
+        const cleanParams = new URLSearchParams(window.location.search);
+        cleanParams.delete("focus");
+        cleanParams.delete("reason");
+        cleanParams.delete("step");
+        const cleanQuery = cleanParams.toString();
+        const newUrl = window.location.pathname + (cleanQuery ? `?${cleanQuery}` : "");
+        window.history.replaceState({}, "", newUrl);
+      } catch {
+        // Ignore history errors
+      }
+
+      return () => clearTimeout(timer);
+    } else if (reasonParam) {
+      setRedirectReason({
+        field: "general",
+        title: "Profile Completion Notice",
+        message: reasonParam,
+      });
+      hasHandledDeepLink.current = true;
+    }
+  }, [isLoadingProfile]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Real-time debounced availability check for phone
+    if (name === "phone" && !isEditMode) {
+      if (phoneCheckTimer.current) clearTimeout(phoneCheckTimer.current);
+      const digits = value.replace(/\D/g, "");
+      if (digits.length >= 10) {
+        phoneCheckTimer.current = setTimeout(() => {
+          void checkFieldAvailability("phone", value);
+        }, 500);
+      } else {
+        if (phoneError) {
+          setPhoneError(null);
+          removeFieldHighlight("phone");
+        }
+      }
+    }
+
+    // Real-time debounced availability check for email
+    if (name === "email" && !isEditMode) {
+      if (emailCheckTimer.current) clearTimeout(emailCheckTimer.current);
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())) {
+        emailCheckTimer.current = setTimeout(() => {
+          void checkFieldAvailability("email", value);
+        }, 500);
+      } else {
+        if (emailError) {
+          setEmailError(null);
+          removeFieldHighlight("artist_register_email");
+        }
+      }
+    }
+
+    // Auto-dismiss reason banner and remove highlight as soon as the user fills/satisfies the field!
+    // If not satisfied or empty, keep it active so the user knows what to complete.
+    if (redirectReason && redirectReason.field === name) {
+      if (isFieldSatisfied(name, value)) {
+        setRedirectReason(null);
+        removeFieldHighlight(name);
+      }
+    }
   };
 
   const handleImageUpload = (
@@ -293,6 +779,12 @@ export default function ProfileSetupPage() {
       }
       const previewUrl = URL.createObjectURL(file);
       setPhotoFiles((prev) => ({ ...prev, [slotKey]: previewUrl }));
+
+      // Auto-dismiss photos reason banner once user uploads a photo
+      if (redirectReason && redirectReason.field === "photos") {
+        setRedirectReason(null);
+        removeFieldHighlight("photos");
+      }
     }
   };
 
@@ -316,6 +808,7 @@ export default function ProfileSetupPage() {
 
     setSubmitting(true);
     setFormError(null);
+    setPasswordError(null);
 
     let session = getUserSession();
     let token = getAuthToken();
@@ -328,8 +821,22 @@ export default function ProfileSetupPage() {
     // If not authenticated, require registration with user's own chosen password
     if (!token || !isMatchingSession) {
       if (!accountPassword || accountPassword.length < 8) {
-        setFormError("Please enter a secure password with at least 8 characters.");
+        setPasswordError("Please enter a secure password with at least 8 characters.");
         setSubmitting(false);
+        
+        // Ensure user is on Step 1 so they can see the input field
+        if (currentStep !== 1) {
+          setCurrentStep(1);
+        }
+
+        // Wait a tick for React to render Step 1, then focus & scroll
+        setTimeout(() => {
+          if (passwordRef.current) {
+            passwordRef.current.focus();
+            passwordRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }, 100);
+
         return;
       }
 
@@ -391,6 +898,8 @@ export default function ProfileSetupPage() {
       phone: formData.phone.trim() || null,
       gender: formData.gender || null,
       dateOfBirth: formData.dob || null,
+      primaryCategory: formData.primaryCategory || "Actor",
+      experience: formData.experience || "Fresh Face",
       city: formData.city.trim() || null,
       state: formData.state.trim() || null,
       bio: formData.portfolioDescription.trim() || null,
@@ -530,6 +1039,36 @@ export default function ProfileSetupPage() {
 
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-8 lg:py-12">
         <form onSubmit={handleSubmit} autoComplete="off" className="space-y-12">
+          {/* Redirection / Navigation Reason Alert Banner */}
+          {redirectReason && (
+            <div className="rounded-2xl border-2 border-[#D4AF37] bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50 p-5 shadow-sm flex items-start gap-4 animate-fadeIn">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37] text-white shadow-xs shrink-0 mt-0.5">
+                <Sparkles size={20} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-md bg-[#D4AF37] px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-white">
+                    Action Required
+                  </span>
+                  <h3 className="font-serif text-sm font-bold text-[#111111]">
+                    Complete: {redirectReason.title}
+                  </h3>
+                </div>
+                <p className="mt-1 text-xs text-[#555555] leading-relaxed">
+                  {redirectReason.message}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setRedirectReason(null)}
+                className="rounded-lg p-1 text-gray-400 hover:bg-black/5 hover:text-gray-700 transition cursor-pointer"
+                aria-label="Dismiss reason banner"
+              >
+                <span className="text-xl leading-none font-bold">&times;</span>
+              </button>
+            </div>
+          )}
+
           {formError && (
             <div className="rounded-2xl border border-red-300 bg-red-50 p-5 text-sm text-red-800 shadow-sm flex items-start gap-4">
               <div className="rounded-full bg-red-100 p-2 text-red-600 shrink-0">
@@ -583,11 +1122,13 @@ export default function ProfileSetupPage() {
                   <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* Full Name */}
                     <div>
+                      {renderFieldReason("fullName")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Full Name *
                       </label>
                       <input
                         type="text"
+                        id="field-fullName"
                         name="fullName"
                         required
                         value={formData.fullName}
@@ -598,11 +1139,13 @@ export default function ProfileSetupPage() {
 
                     {/* Display Name */}
                     <div>
+                      {renderFieldReason("displayName")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Stage / Display Name
                       </label>
                       <input
                         type="text"
+                        id="field-displayName"
                         name="displayName"
                         value={formData.displayName}
                         onChange={handleChange}
@@ -612,11 +1155,13 @@ export default function ProfileSetupPage() {
 
                     {/* Date of Birth */}
                     <div>
+                      {renderFieldReason("dob")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Date of Birth *
                       </label>
                       <input
                         type="date"
+                        id="field-dob"
                         name="dob"
                         required
                         value={formData.dob}
@@ -627,10 +1172,12 @@ export default function ProfileSetupPage() {
 
                     {/* Gender */}
                     <div>
+                      {renderFieldReason("gender")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Gender *
                       </label>
                       <select
+                        id="field-gender"
                         name="gender"
                         value={formData.gender}
                         onChange={handleChange}
@@ -645,11 +1192,13 @@ export default function ProfileSetupPage() {
 
                     {/* City */}
                     <div>
+                      {renderFieldReason("city")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Current City *
                       </label>
                       <input
                         type="text"
+                        id="field-city"
                         name="city"
                         required
                         value={formData.city}
@@ -660,11 +1209,13 @@ export default function ProfileSetupPage() {
 
                     {/* State */}
                     <div>
+                      {renderFieldReason("state")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         State *
                       </label>
                       <input
                         type="text"
+                        id="field-state"
                         name="state"
                         required
                         value={formData.state}
@@ -675,22 +1226,50 @@ export default function ProfileSetupPage() {
 
                     {/* Phone */}
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
+                      {renderFieldReason("phone")}
+                      <label className={`mb-2 block text-xs font-semibold uppercase tracking-wider ${phoneError ? 'text-red-600' : 'text-[#111111]'}`}>
                         Phone Number *
                       </label>
                       <input
                         type="tel"
+                        id="field-phone"
                         name="phone"
                         required
                         value={formData.phone}
                         onChange={handleChange}
-                        className={inputClass}
+                        onBlur={(e) => {
+                          const digits = e.target.value.replace(/\D/g, "");
+                          if (digits.length >= 10) {
+                            void checkFieldAvailability("phone", e.target.value);
+                          } else if (e.target.value.trim().length > 0) {
+                            setPhoneError("Please enter a valid 10-digit phone number.");
+                          }
+                        }}
+                        className={`w-full rounded-xl bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 shadow-xs transition-colors duration-150 ${
+                          phoneError
+                            ? '!border-2 !border-red-500 focus:!border-red-500 focus:!outline-none focus:!ring-0'
+                            : 'border border-gray-300 focus:border-[#D4AF37] focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15'
+                        }`}
                       />
+                      {phoneError && (
+                        <div className="mt-2 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700 flex items-start gap-2">
+                          <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                          <div className="flex-1">
+                            <p className="font-semibold">{phoneError}</p>
+                            <div className="mt-1">
+                              <Link href="/login" className="font-bold underline text-red-800 hover:text-red-950">
+                                Already registered? Click here to Log In &rarr;
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Email */}
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
+                      {renderFieldReason("email")}
+                      <label className={`mb-2 block text-xs font-semibold uppercase tracking-wider ${emailError ? 'text-red-600' : 'text-[#111111]'}`}>
                         Email Address *
                       </label>
                       <input
@@ -702,21 +1281,52 @@ export default function ProfileSetupPage() {
                         disabled={isEditMode}
                         value={formData.email}
                         onChange={handleChange}
+                        onBlur={(e) => {
+                          const val = e.target.value.trim();
+                          if (val.length > 0 && !isEditMode) {
+                            if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+                              void checkFieldAvailability("email", val);
+                            } else {
+                              setEmailError("Please enter a valid email address.");
+                            }
+                          }
+                        }}
                         placeholder="you@example.com"
-                        className={`${inputClass} ${isEditMode ? "bg-gray-100 text-gray-500 cursor-not-allowed" : ""}`}
+                        className={`w-full rounded-xl bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 shadow-xs transition-colors duration-150 ${
+                          isEditMode
+                            ? "bg-gray-100 text-gray-500 cursor-not-allowed border border-gray-300"
+                            : emailError
+                            ? "!border-2 !border-red-500 focus:!border-red-500 focus:!outline-none focus:!ring-0"
+                            : "border border-gray-300 focus:border-[#D4AF37] focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15"
+                        }`}
                       />
                       {isEditMode && (
                         <p className="mt-1 text-[11px] text-gray-500">Email cannot be modified once registered.</p>
+                      )}
+                      {emailError && (
+                        <div className="mt-2 rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700 flex items-start gap-2">
+                          <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                          <div className="flex-1">
+                            <p className="font-semibold">{emailError}</p>
+                            <div className="mt-1">
+                              <Link href="/login" className="font-bold underline text-red-800 hover:text-red-950">
+                                Already have an account? Click here to Log In &rarr;
+                              </Link>
+                            </div>
+                          </div>
+                        </div>
                       )}
                     </div>
 
                     {/* Password - required for artist registration */}
                     {!isEditMode && (
                       <div>
-                        <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
+                        {renderFieldReason("accountPassword")}
+                        <label className={`mb-2 block text-xs font-semibold uppercase tracking-wider ${passwordError ? 'text-red-600' : 'text-[#111111]'}`}>
                           Account Password *
                         </label>
                         <input
+                          ref={passwordRef}
                           type="password"
                           id="artist_register_password"
                           name="accountPassword"
@@ -724,20 +1334,34 @@ export default function ProfileSetupPage() {
                           required
                           minLength={8}
                           value={accountPassword}
-                          onChange={(e) => setAccountPassword(e.target.value)}
+                          onChange={(e) => {
+                            setAccountPassword(e.target.value);
+                            if (passwordError) setPasswordError(null);
+                          }}
                           placeholder="Min 8 characters"
-                          className={inputClass}
+                          className={`w-full rounded-xl bg-white px-4 py-3.5 text-[#111111] placeholder:text-gray-400 shadow-xs transition-colors duration-150 ${
+                            passwordError
+                              ? '!border-2 !border-red-500 focus:!border-red-500 focus:!outline-none focus:!ring-0'
+                              : 'border border-gray-300 focus:border-[#D4AF37] focus:outline-none focus:ring-4 focus:ring-[#D4AF37]/15'
+                          }`}
                         />
+                        {passwordError && (
+                          <p className="mt-1.5 text-xs font-semibold text-red-600">
+                            {passwordError}
+                          </p>
+                        )}
                       </div>
                     )}
 
                     {/* Languages */}
                     <div>
+                      {renderFieldReason("languages")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Languages Known *
                       </label>
                       <input
                         type="text"
+                        id="field-languages"
                         name="languages"
                         required
                         value={formData.languages}
@@ -770,10 +1394,12 @@ export default function ProfileSetupPage() {
                   <div className="mt-8 grid gap-6 md:grid-cols-2">
                     {/* Primary Category */}
                     <div>
+                      {renderFieldReason("primaryCategory")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Primary Talent Category *
                       </label>
                       <select
+                        id="field-primaryCategory"
                         name="primaryCategory"
                         value={formData.primaryCategory}
                         onChange={handleChange}
@@ -790,10 +1416,12 @@ export default function ProfileSetupPage() {
 
                     {/* Experience Level */}
                     <div>
+                      {renderFieldReason("experience")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Experience Level *
                       </label>
                       <select
+                        id="field-experience"
                         name="experience"
                         value={formData.experience}
                         onChange={handleChange}
@@ -808,11 +1436,13 @@ export default function ProfileSetupPage() {
 
                     {/* Skills */}
                     <div className="md:col-span-2">
+                      {renderFieldReason("skills")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Acting / Modeling Skills
                       </label>
                       <input
                         type="text"
+                        id="field-skills"
                         name="skills"
                         value={formData.skills}
                         onChange={handleChange}
@@ -823,11 +1453,13 @@ export default function ProfileSetupPage() {
 
                     {/* Special Skills */}
                     <div className="md:col-span-2">
+                      {renderFieldReason("specialSkills")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Special Skills &amp; Athletics
                       </label>
                       <input
                         type="text"
+                        id="field-specialSkills"
                         name="specialSkills"
                         value={formData.specialSkills}
                         onChange={handleChange}
@@ -838,10 +1470,12 @@ export default function ProfileSetupPage() {
 
                     {/* Previous Work */}
                     <div className="md:col-span-2">
+                      {renderFieldReason("previousWork")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Previous Projects / Experience Highlights
                       </label>
                       <textarea
+                        id="field-previousWork"
                         name="previousWork"
                         rows={3}
                         value={formData.previousWork}
@@ -853,10 +1487,12 @@ export default function ProfileSetupPage() {
 
                     {/* Portfolio Description */}
                     <div className="md:col-span-2">
+                      {renderFieldReason("portfolioDescription")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         About / Portfolio Summary
                       </label>
                       <textarea
+                        id="field-portfolioDescription"
                         name="portfolioDescription"
                         rows={3}
                         value={formData.portfolioDescription}
@@ -889,11 +1525,13 @@ export default function ProfileSetupPage() {
                   <div className="mt-8 grid gap-6 md:grid-cols-3">
                     {/* Height */}
                     <div>
+                      {renderFieldReason("height")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Height (ft &amp; in)
                       </label>
                       <input
                         type="text"
+                        id="field-height"
                         name="height"
                         value={formData.height}
                         onChange={handleChange}
@@ -904,11 +1542,13 @@ export default function ProfileSetupPage() {
 
                     {/* Weight */}
                     <div>
+                      {renderFieldReason("weight")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Weight (kg)
                       </label>
                       <input
                         type="text"
+                        id="field-weight"
                         name="weight"
                         value={formData.weight}
                         onChange={handleChange}
@@ -919,11 +1559,13 @@ export default function ProfileSetupPage() {
 
                     {/* Chest / Bust */}
                     <div>
+                      {renderFieldReason("chest")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Chest / Bust (in)
                       </label>
                       <input
                         type="text"
+                        id="field-chest"
                         name="chest"
                         value={formData.chest}
                         onChange={handleChange}
@@ -934,11 +1576,13 @@ export default function ProfileSetupPage() {
 
                     {/* Waist */}
                     <div>
+                      {renderFieldReason("waist")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Waist (in)
                       </label>
                       <input
                         type="text"
+                        id="field-waist"
                         name="waist"
                         value={formData.waist}
                         onChange={handleChange}
@@ -949,11 +1593,13 @@ export default function ProfileSetupPage() {
 
                     {/* Hips */}
                     <div>
+                      {renderFieldReason("hips")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Hips (in)
                       </label>
                       <input
                         type="text"
+                        id="field-hips"
                         name="hips"
                         value={formData.hips}
                         onChange={handleChange}
@@ -964,6 +1610,7 @@ export default function ProfileSetupPage() {
 
                     {/* Shoe Size */}
                     <div>
+                      {renderFieldReason("shoeSize")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Shoe Size (UK/EU)
                       </label>
@@ -979,6 +1626,7 @@ export default function ProfileSetupPage() {
 
                     {/* Hair Color */}
                     <div>
+                      {renderFieldReason("hairColor")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Hair Color
                       </label>
@@ -994,6 +1642,7 @@ export default function ProfileSetupPage() {
 
                     {/* Eye Color */}
                     <div>
+                      {renderFieldReason("eyeColor")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Eye Color
                       </label>
@@ -1009,6 +1658,7 @@ export default function ProfileSetupPage() {
 
                     {/* Skin Tone */}
                     <div>
+                      {renderFieldReason("skinTone")}
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[#111111]">
                         Skin Tone
                       </label>
@@ -1054,16 +1704,21 @@ export default function ProfileSetupPage() {
 
                 <Button
                   type="button"
-                  onClick={() => {
-                    if (typeof window !== "undefined") {
-                      window.scrollTo({ top: 0, behavior: "smooth" });
-                    }
-                    setCurrentStep(2);
-                  }}
+                  onClick={handleContinueStep1}
+                  disabled={isCheckingAvailability}
                   className="py-4 px-8 text-sm font-bold uppercase tracking-wider"
                 >
-                  <span>Continue</span>
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  {isCheckingAvailability ? (
+                    <>
+                      <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
+                      <span>Verifying Details...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Continue</span>
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
                 </Button>
               </div>
             </>
@@ -1074,7 +1729,8 @@ export default function ProfileSetupPage() {
           ========================================================= */}
           {currentStep === 2 && (
             <Reveal>
-              <div className="rounded-3xl border border-gray-200 bg-white p-7 shadow-md md:p-10">
+              <div id="field-photos" className="rounded-3xl border border-gray-200 bg-white p-7 shadow-md md:p-10">
+                {renderFieldReason("photos")}
                 <div className="flex items-center gap-3 border-b border-gray-200 pb-5">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D4AF37]/10 text-[#D4AF37]">
                     <Camera size={20} />

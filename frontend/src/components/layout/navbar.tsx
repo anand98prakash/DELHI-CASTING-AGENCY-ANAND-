@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ChevronDown, Menu, User, X } from "lucide-react";
+import { ArrowRight, ChevronDown, LogOut, Menu, User, X } from "lucide-react";
 
 import Image from "next/image";
 import { Logo } from "@/components/logo";
@@ -11,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { NAV_GROUPS, type NavGroup, type NavItem } from "@/lib/site-navigation";
 import { AccountTypeModal } from "@/components/auth/AccountTypeModal";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
-import { getUserSession, type DCAUser } from "@/lib/auth";
+import { getUserSession, logoutDCAUserSession, type DCAUser } from "@/lib/auth";
 
 function DesktopDropdown({ group }: { group: NavGroup }) {
   const [hoveredItem, setHoveredItem] = useState<NavItem | null>(null);
@@ -196,6 +197,26 @@ export function Navbar() {
     }
   };
 
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await logoutDCAUserSession();
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+    if (mobileOpen) {
+      closeMobile();
+    }
+    router.push("/");
+  };
+
+  const profileHref = !currentUser?.isLoggedIn
+    ? "/login"
+    : currentUser.role === "ADMIN" || currentUser.role === "admin"
+    ? "/admin/dashboard"
+    : "/dashboard";
+
   return (
     <>
       <header
@@ -239,12 +260,14 @@ export function Navbar() {
 
             {/* RIGHT: BALANCED ACTIONS SECTION */}
             <div className="flex items-center gap-2.5 lg:gap-3 xl:gap-4 2xl:gap-5 shrink-0 pl-1 lg:pl-2">
-              {/* NOTIFICATION BELL */}
-              <div className="flex items-center shrink-0">
-                <NotificationBell />
-              </div>
+              {/* NOTIFICATION BELL (Only visible when user is logged in) */}
+              {currentUser?.isLoggedIn && (
+                <div className="flex items-center shrink-0">
+                  <NotificationBell />
+                </div>
+              )}
 
-              {/* ACCOUNT / DASHBOARD SECONDARY CTA */}
+              {/* SIGN IN / MY PROFILE CTA */}
               <motion.div
                 whileHover={{ y: -1, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -252,31 +275,39 @@ export function Navbar() {
                 className="shrink-0 flex items-center"
               >
                 <Link
-                  href={currentUser?.isLoggedIn ? (currentUser.role === "ADMIN" ? "/admin/dashboard" : "/dashboard") : "/login"}
-                  className="group inline-flex items-center gap-1.5 rounded-full border border-gray-200 bg-[#F7F7F5] px-2.5 lg:px-3.5 xl:px-4 py-1.5 xl:py-2 text-[10.5px] lg:text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-bold uppercase tracking-[0.1em] xl:tracking-[0.14em] text-[#111111] shadow-2xs transition-all duration-300 hover:border-[#D4AF37]/60 hover:bg-white hover:text-[#D4AF37] hover:shadow-xs whitespace-nowrap"
+                  href={profileHref}
+                  className={cn(
+                    "group inline-flex items-center gap-1.5 rounded-full px-2.5 lg:px-3.5 xl:px-4 py-1.5 xl:py-2 text-[10.5px] lg:text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-bold uppercase tracking-[0.1em] xl:tracking-[0.14em] shadow-2xs transition-all duration-300 whitespace-nowrap",
+                    currentUser?.isLoggedIn
+                      ? "border border-[#D4AF37] bg-white text-[#111111] hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-white hover:shadow-xs"
+                      : "border border-gray-200 bg-[#F7F7F5] text-[#111111] hover:border-[#D4AF37]/60 hover:bg-white hover:text-[#D4AF37] hover:shadow-xs"
+                  )}
                 >
-                  <User className="h-3.5 w-3.5 text-[#D4AF37] transition-transform duration-300 group-hover:scale-108 shrink-0" />
-                  <span>{currentUser?.isLoggedIn ? "My Profile" : "Account"}</span>
-                  <ArrowRight className="h-3.5 w-3.5 opacity-0 -ml-1.5 transition-all duration-300 group-hover:opacity-100 group-hover:ml-0 text-[#D4AF37] shrink-0" />
+                  <User className={cn(
+                    "h-3.5 w-3.5 transition-transform duration-300 group-hover:scale-108 shrink-0",
+                    currentUser?.isLoggedIn ? "text-[#D4AF37] group-hover:text-white" : "text-[#D4AF37]"
+                  )} />
+                  <span>{currentUser?.isLoggedIn ? "My Profile" : "Sign In"}</span>
+                  <ArrowRight className={cn(
+                    "h-3.5 w-3.5 opacity-0 -ml-1.5 transition-all duration-300 group-hover:opacity-100 group-hover:ml-0 shrink-0",
+                    currentUser?.isLoggedIn ? "text-[#D4AF37] group-hover:text-white" : "text-[#D4AF37]"
+                  )} />
                 </Link>
               </motion.div>
 
-              {/* REGISTER NOW / DASHBOARD PRIMARY CTA */}
+              {/* REGISTER NOW / LOGOUT PRIMARY CTA */}
               {currentUser?.isLoggedIn ? (
-                <motion.div
-                  whileHover={{ y: -2, scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
+                <motion.button
+                  type="button"
+                  whileHover={{ y: -1, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className="shrink-0 flex items-center"
+                  onClick={handleLogout}
+                  className="group flex items-center gap-1.5 lg:gap-2 rounded-full border border-gray-300 bg-white px-3 lg:px-3.5 xl:px-4 py-1.5 lg:py-2 xl:py-2 text-[10.5px] lg:text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-bold uppercase tracking-[0.12em] xl:tracking-[0.16em] text-gray-700 transition duration-300 hover:border-red-400 hover:bg-red-50 hover:text-red-600 shadow-2xs hover:shadow-xs whitespace-nowrap cursor-pointer shrink-0"
                 >
-                  <Link
-                    href={currentUser.role === "ADMIN" ? "/admin/dashboard" : "/dashboard"}
-                    className="group flex items-center gap-1.5 lg:gap-2 rounded-full border-2 border-[#D4AF37] bg-[#D4AF37] px-3 lg:px-3.5 xl:px-4.5 py-1.5 lg:py-2 xl:py-2.5 text-[10.5px] lg:text-[11px] xl:text-[11.5px] 2xl:text-[12px] font-bold uppercase tracking-[0.12em] xl:tracking-[0.16em] text-white transition duration-300 hover:bg-[#C59B27] hover:border-[#C59B27] shadow-xs hover:shadow-md hover:shadow-[#D4AF37]/20 whitespace-nowrap cursor-pointer shrink-0"
-                  >
-                    <span>DASHBOARD</span>
-                    <ArrowRight className="h-3.5 w-3.5 transition duration-300 group-hover:translate-x-1.5 text-white shrink-0" />
-                  </Link>
-                </motion.div>
+                  <LogOut className="h-3.5 w-3.5 text-gray-400 transition duration-300 group-hover:text-red-600 group-hover:-translate-x-0.5 shrink-0" />
+                  <span>LOGOUT</span>
+                </motion.button>
               ) : (
                 <motion.button
                   type="button"
@@ -294,21 +325,24 @@ export function Navbar() {
 
           </div>
 
-          {/* MOBILE MENU TOGGLE BUTTON */}
-          <button
-            type="button"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation"
-            onClick={toggleMobile}
-            className="flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-[#111111] transition hover:bg-gray-100 lg:hidden ml-auto"
-          >
-            {mobileOpen ? (
-              <X size={26} strokeWidth={1.8} />
-            ) : (
-              <Menu size={26} strokeWidth={1.8} />
-            )}
-          </button>
+          {/* MOBILE MENU TOGGLE BUTTON + NOTIFICATIONS */}
+          <div className="flex items-center gap-2.5 lg:hidden ml-auto">
+            {currentUser?.isLoggedIn && <NotificationBell />}
+            <button
+              type="button"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
+              onClick={toggleMobile}
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-[#111111] transition hover:bg-gray-100"
+            >
+              {mobileOpen ? (
+                <X size={26} strokeWidth={1.8} />
+              ) : (
+                <Menu size={26} strokeWidth={1.8} />
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -390,28 +424,51 @@ export function Navbar() {
                   </div>
                 ))}
 
-                {/* Mobile Account / Dashboard option */}
-                <div className="border-b border-gray-100 py-2">
-                  <Link
-                    href={currentUser?.isLoggedIn ? (currentUser.role === "ADMIN" ? "/admin/dashboard" : "/dashboard") : "/login"}
-                    onClick={closeMobile}
-                    className="flex min-h-12 items-center gap-2 text-base font-semibold uppercase tracking-wider text-[#D4AF37]"
-                  >
-                    <User className="h-5 w-5" />
-                    <span>{currentUser?.isLoggedIn ? "My Profile / Dashboard" : "Login to Artist Account"}</span>
-                  </Link>
-                </div>
+                {/* Mobile Account / Profile */}
+                {currentUser?.isLoggedIn ? (
+                  <div className="border-b border-gray-100 py-2">
+                    <Link
+                      href={profileHref}
+                      onClick={closeMobile}
+                      className="flex min-h-12 items-center gap-2 text-base font-semibold uppercase tracking-wider text-[#D4AF37] hover:text-[#C59B27] transition"
+                    >
+                      <User className="h-5 w-5 text-[#D4AF37]" />
+                      <span>My Profile</span>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="border-b border-gray-100 py-2">
+                    <Link
+                      href="/login"
+                      onClick={closeMobile}
+                      className="flex min-h-12 items-center gap-2 text-base font-semibold uppercase tracking-wider text-[#D4AF37]"
+                    >
+                      <User className="h-5 w-5" />
+                      <span>Sign In</span>
+                    </Link>
+                  </div>
+                )}
               </nav>
 
               {currentUser?.isLoggedIn ? (
-                <Link
-                  href={currentUser.role === "ADMIN" ? "/admin/dashboard" : "/dashboard"}
-                  onClick={closeMobile}
-                  className="mt-8 flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#D4AF37] bg-[#D4AF37] px-6 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition active:scale-[0.98] shadow-md cursor-pointer"
-                >
-                  <span>VIEW MY PROFILE</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                <div className="mt-8 space-y-3">
+                  <Link
+                    href={profileHref}
+                    onClick={closeMobile}
+                    className="flex min-h-14 w-full items-center justify-center gap-2 rounded-full border border-[#D4AF37] bg-[#D4AF37] px-6 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white transition active:scale-[0.98] shadow-md cursor-pointer"
+                  >
+                    <span>VIEW MY PROFILE</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-[#F7F7F5] px-6 py-3 text-xs font-bold uppercase tracking-[0.14em] text-red-600 transition hover:bg-red-50 hover:border-red-300 active:scale-[0.98] cursor-pointer"
+                  >
+                    <LogOut className="h-4 w-4 text-red-500" />
+                    <span>LOGOUT</span>
+                  </button>
+                </div>
               ) : (
                 <button
                   type="button"

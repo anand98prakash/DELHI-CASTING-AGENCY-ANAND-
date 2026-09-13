@@ -9,6 +9,7 @@ import {
   getRejectedArtists,
   getArtistForReview,
   approveArtist,
+  unpublishArtist,
   rejectArtist,
   getPendingCastingCalls,
   approveCastingCall,
@@ -47,6 +48,8 @@ router.get("/artists/rejected", getRejectedArtists);
 router.get("/artists/:id", getArtistForReview);
 
 router.patch("/artists/:id/approve", approveArtist);
+
+router.patch("/artists/:id/unpublish", unpublishArtist);
 
 router.patch("/artists/:id/reject", rejectArtist);
 

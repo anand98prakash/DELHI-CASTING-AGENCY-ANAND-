@@ -29,7 +29,7 @@ export function VideoGallery({ videos, actorName }: VideoGalleryProps) {
             The verified video showreel and audition footage for {actorName} are currently being processed by DCA talent management.
           </p>
           <Link
-            href="/contact"
+            href={`/inquiry?artist=${encodeURIComponent(actorName)}`}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white hover:bg-[#d4af37] text-[#111111] hover:text-white font-semibold text-xs uppercase tracking-wider border border-gray-200 hover:border-[#d4af37] transition-all duration-300 shadow-xs"
           >
             <Mail className="w-4 h-4 text-[#d4af37]" />

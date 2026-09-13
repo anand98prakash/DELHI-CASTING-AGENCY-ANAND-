@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import {
+  checkAvailability,
   forgotPassword,
   getMe,
   login,
@@ -22,6 +23,7 @@ import {
 const router = Router();
 
 // Public routes with rate limiting
+router.post("/check-availability", checkAvailability);
 router.post("/register", registerRateLimiter, register);
 router.post("/login", loginRateLimiter, login);
 router.post("/forgot-password", forgotPasswordRateLimiter, forgotPassword);

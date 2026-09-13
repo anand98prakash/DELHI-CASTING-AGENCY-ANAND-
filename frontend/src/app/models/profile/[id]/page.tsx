@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { getAllModels, getModelById, getRelatedModels } from "@/data/models";
+import { fetchPublicModelById } from "@/lib/publicTalents";
 import { ModelProfileView } from "@/components/models/ModelProfileView";
+
+export const dynamicParams = true;
 
 interface ModelProfilePageProps {
   params: Promise<{ id: string }>;
@@ -20,7 +23,10 @@ export async function generateMetadata({
   params,
 }: ModelProfilePageProps): Promise<Metadata> {
   const { id } = await params;
-  const model = getModelById(id);
+  let model = getModelById(id);
+  if (!model) {
+    model = (await fetchPublicModelById(id)) || undefined;
+  }
 
   if (!model) {
     return {
@@ -38,7 +44,10 @@ export default async function ModelProfilePage({
   params,
 }: ModelProfilePageProps) {
   const { id } = await params;
-  const model = getModelById(id);
+  let model = getModelById(id);
+  if (!model) {
+    model = (await fetchPublicModelById(id)) || undefined;
+  }
 
   if (!model) {
     notFound();

@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
 import { getActorsByCategory, getCategoryBySlug, ACTOR_CATEGORIES } from "@/data/actors";
+import { fetchPublicApprovedTalents, mergeTalentsWithLive } from "@/lib/publicTalents";
 import { ActorGrid } from "@/components/actors/ActorGrid";
 
 export const metadata = {
@@ -14,9 +15,14 @@ export const metadata = {
     "Browse seasoned screen and theatre performers with proven track records across feature films, television serials and OTT platforms.",
 };
 
-export default function ExperiencedActorsPage() {
+export default async function ExperiencedActorsPage() {
   const category = getCategoryBySlug("experienced")!;
-  const actors = getActorsByCategory("experienced");
+  const staticActors = getActorsByCategory("experienced");
+  const liveActors = await fetchPublicApprovedTalents({
+    category: "actor",
+    subCategory: "experienced",
+  });
+  const actors = mergeTalentsWithLive(staticActors, liveActors);
   const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "experienced");
 
   return (

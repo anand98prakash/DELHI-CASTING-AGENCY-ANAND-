@@ -26,7 +26,7 @@ export function ActorCard({ actor }: ActorCardProps) {
       className="group block cursor-pointer"
     >
       {/* Editorial Portrait Image */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-[#F7F7F5]">
+      <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[#F7F7F5]">
         <Image
           src={actor.mainImage}
           alt={`${actor.name} - ${actor.categoryLabel}`}
@@ -35,6 +35,12 @@ export function ActorCard({ actor }: ActorCardProps) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
           className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
+        {actor.id.startsWith("dca-") && (
+          <div className="absolute top-2.5 right-2.5 bg-black/80 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-bold text-[#D4AF37] border border-[#D4AF37]/40 shadow-xs flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Verified Live
+          </div>
+        )}
       </div>
 
       {/* Understated Minimal Typography */}

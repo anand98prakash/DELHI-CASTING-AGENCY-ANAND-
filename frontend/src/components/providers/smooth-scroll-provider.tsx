@@ -1,27 +1,12 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-import Lenis from "lenis";
+import type { ReactNode } from "react";
 
+/**
+ * SmoothScrollProvider:
+ * Relies on native CSS scroll-behavior: smooth to avoid intercepting or freezing
+ * native mousewheel, trackpad, and touch events across desktop and mobile devices.
+ */
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    const id = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(id);
-      lenis.destroy();
-    };
-  }, []);
-
   return <>{children}</>;
 }

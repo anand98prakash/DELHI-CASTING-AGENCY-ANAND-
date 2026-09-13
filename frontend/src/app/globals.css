@@ -52,7 +52,6 @@ html {
   color: #111111;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
 }
 
 body {
@@ -63,7 +62,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -104,13 +103,31 @@ svg {
   background: #D4AF37;
 }
 
-/* Lenis Smooth Scroll */
-html.lenis, html.lenis body {
-  height: auto;
+/* Custom Scrollbar for nested containers */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #D4AF37 #F7F5EE;
 }
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #F7F5EE;
+  border-radius: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #B89222;
+}
+
+
 
 /* Editorial Glass & Overlay Utilities */
 .editorial-card-gradient {

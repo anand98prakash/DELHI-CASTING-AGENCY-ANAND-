@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { X, ArrowRight, Calendar, CheckCircle2, MapPin, ShieldCheck, Tag, User, DollarSign, Clapperboard } from "lucide-react";
 import type { CastingCallItem } from "@/data/casting-calls";
@@ -18,6 +18,9 @@ export function CastingDetailModal({
   onClose,
   onApply,
 }: CastingDetailModalProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const applySectionRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -36,6 +39,49 @@ export function CastingDetailModal({
     };
   }, [isOpen, onClose]);
 
+  // Smoothly auto-scroll to the bottom Apply section upon modal open,
+  // while allowing the user to freely scroll up and down manually.
+  useEffect(() => {
+    if (!isOpen || !item) return;
+
+    // Reset scroll position to top initially
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+
+    let userInteracted = false;
+    const container = scrollContainerRef.current;
+    const handleUserInteraction = () => {
+      userInteracted = true;
+    };
+
+    container?.addEventListener("wheel", handleUserInteraction, { passive: true });
+    container?.addEventListener("touchmove", handleUserInteraction, { passive: true });
+
+    // Smoothly scroll down so the Apply section is immediately brought into view
+    const scrollTimer = setTimeout(() => {
+      if (!userInteracted && scrollContainerRef.current) {
+        if (applySectionRef.current) {
+          applySectionRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
+        } else {
+          scrollContainerRef.current.scrollTo({
+            top: scrollContainerRef.current.scrollHeight,
+            behavior: "smooth",
+          });
+        }
+      }
+    }, 280);
+
+    return () => {
+      clearTimeout(scrollTimer);
+      container?.removeEventListener("wheel", handleUserInteraction);
+      container?.removeEventListener("touchmove", handleUserInteraction);
+    };
+  }, [isOpen, item]);
+
   if (!isOpen || !item) return null;
 
   const statusColor =
@@ -49,11 +95,12 @@ export function CastingDetailModal({
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 sm:p-6 overflow-y-auto animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 sm:p-6 overflow-hidden animate-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-3xl bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl my-8 flex flex-col text-left max-h-[90vh] overflow-y-auto text-[#111111]"
+        ref={scrollContainerRef}
+        className="relative w-full max-w-3xl bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col text-left max-h-[90vh] overflow-y-auto scroll-smooth text-[#111111] overscroll-contain custom-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Close Button */}
@@ -61,7 +108,7 @@ export function CastingDetailModal({
           onClick={onClose}
           type="button"
           aria-label="Close"
-          className="absolute top-4 sm:top-5 right-4 sm:right-5 p-2 rounded-full text-gray-400 hover:text-[#111111] hover:bg-gray-100 transition-colors z-10"
+          className="absolute top-4 sm:top-5 right-4 sm:right-5 p-2 rounded-full text-gray-400 hover:text-[#111111] hover:bg-gray-100 transition-colors z-10 cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
@@ -189,7 +236,10 @@ export function CastingDetailModal({
         </div>
 
         {/* Action Footer */}
-        <div className="mt-4 pt-5 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div
+          ref={applySectionRef}
+          className="mt-4 pt-5 border-t border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0"
+        >
           <p className="text-xs text-[#666666]">
             Delhi Casting Agency coordinates verified talent submissions directly with casting directors.
           </p>
@@ -199,7 +249,7 @@ export function CastingDetailModal({
               onClose();
               onApply(item);
             }}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-semibold text-sm transition-all duration-200 shadow-md w-full sm:w-auto shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-bold text-sm tracking-wide transition-all duration-200 shadow-md hover:shadow-lg w-full sm:w-auto shrink-0 cursor-pointer"
           >
             <span>Apply for this Role</span>
             <ArrowRight className="w-4 h-4" />

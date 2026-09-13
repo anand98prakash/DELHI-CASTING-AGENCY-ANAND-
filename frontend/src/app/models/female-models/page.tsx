@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
 import { getModelsByCategory, getModelCategoryBySlug, MODEL_CATEGORIES } from "@/data/models";
+import { fetchPublicApprovedModels, mergeModelsWithLive } from "@/lib/publicTalents";
 import { ModelGrid } from "@/components/models/ModelGrid";
 
 export const metadata = {
@@ -14,9 +15,15 @@ export const metadata = {
     "Explore versatile female models for runway fashion, high-fashion editorials, designer lookbooks, and commercial advertising.",
 };
 
-export default function FemaleModelsPage() {
+export default async function FemaleModelsPage() {
   const category = getModelCategoryBySlug("female-models")!;
-  const models = getModelsByCategory("female-models");
+  const staticModels = getModelsByCategory("female-models");
+  const liveModels = await fetchPublicApprovedModels({
+    category: "model",
+    gender: "female",
+    subCategory: "female-models",
+  });
+  const models = mergeModelsWithLive(staticModels, liveModels);
   const otherCategories = MODEL_CATEGORIES.filter((c) => c.slug !== "female-models");
 
   return (

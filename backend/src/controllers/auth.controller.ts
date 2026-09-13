@@ -799,3 +799,90 @@ export async function resetPassword(req: Request, res: Response): Promise<void> 
   }
 }
 
+// ==========================================
+// CHECK AVAILABILITY (Email & Phone uniqueness)
+// ==========================================
+
+export async function checkAvailability(req: Request, res: Response): Promise<void> {
+  try {
+    const { email, phone, excludeUserId } = req.body as {
+      email?: string;
+      phone?: string;
+      excludeUserId?: string;
+    };
+
+    let emailExists = false;
+    let phoneExists = false;
+
+    // Check email uniqueness
+    if (email && typeof email === "string" && email.trim() !== "") {
+      const normalizedEmail = email.trim().toLowerCase();
+      const existingUser = await prisma.user.findUnique({
+        where: { email: normalizedEmail },
+        select: { id: true },
+      });
+      if (existingUser && (!excludeUserId || existingUser.id !== excludeUserId)) {
+        emailExists = true;
+      }
+    }
+
+    // Check phone uniqueness across artist and brand profiles
+    if (phone && typeof phone === "string" && phone.trim() !== "") {
+      const trimmedPhone = phone.trim();
+      const normalizedPhone = normalizeIndianPhone(trimmedPhone);
+      const phoneVariants = Array.from(
+        new Set(
+          [
+            trimmedPhone,
+            normalizedPhone,
+            normalizedPhone ? `+91${normalizedPhone}` : null,
+            normalizedPhone ? `+91 ${normalizedPhone}` : null,
+            normalizedPhone ? `0${normalizedPhone}` : null,
+          ].filter(Boolean) as string[]
+        )
+      );
+
+      if (phoneVariants.length > 0) {
+        const [existingArtistPhone, existingBrandPhone] = await Promise.all([
+          prisma.artistProfile.findFirst({
+            where: {
+              phone: { in: phoneVariants },
+              ...(excludeUserId ? { userId: { not: excludeUserId } } : {}),
+            },
+            select: { id: true },
+          }),
+          prisma.brandProfile.findFirst({
+            where: {
+              phone: { in: phoneVariants },
+              ...(excludeUserId ? { userId: { not: excludeUserId } } : {}),
+            },
+            select: { id: true },
+          }),
+        ]);
+
+        if (existingArtistPhone || existingBrandPhone) {
+          phoneExists = true;
+        }
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      emailExists,
+      phoneExists,
+      message: emailExists
+        ? "This email is already registered. Please log in or use a different email address."
+        : phoneExists
+        ? "Phone number is already registered. Please use a different phone number."
+        : "Available",
+    });
+  } catch (error) {
+    console.error("Check availability error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to check availability",
+    });
+  }
+}
+
+

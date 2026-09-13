@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
 import { getActorsByCategory, getCategoryBySlug, ACTOR_CATEGORIES } from "@/data/actors";
+import { fetchPublicApprovedTalents, mergeTalentsWithLive } from "@/lib/publicTalents";
 import { ActorGrid } from "@/components/actors/ActorGrid";
 
 export const metadata = {
@@ -21,9 +22,14 @@ const childSafetyPoints = [
   "Safe, supportive and professional audition environments",
 ];
 
-export default function ChildActorsPage() {
+export default async function ChildActorsPage() {
   const category = getCategoryBySlug("child-actors")!;
-  const actors = getActorsByCategory("child-actors");
+  const staticActors = getActorsByCategory("child-actors");
+  const liveActors = await fetchPublicApprovedTalents({
+    category: "child-artists",
+    subCategory: "child",
+  });
+  const actors = mergeTalentsWithLive(staticActors, liveActors);
   const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "child-actors");
 
   return (

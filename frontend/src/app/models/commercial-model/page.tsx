@@ -11,7 +11,6 @@ import {
 import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
-import { CTASection } from "@/components/ui/cta-section";
 
 const profilePoints = [
   "Recent and clear profile photographs",
@@ -314,14 +313,6 @@ export default function CommercialModelsPage() {
           </div>
         </Reveal>
       </section>
-
-      <CTASection
-        eyebrow="Start Your Journey"
-        title="Ready to showcase your commercial profile?"
-        description="Register your talent profile and explore commercial modeling opportunities available on the platform."
-        buttonLabel="Register Now"
-        buttonHref="/profile/setup"
-      />
     </main>
   );
 }

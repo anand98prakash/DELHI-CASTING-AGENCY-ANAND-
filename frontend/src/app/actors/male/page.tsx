@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
 import { getActorsByCategory, getCategoryBySlug, ACTOR_CATEGORIES } from "@/data/actors";
+import { fetchPublicApprovedTalents, mergeTalentsWithLive } from "@/lib/publicTalents";
 import { ActorGrid } from "@/components/actors/ActorGrid";
 
 export const metadata = {
@@ -14,9 +15,15 @@ export const metadata = {
     "Explore talented male actors available for leading, supporting and character roles across film, television, OTT series and commercial productions.",
 };
 
-export default function MaleActorsPage() {
+export default async function MaleActorsPage() {
   const category = getCategoryBySlug("male")!;
-  const actors = getActorsByCategory("male");
+  const staticActors = getActorsByCategory("male");
+  const liveActors = await fetchPublicApprovedTalents({
+    category: "actor",
+    gender: "male",
+    subCategory: "male-actors",
+  });
+  const actors = mergeTalentsWithLive(staticActors, liveActors);
   const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "male");
 
   return (

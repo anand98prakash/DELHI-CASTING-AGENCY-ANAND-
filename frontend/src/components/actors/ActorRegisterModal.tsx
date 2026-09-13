@@ -57,11 +57,11 @@ export function ActorRegisterModal({
       aria-modal="true"
       aria-labelledby="access-modal-title"
       aria-describedby="access-modal-desc"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 sm:p-6 animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md p-4 sm:p-6 animate-fade-in overflow-hidden"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[500px] bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col text-center"
+        className="relative w-full max-w-[500px] bg-white border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl flex flex-col text-center max-h-[92vh] overflow-y-auto scroll-smooth custom-scrollbar"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top-Right Understated Close Button (×) */}

@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
 import { getActorsByCategory, getCategoryBySlug, ACTOR_CATEGORIES } from "@/data/actors";
+import { fetchPublicApprovedTalents, mergeTalentsWithLive } from "@/lib/publicTalents";
 import { ActorGrid } from "@/components/actors/ActorGrid";
 
 export const metadata = {
@@ -14,9 +15,15 @@ export const metadata = {
     "Explore versatile female actors available for film, television, OTT series, drama productions and commercial assignments with Delhi Casting Agency.",
 };
 
-export default function FemaleActorsPage() {
+export default async function FemaleActorsPage() {
   const category = getCategoryBySlug("female")!;
-  const actors = getActorsByCategory("female");
+  const staticActors = getActorsByCategory("female");
+  const liveActors = await fetchPublicApprovedTalents({
+    category: "actor",
+    gender: "female",
+    subCategory: "female-actors",
+  });
+  const actors = mergeTalentsWithLive(staticActors, liveActors);
   const otherCategories = ACTOR_CATEGORIES.filter((c) => c.slug !== "female");
 
   return (

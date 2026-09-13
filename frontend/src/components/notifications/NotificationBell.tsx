@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Bell } from "lucide-react";
 import { API_URL } from "@/config/env";
-import { getAuthToken, clearDCAUserSession } from "@/lib/auth";
+import { getAuthToken, clearDCAUserSession, getUserSession } from "@/lib/auth";
 import { NotificationDropdown } from "./NotificationDropdown";
 import type { NotificationItem } from "./notification-utils";
 
@@ -16,6 +16,12 @@ export function NotificationBell({ className = "" }: NotificationBellProps) {
   const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const [isAuth, setIsAuth] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return Boolean(getAuthToken() && getUserSession()?.isLoggedIn);
+    }
+    return false;
+  });
   const [isOpen, setIsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState<NotificationItem[]>([]);
@@ -71,7 +77,11 @@ export function NotificationBell({ className = "" }: NotificationBellProps) {
   useEffect(() => {
     const handleAuthChange = () => {
       const token = getAuthToken();
-      if (!token) {
+      const session = getUserSession();
+      const authenticated = Boolean(token && session?.isLoggedIn);
+      setIsAuth(authenticated);
+
+      if (!authenticated) {
         setUnreadCount(0);
         setNotifications([]);
         setError(null);
@@ -286,6 +296,10 @@ export function NotificationBell({ className = "" }: NotificationBellProps) {
 
   // Format Badge Text (e.g. 99+)
   const badgeText = unreadCount > 99 ? "99+" : unreadCount.toString();
+
+  if (!isAuth) {
+    return null;
+  }
 
   return (
     <div ref={containerRef} className={`relative inline-block ${className}`}>

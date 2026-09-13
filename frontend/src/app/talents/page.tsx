@@ -143,7 +143,10 @@ export default function TalentsPage() {
 
             return (
               <Reveal key={category.title} delay={index * 0.05} className="h-full">
-                <div className="group flex flex-col justify-between h-full bg-white border border-gray-200 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-md transition-all duration-500 shadow-xs">
+                <Link
+                  href={category.href}
+                  className="group flex flex-col justify-between h-full bg-white border border-gray-200 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-[#d4af37]/60 hover:shadow-md hover:-translate-y-1.5 transition-all duration-500 shadow-xs cursor-pointer block focus:outline-none focus:ring-2 focus:ring-[#d4af37]"
+                >
                   {/* Top Horizontal Image */}
                   <div className="relative w-full aspect-[16/9] overflow-hidden bg-gray-100">
                     <Image
@@ -157,19 +160,16 @@ export default function TalentsPage() {
                   </div>
 
                   <div className="flex flex-col flex-1 p-6 sm:p-7 pt-4">
-                    {/* Icon & Arrow Header */}
-                    <div className="flex items-start justify-between gap-4 mb-4">
+                    {/* Icon & DCA Verified Header */}
+                    <div className="flex items-center justify-between gap-4 mb-4">
                       <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#d4af37]/10 text-[#d4af37] border border-[#d4af37]/20">
                         <Icon className="h-6 w-6" />
                       </div>
 
-                      <Link
-                        href={category.href}
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 text-[#555555] transition-colors hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-gray-50"
-                        aria-label={`Explore ${category.title}`}
-                      >
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#D4AF37]">
+                        <span className="h-1.5 w-1.5 rounded-full bg-[#D4AF37]" />
+                        <span>DCA Verified</span>
+                      </div>
                     </div>
 
                     {/* Category Title */}
@@ -183,20 +183,14 @@ export default function TalentsPage() {
                     </p>
                   </div>
 
-                  {/* Explore Category CTA */}
-                  <div className="p-6 sm:p-7 pt-0 mt-auto border-t border-gray-200 flex items-center justify-between shrink-0">
-                    <Link
-                      href={category.href}
-                      className="inline-flex items-center text-sm font-bold text-[#111111] hover:text-[#d4af37] transition-colors group/cta"
-                    >
+                  {/* Explore Category CTA Button */}
+                  <div className="p-6 sm:p-7 pt-4 mt-auto border-t border-gray-100 flex flex-col gap-2 shrink-0">
+                    <div className="w-full inline-flex items-center justify-between rounded-full border border-gray-200 bg-[#F7F7F5] px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold uppercase tracking-[0.1em] text-[#111111] transition-all duration-300 group-hover:border-[#D4AF37] group-hover:bg-[#D4AF37] group-hover:text-white shadow-2xs group-hover:shadow-xs">
                       <span>Explore {category.title}</span>
-                      <ArrowRight className="ml-1.5 h-4 w-4 text-[#d4af37] transition-transform group-hover/cta:translate-x-1" />
-                    </Link>
-                    <span className="text-xs text-[#666666] font-medium">
-                      DCA Verified
-                    </span>
+                      <ArrowRight className="h-4 w-4 text-[#d4af37] transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0 ml-2" />
+                    </div>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             );
           })}

@@ -3,7 +3,10 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
 import { getAllChildArtists, getChildArtistById, getRelatedChildArtists } from "@/data/child-artists";
+import { fetchPublicChildArtistById } from "@/lib/publicTalents";
 import { ChildArtistProfileView } from "@/components/child-artists/ChildArtistProfileView";
+
+export const dynamicParams = true;
 
 interface ChildArtistProfilePageProps {
   params: Promise<{ id: string }>;
@@ -20,7 +23,10 @@ export async function generateMetadata({
   params,
 }: ChildArtistProfilePageProps): Promise<Metadata> {
   const { id } = await params;
-  const artist = getChildArtistById(id);
+  let artist = getChildArtistById(id);
+  if (!artist) {
+    artist = (await fetchPublicChildArtistById(id)) || undefined;
+  }
 
   if (!artist) {
     return {
@@ -38,7 +44,10 @@ export default async function ChildArtistProfilePage({
   params,
 }: ChildArtistProfilePageProps) {
   const { id } = await params;
-  const artist = getChildArtistById(id);
+  let artist = getChildArtistById(id);
+  if (!artist) {
+    artist = (await fetchPublicChildArtistById(id)) || undefined;
+  }
 
   if (!artist) {
     notFound();

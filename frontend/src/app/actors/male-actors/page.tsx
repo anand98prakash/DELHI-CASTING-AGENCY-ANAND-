@@ -4,7 +4,6 @@ import { ArrowRight, CheckCircle2, UserRound } from "lucide-react";
 import { PageHero } from "@/components/ui/page-hero";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
-import { CTASection } from "@/components/ui/cta-section";
 
 const profilePoints = [
   "Recent and clear profile photographs",
@@ -220,14 +219,6 @@ export default function MaleActorsPage() {
           </div>
         </Reveal>
       </section>
-
-      <CTASection
-        eyebrow="Start Your Journey"
-        title="Ready to create your actor profile?"
-        description="Register your talent profile and provide accurate information about your acting experience, skills and portfolio."
-        buttonLabel="Register Now"
-        buttonHref="/profile/setup"
-      />
     </main>
   );
 }

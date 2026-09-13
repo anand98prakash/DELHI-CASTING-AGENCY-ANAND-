@@ -14,6 +14,7 @@ import castingRoutes from "./routes/casting.routes.js";
 import applicationRoutes from "./routes/application.routes.js";
 import notificationRoutes from "./routes/notification.routes.js";
 import paymentRoutes from "./routes/payment.routes.js";
+import inquiryRoutes from "./routes/inquiry.routes.js";
 import { getCloudinaryHealthStatus } from "./services/cloudinary.service.js";
 import {
   getArtistApplications,
@@ -176,6 +177,9 @@ app.use("/api/notifications", notificationRoutes);
 
 // Payment & Premium Entitlement routes
 app.use("/api/payments", paymentRoutes);
+
+// Public & brand casting inquiry routes
+app.use("/api/inquiries", inquiryRoutes);
 
 // Health check endpoint
 app.get("/api/health", async (_req: Request, res: Response) => {

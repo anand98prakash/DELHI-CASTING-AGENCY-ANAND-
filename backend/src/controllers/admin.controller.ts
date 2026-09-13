@@ -231,10 +231,11 @@ export async function approveArtist(
       return;
     }
 
-    if (artist.verificationStatus !== "PENDING_REVIEW") {
-      res.status(400).json({
-        success: false,
-        message: `Artist cannot be approved from ${artist.verificationStatus} status`,
+    if (artist.verificationStatus === "APPROVED") {
+      res.status(200).json({
+        success: true,
+        message: "Artist profile is already approved and live",
+        artist,
       });
       return;
     }
@@ -270,7 +271,7 @@ export async function approveArtist(
 
     res.status(200).json({
       success: true,
-      message: "Artist profile approved successfully",
+      message: "Artist profile approved successfully and is now live",
       artist: updatedArtist,
     });
   } catch (error) {
@@ -279,6 +280,60 @@ export async function approveArtist(
     res.status(500).json({
       success: false,
       message: "Failed to approve artist",
+    });
+  }
+}
+
+// ==========================================
+// UNPUBLISH ARTIST (REVERT TO PENDING_REVIEW)
+// ==========================================
+
+export async function unpublishArtist(
+  req: AuthRequest,
+  res: Response,
+): Promise<void> {
+  try {
+    const id = getParamId(req, res);
+
+    if (!id) {
+      return;
+    }
+
+    const artist = await prisma.artistProfile.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!artist) {
+      res.status(404).json({
+        success: false,
+        message: "Artist profile not found",
+      });
+      return;
+    }
+
+    const updatedArtist = await prisma.artistProfile.update({
+      where: {
+        id,
+      },
+      data: {
+        verificationStatus: "PENDING_REVIEW",
+        approvedAt: null,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Artist profile unpublished and moved to review queue",
+      artist: updatedArtist,
+    });
+  } catch (error) {
+    console.error("Unpublish artist error:", error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to unpublish artist",
     });
   }
 }

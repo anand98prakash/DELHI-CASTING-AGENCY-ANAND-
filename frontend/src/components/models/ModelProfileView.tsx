@@ -10,7 +10,6 @@ import {
   Calendar,
   Sparkles,
   ArrowLeft,
-  FileText,
   User,
 } from "lucide-react";
 
@@ -49,13 +48,6 @@ export function ModelProfileView({
       navigator.clipboard.writeText(window.location.href);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
-  const scrollToBiography = () => {
-    const el = document.getElementById("biography");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -98,29 +90,21 @@ export function ModelProfileView({
             {/* Inquire & Share Action Buttons */}
             <div className="flex items-center gap-3">
               <Link
-                href="/contact/"
-                className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-bold text-sm transition-all duration-300 shadow-md"
+                href={`/inquiry?artist=${encodeURIComponent(model.name)}&category=${encodeURIComponent(model.categoryLabel || "Model")}&id=${encodeURIComponent(model.id)}`}
+                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#d4af37] hover:bg-[#c59b27] text-white font-bold text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer"
               >
-                <Mail className="w-4 h-4" />
-                <span>Book / Inquire</span>
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Inquire &amp; Cast</span>
               </Link>
-              <button
-                onClick={scrollToBiography}
-                type="button"
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl bg-[#F7F7F5] hover:bg-gray-100 text-[#111111] border border-gray-200 text-sm font-semibold transition-colors shadow-xs"
-              >
-                <FileText className="w-4 h-4 text-[#d4af37]" />
-                <span>View Biography</span>
-              </button>
               <button
                 onClick={handleShare}
                 type="button"
-                className="p-3 rounded-xl bg-[#F7F7F5] hover:bg-gray-100 text-[#111111] border border-gray-200 transition-colors relative shadow-xs"
+                className="p-3.5 rounded-xl bg-[#F7F7F5] hover:bg-gray-100 text-[#111111] border border-gray-200 transition-colors relative shadow-xs shrink-0 cursor-pointer"
                 title="Share Profile"
               >
-                <Share2 className="w-4 h-4 text-[#111111]" />
+                <Share2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#111111]" />
                 {copied && (
-                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#d4af37] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow">
+                  <span className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#d4af37] text-white text-[10px] font-bold px-2 py-0.5 rounded shadow whitespace-nowrap">
                     Copied!
                   </span>
                 )}
@@ -344,7 +328,7 @@ export function ModelProfileView({
         title={`Interested in Booking ${model.name}?`}
         description="Delhi Casting Agency coordinates comp card requests, availability checking, fittings, and casting inquiries."
         buttonLabel="Submit Booking Inquiry"
-        buttonHref="/contact/"
+        buttonHref={`/inquiry?artist=${encodeURIComponent(model.name)}&category=${encodeURIComponent(model.categoryLabel || "Model")}&id=${encodeURIComponent(model.id)}`}
       />
 
       {/* Header Lightbox Modal */}

@@ -48,6 +48,8 @@ import {
   PremiumFlowModal,
   PremiumModalStep,
 } from "@/components/premium-flow-modal";
+import { ProfileCompletionWidget } from "@/components/dashboard/ProfileCompletionWidget";
+import { ArtistPortfolioManager } from "@/components/dashboard/ArtistPortfolioManager";
 
 interface BackendArtistProfile {
   id: string;
@@ -171,6 +173,18 @@ export default function DashboardPage() {
   const router = useRouter();
   const [userRole, setUserRole] = useState<"artist" | "brand">("artist");
   const [activeTab, setActiveTab] = useState<"profile" | "opportunities" | "saved">("profile");
+
+  const handleTabChange = useCallback((tab: "profile" | "opportunities" | "saved") => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setTimeout(() => {
+        const el = document.getElementById("dashboard-main-content");
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 60);
+    }
+  }, []);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalInitialStep, setModalInitialStep] = useState<PremiumModalStep | undefined>(undefined);
   const [profileStatus, setProfileStatus] = useState<ProfileStatus>("PENDING_REVIEW");
@@ -1081,26 +1095,18 @@ export default function DashboardPage() {
             ? "Manage active casting announcements, post project requirements, and source verified talent rosters."
             : "Manage your artist profile, portfolio headshots, and review verified casting calls."
         }
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: isBrand ? "Brand Dashboard" : "Artist Dashboard" },
+        ]}
       />
 
-      <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">
-        <Breadcrumb
-          items={[
-            { label: "Home", href: "/" },
-            { label: isBrand ? "Brand Dashboard" : "Artist Dashboard" },
-          ]}
-        />
-      </div>
-
-      <section className="mx-auto max-w-7xl px-6 py-10 lg:px-8 lg:py-16">
-        <div className="grid gap-8 lg:grid-cols-12">
+      <section className="mx-auto max-w-6xl xl:max-w-7xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 w-full">
+        <div className="grid gap-6 lg:gap-8 grid-cols-1 lg:grid-cols-12 min-w-0 w-full items-start">
           {/* LEFT SIDEBAR — USER ACTIONS, STATS & NAVIGATION */}
-          <div className="lg:col-span-4 space-y-6">
+          <div className="lg:col-span-4 space-y-6 min-w-0">
             <Reveal>
-              <div className="relative rounded-3xl border border-gray-200 bg-white p-6 shadow-md">
-                <div className="absolute top-5 right-5 z-10">
-                  <NotificationBell />
-                </div>
+              <div className="relative rounded-2xl sm:rounded-3xl border border-gray-200 bg-white p-4 sm:p-6 shadow-md min-w-0 overflow-hidden">
 
                 {/* Main Avatar */}
                 <div className="relative mx-auto aspect-square w-32 overflow-hidden rounded-2xl border-2 border-[#D4AF37] shadow-md bg-gray-100 flex items-center justify-center">
@@ -1173,30 +1179,22 @@ export default function DashboardPage() {
                   </p>
                 </div>
 
-                {/* Profile Completion Bar (Artist & Brand) */}
+                {/* Profile Completion Bar & Pending Items (Artist & Brand) */}
                 <div className="mt-6 border-t border-gray-200 pt-5">
-                  <div className="flex items-center justify-between text-xs font-semibold">
-                    <span className="text-[#555555]">Profile Completion Level</span>
-                    <span className="text-[#D4AF37] font-bold">
-                      {completionPercentage}%
-                    </span>
-                  </div>
-                  <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-gray-100 border border-gray-200">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-[#D4AF37] to-[#C59B27]"
-                      style={{ width: `${completionPercentage}%` }}
-                    />
-                  </div>
-                  <p className="mt-2 text-xs font-medium text-[#555555]">
-                    You have completed {completionPercentage}% of your profile
-                  </p>
+                  <ProfileCompletionWidget
+                    isBrand={isBrand}
+                    profile={profile}
+                    brandData={brandData}
+                    completionPercentage={completionPercentage}
+                    variant="sidebar"
+                  />
                 </div>
 
                 {/* Navigation Tabs */}
                 <div className="mt-6 space-y-2">
                   <button
                     type="button"
-                    onClick={() => setActiveTab("profile")}
+                    onClick={() => handleTabChange("profile")}
                     className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider transition ${
                       activeTab === "profile"
                         ? "bg-[#D4AF37] text-white shadow-xs"
@@ -1214,7 +1212,7 @@ export default function DashboardPage() {
 
                   <button
                     type="button"
-                    onClick={() => setActiveTab("opportunities")}
+                    onClick={() => handleTabChange("opportunities")}
                     className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider transition ${
                       activeTab === "opportunities"
                         ? "bg-[#D4AF37] text-white shadow-xs"
@@ -1234,7 +1232,7 @@ export default function DashboardPage() {
 
                   <button
                     type="button"
-                    onClick={() => setActiveTab("saved")}
+                    onClick={() => handleTabChange("saved")}
                     className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-xs font-bold uppercase tracking-wider transition ${
                       activeTab === "saved"
                         ? "bg-[#D4AF37] text-white shadow-xs"
@@ -1317,12 +1315,12 @@ export default function DashboardPage() {
           </div>
 
           {/* RIGHT MAIN DISPLAY AREA — PROFILE PREVIEW / CASTING CALLS / CANDIDATE ROSTER */}
-          <div className="lg:col-span-8">
+          <div id="dashboard-main-content" className="lg:col-span-8 min-w-0 max-w-full">
             
             {/* TAB 1: PROFILE / COMPANY OVERVIEW */}
             {activeTab === "profile" && (
               <Reveal>
-                <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-8 shadow-md">
+                <div className="rounded-2xl sm:rounded-3xl border border-gray-200 bg-white p-4 sm:p-6 md:p-8 shadow-md min-w-0 max-w-full overflow-hidden">
                   <div className="flex items-center justify-between border-b border-gray-200 pb-5">
                     <div>
                       <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#D4AF37]">
@@ -1373,58 +1371,58 @@ export default function DashboardPage() {
                     </div>
                   )}
 
-                  <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                    <div className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-4">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                  <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                    <div className="rounded-xl sm:rounded-2xl border border-gray-200 bg-[#F7F7F5] p-3.5 sm:p-4 shadow-2xs flex flex-col justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
                         {isBrand ? "Brand Verification Status" : "DCA Verification Status"}
                       </span>
-                      <p className="mt-1 text-sm font-bold">
+                      <div className="mt-1 text-xs sm:text-sm font-bold">
                         {isBrand ? (
                           brandData?.verificationStatus === "APPROVED" ? (
                             <span className="inline-flex items-center gap-1.5 text-emerald-700">
                               <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
-                              Approved Brand Account
+                              Approved
                             </span>
                           ) : brandData?.verificationStatus === "REJECTED" ? (
                             <span className="inline-flex items-center gap-1.5 text-red-700">
                               <span className="h-2 w-2 rounded-full bg-red-500"></span>
-                              Profile Rejected
+                              Rejected
                             </span>
                           ) : (
                             <span className="inline-flex items-center gap-1.5 text-amber-700">
                               <span className="h-2 w-2 rounded-full bg-amber-500"></span>
-                              Profile Under Review
+                              Under Review
                             </span>
                           )
                         ) : (
                           profileStatus
                         )}
-                      </p>
+                      </div>
                     </div>
 
-                    <div className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-4">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    <div className="rounded-xl sm:rounded-2xl border border-gray-200 bg-[#F7F7F5] p-3.5 sm:p-4 shadow-2xs flex flex-col justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
                         Location
                       </span>
-                      <p className="mt-1 text-sm text-[#111111] font-bold">
+                      <p className="mt-1 text-xs sm:text-sm text-[#111111] font-bold truncate">
                         {city}, {state}
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-4">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    <div className="rounded-xl sm:rounded-2xl border border-gray-200 bg-[#F7F7F5] p-3.5 sm:p-4 shadow-2xs flex flex-col justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
                         {isBrand ? "Posted Casting Calls" : "Submitted Applications"}
                       </span>
-                      <p className="mt-1 text-sm text-[#111111] font-bold">
-                        {isBrand ? brandCastings.length : applications.length}
+                      <p className="mt-1 text-xs sm:text-sm text-[#111111] font-bold">
+                        {isBrand ? `${brandCastings.length} Posted` : `${applications.length} Submitted`}
                       </p>
                     </div>
 
-                    <div className="rounded-2xl border border-gray-200 bg-[#F7F7F5] p-4">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                    <div className="rounded-xl sm:rounded-2xl border border-gray-200 bg-[#F7F7F5] p-3.5 sm:p-4 shadow-2xs flex flex-col justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 block mb-1">
                         Profile Level
                       </span>
-                      <p className="mt-1 text-sm text-[#D4AF37] font-bold">
+                      <p className="mt-1 text-xs sm:text-sm text-[#D4AF37] font-bold">
                         {completionPercentage}% Complete
                       </p>
                     </div>
@@ -1436,34 +1434,34 @@ export default function DashboardPage() {
                         <h3 className="font-serif text-base font-bold text-[#111111] mb-3">
                           Contact Details &amp; Physical Attributes
                         </h3>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Contact Email</span>
-                            <span className="font-bold text-[#111111] truncate block">{email}</span>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Contact Email</span>
+                            <span className="font-bold text-[#111111] truncate block text-xs" title={email}>{email}</span>
                           </div>
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Phone</span>
-                            <span className="font-bold text-[#111111]">{phone}</span>
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Phone</span>
+                            <span className="font-bold text-[#111111] text-xs">{phone}</span>
                           </div>
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Height</span>
-                            <span className="font-bold text-[#111111]">{height}</span>
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Height</span>
+                            <span className="font-bold text-[#111111] text-xs">{height}</span>
                           </div>
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Weight</span>
-                            <span className="font-bold text-[#111111]">{weight}</span>
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Weight</span>
+                            <span className="font-bold text-[#111111] text-xs">{weight}</span>
                           </div>
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Chest</span>
-                            <span className="font-bold text-[#111111]">{chest}</span>
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Chest</span>
+                            <span className="font-bold text-[#111111] text-xs">{chest}</span>
                           </div>
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Waist</span>
-                            <span className="font-bold text-[#111111]">{waist}</span>
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Waist</span>
+                            <span className="font-bold text-[#111111] text-xs">{waist}</span>
                           </div>
-                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 sm:col-span-2">
-                            <span className="text-[10px] text-gray-400 font-bold uppercase block">Languages</span>
-                            <span className="font-bold text-[#111111] truncate block">{languages}</span>
+                          <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs col-span-2 sm:col-span-1 lg:col-span-2">
+                            <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Languages</span>
+                            <span className="font-bold text-[#111111] truncate block text-xs">{languages}</span>
                           </div>
                         </div>
                       </div>
@@ -1484,6 +1482,16 @@ export default function DashboardPage() {
                           <p>{adminFeedback}</p>
                         </div>
                       )}
+
+                      {/* Interactive Portfolio & Showreels Section (Optional, High-Value) */}
+                      <div className="mt-8 border-t border-gray-200 pt-6 min-w-0 max-w-full">
+                        <ArtistPortfolioManager
+                          userId={profile?.userId || profile?.id || email}
+                          artistName={fullName}
+                          profilePhoto={profile?.profilePhoto}
+                          headshots={profile?.headshots}
+                        />
+                      </div>
                     </div>
                   )}
 
@@ -1494,35 +1502,35 @@ export default function DashboardPage() {
                           <h3 className="font-serif text-base font-bold text-[#111111]">
                             Company &amp; Coordinator Details
                           </h3>
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                              <span className="text-[10px] text-gray-400 font-bold uppercase block">Company Name</span>
-                              <span className="font-bold text-[#111111] truncate block">{brandData.companyName || fullName}</span>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                              <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Company Name</span>
+                              <span className="font-bold text-[#111111] truncate block text-xs">{brandData.companyName || fullName}</span>
                             </div>
-                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                              <span className="text-[10px] text-gray-400 font-bold uppercase block">Contact Person</span>
-                              <span className="font-bold text-[#111111] truncate block">{brandData.fullName || "Coordinator"}</span>
+                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                              <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Contact Person</span>
+                              <span className="font-bold text-[#111111] truncate block text-xs">{brandData.fullName || "Coordinator"}</span>
                             </div>
-                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                              <span className="text-[10px] text-gray-400 font-bold uppercase block">Official Email</span>
-                              <span className="font-bold text-[#111111] truncate block">{email}</span>
+                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                              <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Official Email</span>
+                              <span className="font-bold text-[#111111] truncate block text-xs" title={email}>{email}</span>
                             </div>
-                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                              <span className="text-[10px] text-gray-400 font-bold uppercase block">Phone</span>
-                              <span className="font-bold text-[#111111]">{phone}</span>
+                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                              <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Phone</span>
+                              <span className="font-bold text-[#111111] text-xs">{phone}</span>
                             </div>
-                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                              <span className="text-[10px] text-gray-400 font-bold uppercase block">Category</span>
-                              <span className="font-bold text-[#111111]">{brandData.category || "Production"}</span>
+                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                              <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Category</span>
+                              <span className="font-bold text-[#111111] text-xs">{brandData.category || "Production"}</span>
                             </div>
-                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200">
-                              <span className="text-[10px] text-gray-400 font-bold uppercase block">Designation</span>
-                              <span className="font-bold text-[#111111]">{brandData.designation || "Executive"}</span>
+                            <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs">
+                              <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Designation</span>
+                              <span className="font-bold text-[#111111] text-xs">{brandData.designation || "Executive"}</span>
                             </div>
                             {brandData.website && (
-                              <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 sm:col-span-2">
-                                <span className="text-[10px] text-gray-400 font-bold uppercase block">Website</span>
-                                <span className="font-bold text-[#D4AF37] truncate block">{brandData.website}</span>
+                              <div className="p-3 rounded-xl bg-[#F7F7F5] border border-gray-200 shadow-2xs col-span-2 sm:col-span-1 lg:col-span-2">
+                                <span className="text-[10px] text-gray-400 font-bold uppercase block mb-0.5">Website</span>
+                                <span className="font-bold text-[#D4AF37] truncate block text-xs">{brandData.website}</span>
                               </div>
                             )}
                           </div>

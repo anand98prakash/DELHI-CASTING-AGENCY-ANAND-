@@ -338,7 +338,7 @@ export default function HowToAvoidCastingScamsPage() {
             </p>
 
             <Link
-              href="/contact/"
+              href="/contact-us"
               className="mt-7 inline-flex items-center text-sm font-semibold text-[#D4AF37]"
             >
               Contact Us

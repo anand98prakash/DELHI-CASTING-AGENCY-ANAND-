@@ -66,10 +66,13 @@ interface PendingArtist {
   languages: string | null;
   skills: string | null;
   specialAbilities: string | null;
+  primaryCategory?: string | null;
+  experience?: string | null;
   profilePhoto: string | null;
   headshots: string | null;
   verificationStatus: string;
   submittedAt: string | null;
+  approvedAt?: string | null;
   user?: {
     email: string;
   };
@@ -175,8 +178,10 @@ export default function AdminDashboardPage() {
   const [loadingStats, setLoadingStats] = useState(true);
   const [statsError, setStatsError] = useState<string | null>(null);
 
-  // Pending Artists state
+  // Artists state
   const [pendingArtists, setPendingArtists] = useState<PendingArtist[]>([]);
+  const [approvedArtists, setApprovedArtists] = useState<PendingArtist[]>([]);
+  const [artistSubTab, setArtistSubTab] = useState<"pending" | "approved">("pending");
   const [loadingArtists, setLoadingArtists] = useState(false);
   const [artistsError, setArtistsError] = useState<string | null>(null);
   const [artistSearch, setArtistSearch] = useState("");
@@ -206,7 +211,7 @@ export default function AdminDashboardPage() {
 
   // Action Modals State
   const [actionModal, setActionModal] = useState<{
-    type: "approve_artist" | "reject_artist" | "approve_casting" | "reject_casting" | "view_artist" | "view_casting" | "approve_brand" | "reject_brand" | "view_brand";
+    type: "approve_artist" | "reject_artist" | "unpublish_artist" | "approve_casting" | "reject_casting" | "view_artist" | "view_casting" | "approve_brand" | "reject_brand" | "view_brand";
     item: PendingArtist | PendingCastingCall | PendingBrand;
   } | null>(null);
 
@@ -287,6 +292,31 @@ export default function AdminDashboardPage() {
       console.error("Fetch pending artists error:", err);
       setArtistsError("Network error fetching pending artists.");
       setLoadingArtists(false);
+    }
+  }, []);
+
+  const fetchApprovedArtists = useCallback(async () => {
+    const token = getAuthToken();
+    if (!token) return;
+
+    try {
+      const response = await fetch(`${API_URL}/api/admin/artists/approved`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = (await response.json()) as {
+        success: boolean;
+        message?: string;
+        artists?: PendingArtist[];
+      };
+
+      if (response.ok && data.success) {
+        setApprovedArtists(data.artists || []);
+      }
+    } catch (err: unknown) {
+      console.error("Fetch approved artists error:", err);
     }
   }, []);
 
@@ -426,6 +456,7 @@ export default function AdminDashboardPage() {
 
           fetchStats();
           fetchPendingArtists();
+          fetchApprovedArtists();
           fetchPendingBrands();
           fetchPendingCastings();
           fetchPayments();
@@ -454,7 +485,7 @@ export default function AdminDashboardPage() {
         window.removeEventListener("dca-auth-change", handleAuthChange);
       };
     }
-  }, [router, fetchStats, fetchPendingArtists, fetchPendingBrands, fetchPendingCastings, fetchPayments]);
+  }, [router, fetchStats, fetchPendingArtists, fetchApprovedArtists, fetchPendingBrands, fetchPendingCastings, fetchPayments]);
 
   const handleLogout = async () => {
     await logoutDCAUserSession();
@@ -476,6 +507,8 @@ export default function AdminDashboardPage() {
 
     if (actionModal.type === "approve_artist") {
       url = `${API_URL}/api/admin/artists/${actionModal.item.id}/approve`;
+    } else if (actionModal.type === "unpublish_artist") {
+      url = `${API_URL}/api/admin/artists/${actionModal.item.id}/unpublish`;
     } else if (actionModal.type === "reject_artist") {
       url = `${API_URL}/api/admin/artists/${actionModal.item.id}/reject`;
     } else if (actionModal.type === "approve_casting") {
@@ -518,6 +551,7 @@ export default function AdminDashboardPage() {
       // Refresh Data
       fetchStats();
       fetchPendingArtists();
+      fetchApprovedArtists();
       fetchPendingBrands();
       fetchPendingCastings();
     } catch (err: unknown) {
@@ -527,13 +561,16 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const filteredArtists = pendingArtists.filter((art) => {
+  const currentArtistList = artistSubTab === "pending" ? pendingArtists : approvedArtists;
+  const filteredArtists = currentArtistList.filter((art) => {
     if (!artistSearch.trim()) return true;
     const q = artistSearch.toLowerCase();
     return (
       art.fullName.toLowerCase().includes(q) ||
       art.city?.toLowerCase().includes(q) ||
-      art.skills?.toLowerCase().includes(q)
+      art.skills?.toLowerCase().includes(q) ||
+      art.primaryCategory?.toLowerCase().includes(q) ||
+      art.gender?.toLowerCase().includes(q)
     );
   });
 
@@ -620,11 +657,20 @@ export default function AdminDashboardPage() {
                   >
                     <div className="flex items-center gap-2">
                       <Users size={16} />
-                      <span>Artist Verification</span>
+                      <span>Artist Moderation</span>
                     </div>
-                    <span className="rounded-full bg-amber-200/60 px-2 py-0.5 text-[10px] font-bold text-amber-900">
-                      {pendingArtists.length}
-                    </span>
+                    <div className="flex items-center gap-1">
+                      {pendingArtists.length > 0 && (
+                        <span className="rounded-full bg-amber-200/60 px-2 py-0.5 text-[10px] font-bold text-amber-900">
+                          {pendingArtists.length}
+                        </span>
+                      )}
+                      {approvedArtists.length > 0 && (
+                        <span className="rounded-full bg-emerald-200/60 px-2 py-0.5 text-[10px] font-bold text-emerald-900">
+                          {approvedArtists.length} Live
+                        </span>
+                      )}
+                    </div>
                   </button>
 
                   <button
@@ -839,17 +885,22 @@ export default function AdminDashboardPage() {
               </Reveal>
             )}
 
-            {/* TAB 2: ARTIST VERIFICATION QUEUE */}
+            {/* TAB 2: ARTIST VERIFICATION & PUBLISHING QUEUE */}
             {activeTab === "artists" && (
               <Reveal>
                 <div className="rounded-3xl border border-gray-200 bg-white p-6 md:p-8 shadow-md space-y-6">
+                  {/* Top Bar with Header & Search */}
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-200 pb-4 gap-3">
                     <div>
                       <h2 className="font-serif text-2xl font-bold text-[#111111]">
-                        Artist Profile Verification Queue
+                        {artistSubTab === "pending"
+                          ? "Artist Verification & Publishing Queue"
+                          : "Live Website Talent Directory"}
                       </h2>
                       <p className="text-xs text-[#555555] mt-0.5">
-                        Review submitted portfolios before granting platform verification status.
+                        {artistSubTab === "pending"
+                          ? "Review submitted profiles across all talent categories. Click 'Approve & Publish Live' to publish them to the live website roster."
+                          : "Profiles currently live on the public website. You can inspect their live dossiers or unpublish back to review."}
                       </p>
                     </div>
 
@@ -857,12 +908,46 @@ export default function AdminDashboardPage() {
                       <Search size={14} className="absolute left-3 top-3 text-gray-400" />
                       <input
                         type="text"
-                        placeholder="Search name, city, skills..."
+                        placeholder="Search name, city, category..."
                         value={artistSearch}
                         onChange={(e) => setArtistSearch(e.target.value)}
                         className="w-full rounded-xl border border-gray-300 bg-[#F7F7F5] pl-9 pr-3 py-2 text-xs focus:border-[#D4AF37] focus:outline-none"
                       />
                     </div>
+                  </div>
+
+                  {/* Sub-tab Navigation (Pending vs Live) */}
+                  <div className="flex flex-wrap items-center gap-2 border-b border-gray-200 pb-3">
+                    <button
+                      type="button"
+                      onClick={() => setArtistSubTab("pending")}
+                      className={`px-4 py-2 text-xs font-bold rounded-xl transition cursor-pointer flex items-center gap-2 ${
+                        artistSubTab === "pending"
+                          ? "bg-[#D4AF37] text-white shadow-xs"
+                          : "bg-[#F7F7F5] text-gray-700 hover:bg-gray-100 border border-gray-200"
+                      }`}
+                    >
+                      <span>Pending Review</span>
+                      <span className="rounded-full bg-white/25 px-2 py-0.2 text-[10px]">
+                        {pendingArtists.length}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setArtistSubTab("approved")}
+                      className={`px-4 py-2 text-xs font-bold rounded-xl transition cursor-pointer flex items-center gap-2 ${
+                        artistSubTab === "approved"
+                          ? "bg-emerald-600 text-white shadow-xs"
+                          : "bg-[#F7F7F5] text-gray-700 hover:bg-gray-100 border border-gray-200"
+                      }`}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Live on Website</span>
+                      <span className="rounded-full bg-white/25 px-2 py-0.2 text-[10px]">
+                        {approvedArtists.length}
+                      </span>
+                    </button>
                   </div>
 
                   {loadingArtists ? (
@@ -893,19 +978,50 @@ export default function AdminDashboardPage() {
                               </div>
 
                               <div>
-                                <h3 className="font-serif text-base font-bold text-[#111111]">
-                                  {art.fullName}
-                                </h3>
-                                <p className="text-xs text-[#555555] mt-0.5">
-                                  {art.gender || "Artist"} • {art.city || "City N/A"}, {art.state || "State N/A"}
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <h3 className="font-serif text-base font-bold text-[#111111]">
+                                    {art.fullName}
+                                  </h3>
+
+                                  {/* Category Badge */}
+                                  <span className="rounded-full bg-[#D4AF37]/15 px-2 py-0.5 text-[10px] font-bold text-[#8A7129] border border-[#D4AF37]/30">
+                                    {art.primaryCategory || "Actor"}
+                                  </span>
+
+                                  {/* Live Pill */}
+                                  {art.verificationStatus === "APPROVED" && (
+                                    <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-bold text-emerald-800">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                      LIVE
+                                    </span>
+                                  )}
+                                </div>
+
+                                <p className="text-xs text-[#555555] mt-1">
+                                  {art.gender || "Artist"} • {art.experience || "Fresh Face"} • {art.city || "City N/A"}, {art.state || "State N/A"}
                                 </p>
+
                                 <p className="text-[11px] text-gray-400 mt-1">
-                                  Submitted {art.submittedAt ? new Date(art.submittedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "Recently"}
+                                  {art.verificationStatus === "APPROVED" && art.approvedAt
+                                    ? `Published Live on ${new Date(art.approvedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}`
+                                    : `Submitted ${art.submittedAt ? new Date(art.submittedAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "Recently"}`}
                                 </p>
                               </div>
                             </div>
 
-                            <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
+                              {/* If already live, provide Direct Public Link */}
+                              {art.verificationStatus === "APPROVED" && (
+                                <a
+                                  href={`/actors/profile/dca-${art.id}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="px-3 py-2 rounded-xl border border-emerald-300 bg-emerald-50 text-xs font-semibold text-emerald-800 hover:bg-emerald-100 transition"
+                                >
+                                  View Live
+                                </a>
+                              )}
+
                               <button
                                 type="button"
                                 onClick={() => setActionModal({ type: "view_artist", item: art })}
@@ -914,21 +1030,34 @@ export default function AdminDashboardPage() {
                                 Comp Card
                               </button>
 
-                              <button
-                                type="button"
-                                onClick={() => setActionModal({ type: "approve_artist", item: art })}
-                                className="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition cursor-pointer"
-                              >
-                                Approve
-                              </button>
+                              {art.verificationStatus === "APPROVED" ? (
+                                <button
+                                  type="button"
+                                  onClick={() => setActionModal({ type: "unpublish_artist", item: art })}
+                                  className="px-3.5 py-2 rounded-xl bg-amber-600 text-white font-bold text-xs hover:bg-amber-700 transition cursor-pointer"
+                                >
+                                  Unpublish
+                                </button>
+                              ) : (
+                                <>
+                                  <button
+                                    type="button"
+                                    onClick={() => setActionModal({ type: "approve_artist", item: art })}
+                                    className="px-4 py-2 rounded-xl bg-emerald-600 text-white font-bold text-xs hover:bg-emerald-700 transition cursor-pointer flex items-center gap-1.5"
+                                  >
+                                    <CheckCircle2 size={13} />
+                                    <span>Publish Live</span>
+                                  </button>
 
-                              <button
-                                type="button"
-                                onClick={() => setActionModal({ type: "reject_artist", item: art })}
-                                className="px-4 py-2 rounded-xl bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition cursor-pointer"
-                              >
-                                Reject
-                              </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setActionModal({ type: "reject_artist", item: art })}
+                                    className="px-4 py-2 rounded-xl bg-rose-600 text-white font-bold text-xs hover:bg-rose-700 transition cursor-pointer"
+                                  >
+                                    Reject
+                                  </button>
+                                </>
+                              )}
                             </div>
                           </div>
                         );
@@ -937,8 +1066,16 @@ export default function AdminDashboardPage() {
                   ) : (
                     <div className="p-10 text-center text-xs text-gray-500 rounded-2xl border border-gray-200 bg-[#F7F7F5]">
                       <CheckCircle2 size={36} className="mx-auto mb-2 text-emerald-600" />
-                      <p className="font-bold text-[#111111]">No Pending Artists</p>
-                      <p className="mt-0.5 text-gray-500">All submitted artist portfolios have been reviewed.</p>
+                      <p className="font-bold text-[#111111]">
+                        {artistSubTab === "pending"
+                          ? "No Pending Artists"
+                          : "No Live Artists Found"}
+                      </p>
+                      <p className="mt-0.5 text-gray-500">
+                        {artistSubTab === "pending"
+                          ? "All submitted artist portfolios have been reviewed."
+                          : "No artist profiles currently published in this view. Approve profiles from the Pending Review queue to make them visible."}
+                      </p>
                     </div>
                   )}
                 </div>
@@ -1573,7 +1710,11 @@ export default function AdminDashboardPage() {
             ) : (
               <div className="space-y-4 text-xs">
                 <h2 className="font-serif text-xl font-bold text-[#111111]">
-                  {actionModal.type.includes("approve") ? "Confirm Approval" : "Confirm Rejection"}
+                  {actionModal.type === "unpublish_artist"
+                    ? "Confirm Unpublish from Website"
+                    : actionModal.type.includes("approve")
+                    ? "Confirm Approval & Publish Live"
+                    : "Confirm Rejection"}
                 </h2>
 
                 <p className="text-gray-600">
@@ -1585,6 +1726,12 @@ export default function AdminDashboardPage() {
                       : actionModal.item.title}
                   </span>
                 </p>
+
+                {actionModal.type === "unpublish_artist" && (
+                  <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs">
+                    This artist profile will be removed from all public website rosters and reverted to review.
+                  </div>
+                )}
 
                 {actionError && (
                   <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 font-bold">
@@ -1619,10 +1766,20 @@ export default function AdminDashboardPage() {
                     disabled={submittingAction}
                     onClick={handleExecuteAction}
                     className={`px-5 py-2 rounded-xl font-bold text-white transition cursor-pointer disabled:opacity-50 ${
-                      actionModal.type.includes("approve") ? "bg-emerald-600 hover:bg-emerald-700" : "bg-rose-600 hover:bg-rose-700"
+                      actionModal.type === "unpublish_artist"
+                        ? "bg-amber-600 hover:bg-amber-700"
+                        : actionModal.type.includes("approve")
+                        ? "bg-emerald-600 hover:bg-emerald-700"
+                        : "bg-rose-600 hover:bg-rose-700"
                     }`}
                   >
-                    {submittingAction ? "Processing..." : actionModal.type.includes("approve") ? "Approve Now" : "Reject Now"}
+                    {submittingAction
+                      ? "Processing..."
+                      : actionModal.type === "unpublish_artist"
+                      ? "Unpublish Now"
+                      : actionModal.type.includes("approve")
+                      ? "Publish Live"
+                      : "Reject Now"}
                   </button>
                 </div>
               </div>

@@ -5,7 +5,6 @@ import { ArrowRight, Sparkles, ShieldCheck } from "lucide-react";
 
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
-import { CTASection } from "@/components/ui/cta-section";
 import { CASTING_CATEGORIES } from "@/data/casting-calls";
 import { CastingCategoryCard } from "@/components/casting-calls/CastingCategoryCard";
 
@@ -121,15 +120,6 @@ export default function CastingCallsPage() {
           </div>
         </Reveal>
       </section>
-
-      {/* Global CTA Section */}
-      <CTASection
-        eyebrow="Find Your Opportunity"
-        title="Ready to apply for casting calls?"
-        description="Create your DCA talent profile and submit your portfolio for suitable casting opportunities."
-        buttonLabel="Register Now"
-        buttonHref="/profile/setup"
-      />
     </main>
   );
 }

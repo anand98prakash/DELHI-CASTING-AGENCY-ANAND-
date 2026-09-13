@@ -64,6 +64,9 @@ model ArtistProfile {
   gender      String?
   dateOfBirth DateTime?
 
+  primaryCategory String? @default("Actor")
+  experience      String?
+
   city  String?
   state String?
 

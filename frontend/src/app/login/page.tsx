@@ -34,6 +34,7 @@ function LoginContent() {
   const [pendingUserSession, setPendingUserSession] = useState<{ email: string; role: AppRole; token: string; id: string } | null>(null);
 
   const isRegistered = searchParams.get("registered") === "true";
+  const redirectReason = searchParams.get("reason");
   const success = isRegistered
     ? "Account created successfully! Please log in with your email and password."
     : "";
@@ -212,6 +213,14 @@ function LoginContent() {
         <div className="mb-4 flex items-center justify-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center text-xs font-semibold text-emerald-700">
           <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
           <span>{success}</span>
+        </div>
+      )}
+
+      {/* Redirection Notice */}
+      {redirectReason && !error && !success && (
+        <div className="mb-4 flex items-center gap-2.5 rounded-xl border border-amber-300 bg-amber-50 p-3 text-xs font-semibold text-amber-950 shadow-xs">
+          <Sparkles size={16} className="text-[#D4AF37] shrink-0" />
+          <span>{redirectReason}</span>
         </div>
       )}
 

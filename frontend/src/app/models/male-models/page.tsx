@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { Reveal } from "@/components/ui/reveal";
 import { CTASection } from "@/components/ui/cta-section";
 import { getModelsByCategory, getModelCategoryBySlug, MODEL_CATEGORIES } from "@/data/models";
+import { fetchPublicApprovedModels, mergeModelsWithLive } from "@/lib/publicTalents";
 import { ModelGrid } from "@/components/models/ModelGrid";
 
 export const metadata = {
@@ -14,9 +15,15 @@ export const metadata = {
     "Explore dynamic male models for menswear campaigns, fashion runways, fitness assignments, and commercial advertisements.",
 };
 
-export default function MaleModelsPage() {
+export default async function MaleModelsPage() {
   const category = getModelCategoryBySlug("male-models")!;
-  const models = getModelsByCategory("male-models");
+  const staticModels = getModelsByCategory("male-models");
+  const liveModels = await fetchPublicApprovedModels({
+    category: "model",
+    gender: "male",
+    subCategory: "male-models",
+  });
+  const models = mergeModelsWithLive(staticModels, liveModels);
   const otherCategories = MODEL_CATEGORIES.filter((c) => c.slug !== "male-models");
 
   return (
