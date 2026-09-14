@@ -38,14 +38,14 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/webthegrowbiz-ops/delhicastingagency.git"
+    "url": "git+https://github.com/anand98prakash/DELHI-CASTING-AGENCY-ANAND-.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "bugs": {
-    "url": "https://github.com/webthegrowbiz-ops/delhicastingagency/issues"
+    "url": "https://github.com/anand98prakash/DELHI-CASTING-AGENCY-ANAND-/issues"
   },
-  "homepage": "https://github.com/webthegrowbiz-ops/delhicastingagency#readme"
+  "homepage": "https://github.com/anand98prakash/DELHI-CASTING-AGENCY-ANAND-#readme"
 }
