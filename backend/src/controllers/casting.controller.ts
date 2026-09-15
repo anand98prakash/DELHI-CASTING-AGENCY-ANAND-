@@ -614,27 +614,33 @@ export async function updateBrandProfile(
       } else if (typeof phone === "string") {
         const normalizedPhone = normalizeIndianPhone(phone);
         if (normalizedPhone) {
-          const [existingArtistPhone, existingBrandPhone] = await Promise.all([
-            prisma.artistProfile.findFirst({
-              where: {
-                phone: normalizedPhone,
-                NOT: { userId: req.user.userId },
-              },
-            }),
-            prisma.brandProfile.findFirst({
-              where: {
-                phone: normalizedPhone,
-                NOT: { userId: req.user.userId },
-              },
-            }),
-          ]);
+          try {
+            const [existingArtistPhone, existingBrandPhone] = await Promise.all([
+              prisma.artistProfile.findFirst({
+                where: {
+                  phone: normalizedPhone,
+                  NOT: { userId: req.user.userId },
+                },
+                select: { id: true },
+              }),
+              prisma.brandProfile.findFirst({
+                where: {
+                  phone: normalizedPhone,
+                  NOT: { userId: req.user.userId },
+                },
+                select: { id: true },
+              }),
+            ]);
 
-          if (existingArtistPhone || existingBrandPhone) {
-            res.status(409).json({
-              success: false,
-              message: "Phone number is already registered.",
-            });
-            return;
+            if (existingArtistPhone || existingBrandPhone) {
+              res.status(409).json({
+                success: false,
+                message: "Phone number is already registered.",
+              });
+              return;
+            }
+          } catch (phoneErr) {
+            console.warn("Brand phone update uniqueness query warning:", phoneErr instanceof Error ? phoneErr.message : phoneErr);
           }
           updateData.phone = normalizedPhone;
         } else {

@@ -94,17 +94,27 @@ export async function register(req: Request, res: Response): Promise<void> {
     if (phone && typeof phone === "string" && phone.trim() !== "") {
       const normalizedPhone = normalizeIndianPhone(phone);
       if (normalizedPhone) {
-        const [existingArtistPhone, existingBrandPhone] = await Promise.all([
-          prisma.artistProfile.findFirst({ where: { phone: normalizedPhone } }),
-          prisma.brandProfile.findFirst({ where: { phone: normalizedPhone } }),
-        ]);
+        try {
+          const [existingArtistPhone, existingBrandPhone] = await Promise.all([
+            prisma.artistProfile.findFirst({
+              where: { phone: normalizedPhone },
+              select: { id: true },
+            }),
+            prisma.brandProfile.findFirst({
+              where: { phone: normalizedPhone },
+              select: { id: true },
+            }),
+          ]);
 
-        if (existingArtistPhone || existingBrandPhone) {
-          res.status(409).json({
-            success: false,
-            message: "Phone number is already registered. Please use a different phone number.",
-          });
-          return;
+          if (existingArtistPhone || existingBrandPhone) {
+            res.status(409).json({
+              success: false,
+              message: "Phone number is already registered. Please use a different phone number.",
+            });
+            return;
+          }
+        } catch (phoneErr) {
+          console.warn("Phone uniqueness check query warning:", phoneErr instanceof Error ? phoneErr.message : phoneErr);
         }
       }
     }

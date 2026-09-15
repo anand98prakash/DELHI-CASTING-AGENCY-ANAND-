@@ -59,9 +59,23 @@ function isAllowedOrigin(origin: string): boolean {
 }
 
 // Auto-apply pending database migrations safely on startup in production
+async function ensureDatabaseSchema() {
+  try {
+    await prisma.$executeRawUnsafe(`
+      ALTER TABLE "ArtistProfile" 
+      ADD COLUMN IF NOT EXISTS "primaryCategory" TEXT DEFAULT 'Actor',
+      ADD COLUMN IF NOT EXISTS "experience" TEXT;
+    `);
+    console.log("[Prisma] Verified ArtistProfile schema columns (primaryCategory, experience)");
+  } catch (err: unknown) {
+    console.warn("[Prisma] Schema auto-patch notice:", err instanceof Error ? err.message : err);
+  }
+}
+
 function applyMigrationsOnStartup() {
   console.log("[Prisma] Checking database migrations...");
-  exec("npx prisma migrate deploy", (error, stdout, stderr) => {
+  const schemaPath = path.resolve(process.cwd(), "prisma", "schema.prisma");
+  exec(`npx prisma migrate deploy --schema="${schemaPath}"`, (error, stdout, stderr) => {
     if (error) {
       console.error("[Prisma] Migration deployment failed:", error.message);
       if (stderr) console.error("[Prisma] Migration stderr:", stderr);
@@ -71,6 +85,7 @@ function applyMigrationsOnStartup() {
   });
 }
 
+void ensureDatabaseSchema();
 applyMigrationsOnStartup();
 
 // Enable reverse proxy trust for accurate client IP detection in rate limiters
